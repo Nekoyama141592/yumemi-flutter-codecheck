@@ -37,7 +37,7 @@ jobs:
       - name: Run tests
         run: flutter test
 
-      - name: List code
+      - name: Lint code
         run: flutter analyze
 
       - name: Format code
@@ -70,7 +70,7 @@ jobs:
       - name: Run tests
         run: flutter test
 
-      - name: List code
+      - name: Lint code
         run: flutter analyze
 
       - name: Format code
