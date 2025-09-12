@@ -2,6 +2,7 @@ import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
 import 'package:hooks_riverpod/hooks_riverpod.dart';
 import '../notifier/theme/theme_notifier.dart';
+import '../../l10n/app_localizations.dart';
 
 class OriginalDrawer extends ConsumerWidget {
   const OriginalDrawer({super.key});
@@ -14,12 +15,12 @@ class OriginalDrawer extends ConsumerWidget {
     return Drawer(
       child: Column(
         children: [
-          const DrawerHeader(
-            child: Text('Settings'),
+          DrawerHeader(
+            child: Text(AppLocalizations.of(context)!.settings),
           ),
           ListTile(
             leading: const Icon(Icons.dark_mode),
-            title: const Text('Dark Mode'),
+            title: Text(AppLocalizations.of(context)!.darkMode),
             trailing: CupertinoSwitch(
               value: themeState.isDarkMode,
               onChanged: (value) => themeNotifier.toggleTheme(),

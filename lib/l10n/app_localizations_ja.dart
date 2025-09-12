@@ -10,4 +10,10 @@ class AppLocalizationsJa extends AppLocalizations {
 
   @override
   String get hello => 'こんにちは';
+
+  @override
+  String get settings => '設定';
+
+  @override
+  String get darkMode => 'ダークモード';
 }
