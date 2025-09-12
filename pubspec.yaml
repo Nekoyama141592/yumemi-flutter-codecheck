@@ -13,12 +13,9 @@ dependencies:
 
   cupertino_icons: ^1.0.8
   flutter_flavor: ^3.1.4
-  flutter_flavorizr: ^2.4.1
   flutter_localizations:
     sdk: flutter  
   hooks_riverpod: ^3.0.0
-  flutter_launcher_icons: ^0.14.4
-  intl: ^0.20.2
   
 
 dev_dependencies:
@@ -31,6 +28,9 @@ dev_dependencies:
   json_serializable: ^6.11.1
   riverpod_lint: ^3.0.0
   build_runner: ^2.7.1
+  flutter_flavorizr: ^2.4.1
+  flutter_launcher_icons: ^0.14.4
+  intl: ^0.20.2
 
 flutter:
   generate: true 
