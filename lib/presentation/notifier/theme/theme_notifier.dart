@@ -5,7 +5,7 @@ part 'theme_notifier.g.dart';
 @Riverpod(keepAlive: true)
 class ThemeNotifier extends _$ThemeNotifier {
   @override
-  FutureOr<ThemeState> build() async {
+  ThemeState build() {
     return ThemeState();
   }
 
