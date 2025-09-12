@@ -12,5 +12,4 @@ class ThemeNotifier extends _$ThemeNotifier {
   void toggleTheme() {
     state = state.copyWith(isDarkMode: !state.isDarkMode);
   }
-
 }

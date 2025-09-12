@@ -15,9 +15,7 @@ class OriginalDrawer extends ConsumerWidget {
     return Drawer(
       child: Column(
         children: [
-          DrawerHeader(
-            child: Text(AppLocalizations.of(context)!.settings),
-          ),
+          DrawerHeader(child: Text(AppLocalizations.of(context)!.settings)),
           ListTile(
             leading: const Icon(Icons.dark_mode),
             title: Text(AppLocalizations.of(context)!.darkMode),

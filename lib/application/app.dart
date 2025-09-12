@@ -28,5 +28,4 @@ class App extends HookConsumerWidget {
       home: MyHomePage(),
     );
   }
-
 }
