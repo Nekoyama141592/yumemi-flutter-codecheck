@@ -24,3 +24,23 @@ dev_dependencies:
 flutter:
 
   uses-material-design: true
+flavorizr:
+  app:
+    android:
+      flavorDimensions: "flavor-type"
+
+  flavors:
+    dev:
+      app:
+        name: "Codecheck Dev"
+      android:
+        applicationId: "com.firebaseapp.yumemi_flutter_codecheck_dev"
+      ios:
+        bundleId: "com.firebaseapp.yumemiFlutterCodecheckDev"
+    prod:
+      app:
+        name: "Codecheck"
+      android:
+        applicationId: "com.firebaseapp.yumemi_flutter_codecheck"
+      ios:
+        bundleId: "com.firebaseapp.yumemiFlutterCodecheck"
