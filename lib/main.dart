@@ -9,14 +9,17 @@ import 'application/flavors.dart';
 
 void main() async {
   WidgetsFlutterBinding.ensureInitialized();
-  
+
   F.appFlavor = Flavor.values.firstWhere(
     (element) => element.name == appFlavor,
   );
 
-  runApp(ProviderScope(overrides: [
-    prefsProvider.overrideWithValue(
-      await SharedPreferences.getInstance(),
+  runApp(
+    ProviderScope(
+      overrides: [
+        prefsProvider.overrideWithValue(await SharedPreferences.getInstance()),
+      ],
+      child: const App(),
     ),
-  ],child: const App()));
+  );
 }
