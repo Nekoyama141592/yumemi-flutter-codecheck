@@ -10,4 +10,10 @@ class AppLocalizationsEn extends AppLocalizations {
 
   @override
   String get hello => 'Hello';
+
+  @override
+  String get settings => 'Settings';
+
+  @override
+  String get darkMode => 'Dark Mode';
 }

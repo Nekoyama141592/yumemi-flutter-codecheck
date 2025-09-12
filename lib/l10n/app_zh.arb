@@ -2,5 +2,13 @@
   "hello": "你好",
   "@hello": {
     "description": "A greeting message"
+  },
+  "settings": "设置",
+  "@settings": {
+    "description": "Settings title"
+  },
+  "darkMode": "深色模式",
+  "@darkMode": {
+    "description": "Dark mode toggle"
   }
 }

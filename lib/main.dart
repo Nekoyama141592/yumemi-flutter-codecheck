@@ -1,7 +1,8 @@
 import 'package:flutter/material.dart';
 import 'package:flutter/services.dart';
+import 'package:hooks_riverpod/hooks_riverpod.dart';
 
-import 'presentation/app.dart';
+import 'application/app.dart';
 import 'application/flavors.dart';
 
 void main() {
@@ -9,5 +10,5 @@ void main() {
     (element) => element.name == appFlavor,
   );
 
-  runApp(const App());
+  runApp(ProviderScope(child: const App()));
 }

@@ -2,5 +2,13 @@
   "hello": "Hello",
   "@hello": {
     "description": "A greeting message"
+  },
+  "settings": "Settings",
+  "@settings": {
+    "description": "Settings title"
+  },
+  "darkMode": "Dark Mode",
+  "@darkMode": {
+    "description": "Dark mode toggle"
   }
 }

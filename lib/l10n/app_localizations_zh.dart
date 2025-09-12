@@ -10,4 +10,10 @@ class AppLocalizationsZh extends AppLocalizations {
 
   @override
   String get hello => '你好';
+
+  @override
+  String get settings => '设置';
+
+  @override
+  String get darkMode => '深色模式';
 }
