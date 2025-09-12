@@ -1,0 +1,6 @@
+{
+  "hello": "こんにちは",
+  "@hello": {
+    "description": "A greeting message"
+  }
+}
