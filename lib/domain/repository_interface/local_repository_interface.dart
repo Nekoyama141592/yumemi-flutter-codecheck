@@ -1,4 +1,4 @@
 abstract class LocalRepositoryInterface {
-  Future<void> saveIsDarkTheme(bool isDarkMode);
-  bool getIsDarkTheme();
+  Future<void> saveIsDarkMode(bool isDarkMode);
+  bool getIsDarkMode();
 }
