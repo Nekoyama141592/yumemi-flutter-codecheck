@@ -1,8 +1,8 @@
 import 'package:flutter/material.dart';
 import 'package:flutter/services.dart';
 
-import 'app.dart';
-import 'flavors.dart';
+import 'presentation/app.dart';
+import 'application/flavors.dart';
 
 void main() {
   F.appFlavor = Flavor.values.firstWhere(
