@@ -13,6 +13,6 @@ class LocalRepository implements LocalRepositoryInterface {
 
   @override
   bool getIsDarkMode() {
-    return _prefs.getBool('isDarkMode') ?? false;
+    return _prefs.getBool('isDarkMode') ?? true;
   }
 }
