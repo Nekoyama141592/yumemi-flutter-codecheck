@@ -905,6 +905,8 @@
 			isa = XCBuildConfiguration;
 			baseConfigurationReference = 769EB5217D895546BA78A16E /* devDebug.xcconfig */;
 			buildSettings = {
+				ASSETCATALOG_COMPILER_APPICON_NAME = "AppIcon-$(ASSET_PREFIX)";
+				DEVELOPMENT_TEAM = Z6C5BQY9P3;
 				PRODUCT_NAME = "$(TARGET_NAME)";
 			};
 			name = "Debug-dev";
@@ -913,6 +915,8 @@
 			isa = XCBuildConfiguration;
 			baseConfigurationReference = C71A20AE2C62C3EFAF792A49 /* prodRelease.xcconfig */;
 			buildSettings = {
+				ASSETCATALOG_COMPILER_APPICON_NAME = "AppIcon-$(ASSET_PREFIX)";
+				DEVELOPMENT_TEAM = Z6C5BQY9P3;
 				PRODUCT_NAME = "$(TARGET_NAME)";
 			};
 			name = "Release-prod";
@@ -921,6 +925,8 @@
 			isa = XCBuildConfiguration;
 			baseConfigurationReference = 20A9362463381A49F55C9AE8 /* devRelease.xcconfig */;
 			buildSettings = {
+				ASSETCATALOG_COMPILER_APPICON_NAME = "AppIcon-$(ASSET_PREFIX)";
+				DEVELOPMENT_TEAM = Z6C5BQY9P3;
 				PRODUCT_NAME = "$(TARGET_NAME)";
 			};
 			name = "Release-dev";
@@ -929,6 +935,8 @@
 			isa = XCBuildConfiguration;
 			baseConfigurationReference = 82C07C5F0DB6D93206B116C5 /* prodDebug.xcconfig */;
 			buildSettings = {
+				ASSETCATALOG_COMPILER_APPICON_NAME = "AppIcon-$(ASSET_PREFIX)";
+				DEVELOPMENT_TEAM = Z6C5BQY9P3;
 				PRODUCT_NAME = "$(TARGET_NAME)";
 			};
 			name = "Debug-prod";
@@ -937,14 +945,60 @@
 			isa = XCBuildConfiguration;
 			baseConfigurationReference = 64BC9DFFA9AC91B7C558E3BD /* prodProfile.xcconfig */;
 			buildSettings = {
+				ASSETCATALOG_COMPILER_APPICON_NAME = "AppIcon-$(ASSET_PREFIX)";
+				DEVELOPMENT_TEAM = Z6C5BQY9P3;
 				PRODUCT_NAME = "$(TARGET_NAME)";
 			};
 			name = "Profile-prod";
+		};
+		D84B62B02E7430D200002A9E /* Debug-dev */ = {
+			isa = XCBuildConfiguration;
+			buildSettings = {
+				PRODUCT_NAME = RunnerTests;
+			};
+			name = "Debug-dev";
+		};
+		D84B62B12E7430D200002A9E /* Profile-dev */ = {
+			isa = XCBuildConfiguration;
+			buildSettings = {
+				PRODUCT_NAME = RunnerTests;
+			};
+			name = "Profile-dev";
+		};
+		D84B62B22E7430D200002A9E /* Release-dev */ = {
+			isa = XCBuildConfiguration;
+			buildSettings = {
+				PRODUCT_NAME = RunnerTests;
+			};
+			name = "Release-dev";
+		};
+		D84B62B32E7430D200002A9E /* Debug-prod */ = {
+			isa = XCBuildConfiguration;
+			buildSettings = {
+				PRODUCT_NAME = RunnerTests;
+			};
+			name = "Debug-prod";
+		};
+		D84B62B42E7430D200002A9E /* Profile-prod */ = {
+			isa = XCBuildConfiguration;
+			buildSettings = {
+				PRODUCT_NAME = RunnerTests;
+			};
+			name = "Profile-prod";
+		};
+		D84B62B52E7430D200002A9E /* Release-prod */ = {
+			isa = XCBuildConfiguration;
+			buildSettings = {
+				PRODUCT_NAME = RunnerTests;
+			};
+			name = "Release-prod";
 		};
 		F2CD936EF9A6582558B5A4FE /* Profile-dev */ = {
 			isa = XCBuildConfiguration;
 			baseConfigurationReference = 588E85B6599AC9272D316BD3 /* devProfile.xcconfig */;
 			buildSettings = {
+				ASSETCATALOG_COMPILER_APPICON_NAME = "AppIcon-$(ASSET_PREFIX)";
+				DEVELOPMENT_TEAM = Z6C5BQY9P3;
 				PRODUCT_NAME = "$(TARGET_NAME)";
 			};
 			name = "Profile-dev";
@@ -1103,6 +1157,12 @@
 				331C8088294A63A400263BE5 /* Debug */,
 				331C8089294A63A400263BE5 /* Release */,
 				331C808A294A63A400263BE5 /* Profile */,
+				D84B62B02E7430D200002A9E /* Debug-dev */,
+				D84B62B12E7430D200002A9E /* Profile-dev */,
+				D84B62B22E7430D200002A9E /* Release-dev */,
+				D84B62B32E7430D200002A9E /* Debug-prod */,
+				D84B62B42E7430D200002A9E /* Profile-prod */,
+				D84B62B52E7430D200002A9E /* Release-prod */,
 			);
 			defaultConfigurationIsVisible = 0;
 			defaultConfigurationName = Release;
