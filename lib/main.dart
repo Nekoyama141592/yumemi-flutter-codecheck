@@ -8,6 +8,8 @@ import 'application/app.dart';
 import 'application/flavors.dart';
 
 void main() async {
+  WidgetsFlutterBinding.ensureInitialized();
+  
   F.appFlavor = Flavor.values.firstWhere(
     (element) => element.name == appFlavor,
   );
