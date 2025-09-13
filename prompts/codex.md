@@ -8,3 +8,5 @@
 4. lib/core/provider/datasourceにriverpod_generatorを使用してGitHubApiClientProviderを作成してください。
 
 5. lib/core/provider/datasource/github/github_api_client_provider.dartにてtokenを外から受け取るFamilyProviderに変更してください。
+
+6. lib/infrastructure/repositoryにGithubRepositoryInterfaceをimplementsしたGithubRepositoryを作成してください。
