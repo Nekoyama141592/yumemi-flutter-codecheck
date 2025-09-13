@@ -40,7 +40,7 @@ class MyHomePage extends HookConsumerWidget {
       drawer: const OriginalDrawer(),
       body: state.when(
         loading: () => const Center(child: CircularProgressIndicator()),
-        error: (e, _) => Center(child: Text('Error: ${e.toString()}')),
+        error: (_,_) => Center(child: Text('エラーが発生しました')),
         data: (data) {
           if (data.repositories.isEmpty) {
             return Center(child: Text(AppLocalizations.of(context)!.hello));

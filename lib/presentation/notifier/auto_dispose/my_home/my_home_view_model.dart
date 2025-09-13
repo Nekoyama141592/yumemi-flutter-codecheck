@@ -1,3 +1,4 @@
+import 'dart:developer' as developer;
 import 'dart:async';
 
 import 'package:riverpod_annotation/riverpod_annotation.dart';
@@ -17,6 +18,7 @@ class MyHomeViewModel extends _$MyHomeViewModel {
       final items = await repo.searchRepositories(query: 'flutter');
       return MyHomeState(repositories: items, token: token);
     } catch (e) {
+      developer.log(e.toString());
       rethrow;
     }
   }
