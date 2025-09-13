@@ -1,6 +1,6 @@
 import 'package:auto_route/auto_route.dart';
 import 'package:hooks_riverpod/hooks_riverpod.dart';
-import 'package:yumemi_flutter_codecheck/presentation/my_home_page.dart';
+import 'package:yumemi_flutter_codecheck/presentation/page/my_home_page.dart';
 part 'app_router.gr.dart';
 
 @AutoRouterConfig(replaceInRouteName: 'Page,Route')

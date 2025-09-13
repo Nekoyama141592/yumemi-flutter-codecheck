@@ -1,9 +1,9 @@
 import 'package:auto_route/auto_route.dart';
 import 'package:flutter/material.dart';
 import 'package:hooks_riverpod/hooks_riverpod.dart';
-import '../l10n/app_localizations.dart';
-import '../application/flavors.dart';
-import 'common/original_drawer.dart';
+import '../../l10n/app_localizations.dart';
+import '../../application/flavors.dart';
+import '../common/original_drawer.dart';
 import 'package:yumemi_flutter_codecheck/presentation/notifier/auto_dispose/my_home/my_home_view_model.dart';
 
 @RoutePage()
