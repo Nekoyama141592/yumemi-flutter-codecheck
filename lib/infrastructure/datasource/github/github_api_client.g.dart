@@ -20,7 +20,7 @@ class _GitHubApiClient implements GitHubApiClient {
   final ParseErrorLogger? errorLogger;
 
   @override
-  Future<SearchRepositoriesResponse> _searchRepositories(
+  Future<SearchRepositoriesResponse> searchRepositories(
     String q,
     String? sort,
     String? order,
