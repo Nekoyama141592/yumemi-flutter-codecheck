@@ -10,7 +10,20 @@ part 'my_home_view_model.g.dart';
 class MyHomeViewModel extends _$MyHomeViewModel {
   @override
   FutureOr<MyHomeState> build() async {
-    return const MyHomeState(repositories: []);
+    const token = ''; // TODO: 環境変数から取得
+    try {
+      final repo = ref.read(githubRepositoryProvider(token: token));
+      final items = await repo.searchRepositories(
+        'flutter',
+        null,
+        null,
+        null,
+        null,
+      );
+      return MyHomeState(repositories: items);
+    } catch (e) {
+      rethrow;
+    }
   }
 
   Future<void> searchRepositories({

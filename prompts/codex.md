@@ -20,3 +20,7 @@
 10. lib/presentation/notifier/auto_dispose/my_home/my_home_view_model.dartにriverpod_generatorを使用してAutoDisposeAsyncNotifierのMyHomeViewModelを作成してください。stateはlib/presentation/state/auto_dispose/my_home/my_home_state.dartを使用してください。
 
 11. lib/presentation/notifier/auto_dispose/my_home/my_home_view_model.dartをAsyncNotifierではなくNotifierに変更してください。
+
+12. MyHomePageでHookConsumerWidgetを使用してMyHomeViewModelを使用して、GitHubのリポジトリのfullNameを表示してください。
+
+13. MyHomePageで初回表示時にサンプルクエリで検索を実行するのをViewModelのbuildメソッド内で行うようにしてください。
