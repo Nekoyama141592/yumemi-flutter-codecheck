@@ -4,3 +4,7 @@
 2. lib/infrastructure/datasource/github/github_api_client.dart では、GitHubApiClient を retrofit および retrofit_generator を用いて実装します。/search/repositories エンドポイントをクエリパラメータ形式でリクエストする際には、lib/infrastructure/model/github/search_repositories/request/search_repositories_request.dart と lib/infrastructure/model/github/search_repositories/response/search_repositories_response.dart を利用してください。
 
 3. lib/infrastructure/model/github/search_repositories/requestのフォルダを削除して、それを踏まえてlib/infrastructure/datasource/github/github_api_client.dartも修正してください。
+
+4. lib/core/provider/datasourceにriverpod_generatorを使用してGitHubApiClientProviderを作成してください。
+
+5. lib/core/provider/datasource/github/github_api_client_provider.dartにてtokenを外から受け取るFamilyProviderに変更してください。
