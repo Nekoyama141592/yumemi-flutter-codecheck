@@ -15,7 +15,7 @@ class MyHomeViewModel extends _$MyHomeViewModel {
       final token = await ref.read(secureStorageRepositoryProvider).getToken();
       final repo = ref.read(githubRepositoryProvider(token: token));
       final items = await repo.searchRepositories(query: 'flutter');
-      return MyHomeState(repositories: items,token: token);
+      return MyHomeState(repositories: items, token: token);
     } catch (e) {
       rethrow;
     }
