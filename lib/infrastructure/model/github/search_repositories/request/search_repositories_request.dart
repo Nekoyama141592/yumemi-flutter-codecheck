@@ -6,11 +6,12 @@ part 'search_repositories_request.g.dart';
 @freezed
 abstract class SearchRepositoriesRequest with _$SearchRepositoriesRequest {
   const SearchRepositoriesRequest._();
+  @JsonSerializable(includeIfNull: false)
   const factory SearchRepositoriesRequest({
     required String q,
     String? sort,
     String? order,
-    int? perPage,
+    @JsonKey(name: 'per_page') int? perPage,
     int? page,
   }) = _SearchRepositoriesRequest;
 

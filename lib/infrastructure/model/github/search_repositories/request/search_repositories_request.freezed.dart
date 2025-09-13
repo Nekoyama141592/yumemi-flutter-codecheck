@@ -15,7 +15,7 @@ T _$identity<T>(T value) => value;
 /// @nodoc
 mixin _$SearchRepositoriesRequest {
 
- String get q; String? get sort; String? get order; int? get perPage; int? get page;
+ String get q; String? get sort; String? get order;@JsonKey(name: 'per_page') int? get perPage; int? get page;
 /// Create a copy of SearchRepositoriesRequest
 /// with the given fields replaced by the non-null parameter values.
 @JsonKey(includeFromJson: false, includeToJson: false)
@@ -48,7 +48,7 @@ abstract mixin class $SearchRepositoriesRequestCopyWith<$Res>  {
   factory $SearchRepositoriesRequestCopyWith(SearchRepositoriesRequest value, $Res Function(SearchRepositoriesRequest) _then) = _$SearchRepositoriesRequestCopyWithImpl;
 @useResult
 $Res call({
- String q, String? sort, String? order, int? perPage, int? page
+ String q, String? sort, String? order,@JsonKey(name: 'per_page') int? perPage, int? page
 });
 
 
@@ -157,7 +157,7 @@ return $default(_that);case _:
 /// }
 /// ```
 
-@optionalTypeArgs TResult maybeWhen<TResult extends Object?>(TResult Function( String q,  String? sort,  String? order,  int? perPage,  int? page)?  $default,{required TResult orElse(),}) {final _that = this;
+@optionalTypeArgs TResult maybeWhen<TResult extends Object?>(TResult Function( String q,  String? sort,  String? order, @JsonKey(name: 'per_page')  int? perPage,  int? page)?  $default,{required TResult orElse(),}) {final _that = this;
 switch (_that) {
 case _SearchRepositoriesRequest() when $default != null:
 return $default(_that.q,_that.sort,_that.order,_that.perPage,_that.page);case _:
@@ -178,7 +178,7 @@ return $default(_that.q,_that.sort,_that.order,_that.perPage,_that.page);case _:
 /// }
 /// ```
 
-@optionalTypeArgs TResult when<TResult extends Object?>(TResult Function( String q,  String? sort,  String? order,  int? perPage,  int? page)  $default,) {final _that = this;
+@optionalTypeArgs TResult when<TResult extends Object?>(TResult Function( String q,  String? sort,  String? order, @JsonKey(name: 'per_page')  int? perPage,  int? page)  $default,) {final _that = this;
 switch (_that) {
 case _SearchRepositoriesRequest():
 return $default(_that.q,_that.sort,_that.order,_that.perPage,_that.page);case _:
@@ -198,7 +198,7 @@ return $default(_that.q,_that.sort,_that.order,_that.perPage,_that.page);case _:
 /// }
 /// ```
 
-@optionalTypeArgs TResult? whenOrNull<TResult extends Object?>(TResult? Function( String q,  String? sort,  String? order,  int? perPage,  int? page)?  $default,) {final _that = this;
+@optionalTypeArgs TResult? whenOrNull<TResult extends Object?>(TResult? Function( String q,  String? sort,  String? order, @JsonKey(name: 'per_page')  int? perPage,  int? page)?  $default,) {final _that = this;
 switch (_that) {
 case _SearchRepositoriesRequest() when $default != null:
 return $default(_that.q,_that.sort,_that.order,_that.perPage,_that.page);case _:
@@ -210,16 +210,16 @@ return $default(_that.q,_that.sort,_that.order,_that.perPage,_that.page);case _:
 }
 
 /// @nodoc
-@JsonSerializable()
 
+@JsonSerializable(includeIfNull: false)
 class _SearchRepositoriesRequest extends SearchRepositoriesRequest {
-  const _SearchRepositoriesRequest({required this.q, this.sort, this.order, this.perPage, this.page}): super._();
+  const _SearchRepositoriesRequest({required this.q, this.sort, this.order, @JsonKey(name: 'per_page') this.perPage, this.page}): super._();
   factory _SearchRepositoriesRequest.fromJson(Map<String, dynamic> json) => _$SearchRepositoriesRequestFromJson(json);
 
 @override final  String q;
 @override final  String? sort;
 @override final  String? order;
-@override final  int? perPage;
+@override@JsonKey(name: 'per_page') final  int? perPage;
 @override final  int? page;
 
 /// Create a copy of SearchRepositoriesRequest
@@ -255,7 +255,7 @@ abstract mixin class _$SearchRepositoriesRequestCopyWith<$Res> implements $Searc
   factory _$SearchRepositoriesRequestCopyWith(_SearchRepositoriesRequest value, $Res Function(_SearchRepositoriesRequest) _then) = __$SearchRepositoriesRequestCopyWithImpl;
 @override @useResult
 $Res call({
- String q, String? sort, String? order, int? perPage, int? page
+ String q, String? sort, String? order,@JsonKey(name: 'per_page') int? perPage, int? page
 });
 
 

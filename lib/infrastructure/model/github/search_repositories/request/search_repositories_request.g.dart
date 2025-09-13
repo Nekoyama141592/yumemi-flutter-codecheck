@@ -12,7 +12,7 @@ _SearchRepositoriesRequest _$SearchRepositoriesRequestFromJson(
   q: json['q'] as String,
   sort: json['sort'] as String?,
   order: json['order'] as String?,
-  perPage: (json['perPage'] as num?)?.toInt(),
+  perPage: (json['per_page'] as num?)?.toInt(),
   page: (json['page'] as num?)?.toInt(),
 );
 
@@ -20,8 +20,8 @@ Map<String, dynamic> _$SearchRepositoriesRequestToJson(
   _SearchRepositoriesRequest instance,
 ) => <String, dynamic>{
   'q': instance.q,
-  'sort': instance.sort,
-  'order': instance.order,
-  'perPage': instance.perPage,
-  'page': instance.page,
+  'sort': ?instance.sort,
+  'order': ?instance.order,
+  'per_page': ?instance.perPage,
+  'page': ?instance.page,
 };
