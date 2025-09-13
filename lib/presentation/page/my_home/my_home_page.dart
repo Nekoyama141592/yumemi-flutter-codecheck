@@ -6,6 +6,7 @@ import '../../../application/flavors.dart';
 import '../../common/original_drawer.dart';
 import 'package:yumemi_flutter_codecheck/presentation/notifier/auto_dispose/my_home/my_home_view_model.dart';
 import 'package:yumemi_flutter_codecheck/application/theme/extensions/app_colors.dart';
+import 'package:yumemi_flutter_codecheck/presentation/page/my_home/components/edit_token_dialog.dart';
 
 @RoutePage()
 class MyHomePage extends HookConsumerWidget {
@@ -23,11 +24,15 @@ class MyHomePage extends HookConsumerWidget {
         actions: [
           Padding(
             padding: const EdgeInsets.only(right: 12),
-            child: Icon(
-              Icons.vpn_key,
-              color: token != null
-                  ? Theme.of(context).extension<AppColors>()!.tokenOn
-                  : Theme.of(context).extension<AppColors>()!.tokenOff,
+            child: IconButton(
+              tooltip: 'Edit token',
+              onPressed: () => EditTokenDialog.show(context),
+              icon: Icon(
+                Icons.vpn_key,
+                color: token != null
+                    ? Theme.of(context).extension<AppColors>()!.tokenOn
+                    : Theme.of(context).extension<AppColors>()!.tokenOff,
+              ),
             ),
           ),
         ],

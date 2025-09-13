@@ -36,3 +36,5 @@
 18. MyHomePageのstatusColorはlib/application/theme/dark_theme.dartとlib/application/theme/light_theme.dartに新たに定義した色を使い、Theme.of(context)を使ってください
 
 19. lib/presentation/page/my_home/components/edit_token_dialog.dartにHookConsumerWidgetを使用してSecureStorageRepositoryを使用し、tokenを編集するダイアログを作成してください。
+
+20. MyHomePageのkeyのアイコンを押下したらEditTokenDialogを表示してください。
