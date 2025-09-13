@@ -23,4 +23,3 @@ class SecureStorageRepository implements SecureStorageInterface {
     await _storage.delete(key: _tokenKey);
   }
 }
-

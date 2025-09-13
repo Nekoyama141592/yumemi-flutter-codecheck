@@ -9,4 +9,3 @@ SecureStorageRepository secureStorageRepository(Ref ref) {
   final storage = ref.watch(secureStorageProvider);
   return SecureStorageRepository(storage);
 }
-
