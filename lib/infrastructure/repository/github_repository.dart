@@ -34,4 +34,3 @@ class GithubRepository implements GithubRepositoryInterface {
         .toList(growable: false);
   }
 }
-

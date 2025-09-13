@@ -4,7 +4,8 @@ part 'search_repositories_item_entity.freezed.dart';
 part 'search_repositories_item_entity.g.dart';
 
 @freezed
-abstract class SearchRepositoriesItemEntity with _$SearchRepositoriesItemEntity {
+abstract class SearchRepositoriesItemEntity
+    with _$SearchRepositoriesItemEntity {
   const SearchRepositoriesItemEntity._();
   const factory SearchRepositoriesItemEntity({
     required int id,
