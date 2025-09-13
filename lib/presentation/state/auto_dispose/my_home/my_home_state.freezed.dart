@@ -1,0 +1,283 @@
+// GENERATED CODE - DO NOT MODIFY BY HAND
+// coverage:ignore-file
+// ignore_for_file: type=lint
+// ignore_for_file: unused_element, deprecated_member_use, deprecated_member_use_from_same_package, use_function_type_syntax_for_parameters, unnecessary_const, avoid_init_to_null, invalid_override_different_default_values_named, prefer_expression_function_bodies, annotate_overrides, invalid_annotation_target, unnecessary_question_mark
+
+part of 'my_home_state.dart';
+
+// **************************************************************************
+// FreezedGenerator
+// **************************************************************************
+
+// dart format off
+T _$identity<T>(T value) => value;
+
+/// @nodoc
+mixin _$MyHomeState {
+
+ List<SearchRepositoriesItemEntity> get repositories;
+/// Create a copy of MyHomeState
+/// with the given fields replaced by the non-null parameter values.
+@JsonKey(includeFromJson: false, includeToJson: false)
+@pragma('vm:prefer-inline')
+$MyHomeStateCopyWith<MyHomeState> get copyWith => _$MyHomeStateCopyWithImpl<MyHomeState>(this as MyHomeState, _$identity);
+
+  /// Serializes this MyHomeState to a JSON map.
+  Map<String, dynamic> toJson();
+
+
+@override
+bool operator ==(Object other) {
+  return identical(this, other) || (other.runtimeType == runtimeType&&other is MyHomeState&&const DeepCollectionEquality().equals(other.repositories, repositories));
+}
+
+@JsonKey(includeFromJson: false, includeToJson: false)
+@override
+int get hashCode => Object.hash(runtimeType,const DeepCollectionEquality().hash(repositories));
+
+@override
+String toString() {
+  return 'MyHomeState(repositories: $repositories)';
+}
+
+
+}
+
+/// @nodoc
+abstract mixin class $MyHomeStateCopyWith<$Res>  {
+  factory $MyHomeStateCopyWith(MyHomeState value, $Res Function(MyHomeState) _then) = _$MyHomeStateCopyWithImpl;
+@useResult
+$Res call({
+ List<SearchRepositoriesItemEntity> repositories
+});
+
+
+
+
+}
+/// @nodoc
+class _$MyHomeStateCopyWithImpl<$Res>
+    implements $MyHomeStateCopyWith<$Res> {
+  _$MyHomeStateCopyWithImpl(this._self, this._then);
+
+  final MyHomeState _self;
+  final $Res Function(MyHomeState) _then;
+
+/// Create a copy of MyHomeState
+/// with the given fields replaced by the non-null parameter values.
+@pragma('vm:prefer-inline') @override $Res call({Object? repositories = null,}) {
+  return _then(_self.copyWith(
+repositories: null == repositories ? _self.repositories : repositories // ignore: cast_nullable_to_non_nullable
+as List<SearchRepositoriesItemEntity>,
+  ));
+}
+
+}
+
+
+/// Adds pattern-matching-related methods to [MyHomeState].
+extension MyHomeStatePatterns on MyHomeState {
+/// A variant of `map` that fallback to returning `orElse`.
+///
+/// It is equivalent to doing:
+/// ```dart
+/// switch (sealedClass) {
+///   case final Subclass value:
+///     return ...;
+///   case _:
+///     return orElse();
+/// }
+/// ```
+
+@optionalTypeArgs TResult maybeMap<TResult extends Object?>(TResult Function( _MyHomeState value)?  $default,{required TResult orElse(),}){
+final _that = this;
+switch (_that) {
+case _MyHomeState() when $default != null:
+return $default(_that);case _:
+  return orElse();
+
+}
+}
+/// A `switch`-like method, using callbacks.
+///
+/// Callbacks receives the raw object, upcasted.
+/// It is equivalent to doing:
+/// ```dart
+/// switch (sealedClass) {
+///   case final Subclass value:
+///     return ...;
+///   case final Subclass2 value:
+///     return ...;
+/// }
+/// ```
+
+@optionalTypeArgs TResult map<TResult extends Object?>(TResult Function( _MyHomeState value)  $default,){
+final _that = this;
+switch (_that) {
+case _MyHomeState():
+return $default(_that);case _:
+  throw StateError('Unexpected subclass');
+
+}
+}
+/// A variant of `map` that fallback to returning `null`.
+///
+/// It is equivalent to doing:
+/// ```dart
+/// switch (sealedClass) {
+///   case final Subclass value:
+///     return ...;
+///   case _:
+///     return null;
+/// }
+/// ```
+
+@optionalTypeArgs TResult? mapOrNull<TResult extends Object?>(TResult? Function( _MyHomeState value)?  $default,){
+final _that = this;
+switch (_that) {
+case _MyHomeState() when $default != null:
+return $default(_that);case _:
+  return null;
+
+}
+}
+/// A variant of `when` that fallback to an `orElse` callback.
+///
+/// It is equivalent to doing:
+/// ```dart
+/// switch (sealedClass) {
+///   case Subclass(:final field):
+///     return ...;
+///   case _:
+///     return orElse();
+/// }
+/// ```
+
+@optionalTypeArgs TResult maybeWhen<TResult extends Object?>(TResult Function( List<SearchRepositoriesItemEntity> repositories)?  $default,{required TResult orElse(),}) {final _that = this;
+switch (_that) {
+case _MyHomeState() when $default != null:
+return $default(_that.repositories);case _:
+  return orElse();
+
+}
+}
+/// A `switch`-like method, using callbacks.
+///
+/// As opposed to `map`, this offers destructuring.
+/// It is equivalent to doing:
+/// ```dart
+/// switch (sealedClass) {
+///   case Subclass(:final field):
+///     return ...;
+///   case Subclass2(:final field2):
+///     return ...;
+/// }
+/// ```
+
+@optionalTypeArgs TResult when<TResult extends Object?>(TResult Function( List<SearchRepositoriesItemEntity> repositories)  $default,) {final _that = this;
+switch (_that) {
+case _MyHomeState():
+return $default(_that.repositories);case _:
+  throw StateError('Unexpected subclass');
+
+}
+}
+/// A variant of `when` that fallback to returning `null`
+///
+/// It is equivalent to doing:
+/// ```dart
+/// switch (sealedClass) {
+///   case Subclass(:final field):
+///     return ...;
+///   case _:
+///     return null;
+/// }
+/// ```
+
+@optionalTypeArgs TResult? whenOrNull<TResult extends Object?>(TResult? Function( List<SearchRepositoriesItemEntity> repositories)?  $default,) {final _that = this;
+switch (_that) {
+case _MyHomeState() when $default != null:
+return $default(_that.repositories);case _:
+  return null;
+
+}
+}
+
+}
+
+/// @nodoc
+@JsonSerializable()
+
+class _MyHomeState extends MyHomeState {
+  const _MyHomeState({required final  List<SearchRepositoriesItemEntity> repositories}): _repositories = repositories,super._();
+  factory _MyHomeState.fromJson(Map<String, dynamic> json) => _$MyHomeStateFromJson(json);
+
+ final  List<SearchRepositoriesItemEntity> _repositories;
+@override List<SearchRepositoriesItemEntity> get repositories {
+  if (_repositories is EqualUnmodifiableListView) return _repositories;
+  // ignore: implicit_dynamic_type
+  return EqualUnmodifiableListView(_repositories);
+}
+
+
+/// Create a copy of MyHomeState
+/// with the given fields replaced by the non-null parameter values.
+@override @JsonKey(includeFromJson: false, includeToJson: false)
+@pragma('vm:prefer-inline')
+_$MyHomeStateCopyWith<_MyHomeState> get copyWith => __$MyHomeStateCopyWithImpl<_MyHomeState>(this, _$identity);
+
+@override
+Map<String, dynamic> toJson() {
+  return _$MyHomeStateToJson(this, );
+}
+
+@override
+bool operator ==(Object other) {
+  return identical(this, other) || (other.runtimeType == runtimeType&&other is _MyHomeState&&const DeepCollectionEquality().equals(other._repositories, _repositories));
+}
+
+@JsonKey(includeFromJson: false, includeToJson: false)
+@override
+int get hashCode => Object.hash(runtimeType,const DeepCollectionEquality().hash(_repositories));
+
+@override
+String toString() {
+  return 'MyHomeState(repositories: $repositories)';
+}
+
+
+}
+
+/// @nodoc
+abstract mixin class _$MyHomeStateCopyWith<$Res> implements $MyHomeStateCopyWith<$Res> {
+  factory _$MyHomeStateCopyWith(_MyHomeState value, $Res Function(_MyHomeState) _then) = __$MyHomeStateCopyWithImpl;
+@override @useResult
+$Res call({
+ List<SearchRepositoriesItemEntity> repositories
+});
+
+
+
+
+}
+/// @nodoc
+class __$MyHomeStateCopyWithImpl<$Res>
+    implements _$MyHomeStateCopyWith<$Res> {
+  __$MyHomeStateCopyWithImpl(this._self, this._then);
+
+  final _MyHomeState _self;
+  final $Res Function(_MyHomeState) _then;
+
+/// Create a copy of MyHomeState
+/// with the given fields replaced by the non-null parameter values.
+@override @pragma('vm:prefer-inline') $Res call({Object? repositories = null,}) {
+  return _then(_MyHomeState(
+repositories: null == repositories ? _self._repositories : repositories // ignore: cast_nullable_to_non_nullable
+as List<SearchRepositoriesItemEntity>,
+  ));
+}
+
+
+}
+
+// dart format on

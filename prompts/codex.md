@@ -1,1 +1,28 @@
 # Codex プロンプト集
+1. lib/infrastructure/model/github/search_repositories/response 配下に、repository_item、simple_user、license_simple、permission という各フォルダを作成し、それぞれのクラスを分割して管理してください。各クラスのファイルは自動生成されるように設定します。
+
+2. lib/infrastructure/datasource/github/github_api_client.dart では、GitHubApiClient を retrofit および retrofit_generator を用いて実装します。/search/repositories エンドポイントをクエリパラメータ形式でリクエストする際には、lib/infrastructure/model/github/search_repositories/request/search_repositories_request.dart と lib/infrastructure/model/github/search_repositories/response/search_repositories_response.dart を利用してください。
+
+3. lib/infrastructure/model/github/search_repositories/requestのフォルダを削除して、それを踏まえてlib/infrastructure/datasource/github/github_api_client.dartも修正してください。
+
+4. lib/core/provider/datasourceにriverpod_generatorを使用してGitHubApiClientProviderを作成してください。
+
+5. lib/core/provider/datasource/github/github_api_client_provider.dartにてtokenを外から受け取るFamilyProviderに変更してください。
+
+6. lib/infrastructure/repositoryにGithubRepositoryInterfaceをimplementsしたGithubRepositoryを作成してください。
+
+7. GithubRepositoryInterfaceのsearchRepositoriesのquery以外をnull許容できるようにしてください。
+
+8. lib/domain/entity/search_repositories_item/search_repositories_item_entity.dartにfromModelというfactoryコンストラクタを作成してください。そしてGithubRepositoryではそれを使用してください。
+
+9. lib/core/provider/repository/github/github_repository_provider.dartにriverpod_generatorを使用してGithubRepositoryProviderを作成してください。
+
+10. lib/presentation/notifier/auto_dispose/my_home/my_home_view_model.dartにriverpod_generatorを使用してAutoDisposeAsyncNotifierのMyHomeViewModelを作成してください。stateはlib/presentation/state/auto_dispose/my_home/my_home_state.dartを使用してください。
+
+11. lib/presentation/notifier/auto_dispose/my_home/my_home_view_model.dartをAsyncNotifierではなくNotifierに変更してください。
+
+12. MyHomePageでHookConsumerWidgetを使用してMyHomeViewModelを使用して、GitHubのリポジトリのfullNameを表示してください。
+
+13. MyHomePageで初回表示時にサンプルクエリで検索を実行するのをViewModelのbuildメソッド内で行うようにしてください。
+
+14. GithubRepositoryInterfaceのsearchRepositoriesの引数を名前付き引数に変更してください。

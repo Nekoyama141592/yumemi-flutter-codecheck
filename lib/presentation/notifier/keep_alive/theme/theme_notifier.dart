@@ -1,5 +1,5 @@
 import 'package:riverpod_annotation/riverpod_annotation.dart';
-import 'package:yumemi_flutter_codecheck/presentation/state/theme/theme_state.dart';
+import 'package:yumemi_flutter_codecheck/presentation/state/keep_alive/theme/theme_state.dart';
 import 'package:yumemi_flutter_codecheck/core/provider/repository/local/local_repository_provider.dart';
 part 'theme_notifier.g.dart';
 

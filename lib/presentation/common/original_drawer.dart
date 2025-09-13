@@ -1,7 +1,7 @@
 import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
 import 'package:hooks_riverpod/hooks_riverpod.dart';
-import '../notifier/theme/theme_notifier.dart';
+import '../notifier/keep_alive/theme/theme_notifier.dart';
 import '../../l10n/app_localizations.dart';
 
 class OriginalDrawer extends ConsumerWidget {

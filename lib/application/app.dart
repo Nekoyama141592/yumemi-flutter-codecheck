@@ -4,7 +4,7 @@ import 'package:hooks_riverpod/hooks_riverpod.dart';
 import 'package:yumemi_flutter_codecheck/application/theme/dark_theme.dart';
 import 'package:yumemi_flutter_codecheck/application/theme/light_theme.dart';
 import 'package:yumemi_flutter_codecheck/core/provider/keep_alive/app_router/app_router_provider.dart';
-import 'package:yumemi_flutter_codecheck/presentation/notifier/theme/theme_notifier.dart';
+import 'package:yumemi_flutter_codecheck/presentation/notifier/keep_alive/theme/theme_notifier.dart';
 import '../l10n/app_localizations.dart';
 
 import 'flavors.dart';
