@@ -25,7 +25,9 @@ class MyHomePage extends HookConsumerWidget {
             padding: const EdgeInsets.only(right: 12),
             child: Icon(
               Icons.vpn_key,
-              color: token != null ? Theme.of(context).extension<AppColors>()!.tokenOn : Theme.of(context).extension<AppColors>()!.tokenOff,
+              color: token != null
+                  ? Theme.of(context).extension<AppColors>()!.tokenOn
+                  : Theme.of(context).extension<AppColors>()!.tokenOff,
             ),
           ),
         ],

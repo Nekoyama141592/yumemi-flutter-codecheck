@@ -1,10 +1,7 @@
 import 'package:flutter/material.dart';
 
 class AppColors extends ThemeExtension<AppColors> {
-  const AppColors({
-    required this.tokenOn,
-    required this.tokenOff,
-  });
+  const AppColors({required this.tokenOn, required this.tokenOff});
 
   final Color tokenOn;
   final Color tokenOff;
@@ -26,4 +23,3 @@ class AppColors extends ThemeExtension<AppColors> {
     );
   }
 }
-
