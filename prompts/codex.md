@@ -26,3 +26,5 @@
 13. MyHomePageで初回表示時にサンプルクエリで検索を実行するのをViewModelのbuildメソッド内で行うようにしてください。
 
 14. GithubRepositoryInterfaceのsearchRepositoriesの引数を名前付き引数に変更してください。
+
+15. lib/infrastructure/repositoryにFlutterSecureStorageを外から受け取り、SecureStorageInterfaceをimplementsしたSecureStorageRepositoryを作成してください。
