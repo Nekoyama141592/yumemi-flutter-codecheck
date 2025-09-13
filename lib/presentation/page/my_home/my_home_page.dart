@@ -1,10 +1,12 @@
 import 'package:auto_route/auto_route.dart';
 import 'package:flutter/material.dart';
 import 'package:hooks_riverpod/hooks_riverpod.dart';
-import '../l10n/app_localizations.dart';
-import '../application/flavors.dart';
-import 'common/original_drawer.dart';
+import '../../../l10n/app_localizations.dart';
+import '../../../application/flavors.dart';
+import '../../common/original_drawer.dart';
 import 'package:yumemi_flutter_codecheck/presentation/notifier/auto_dispose/my_home/my_home_view_model.dart';
+import 'package:yumemi_flutter_codecheck/application/theme/extensions/app_colors.dart';
+import 'package:yumemi_flutter_codecheck/presentation/page/my_home/components/edit_token_dialog.dart';
 
 @RoutePage()
 class MyHomePage extends HookConsumerWidget {
@@ -14,12 +16,32 @@ class MyHomePage extends HookConsumerWidget {
   Widget build(BuildContext context, WidgetRef ref) {
     final state = ref.watch(myHomeViewModelProvider);
 
+    final token = state.value?.token;
+
     return Scaffold(
-      appBar: AppBar(title: Text(F.title)),
+      appBar: AppBar(
+        title: Text(F.title),
+        actions: [
+          Padding(
+            padding: const EdgeInsets.only(right: 12),
+            child: IconButton(
+              tooltip: AppLocalizations.of(context)!.editTokenTooltip,
+              onPressed: () => EditTokenDialog.show(context),
+              icon: Icon(
+                Icons.vpn_key,
+                color: token != null
+                    ? Theme.of(context).extension<AppColors>()!.tokenOn
+                    : Theme.of(context).extension<AppColors>()!.tokenOff,
+              ),
+            ),
+          ),
+        ],
+      ),
       drawer: const OriginalDrawer(),
       body: state.when(
         loading: () => const Center(child: CircularProgressIndicator()),
-        error: (e, _) => Center(child: Text('Error: ${e.toString()}')),
+        error: (e, _) =>
+            Center(child: Text(AppLocalizations.of(context)!.error(e))),
         data: (data) {
           if (data.repositories.isEmpty) {
             return Center(child: Text(AppLocalizations.of(context)!.hello));

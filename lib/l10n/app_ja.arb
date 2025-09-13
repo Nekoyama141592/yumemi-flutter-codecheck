@@ -10,5 +10,40 @@
   "darkMode": "ダークモード",
   "@darkMode": {
     "description": "Dark mode toggle"
+  },
+  "editTokenTooltip": "トークンを編集",
+  "@editTokenTooltip": {
+    "description": "Tooltip for editing the token"
+  },
+  "editTokenTitle": "トークンを編集",
+  "@editTokenTitle": {
+    "description": "Dialog title for editing the token"
+  },
+  "tokenLabel": "トークン",
+  "@tokenLabel": {
+    "description": "Label for token text field"
+  },
+  "tokenHint": "GitHub パーソナルアクセストークン",
+  "@tokenHint": {
+    "description": "Hint text for token text field"
+  },
+  "cancel": "キャンセル",
+  "@cancel": {
+    "description": "Cancel button label"
+  },
+  "delete": "削除",
+  "@delete": {
+    "description": "Delete button label"
+  },
+  "save": "保存",
+  "@save": {
+    "description": "Save button label"
+  },
+  "error": "エラー: {error}",
+  "@error": {
+    "description": "Error text prefix with the given error description",
+    "placeholders": {
+      "error": {}
+    }
   }
 }

@@ -15,7 +15,7 @@ T _$identity<T>(T value) => value;
 /// @nodoc
 mixin _$MyHomeState {
 
- List<SearchRepositoriesItemEntity> get repositories;
+ List<SearchRepositoriesItemEntity> get repositories; String? get token;
 /// Create a copy of MyHomeState
 /// with the given fields replaced by the non-null parameter values.
 @JsonKey(includeFromJson: false, includeToJson: false)
@@ -28,16 +28,16 @@ $MyHomeStateCopyWith<MyHomeState> get copyWith => _$MyHomeStateCopyWithImpl<MyHo
 
 @override
 bool operator ==(Object other) {
-  return identical(this, other) || (other.runtimeType == runtimeType&&other is MyHomeState&&const DeepCollectionEquality().equals(other.repositories, repositories));
+  return identical(this, other) || (other.runtimeType == runtimeType&&other is MyHomeState&&const DeepCollectionEquality().equals(other.repositories, repositories)&&(identical(other.token, token) || other.token == token));
 }
 
 @JsonKey(includeFromJson: false, includeToJson: false)
 @override
-int get hashCode => Object.hash(runtimeType,const DeepCollectionEquality().hash(repositories));
+int get hashCode => Object.hash(runtimeType,const DeepCollectionEquality().hash(repositories),token);
 
 @override
 String toString() {
-  return 'MyHomeState(repositories: $repositories)';
+  return 'MyHomeState(repositories: $repositories, token: $token)';
 }
 
 
@@ -48,7 +48,7 @@ abstract mixin class $MyHomeStateCopyWith<$Res>  {
   factory $MyHomeStateCopyWith(MyHomeState value, $Res Function(MyHomeState) _then) = _$MyHomeStateCopyWithImpl;
 @useResult
 $Res call({
- List<SearchRepositoriesItemEntity> repositories
+ List<SearchRepositoriesItemEntity> repositories, String? token
 });
 
 
@@ -65,10 +65,11 @@ class _$MyHomeStateCopyWithImpl<$Res>
 
 /// Create a copy of MyHomeState
 /// with the given fields replaced by the non-null parameter values.
-@pragma('vm:prefer-inline') @override $Res call({Object? repositories = null,}) {
+@pragma('vm:prefer-inline') @override $Res call({Object? repositories = null,Object? token = freezed,}) {
   return _then(_self.copyWith(
 repositories: null == repositories ? _self.repositories : repositories // ignore: cast_nullable_to_non_nullable
-as List<SearchRepositoriesItemEntity>,
+as List<SearchRepositoriesItemEntity>,token: freezed == token ? _self.token : token // ignore: cast_nullable_to_non_nullable
+as String?,
   ));
 }
 
@@ -153,10 +154,10 @@ return $default(_that);case _:
 /// }
 /// ```
 
-@optionalTypeArgs TResult maybeWhen<TResult extends Object?>(TResult Function( List<SearchRepositoriesItemEntity> repositories)?  $default,{required TResult orElse(),}) {final _that = this;
+@optionalTypeArgs TResult maybeWhen<TResult extends Object?>(TResult Function( List<SearchRepositoriesItemEntity> repositories,  String? token)?  $default,{required TResult orElse(),}) {final _that = this;
 switch (_that) {
 case _MyHomeState() when $default != null:
-return $default(_that.repositories);case _:
+return $default(_that.repositories,_that.token);case _:
   return orElse();
 
 }
@@ -174,10 +175,10 @@ return $default(_that.repositories);case _:
 /// }
 /// ```
 
-@optionalTypeArgs TResult when<TResult extends Object?>(TResult Function( List<SearchRepositoriesItemEntity> repositories)  $default,) {final _that = this;
+@optionalTypeArgs TResult when<TResult extends Object?>(TResult Function( List<SearchRepositoriesItemEntity> repositories,  String? token)  $default,) {final _that = this;
 switch (_that) {
 case _MyHomeState():
-return $default(_that.repositories);case _:
+return $default(_that.repositories,_that.token);case _:
   throw StateError('Unexpected subclass');
 
 }
@@ -194,10 +195,10 @@ return $default(_that.repositories);case _:
 /// }
 /// ```
 
-@optionalTypeArgs TResult? whenOrNull<TResult extends Object?>(TResult? Function( List<SearchRepositoriesItemEntity> repositories)?  $default,) {final _that = this;
+@optionalTypeArgs TResult? whenOrNull<TResult extends Object?>(TResult? Function( List<SearchRepositoriesItemEntity> repositories,  String? token)?  $default,) {final _that = this;
 switch (_that) {
 case _MyHomeState() when $default != null:
-return $default(_that.repositories);case _:
+return $default(_that.repositories,_that.token);case _:
   return null;
 
 }
@@ -209,7 +210,7 @@ return $default(_that.repositories);case _:
 @JsonSerializable()
 
 class _MyHomeState extends MyHomeState {
-  const _MyHomeState({required final  List<SearchRepositoriesItemEntity> repositories}): _repositories = repositories,super._();
+  const _MyHomeState({required final  List<SearchRepositoriesItemEntity> repositories, this.token}): _repositories = repositories,super._();
   factory _MyHomeState.fromJson(Map<String, dynamic> json) => _$MyHomeStateFromJson(json);
 
  final  List<SearchRepositoriesItemEntity> _repositories;
@@ -219,6 +220,7 @@ class _MyHomeState extends MyHomeState {
   return EqualUnmodifiableListView(_repositories);
 }
 
+@override final  String? token;
 
 /// Create a copy of MyHomeState
 /// with the given fields replaced by the non-null parameter values.
@@ -233,16 +235,16 @@ Map<String, dynamic> toJson() {
 
 @override
 bool operator ==(Object other) {
-  return identical(this, other) || (other.runtimeType == runtimeType&&other is _MyHomeState&&const DeepCollectionEquality().equals(other._repositories, _repositories));
+  return identical(this, other) || (other.runtimeType == runtimeType&&other is _MyHomeState&&const DeepCollectionEquality().equals(other._repositories, _repositories)&&(identical(other.token, token) || other.token == token));
 }
 
 @JsonKey(includeFromJson: false, includeToJson: false)
 @override
-int get hashCode => Object.hash(runtimeType,const DeepCollectionEquality().hash(_repositories));
+int get hashCode => Object.hash(runtimeType,const DeepCollectionEquality().hash(_repositories),token);
 
 @override
 String toString() {
-  return 'MyHomeState(repositories: $repositories)';
+  return 'MyHomeState(repositories: $repositories, token: $token)';
 }
 
 
@@ -253,7 +255,7 @@ abstract mixin class _$MyHomeStateCopyWith<$Res> implements $MyHomeStateCopyWith
   factory _$MyHomeStateCopyWith(_MyHomeState value, $Res Function(_MyHomeState) _then) = __$MyHomeStateCopyWithImpl;
 @override @useResult
 $Res call({
- List<SearchRepositoriesItemEntity> repositories
+ List<SearchRepositoriesItemEntity> repositories, String? token
 });
 
 
@@ -270,10 +272,11 @@ class __$MyHomeStateCopyWithImpl<$Res>
 
 /// Create a copy of MyHomeState
 /// with the given fields replaced by the non-null parameter values.
-@override @pragma('vm:prefer-inline') $Res call({Object? repositories = null,}) {
+@override @pragma('vm:prefer-inline') $Res call({Object? repositories = null,Object? token = freezed,}) {
   return _then(_MyHomeState(
 repositories: null == repositories ? _self._repositories : repositories // ignore: cast_nullable_to_non_nullable
-as List<SearchRepositoriesItemEntity>,
+as List<SearchRepositoriesItemEntity>,token: freezed == token ? _self.token : token // ignore: cast_nullable_to_non_nullable
+as String?,
   ));
 }
 

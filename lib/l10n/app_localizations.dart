@@ -117,6 +117,54 @@ abstract class AppLocalizations {
   /// In en, this message translates to:
   /// **'Dark Mode'**
   String get darkMode;
+
+  /// Tooltip for editing the token
+  ///
+  /// In en, this message translates to:
+  /// **'Edit token'**
+  String get editTokenTooltip;
+
+  /// Dialog title for editing the token
+  ///
+  /// In en, this message translates to:
+  /// **'Edit Token'**
+  String get editTokenTitle;
+
+  /// Label for token text field
+  ///
+  /// In en, this message translates to:
+  /// **'Token'**
+  String get tokenLabel;
+
+  /// Hint text for token text field
+  ///
+  /// In en, this message translates to:
+  /// **'GitHub Personal Access Token'**
+  String get tokenHint;
+
+  /// Cancel button label
+  ///
+  /// In en, this message translates to:
+  /// **'Cancel'**
+  String get cancel;
+
+  /// Delete button label
+  ///
+  /// In en, this message translates to:
+  /// **'Delete'**
+  String get delete;
+
+  /// Save button label
+  ///
+  /// In en, this message translates to:
+  /// **'Save'**
+  String get save;
+
+  /// Error text prefix with the given error description
+  ///
+  /// In en, this message translates to:
+  /// **'Error: {error}'**
+  String error(Object error);
 }
 
 class _AppLocalizationsDelegate

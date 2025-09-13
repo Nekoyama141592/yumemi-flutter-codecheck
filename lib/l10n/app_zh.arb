@@ -10,5 +10,40 @@
   "darkMode": "深色模式",
   "@darkMode": {
     "description": "Dark mode toggle"
+  },
+  "editTokenTooltip": "编辑令牌",
+  "@editTokenTooltip": {
+    "description": "Tooltip for editing the token"
+  },
+  "editTokenTitle": "编辑令牌",
+  "@editTokenTitle": {
+    "description": "Dialog title for editing the token"
+  },
+  "tokenLabel": "令牌",
+  "@tokenLabel": {
+    "description": "Label for token text field"
+  },
+  "tokenHint": "GitHub 个人访问令牌",
+  "@tokenHint": {
+    "description": "Hint text for token text field"
+  },
+  "cancel": "取消",
+  "@cancel": {
+    "description": "Cancel button label"
+  },
+  "delete": "删除",
+  "@delete": {
+    "description": "Delete button label"
+  },
+  "save": "保存",
+  "@save": {
+    "description": "Save button label"
+  },
+  "error": "错误：{error}",
+  "@error": {
+    "description": "Error text prefix with the given error description",
+    "placeholders": {
+      "error": {}
+    }
   }
 }

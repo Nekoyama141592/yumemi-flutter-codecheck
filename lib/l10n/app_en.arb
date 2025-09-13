@@ -10,5 +10,40 @@
   "darkMode": "Dark Mode",
   "@darkMode": {
     "description": "Dark mode toggle"
+  },
+  "editTokenTooltip": "Edit token",
+  "@editTokenTooltip": {
+    "description": "Tooltip for editing the token"
+  },
+  "editTokenTitle": "Edit Token",
+  "@editTokenTitle": {
+    "description": "Dialog title for editing the token"
+  },
+  "tokenLabel": "Token",
+  "@tokenLabel": {
+    "description": "Label for token text field"
+  },
+  "tokenHint": "GitHub Personal Access Token",
+  "@tokenHint": {
+    "description": "Hint text for token text field"
+  },
+  "cancel": "Cancel",
+  "@cancel": {
+    "description": "Cancel button label"
+  },
+  "delete": "Delete",
+  "@delete": {
+    "description": "Delete button label"
+  },
+  "save": "Save",
+  "@save": {
+    "description": "Save button label"
+  },
+  "error": "Error: {error}",
+  "@error": {
+    "description": "Error text prefix with the given error description",
+    "placeholders": {
+      "error": {}
+    }
   }
 }

@@ -1,7 +1,9 @@
+import 'dart:developer' as developer;
 import 'dart:async';
 
 import 'package:riverpod_annotation/riverpod_annotation.dart';
 import 'package:yumemi_flutter_codecheck/core/provider/repository/github/github_repository_provider.dart';
+import 'package:yumemi_flutter_codecheck/core/provider/repository/secure_storage/secure_storage_repository_provider.dart';
 import 'package:yumemi_flutter_codecheck/presentation/state/auto_dispose/my_home/my_home_state.dart';
 
 part 'my_home_view_model.g.dart';
@@ -10,12 +12,13 @@ part 'my_home_view_model.g.dart';
 class MyHomeViewModel extends _$MyHomeViewModel {
   @override
   FutureOr<MyHomeState> build() async {
-    const token = '';
     try {
+      final token = await ref.read(secureStorageRepositoryProvider).getToken();
       final repo = ref.read(githubRepositoryProvider(token: token));
       final items = await repo.searchRepositories(query: 'flutter');
-      return MyHomeState(repositories: items);
+      return MyHomeState(repositories: items, token: token);
     } catch (e) {
+      developer.log(e.toString());
       rethrow;
     }
   }
@@ -27,9 +30,9 @@ class MyHomeViewModel extends _$MyHomeViewModel {
     int? perPage,
     int? page,
   }) async {
-    const token = '';
     state = const AsyncValue.loading();
     try {
+      final token = await ref.read(secureStorageRepositoryProvider).getToken();
       final repo = ref.read(githubRepositoryProvider(token: token));
       final items = await repo.searchRepositories(
         query: query,
@@ -38,7 +41,7 @@ class MyHomeViewModel extends _$MyHomeViewModel {
         perPage: perPage,
         page: page,
       );
-      state = AsyncValue.data(MyHomeState(repositories: items));
+      state = AsyncValue.data(state.value!.copyWith(repositories: items));
     } catch (e, st) {
       state = AsyncValue.error(e, st);
     }

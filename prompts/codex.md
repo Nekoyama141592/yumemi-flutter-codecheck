@@ -26,3 +26,19 @@
 13. MyHomePageで初回表示時にサンプルクエリで検索を実行するのをViewModelのbuildメソッド内で行うようにしてください。
 
 14. GithubRepositoryInterfaceのsearchRepositoriesの引数を名前付き引数に変更してください。
+
+15. lib/infrastructure/repositoryにFlutterSecureStorageを外から受け取り、SecureStorageInterfaceをimplementsしたSecureStorageRepositoryを作成してください。
+
+16. lib/core/provider/repository/secure_storage/secure_storage_repository_provider.dartにriverpod_generatorを使用してSecureStorageRepositoryProviderを作成してください。
+
+17. MyHomePageの画面内にkeyのアイコンを追加し、MyHomeStateのtokenがnullの場合はkeyのアイコンを赤く表示し、そうでない場合はkeyのアイコンを緑色で表示してください。ただし、彩度の高さはダークテーマとライトテーマで変えて見やすいようにしてください。
+
+18. MyHomePageのstatusColorはlib/application/theme/dark_theme.dartとlib/application/theme/light_theme.dartに新たに定義した色を使い、Theme.of(context)を使ってください
+
+19. lib/presentation/page/my_home/components/edit_token_dialog.dartにHookConsumerWidgetを使用してSecureStorageRepositoryを使用し、tokenを編集するダイアログを作成してください。
+
+20. MyHomePageのkeyのアイコンを押下したらEditTokenDialogを表示してください。
+
+21. lib/presentation/page/my_home/my_home_page.dartとlib/presentation/page/my_home/components/edit_token_dialog.dartで表示してある文字列を全て翻訳して
+
+22. lib/l10n/app_localizations.dartの変更点を全ての.arbファイルにも反映して。最後にflutter gen-l10nを実行して

@@ -12,7 +12,11 @@ _MyHomeState _$MyHomeStateFromJson(Map<String, dynamic> json) => _MyHomeState(
         (e) => SearchRepositoriesItemEntity.fromJson(e as Map<String, dynamic>),
       )
       .toList(),
+  token: json['token'] as String?,
 );
 
 Map<String, dynamic> _$MyHomeStateToJson(_MyHomeState instance) =>
-    <String, dynamic>{'repositories': instance.repositories};
+    <String, dynamic>{
+      'repositories': instance.repositories,
+      'token': instance.token,
+    };
