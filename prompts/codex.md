@@ -28,3 +28,5 @@
 14. GithubRepositoryInterfaceのsearchRepositoriesの引数を名前付き引数に変更してください。
 
 15. lib/infrastructure/repositoryにFlutterSecureStorageを外から受け取り、SecureStorageInterfaceをimplementsしたSecureStorageRepositoryを作成してください。
+
+16. lib/core/provider/repository/secure_storage/secure_storage_repository_provider.dartにriverpod_generatorを使用してSecureStorageRepositoryProviderを作成してください。
