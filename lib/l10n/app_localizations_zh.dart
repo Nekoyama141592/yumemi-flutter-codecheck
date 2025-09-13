@@ -16,4 +16,30 @@ class AppLocalizationsZh extends AppLocalizations {
 
   @override
   String get darkMode => '深色模式';
+
+  @override
+  String get editTokenTooltip => '编辑令牌';
+
+  @override
+  String get editTokenTitle => '编辑令牌';
+
+  @override
+  String get tokenLabel => '令牌';
+
+  @override
+  String get tokenHint => 'GitHub 个人访问令牌';
+
+  @override
+  String get cancel => '取消';
+
+  @override
+  String get delete => '删除';
+
+  @override
+  String get save => '保存';
+
+  @override
+  String error(Object error) {
+    return '错误：$error';
+  }
 }

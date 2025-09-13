@@ -38,3 +38,7 @@
 19. lib/presentation/page/my_home/components/edit_token_dialog.dartにHookConsumerWidgetを使用してSecureStorageRepositoryを使用し、tokenを編集するダイアログを作成してください。
 
 20. MyHomePageのkeyのアイコンを押下したらEditTokenDialogを表示してください。
+
+21. lib/presentation/page/my_home/my_home_page.dartとlib/presentation/page/my_home/components/edit_token_dialog.dartで表示してある文字列を全て翻訳して
+
+22. lib/l10n/app_localizations.dartの変更点を全ての.arbファイルにも反映して。最後にflutter gen-l10nを実行して

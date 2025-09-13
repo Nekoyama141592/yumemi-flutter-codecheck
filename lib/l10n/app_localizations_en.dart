@@ -16,4 +16,30 @@ class AppLocalizationsEn extends AppLocalizations {
 
   @override
   String get darkMode => 'Dark Mode';
+
+  @override
+  String get editTokenTooltip => 'Edit token';
+
+  @override
+  String get editTokenTitle => 'Edit Token';
+
+  @override
+  String get tokenLabel => 'Token';
+
+  @override
+  String get tokenHint => 'GitHub Personal Access Token';
+
+  @override
+  String get cancel => 'Cancel';
+
+  @override
+  String get delete => 'Delete';
+
+  @override
+  String get save => 'Save';
+
+  @override
+  String error(Object error) {
+    return 'Error: $error';
+  }
 }

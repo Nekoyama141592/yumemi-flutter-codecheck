@@ -16,4 +16,30 @@ class AppLocalizationsJa extends AppLocalizations {
 
   @override
   String get darkMode => 'ダークモード';
+
+  @override
+  String get editTokenTooltip => 'トークンを編集';
+
+  @override
+  String get editTokenTitle => 'トークンを編集';
+
+  @override
+  String get tokenLabel => 'トークン';
+
+  @override
+  String get tokenHint => 'GitHub パーソナルアクセストークン';
+
+  @override
+  String get cancel => 'キャンセル';
+
+  @override
+  String get delete => '削除';
+
+  @override
+  String get save => '保存';
+
+  @override
+  String error(Object error) {
+    return 'エラー: $error';
+  }
 }

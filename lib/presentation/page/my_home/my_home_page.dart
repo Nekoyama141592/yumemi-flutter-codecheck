@@ -25,7 +25,7 @@ class MyHomePage extends HookConsumerWidget {
           Padding(
             padding: const EdgeInsets.only(right: 12),
             child: IconButton(
-              tooltip: 'Edit token',
+              tooltip: AppLocalizations.of(context)!.editTokenTooltip,
               onPressed: () => EditTokenDialog.show(context),
               icon: Icon(
                 Icons.vpn_key,
@@ -40,7 +40,7 @@ class MyHomePage extends HookConsumerWidget {
       drawer: const OriginalDrawer(),
       body: state.when(
         loading: () => const Center(child: CircularProgressIndicator()),
-        error: (_,_) => Center(child: Text('エラーが発生しました')),
+        error: (e, _) => Center(child: Text(AppLocalizations.of(context)!.error(e))),
         data: (data) {
           if (data.repositories.isEmpty) {
             return Center(child: Text(AppLocalizations.of(context)!.hello));

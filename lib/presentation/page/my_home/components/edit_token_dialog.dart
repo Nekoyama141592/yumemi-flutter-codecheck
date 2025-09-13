@@ -3,6 +3,7 @@ import 'package:flutter_hooks/flutter_hooks.dart';
 import 'package:hooks_riverpod/hooks_riverpod.dart';
 import 'package:yumemi_flutter_codecheck/core/provider/repository/secure_storage/secure_storage_repository_provider.dart';
 import 'package:yumemi_flutter_codecheck/presentation/notifier/auto_dispose/my_home/my_home_view_model.dart';
+import 'package:yumemi_flutter_codecheck/l10n/app_localizations.dart';
 
 class EditTokenDialog extends HookConsumerWidget {
   const EditTokenDialog({super.key});
@@ -49,7 +50,7 @@ class EditTokenDialog extends HookConsumerWidget {
     }
 
     return AlertDialog(
-      title: const Text('トークンを編集'),
+      title: Text(AppLocalizations.of(context)!.editTokenTitle),
       content: SizedBox(
         width: 400,
         child: loading.value
@@ -61,8 +62,8 @@ class EditTokenDialog extends HookConsumerWidget {
                 controller: controller,
                 obscureText: obscure.value,
                 decoration: InputDecoration(
-                  labelText: 'Token',
-                  hintText: 'GitHub Personal Access Token',
+                  labelText: AppLocalizations.of(context)!.tokenLabel,
+                  hintText: AppLocalizations.of(context)!.tokenHint,
                   prefixIcon: const Icon(Icons.vpn_key),
                   suffixIcon: IconButton(
                     onPressed: () => obscure.value = !obscure.value,
@@ -76,15 +77,15 @@ class EditTokenDialog extends HookConsumerWidget {
       actions: [
         TextButton(
           onPressed: () => Navigator.of(context).pop(),
-          child: const Text('キャンセル'),
+          child: Text(AppLocalizations.of(context)!.cancel),
         ),
         TextButton(
           onPressed: loading.value ? null : deleteToken,
-          child: const Text('削除'),
+          child: Text(AppLocalizations.of(context)!.delete),
         ),
         ElevatedButton(
           onPressed: loading.value ? null : save,
-          child: const Text('保存'),
+          child: Text(AppLocalizations.of(context)!.save),
         ),
       ],
     );
