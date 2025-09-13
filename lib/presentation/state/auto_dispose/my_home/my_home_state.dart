@@ -9,6 +9,7 @@ abstract class MyHomeState with _$MyHomeState {
   const MyHomeState._();
   const factory MyHomeState({
     required List<SearchRepositoriesItemEntity> repositories,
+    String? token,
   }) = _MyHomeState;
   factory MyHomeState.fromJson(Map<String, dynamic> json) =>
       _$MyHomeStateFromJson(json);
