@@ -30,9 +30,9 @@ class MyHomeViewModel extends _$MyHomeViewModel {
     int? perPage,
     int? page,
   }) async {
-    const token = '';
     state = const AsyncValue.loading();
     try {
+      final token = await ref.read(secureStorageRepositoryProvider).getToken();
       final repo = ref.read(githubRepositoryProvider(token: token));
       final items = await repo.searchRepositories(
         query: query,
