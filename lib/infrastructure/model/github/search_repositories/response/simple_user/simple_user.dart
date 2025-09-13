@@ -34,4 +34,3 @@ abstract class SimpleUser with _$SimpleUser {
   factory SimpleUser.fromJson(Map<String, dynamic> json) =>
       _$SimpleUserFromJson(json);
 }
-

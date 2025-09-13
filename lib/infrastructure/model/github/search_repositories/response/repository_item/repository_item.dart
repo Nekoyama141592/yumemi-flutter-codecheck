@@ -87,4 +87,3 @@ abstract class RepositoryItem with _$RepositoryItem {
   factory RepositoryItem.fromJson(Map<String, dynamic> json) =>
       _$RepositoryItemFromJson(json);
 }
-

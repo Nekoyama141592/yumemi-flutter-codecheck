@@ -18,4 +18,3 @@ abstract class LicenseSimple with _$LicenseSimple {
   factory LicenseSimple.fromJson(Map<String, dynamic> json) =>
       _$LicenseSimpleFromJson(json);
 }
-

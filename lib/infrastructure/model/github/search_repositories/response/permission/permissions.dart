@@ -17,4 +17,3 @@ abstract class Permissions with _$Permissions {
   factory Permissions.fromJson(Map<String, dynamic> json) =>
       _$PermissionsFromJson(json);
 }
-
