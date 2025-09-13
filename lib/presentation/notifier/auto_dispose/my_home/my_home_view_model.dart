@@ -1,0 +1,39 @@
+import 'dart:async';
+
+import 'package:riverpod_annotation/riverpod_annotation.dart';
+import 'package:yumemi_flutter_codecheck/core/provider/repository/github/github_repository_provider.dart';
+import 'package:yumemi_flutter_codecheck/presentation/state/auto_dispose/my_home/my_home_state.dart';
+
+part 'my_home_view_model.g.dart';
+
+@riverpod
+class MyHomeViewModel extends _$MyHomeViewModel {
+  @override
+  FutureOr<MyHomeState> build() async {
+    return const MyHomeState(repositories: []);
+  }
+
+  Future<void> searchRepositories({
+    required String query,
+    String? sort,
+    String? order,
+    int? perPage,
+    int? page,
+  }) async {
+    const token = ''; // TODO: 環境変数から取得
+    state = const AsyncValue.loading();
+    try {
+      final repo = ref.read(githubRepositoryProvider(token: token));
+      final items = await repo.searchRepositories(
+        query,
+        sort,
+        order,
+        perPage,
+        page,
+      );
+      state = AsyncValue.data(MyHomeState(repositories: items));
+    } catch (e, st) {
+      state = AsyncValue.error(e, st);
+    }
+  }
+}

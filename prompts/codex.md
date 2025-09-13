@@ -16,3 +16,7 @@
 8. lib/domain/entity/search_repositories_item/search_repositories_item_entity.dartにfromModelというfactoryコンストラクタを作成してください。そしてGithubRepositoryではそれを使用してください。
 
 9. lib/core/provider/repository/github/github_repository_provider.dartにriverpod_generatorを使用してGithubRepositoryProviderを作成してください。
+
+10. lib/presentation/notifier/auto_dispose/my_home/my_home_view_model.dartにriverpod_generatorを使用してAutoDisposeAsyncNotifierのMyHomeViewModelを作成してください。stateはlib/presentation/state/auto_dispose/my_home/my_home_state.dartを使用してください。
+
+11. lib/presentation/notifier/auto_dispose/my_home/my_home_view_model.dartをAsyncNotifierではなくNotifierに変更してください。
