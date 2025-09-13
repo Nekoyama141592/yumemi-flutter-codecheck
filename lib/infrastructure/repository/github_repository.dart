@@ -24,13 +24,7 @@ class GithubRepository implements GithubRepositoryInterface {
     );
 
     return response.items
-        .map(
-          (e) => SearchRepositoriesItemEntity(
-            id: e.id,
-            fullName: e.fullName,
-            htmlUrl: e.htmlUrl,
-          ),
-        )
+        .map(SearchRepositoriesItemEntity.fromModel)
         .toList(growable: false);
   }
 }

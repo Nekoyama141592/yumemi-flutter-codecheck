@@ -12,3 +12,5 @@
 6. lib/infrastructure/repositoryにGithubRepositoryInterfaceをimplementsしたGithubRepositoryを作成してください。
 
 7. GithubRepositoryInterfaceのsearchRepositoriesのquery以外をnull許容できるようにしてください。
+
+8. lib/domain/entity/search_repositories_item/search_repositories_item_entity.dartにfromModelというfactoryコンストラクタを作成してください。そしてGithubRepositoryではそれを使用してください。
