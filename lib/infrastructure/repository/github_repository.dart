@@ -10,10 +10,10 @@ class GithubRepository implements GithubRepositoryInterface {
   @override
   Future<List<SearchRepositoriesItemEntity>> searchRepositories(
     String query,
-    String sort,
-    String order,
-    int perPage,
-    int page,
+    String? sort,
+    String? order,
+    int? perPage,
+    int? page,
   ) async {
     final response = await _apiClient.searchRepositories(
       query,
