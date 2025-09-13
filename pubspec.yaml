@@ -20,6 +20,7 @@ dependencies:
   riverpod_annotation: ^3.0.0
   shared_preferences: ^2.5.3
   auto_route: ^10.1.2
+  retrofit: ^4.7.2
   
 
 dev_dependencies:
@@ -35,6 +36,7 @@ dev_dependencies:
   flutter_flavorizr: ^2.4.1
   flutter_launcher_icons: ^0.14.4
   intl: ^0.20.2
+  retrofit_generator: ^10.0.0
 
 flutter:
   generate: true 
