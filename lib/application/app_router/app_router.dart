@@ -9,8 +9,6 @@ class AppRouter extends RootStackRouter {
   final Ref ref;
   @override
   List<AutoRoute> get routes {
-    return [
-      AutoRoute(page: MyHomeRoute.page, path: MyHomePage.path),
-    ];
+    return [AutoRoute(page: MyHomeRoute.page, path: MyHomePage.path)];
   }
 }

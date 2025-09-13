@@ -3,6 +3,7 @@ import 'package:flutter/material.dart';
 import '../l10n/app_localizations.dart';
 import '../application/flavors.dart';
 import 'common/original_drawer.dart';
+
 @RoutePage()
 class MyHomePage extends StatelessWidget {
   const MyHomePage({super.key});
