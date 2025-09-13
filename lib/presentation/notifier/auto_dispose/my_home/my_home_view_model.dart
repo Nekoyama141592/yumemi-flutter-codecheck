@@ -13,13 +13,7 @@ class MyHomeViewModel extends _$MyHomeViewModel {
     const token = ''; // TODO: 環境変数から取得
     try {
       final repo = ref.read(githubRepositoryProvider(token: token));
-      final items = await repo.searchRepositories(
-        'flutter',
-        null,
-        null,
-        null,
-        null,
-      );
+      final items = await repo.searchRepositories(query: 'flutter');
       return MyHomeState(repositories: items);
     } catch (e) {
       rethrow;
@@ -38,11 +32,11 @@ class MyHomeViewModel extends _$MyHomeViewModel {
     try {
       final repo = ref.read(githubRepositoryProvider(token: token));
       final items = await repo.searchRepositories(
-        query,
-        sort,
-        order,
-        perPage,
-        page,
+        query: query,
+        sort: sort,
+        order: order,
+        perPage: perPage,
+        page: page,
       );
       state = AsyncValue.data(MyHomeState(repositories: items));
     } catch (e, st) {

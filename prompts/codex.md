@@ -24,3 +24,5 @@
 12. MyHomePageでHookConsumerWidgetを使用してMyHomeViewModelを使用して、GitHubのリポジトリのfullNameを表示してください。
 
 13. MyHomePageで初回表示時にサンプルクエリで検索を実行するのをViewModelのbuildメソッド内で行うようにしてください。
+
+14. GithubRepositoryInterfaceのsearchRepositoriesの引数を名前付き引数に変更してください。
