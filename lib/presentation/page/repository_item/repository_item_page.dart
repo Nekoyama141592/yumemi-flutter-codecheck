@@ -254,8 +254,10 @@ class RepositoryItemPage extends HookConsumerWidget {
         final size = MediaQuery.of(context).size;
         final scaleH = (size.height / 812).clamp(0.8, 1.3);
         final spacing = (constraints.maxWidth * 0.03).clamp(8.0, 16.0);
-        final minTileHeight =
-            120.0 * scaleH; // ensure enough height for placeholders
+        // Ensure tile is tall enough: padding*2 + circle + gaps + two lines
+        final contentMinHeight =
+            (16 * 2 + 40 + 8 + 24 + 6 + 14) * scaleH; // 124 * scaleH
+        final minTileHeight = contentMinHeight + 4 * scaleH; // small buffer
         final tentativeCols = (constraints.maxWidth / 160).floor();
         final crossAxisCount = tentativeCols.clamp(1, 4);
         final tileWidth =
