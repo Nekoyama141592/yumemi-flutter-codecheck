@@ -4,7 +4,6 @@ import 'package:flutter/services.dart';
 import 'package:hooks_riverpod/hooks_riverpod.dart';
 import 'package:yumemi_flutter_codecheck/core/util/route_util.dart';
 import 'package:yumemi_flutter_codecheck/domain/entity/search_repositories_item/search_repositories_item_entity.dart';
-import 'package:yumemi_flutter_codecheck/presentation/state/auto_dispose/my_home/my_home_state.dart';
 import '../../../l10n/app_localizations.dart';
 import 'package:yumemi_flutter_codecheck/presentation/notifier/auto_dispose/my_home/my_home_view_model.dart';
 import 'package:yumemi_flutter_codecheck/application/theme/extensions/app_colors.dart';
@@ -23,8 +22,7 @@ class MyHomePage extends HookConsumerWidget {
     final token = state.value?.token;
     final searchController = useTextEditingController(text: 'flutter');
     final appColors = Theme.of(context).extension<AppColors>()!;
-    final size = MediaQuery.of(context).size;
-    final scaleH = (size.height / 812).clamp(0.8, 1.3);
+    final isDark = ref.watch(themeProvider).isDarkMode;
 
     // Animation controllers
     final headerAnimationController = useAnimationController(
@@ -105,26 +103,64 @@ class MyHomePage extends HookConsumerWidget {
               position: headerSlideAnimation,
               child: FadeTransition(
                 opacity: headerFadeAnimation,
-                child: _buildHeader(context, ref, appColors, token, scaleH),
+                child: _Header(
+                  isDark: isDark,
+                  token: token,
+                  appColors: appColors,
+                  onToggleTheme: () {
+                    HapticFeedback.lightImpact();
+                    ref.read(themeProvider.notifier).toggleTheme();
+                  },
+                  onEditToken: () {
+                    HapticFeedback.lightImpact();
+                    EditTokenDialog.show(context);
+                  },
+                ),
               ),
             ),
             SlideTransition(
               position: searchSlideAnimation,
               child: FadeTransition(
                 opacity: searchFadeAnimation,
-                child: _buildSearchSection(
-                  context,
-                  searchController,
-                  notifier,
-                  appColors,
-                  scaleH,
+                child: _SearchSection(
+                  appColors: appColors,
+                  searchController: searchController,
+                  onQueryChanged: (query) async {
+                    HapticFeedback.selectionClick();
+                    await notifier().searchRepositories(query: query);
+                  },
+                  onClear: () async {
+                    searchController.clear();
+                    await notifier().searchRepositories(query: '');
+                  },
                 ),
               ),
             ),
             Expanded(
               child: FadeTransition(
                 opacity: contentFadeAnimation,
-                child: _buildContent(context, state, appColors),
+                child: state.when(
+                  loading: () => _LoadingView(appColors: appColors),
+                  error: (error, _) =>
+                      _ErrorView(appColors: appColors, error: error),
+                  data: (data) {
+                    if (data.repositories.isEmpty) {
+                      return _EmptyView(appColors: appColors);
+                    }
+                    return _RepositoryListView(
+                      appColors: appColors,
+                      repositories: data.repositories,
+                      onTapRepo: (repo) {
+                        HapticFeedback.lightImpact();
+                        RouteUtil.pushRepositoryItemPage(
+                          context,
+                          userName: repo.userName,
+                          name: repo.name,
+                        );
+                      },
+                    );
+                  },
+                ),
               ),
             ),
           ],
@@ -133,14 +169,27 @@ class MyHomePage extends HookConsumerWidget {
     );
   }
 
-  Widget _buildHeader(
-    BuildContext context,
-    WidgetRef ref,
-    AppColors appColors,
-    String? token,
-    double scaleH,
-  ) {
-    final isDark = ref.watch(themeProvider).isDarkMode;
+}
+
+class _Header extends StatelessWidget {
+  const _Header({
+    required this.isDark,
+    required this.token,
+    required this.appColors,
+    required this.onToggleTheme,
+    required this.onEditToken,
+  });
+
+  final bool isDark;
+  final String? token;
+  final AppColors appColors;
+  final VoidCallback onToggleTheme;
+  final VoidCallback onEditToken;
+
+  @override
+  Widget build(BuildContext context) {
+    final size = MediaQuery.of(context).size;
+    final scaleH = (size.height / 812).clamp(0.8, 1.3);
 
     return Container(
       width: double.infinity,
@@ -196,10 +245,7 @@ class MyHomePage extends HookConsumerWidget {
                       tooltip: isDark
                           ? AppLocalizations.of(context)!.themeLightTooltip
                           : AppLocalizations.of(context)!.themeDarkTooltip,
-                      onPressed: () {
-                        HapticFeedback.lightImpact();
-                        ref.read(themeProvider.notifier).toggleTheme();
-                      },
+                      onPressed: onToggleTheme,
                       icon: AnimatedSwitcher(
                         duration: const Duration(milliseconds: 200),
                         child: Icon(
@@ -229,10 +275,7 @@ class MyHomePage extends HookConsumerWidget {
                     ),
                     child: IconButton(
                       tooltip: AppLocalizations.of(context)!.editTokenTooltip,
-                      onPressed: () {
-                        HapticFeedback.lightImpact();
-                        EditTokenDialog.show(context);
-                      },
+                      onPressed: onEditToken,
                       icon: Icon(
                         Icons.vpn_key_rounded,
                         color: token != null
@@ -251,14 +294,25 @@ class MyHomePage extends HookConsumerWidget {
       ),
     );
   }
+}
 
-  Widget _buildSearchSection(
-    BuildContext context,
-    TextEditingController searchController,
-    MyHomeViewModel Function() notifier,
-    AppColors appColors,
-    double scaleH,
-  ) {
+class _SearchSection extends StatelessWidget {
+  const _SearchSection({
+    required this.appColors,
+    required this.searchController,
+    required this.onQueryChanged,
+    required this.onClear,
+  });
+
+  final AppColors appColors;
+  final TextEditingController searchController;
+  final Future<void> Function(String query) onQueryChanged;
+  final Future<void> Function() onClear;
+
+  @override
+  Widget build(BuildContext context) {
+    final size = MediaQuery.of(context).size;
+    final scaleH = (size.height / 812).clamp(0.8, 1.3);
     return Container(
       width: double.infinity,
       padding: EdgeInsets.all(20 * scaleH),
@@ -291,10 +345,8 @@ class MyHomePage extends HookConsumerWidget {
                 hintText: AppLocalizations.of(context)!.searchFieldHint,
                 hintStyle: TextStyle(color: appColors.secondary, fontSize: 15),
                 prefixIcon: Container(
-                  margin: EdgeInsets.only(
-                    left: 16 * scaleH,
-                    right: 12 * scaleH,
-                  ),
+                  margin:
+                      EdgeInsets.only(left: 16 * scaleH, right: 12 * scaleH),
                   child: Icon(
                     Icons.search_rounded,
                     color: appColors.primary,
@@ -304,9 +356,8 @@ class MyHomePage extends HookConsumerWidget {
                 prefixIconConstraints: BoxConstraints(minWidth: 52 * scaleH),
                 suffixIcon: searchController.text.isNotEmpty
                     ? IconButton(
-                        onPressed: () {
-                          searchController.clear();
-                          notifier().searchRepositories(query: '');
+                        onPressed: () async {
+                          await onClear();
                         },
                         icon: Icon(
                           Icons.clear_rounded,
@@ -334,35 +385,21 @@ class MyHomePage extends HookConsumerWidget {
                   vertical: 18 * scaleH,
                 ),
               ),
-              onChanged: (query) async {
-                HapticFeedback.selectionClick();
-                await notifier().searchRepositories(query: query);
-              },
+              onChanged: onQueryChanged,
             ),
           ),
         ],
       ),
     );
   }
+}
 
-  Widget _buildContent(
-    BuildContext context,
-    AsyncValue<MyHomeState> state,
-    AppColors appColors,
-  ) {
-    return state.when(
-      loading: () => _buildLoadingState(context, appColors),
-      error: (error, _) => _buildErrorState(context, error, appColors),
-      data: (data) {
-        if (data.repositories.isEmpty) {
-          return _buildEmptyState(context, appColors);
-        }
-        return _buildRepositoryList(context, data.repositories, appColors);
-      },
-    );
-  }
+class _LoadingView extends StatelessWidget {
+  const _LoadingView({required this.appColors});
+  final AppColors appColors;
 
-  Widget _buildLoadingState(BuildContext context, AppColors appColors) {
+  @override
+  Widget build(BuildContext context) {
     final size = MediaQuery.of(context).size;
     final scaleH = (size.height / 812).clamp(0.8, 1.3);
     return Center(
@@ -393,12 +430,15 @@ class MyHomePage extends HookConsumerWidget {
       ),
     );
   }
+}
 
-  Widget _buildErrorState(
-    BuildContext context,
-    Object error,
-    AppColors appColors,
-  ) {
+class _ErrorView extends StatelessWidget {
+  const _ErrorView({required this.appColors, required this.error});
+  final AppColors appColors;
+  final Object error;
+
+  @override
+  Widget build(BuildContext context) {
     final size = MediaQuery.of(context).size;
     final scaleH = (size.height / 812).clamp(0.8, 1.3);
     return Container(
@@ -421,7 +461,7 @@ class MyHomePage extends HookConsumerWidget {
             ),
             SizedBox(height: 24 * scaleH),
             Text(
-              AppLocalizations.of(context)!.repoErrorTitle,
+              AppLocalizations.of(context)!.repoErrorSubtitle,
               style: TextStyle(
                 color: appColors.onSurface,
                 fontSize: 20,
@@ -430,7 +470,7 @@ class MyHomePage extends HookConsumerWidget {
             ),
             SizedBox(height: 12 * scaleH),
             Text(
-              AppLocalizations.of(context)!.repoErrorSubtitle,
+              AppLocalizations.of(context)!.repoErrorTitle,
               style: TextStyle(
                 color: appColors.secondary,
                 fontSize: 14,
@@ -443,8 +483,14 @@ class MyHomePage extends HookConsumerWidget {
       ),
     );
   }
+}
 
-  Widget _buildEmptyState(BuildContext context, AppColors appColors) {
+class _EmptyView extends StatelessWidget {
+  const _EmptyView({required this.appColors});
+  final AppColors appColors;
+
+  @override
+  Widget build(BuildContext context) {
     final size = MediaQuery.of(context).size;
     final scaleH = (size.height / 812).clamp(0.8, 1.3);
     return Container(
@@ -489,36 +535,58 @@ class MyHomePage extends HookConsumerWidget {
       ),
     );
   }
+}
 
-  Widget _buildRepositoryList(
-    BuildContext context,
-    List repositories,
-    AppColors appColors,
-  ) {
+class _RepositoryListView extends StatelessWidget {
+  const _RepositoryListView({
+    required this.appColors,
+    required this.repositories,
+    required this.onTapRepo,
+  });
+
+  final AppColors appColors;
+  final List<SearchRepositoriesItemEntity> repositories;
+  final ValueChanged<SearchRepositoriesItemEntity> onTapRepo;
+
+  @override
+  Widget build(BuildContext context) {
     final size = MediaQuery.of(context).size;
     final scaleH = (size.height / 812).clamp(0.8, 1.3);
     return ListView.separated(
-      padding: EdgeInsets.symmetric(
-        horizontal: 20 * scaleH,
-        vertical: 8 * scaleH,
-      ),
+      padding:
+          EdgeInsets.symmetric(horizontal: 20 * scaleH, vertical: 8 * scaleH),
       itemCount: repositories.length,
       separatorBuilder: (context, index) => SizedBox(height: 12 * scaleH),
       itemBuilder: (context, index) {
         final repo = repositories[index];
         return _AnimatedListItem(
           index: index,
-          child: _buildRepositoryCard(context, repo, appColors),
+          child: _RepositoryCard(
+            appColors: appColors,
+            repo: repo,
+            onTap: () => onTapRepo(repo),
+          ),
         );
       },
     );
   }
+}
 
-  Widget _buildRepositoryCard(
-    BuildContext context,
-    SearchRepositoriesItemEntity repo,
-    AppColors appColors,
-  ) {
+class _RepositoryCard extends StatelessWidget {
+  const _RepositoryCard({
+    required this.appColors,
+    required this.repo,
+    required this.onTap,
+  });
+
+  final AppColors appColors;
+  final SearchRepositoriesItemEntity repo;
+  final VoidCallback onTap;
+
+  @override
+  Widget build(BuildContext context) {
+    final size = MediaQuery.of(context).size;
+    final scaleH = (size.height / 812).clamp(0.8, 1.3);
     return Container(
       decoration: BoxDecoration(
         color: appColors.cardBackground,
@@ -533,55 +601,36 @@ class MyHomePage extends HookConsumerWidget {
         ],
       ),
       child: _AnimatedCardButton(
-        onTap: () {
-          HapticFeedback.lightImpact();
-          RouteUtil.pushRepositoryItemPage(
-            context,
-            userName: repo.userName,
-            name: repo.name,
-          );
-        },
+        onTap: onTap,
         borderRadius: BorderRadius.circular(16),
-        child: Builder(
-          builder: (context) {
-            final size = MediaQuery.of(context).size;
-            final scaleH = (size.height / 812).clamp(0.8, 1.3);
-            return Padding(
-              padding: EdgeInsets.all(20 * scaleH),
-              child: Column(
-                crossAxisAlignment: CrossAxisAlignment.start,
-                children: [
-                  Row(
-                    children: [
-                      SizedBox(width: 12 * scaleH),
-                      Expanded(
-                        child: Text(
-                          repo.fullName,
-                          style: TextStyle(
-                            color: appColors.onSurface,
-                            fontSize: 16,
-                            fontWeight: FontWeight.w600,
-                          ),
-                          overflow: TextOverflow.ellipsis,
-                        ),
-                      ),
-                      Icon(
-                        Icons.arrow_forward_ios_rounded,
-                        color: appColors.secondary,
-                        size: 16,
-                      ),
-                    ],
+        child: Padding(
+          padding: EdgeInsets.all(20 * scaleH),
+          child: Row(
+            children: [
+              SizedBox(width: 12 * scaleH),
+              Expanded(
+                child: Text(
+                  repo.fullName,
+                  style: TextStyle(
+                    color: appColors.onSurface,
+                    fontSize: 16,
+                    fontWeight: FontWeight.w600,
                   ),
-                ],
+                  overflow: TextOverflow.ellipsis,
+                ),
               ),
-            );
-          },
+              Icon(
+                Icons.arrow_forward_ios_rounded,
+                color: appColors.secondary,
+                size: 16,
+              ),
+            ],
+          ),
         ),
       ),
     );
   }
 }
-
 // Animated list item for staggered animations
 class _AnimatedListItem extends HookWidget {
   const _AnimatedListItem({required this.index, required this.child});
