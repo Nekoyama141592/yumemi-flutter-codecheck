@@ -12,6 +12,7 @@ _SearchRepositoriesItemEntity _$SearchRepositoriesItemEntityFromJson(
   id: (json['id'] as num).toInt(),
   fullName: json['fullName'] as String,
   htmlUrl: json['htmlUrl'] as String,
+  name: json['name'] as String,
 );
 
 Map<String, dynamic> _$SearchRepositoriesItemEntityToJson(
@@ -20,4 +21,5 @@ Map<String, dynamic> _$SearchRepositoriesItemEntityToJson(
   'id': instance.id,
   'fullName': instance.fullName,
   'htmlUrl': instance.htmlUrl,
+  'name': instance.name,
 };
