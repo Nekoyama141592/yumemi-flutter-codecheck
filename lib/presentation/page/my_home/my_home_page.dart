@@ -58,9 +58,8 @@ class MyHomePage extends HookConsumerWidget {
           Expanded(
             child: state.when(
               loading: () => const Center(child: CircularProgressIndicator()),
-              error: (e, _) => Center(
-                child: Text(AppLocalizations.of(context)!.error(e)),
-              ),
+              error: (e, _) =>
+                  Center(child: Text(AppLocalizations.of(context)!.error(e))),
               data: (data) {
                 if (data.repositories.isEmpty) {
                   return Center(
