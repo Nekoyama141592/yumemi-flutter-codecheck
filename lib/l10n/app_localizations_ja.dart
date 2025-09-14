@@ -84,10 +84,10 @@ class AppLocalizationsJa extends AppLocalizations {
   String get startExploringSubtitle => 'GitHubのリポジトリを検索して素晴らしいプロジェクトやコードを見つけましょう';
 
   @override
-  String get repoErrorTitle => 'エラーが発生しました';
+  String get repoErrorTitle => 'リポジトリ情報の取得に失敗しました';
 
   @override
-  String get repoErrorSubtitle => 'リポジトリの情報を取得できませんでした';
+  String get repoErrorSubtitle => '画面の右上から個人用アクセストークンを登録してください';
 
   @override
   String get repoNotFoundTitle => 'リポジトリが見つかりません';
