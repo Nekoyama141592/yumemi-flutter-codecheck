@@ -11,6 +11,13 @@ class RepositoryItemPage extends StatelessWidget {
 
   static const path = '/users/:userName/repositories/:name';
 
+  static String generatePath({
+    required String userName,
+    required String name,
+  }) {
+    return '/users/$userName/repositories/$name';
+  }
+  
   final String userName;
   final String name;
 
