@@ -23,6 +23,15 @@ class MyHomePage extends HookConsumerWidget {
 
     return Scaffold(
       appBar: AppBar(
+        leading: Builder(
+          builder: (context) {
+            final isDark = ref.watch(themeProvider).isDarkMode;
+            return IconButton(
+              onPressed: () => ref.read(themeProvider.notifier).toggleTheme(),
+              icon: Icon(isDark ? Icons.dark_mode : Icons.light_mode),
+            );
+          },
+        ),
         title: Text(F.title),
         actions: [
           Padding(
@@ -37,15 +46,6 @@ class MyHomePage extends HookConsumerWidget {
                     : Theme.of(context).extension<AppColors>()!.tokenOff,
               ),
             ),
-          ),
-          Builder(
-            builder: (context) {
-              final isDark = ref.watch(themeProvider).isDarkMode;
-              return IconButton(
-                onPressed: () => ref.read(themeProvider.notifier).toggleTheme(),
-                icon: Icon(isDark ? Icons.dark_mode : Icons.light_mode),
-              );
-            },
           ),
         ],
       ),
