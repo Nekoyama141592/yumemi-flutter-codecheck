@@ -33,7 +33,7 @@ class AppLocalizationsZh extends AppLocalizations {
   String get save => '保存';
 
   @override
-  String get error => '错误';
+  String get error => '请从屏幕右上角注册您的个人访问令牌';
 
   @override
   String get repositoryName => '仓库名';

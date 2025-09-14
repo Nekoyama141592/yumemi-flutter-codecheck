@@ -31,7 +31,7 @@
   "@save": {
     "description": "Save button label"
   },
-  "error": "エラー",
+  "error": "画面の右上から個人用アクセストークンを登録してください",
   "@error": {
     "description": "Error text prefix with the given error description"
   },

@@ -31,7 +31,7 @@
   "@save": {
     "description": "Save button label"
   },
-  "error": "错误",
+  "error": "请从屏幕右上角注册您的个人访问令牌",
   "@error": {
     "description": "Error text prefix with the given error description"
   },

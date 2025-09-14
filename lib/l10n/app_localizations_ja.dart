@@ -33,7 +33,7 @@ class AppLocalizationsJa extends AppLocalizations {
   String get save => '保存';
 
   @override
-  String get error => 'エラー';
+  String get error => '画面の右上から個人用アクセストークンを登録してください';
 
   @override
   String get repositoryName => 'リポジトリ名';

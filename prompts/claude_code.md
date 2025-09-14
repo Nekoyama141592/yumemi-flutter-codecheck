@@ -13,3 +13,5 @@
 12. lib/presentation/page/repository_item/repository_item_page.dartにて「Issuesを見る」ボタンを削除して。
 13. lib/presentation/page/repository_item/repository_item_page.dartにおしゃれなアニメーションを導入して
 14. lib/presentation/page/my_home/my_home_page.dartにもおしゃれなアニメーションを導入して
+15. l10nのsomethingWentWrongを「リポジトリ情報の取得に失敗しました」の翻訳に変更して
+16. l10n(ja,en,zh)のerrorを「画面の右上から個人用アクセストークンを登録してください」の翻訳に変更して

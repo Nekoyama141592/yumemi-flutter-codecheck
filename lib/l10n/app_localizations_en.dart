@@ -33,7 +33,7 @@ class AppLocalizationsEn extends AppLocalizations {
   String get save => 'Save';
 
   @override
-  String get error => 'Error';
+  String get error => 'Please register your personal access token from the top right of the screen';
 
   @override
   String get repositoryName => 'Repository';

@@ -31,7 +31,7 @@
   "@save": {
     "description": "Save button label"
   },
-  "error": "Error",
+  "error": "Please register your personal access token from the top right of the screen",
   "@error": {
     "description": "Error text prefix with the given error description"
   },

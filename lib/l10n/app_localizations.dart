@@ -148,7 +148,7 @@ abstract class AppLocalizations {
   /// Error text prefix with the given error description
   ///
   /// In en, this message translates to:
-  /// **'Error'**
+  /// **'Please register your personal access token from the top right of the screen'**
   String get error;
 
   /// Label for repository name
