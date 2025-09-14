@@ -33,9 +33,6 @@ class AppLocalizationsZh extends AppLocalizations {
   String get save => '保存';
 
   @override
-  String get error => '请从屏幕右上角注册您的个人访问令牌';
-
-  @override
   String get repositoryName => '仓库名';
 
   @override
@@ -73,9 +70,6 @@ class AppLocalizationsZh extends AppLocalizations {
 
   @override
   String get searchingRepositories => '正在搜索仓库…';
-
-  @override
-  String get somethingWentWrong => '获取仓库信息失败';
 
   @override
   String get startExploring => '开始探索';

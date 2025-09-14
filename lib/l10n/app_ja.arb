@@ -31,10 +31,6 @@
   "@save": {
     "description": "Save button label"
   },
-  "error": "画面の右上から個人用アクセストークンを登録してください",
-  "@error": {
-    "description": "Error text prefix with the given error description"
-  },
   "repositoryName": "リポジトリ名",
   "@repositoryName": {"description": "Label for repository name"},
   "language": "言語",
@@ -62,8 +58,6 @@
   "@searchFieldHint": {"description": "Hint text for search field"},
   "searchingRepositories": "リポジトリを検索中...",
   "@searchingRepositories": {"description": "Loading message while searching repos"},
-  "somethingWentWrong": "リポジトリ情報の取得に失敗しました",
-  "@somethingWentWrong": {"description": "Generic error title"},
   "startExploring": "探索を始めましょう",
   "@startExploring": {"description": "Empty state title"},
   "startExploringSubtitle": "GitHubのリポジトリを検索して素晴らしいプロジェクトやコードを見つけましょう",

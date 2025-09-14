@@ -421,7 +421,7 @@ class MyHomePage extends HookConsumerWidget {
             ),
             SizedBox(height: 24 * scaleH),
             Text(
-              AppLocalizations.of(context)!.somethingWentWrong,
+              AppLocalizations.of(context)!.repoErrorTitle,
               style: TextStyle(
                 color: appColors.onSurface,
                 fontSize: 20,
@@ -430,7 +430,7 @@ class MyHomePage extends HookConsumerWidget {
             ),
             SizedBox(height: 12 * scaleH),
             Text(
-              AppLocalizations.of(context)!.error,
+              AppLocalizations.of(context)!.repoErrorSubtitle,
               style: TextStyle(
                 color: appColors.secondary,
                 fontSize: 14,

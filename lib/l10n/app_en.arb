@@ -31,10 +31,6 @@
   "@save": {
     "description": "Save button label"
   },
-  "error": "Please register your personal access token from the top right of the screen",
-  "@error": {
-    "description": "Error text prefix with the given error description"
-  },
   "repositoryName": "Repository",
   "@repositoryName": {"description": "Label for repository name"},
   "language": "Language",
@@ -62,8 +58,6 @@
   "@searchFieldHint": {"description": "Hint text for search field"},
   "searchingRepositories": "Searching repositories...",
   "@searchingRepositories": {"description": "Loading message while searching repos"},
-  "somethingWentWrong": "Failed to get repository information",
-  "@somethingWentWrong": {"description": "Generic error title"},
   "startExploring": "Start exploring",
   "@startExploring": {"description": "Empty state title"},
   "startExploringSubtitle": "Search for GitHub repositories to discover amazing projects and code",

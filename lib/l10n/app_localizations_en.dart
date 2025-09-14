@@ -33,9 +33,6 @@ class AppLocalizationsEn extends AppLocalizations {
   String get save => 'Save';
 
   @override
-  String get error => 'Please register your personal access token from the top right of the screen';
-
-  @override
   String get repositoryName => 'Repository';
 
   @override
@@ -73,9 +70,6 @@ class AppLocalizationsEn extends AppLocalizations {
 
   @override
   String get searchingRepositories => 'Searching repositories...';
-
-  @override
-  String get somethingWentWrong => 'Failed to get repository information';
 
   @override
   String get startExploring => 'Start exploring';

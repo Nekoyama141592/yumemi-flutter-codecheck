@@ -33,9 +33,6 @@ class AppLocalizationsJa extends AppLocalizations {
   String get save => '保存';
 
   @override
-  String get error => '画面の右上から個人用アクセストークンを登録してください';
-
-  @override
   String get repositoryName => 'リポジトリ名';
 
   @override
@@ -73,9 +70,6 @@ class AppLocalizationsJa extends AppLocalizations {
 
   @override
   String get searchingRepositories => 'リポジトリを検索中...';
-
-  @override
-  String get somethingWentWrong => 'リポジトリ情報の取得に失敗しました';
 
   @override
   String get startExploring => '探索を始めましょう';
