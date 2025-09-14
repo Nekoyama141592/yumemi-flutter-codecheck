@@ -187,7 +187,7 @@ class RepositoryItemPage extends HookConsumerWidget {
                     isLandscape: isLandscape,
                   ),
                 ),
-                error: (_, __) => SlideTransition(
+                error: (_, _) => SlideTransition(
                   position: slideAnimationTween,
                   child: FadeTransition(
                     opacity: fadeAnimationTween,
