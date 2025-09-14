@@ -1,3 +1,4 @@
+import 'dart:developer' as developer;
 import 'package:riverpod_annotation/riverpod_annotation.dart';
 import 'package:yumemi_flutter_codecheck/core/provider/repository/github/github_repository_provider.dart';
 import 'package:yumemi_flutter_codecheck/domain/entity/get_repository_item/get_repository_item_entity.dart';
@@ -13,6 +14,7 @@ class GetRepositoryViewModel extends _$GetRepositoryViewModel {
       final result = await repo.getRepository(userName: userName, name: name);
       return result;
     } catch (e) {
+      developer.log(e.toString());
       rethrow;
     }
   }
