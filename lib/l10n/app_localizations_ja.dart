@@ -12,12 +12,6 @@ class AppLocalizationsJa extends AppLocalizations {
   String get hello => 'こんにちは';
 
   @override
-  String get settings => '設定';
-
-  @override
-  String get darkMode => 'ダークモード';
-
-  @override
   String get editTokenTooltip => 'トークンを編集';
 
   @override

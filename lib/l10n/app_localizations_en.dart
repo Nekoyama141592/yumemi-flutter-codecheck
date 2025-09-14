@@ -12,12 +12,6 @@ class AppLocalizationsEn extends AppLocalizations {
   String get hello => 'Hello';
 
   @override
-  String get settings => 'Settings';
-
-  @override
-  String get darkMode => 'Dark Mode';
-
-  @override
   String get editTokenTooltip => 'Edit token';
 
   @override

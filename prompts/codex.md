@@ -66,3 +66,5 @@
 33. lib/domain/repository_interface/github_repository_interface.dartのgetRepositoryでSearchRepositoriesItemEntityではなく、GetRepositoryItemEntityを使用するようにして。
 
 34. MyHomePageの鍵アイコンの右横にAppBarの左上に月と太陽が切り替わるアイコンを設置して、そのボタンを押すことでもダークモードとライトモードも切り替えられるようにして
+
+35. OriginalDrawerをHomePageで表示しないようにして。また、AppLocalizations.of(context)!.settings,AppLocalizations.of(context)!.darkModeの翻訳ももう不要なので削除して。最後にlib/presentation/common/original_drawer.dartのファイルを削除して。

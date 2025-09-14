@@ -4,7 +4,6 @@ import 'package:hooks_riverpod/hooks_riverpod.dart';
 import 'package:yumemi_flutter_codecheck/core/util/route_util.dart';
 import '../../../l10n/app_localizations.dart';
 import '../../../application/flavors.dart';
-import '../../common/original_drawer.dart';
 import 'package:yumemi_flutter_codecheck/presentation/notifier/auto_dispose/my_home/my_home_view_model.dart';
 import 'package:yumemi_flutter_codecheck/application/theme/extensions/app_colors.dart';
 import 'package:yumemi_flutter_codecheck/presentation/page/my_home/components/edit_token_dialog.dart';
@@ -50,7 +49,6 @@ class MyHomePage extends HookConsumerWidget {
           ),
         ],
       ),
-      drawer: const OriginalDrawer(),
       body: Column(
         children: [
           Padding(

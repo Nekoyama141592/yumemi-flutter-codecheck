@@ -3,14 +3,6 @@
   "@hello": {
     "description": "A greeting message"
   },
-  "settings": "设置",
-  "@settings": {
-    "description": "Settings title"
-  },
-  "darkMode": "深色模式",
-  "@darkMode": {
-    "description": "Dark mode toggle"
-  },
   "editTokenTooltip": "编辑令牌",
   "@editTokenTooltip": {
     "description": "Tooltip for editing the token"

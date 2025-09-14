@@ -12,12 +12,6 @@ class AppLocalizationsZh extends AppLocalizations {
   String get hello => '你好';
 
   @override
-  String get settings => '设置';
-
-  @override
-  String get darkMode => '深色模式';
-
-  @override
   String get editTokenTooltip => '编辑令牌';
 
   @override
