@@ -1,3 +1,4 @@
+import 'dart:math' as math;
 import 'package:auto_route/auto_route.dart';
 import 'package:flutter/material.dart';
 import 'package:hooks_riverpod/hooks_riverpod.dart';
@@ -36,6 +37,8 @@ class RepositoryItemPage extends HookConsumerWidget {
     final state = ref.watch(repositoryItemViewModelProvider(userName, name));
     final appColors = Theme.of(context).extension<AppColors>()!;
     final isDark = ref.watch(themeProvider).isDarkMode;
+    final isLandscape =
+        MediaQuery.of(context).orientation == Orientation.landscape;
     final tokenFuture = useMemoized(
       () => ref.read(secureStorageRepositoryProvider).getToken(),
       const [],
@@ -115,21 +118,62 @@ class RepositoryItemPage extends HookConsumerWidget {
         ],
       ),
       body: SafeArea(
-        child: SingleChildScrollView(
-          padding: const EdgeInsets.all(20),
-          child: state.when(
-            loading: () => _buildLoadingState(appColors),
-            error: (_, _) => _buildErrorState(context, appColors),
-            data: (repo) => repo == null
-                ? _buildNotFoundState(context, appColors)
-                : _buildRepositoryContent(context, repo, appColors),
-          ),
+        child: LayoutBuilder(
+          builder: (context, constraints) {
+            final content = state.when(
+              loading: () => _buildLoadingState(appColors, isLandscape),
+              error: (_, _) => _buildErrorState(context, appColors),
+              data: (repo) => repo == null
+                  ? _buildNotFoundState(context, appColors)
+                  : _buildRepositoryContent(
+                      context,
+                      repo,
+                      appColors,
+                      isLandscape,
+                    ),
+            );
+
+            // In landscape, vertically center the page content within viewport
+            // while keeping it scrollable when necessary.
+            if (isLandscape) {
+              return SingleChildScrollView(
+                padding: const EdgeInsets.all(20),
+                child: ConstrainedBox(
+                  constraints: BoxConstraints(minHeight: constraints.maxHeight),
+                  child: Center(child: content),
+                ),
+              );
+            }
+
+            // Portrait: keep previous behavior.
+            return SingleChildScrollView(
+              padding: const EdgeInsets.all(20),
+              child: content,
+            );
+          },
         ),
       ),
     );
   }
 
-  Widget _buildLoadingState(AppColors appColors) {
+  Widget _buildLoadingState(AppColors appColors, bool isLandscape) {
+    if (isLandscape) {
+      return Column(
+        crossAxisAlignment: CrossAxisAlignment.start,
+        children: [
+          Row(
+            crossAxisAlignment: CrossAxisAlignment.start,
+            children: [
+              Expanded(child: _buildHeaderCardLoading(appColors)),
+              const SizedBox(width: 20),
+              Expanded(child: _buildStatsGridLoading(appColors)),
+            ],
+          ),
+          const SizedBox(height: 20),
+          _buildActionButtonsLoading(appColors),
+        ],
+      );
+    }
     return Column(
       crossAxisAlignment: CrossAxisAlignment.start,
       children: [
@@ -180,42 +224,56 @@ class RepositoryItemPage extends HookConsumerWidget {
 
   Widget _buildStatsGridLoading(AppColors appColors) {
     const itemCount = 4; // same as stats length
-    return GridView.builder(
-      shrinkWrap: true,
-      physics: const NeverScrollableScrollPhysics(),
-      gridDelegate: const SliverGridDelegateWithFixedCrossAxisCount(
-        crossAxisCount: 2,
-        crossAxisSpacing: 12,
-        mainAxisSpacing: 12,
-        childAspectRatio: 1.4,
-      ),
-      itemCount: itemCount,
-      itemBuilder: (context, index) {
-        return Container(
-          padding: const EdgeInsets.all(16),
-          decoration: BoxDecoration(
-            color: appColors.cardBackground,
-            borderRadius: BorderRadius.circular(16),
-            border: Border.all(color: appColors.border, width: 1),
+    return LayoutBuilder(
+      builder: (context, constraints) {
+        // Compute responsive columns and aspect ratio based on available width
+        const spacing = 12.0;
+        const minTileHeight = 120.0; // ensure enough height for placeholders
+        final tentativeCols = (constraints.maxWidth / 160).floor();
+        final crossAxisCount = tentativeCols.clamp(1, 4);
+        final tileWidth =
+            (constraints.maxWidth - spacing * (crossAxisCount - 1)) /
+            crossAxisCount;
+        final childAspectRatio = tileWidth / math.max(minTileHeight, 1);
+
+        return GridView.builder(
+          shrinkWrap: true,
+          physics: const NeverScrollableScrollPhysics(),
+          gridDelegate: SliverGridDelegateWithFixedCrossAxisCount(
+            crossAxisCount: crossAxisCount,
+            crossAxisSpacing: spacing,
+            mainAxisSpacing: spacing,
+            childAspectRatio: childAspectRatio,
           ),
-          child: const Column(
-            mainAxisAlignment: MainAxisAlignment.center,
-            children: [
-              _ShimmerCircle(radius: 20), // icon circle ~40x40
-              SizedBox(height: 8),
-              _ShimmerContainer(
-                height: 24, // value text height
-                width: 60,
-                borderRadius: BorderRadius.all(Radius.circular(6)),
+          itemCount: itemCount,
+          itemBuilder: (context, index) {
+            return Container(
+              padding: const EdgeInsets.all(16),
+              decoration: BoxDecoration(
+                color: appColors.cardBackground,
+                borderRadius: BorderRadius.circular(16),
+                border: Border.all(color: appColors.border, width: 1),
               ),
-              SizedBox(height: 6),
-              _ShimmerContainer(
-                height: 14, // label text height
-                width: 70,
-                borderRadius: BorderRadius.all(Radius.circular(6)),
+              child: const Column(
+                mainAxisAlignment: MainAxisAlignment.center,
+                children: [
+                  _ShimmerCircle(radius: 20), // icon circle ~40x40
+                  SizedBox(height: 8),
+                  _ShimmerContainer(
+                    height: 24, // value text height
+                    width: 60,
+                    borderRadius: BorderRadius.all(Radius.circular(6)),
+                  ),
+                  SizedBox(height: 6),
+                  _ShimmerContainer(
+                    height: 14, // label text height
+                    width: 70,
+                    borderRadius: BorderRadius.all(Radius.circular(6)),
+                  ),
+                ],
               ),
-            ],
-          ),
+            );
+          },
         );
       },
     );
@@ -328,7 +386,25 @@ class RepositoryItemPage extends HookConsumerWidget {
     BuildContext context,
     GetRepositoryItemEntity repo,
     AppColors appColors,
+    bool isLandscape,
   ) {
+    if (isLandscape) {
+      return Column(
+        crossAxisAlignment: CrossAxisAlignment.start,
+        children: [
+          Row(
+            crossAxisAlignment: CrossAxisAlignment.start,
+            children: [
+              Expanded(child: _buildHeaderCard(context, repo, appColors)),
+              const SizedBox(width: 20),
+              Expanded(child: _buildStatsGrid(context, repo, appColors)),
+            ],
+          ),
+          const SizedBox(height: 20),
+          _buildActionButtons(context, repo, appColors),
+        ],
+      );
+    }
     return Column(
       crossAxisAlignment: CrossAxisAlignment.start,
       children: [
@@ -476,55 +552,69 @@ class RepositoryItemPage extends HookConsumerWidget {
       ),
     ];
 
-    return GridView.builder(
-      shrinkWrap: true,
-      physics: const NeverScrollableScrollPhysics(),
-      gridDelegate: const SliverGridDelegateWithFixedCrossAxisCount(
-        crossAxisCount: 2,
-        crossAxisSpacing: 12,
-        mainAxisSpacing: 12,
-        childAspectRatio: 1.4,
-      ),
-      itemCount: stats.length,
-      itemBuilder: (context, index) {
-        final stat = stats[index];
-        return Container(
-          padding: const EdgeInsets.all(16),
-          decoration: BoxDecoration(
-            color: appColors.cardBackground,
-            borderRadius: BorderRadius.circular(16),
-            border: Border.all(color: appColors.border, width: 1),
+    return LayoutBuilder(
+      builder: (context, constraints) {
+        // Compute responsive columns and aspect ratio based on available width
+        const spacing = 12.0;
+        const minTileHeight = 120.0; // ensure content fits vertically
+        final tentativeCols = (constraints.maxWidth / 160).floor();
+        final crossAxisCount = tentativeCols.clamp(1, 4);
+        final tileWidth =
+            (constraints.maxWidth - spacing * (crossAxisCount - 1)) /
+            crossAxisCount;
+        final childAspectRatio = tileWidth / math.max(minTileHeight, 1);
+
+        return GridView.builder(
+          shrinkWrap: true,
+          physics: const NeverScrollableScrollPhysics(),
+          gridDelegate: SliverGridDelegateWithFixedCrossAxisCount(
+            crossAxisCount: crossAxisCount,
+            crossAxisSpacing: spacing,
+            mainAxisSpacing: spacing,
+            childAspectRatio: childAspectRatio,
           ),
-          child: Column(
-            mainAxisAlignment: MainAxisAlignment.center,
-            children: [
-              Container(
-                padding: const EdgeInsets.all(8),
-                decoration: BoxDecoration(
-                  color: stat.color.withValues(alpha: 0.1),
-                  shape: BoxShape.circle,
-                ),
-                child: Icon(stat.icon, color: stat.color, size: 24),
+          itemCount: stats.length,
+          itemBuilder: (context, index) {
+            final stat = stats[index];
+            return Container(
+              padding: const EdgeInsets.all(16),
+              decoration: BoxDecoration(
+                color: appColors.cardBackground,
+                borderRadius: BorderRadius.circular(16),
+                border: Border.all(color: appColors.border, width: 1),
               ),
-              const SizedBox(height: 8),
-              Text(
-                stat.value,
-                style: TextStyle(
-                  color: appColors.onSurface,
-                  fontSize: 20,
-                  fontWeight: FontWeight.w700,
-                ),
+              child: Column(
+                mainAxisAlignment: MainAxisAlignment.center,
+                children: [
+                  Container(
+                    padding: const EdgeInsets.all(8),
+                    decoration: BoxDecoration(
+                      color: stat.color.withValues(alpha: 0.1),
+                      shape: BoxShape.circle,
+                    ),
+                    child: Icon(stat.icon, color: stat.color, size: 24),
+                  ),
+                  const SizedBox(height: 8),
+                  Text(
+                    stat.value,
+                    style: TextStyle(
+                      color: appColors.onSurface,
+                      fontSize: 16,
+                      fontWeight: FontWeight.w700,
+                    ),
+                  ),
+                  Text(
+                    stat.label,
+                    style: TextStyle(
+                      color: appColors.secondary,
+                      fontSize: 8,
+                      fontWeight: FontWeight.w500,
+                    ),
+                  ),
+                ],
               ),
-              Text(
-                stat.label,
-                style: TextStyle(
-                  color: appColors.secondary,
-                  fontSize: 12,
-                  fontWeight: FontWeight.w500,
-                ),
-              ),
-            ],
-          ),
+            );
+          },
         );
       },
     );

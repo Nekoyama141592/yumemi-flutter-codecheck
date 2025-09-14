@@ -84,3 +84,8 @@
 41. lib/presentation/page/repository_item/repository_item_page.dartとlib/presentation/page/my_home/my_home_page.dartの文言の翻訳を行なってください。
 
 42. lib/presentation/page/repository_item/repository_item_page.dartでのshimmerでのスケルトンローディングの高さがローディング完了後と合っていないので一致させて
+
+43. lib/presentation/page/repository_item/repository_item_page.dartを画面横向きのUIにも対応させて
+
+44. 横向きのデザインだと「The following assertion was thrown during layout:
+A RenderFlex overflowed by 73 pixels on the bottom.」という上にオーバーフローしているエラーが発生するので縦の中央に配置するように修正して
