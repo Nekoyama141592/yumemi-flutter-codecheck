@@ -9,7 +9,7 @@ abstract class GetRepositoryItemEntity with _$GetRepositoryItemEntity {
   const GetRepositoryItemEntity._();
 
   const factory GetRepositoryItemEntity({
-    required String name,
+    required String fullName,
     String? ownerAvatarUrl,
     String? language,
     required int stargazersCount,
@@ -20,7 +20,7 @@ abstract class GetRepositoryItemEntity with _$GetRepositoryItemEntity {
 
   factory GetRepositoryItemEntity.fromModel(RepositoryItem model) =>
       GetRepositoryItemEntity(
-        name: model.name,
+        fullName: model.fullName,
         ownerAvatarUrl: model.owner?.avatarUrl,
         language: model.language,
         stargazersCount: model.stargazersCount,
@@ -32,4 +32,3 @@ abstract class GetRepositoryItemEntity with _$GetRepositoryItemEntity {
   factory GetRepositoryItemEntity.fromJson(Map<String, dynamic> json) =>
       _$GetRepositoryItemEntityFromJson(json);
 }
-

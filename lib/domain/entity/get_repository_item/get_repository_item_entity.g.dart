@@ -9,7 +9,7 @@ part of 'get_repository_item_entity.dart';
 _GetRepositoryItemEntity _$GetRepositoryItemEntityFromJson(
   Map<String, dynamic> json,
 ) => _GetRepositoryItemEntity(
-  name: json['name'] as String,
+  fullName: json['fullName'] as String,
   ownerAvatarUrl: json['ownerAvatarUrl'] as String?,
   language: json['language'] as String?,
   stargazersCount: (json['stargazersCount'] as num).toInt(),
@@ -21,7 +21,7 @@ _GetRepositoryItemEntity _$GetRepositoryItemEntityFromJson(
 Map<String, dynamic> _$GetRepositoryItemEntityToJson(
   _GetRepositoryItemEntity instance,
 ) => <String, dynamic>{
-  'name': instance.name,
+  'fullName': instance.fullName,
   'ownerAvatarUrl': instance.ownerAvatarUrl,
   'language': instance.language,
   'stargazersCount': instance.stargazersCount,
