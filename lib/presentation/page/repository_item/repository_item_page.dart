@@ -29,7 +29,24 @@ class RepositoryItemPage extends HookConsumerWidget {
         child: state.when(
           loading: () => Text('$userName/$name'),
           error: (_, _) => Text('$userName/$name'),
-          data: (repo) => Text(repo?.htmlUrl ?? 'not found'),
+          data: (repo) {
+            if (repo == null) {
+              return Text('$userName/$name');
+            }
+            return Column(
+              mainAxisSize: MainAxisSize.min,
+              crossAxisAlignment: CrossAxisAlignment.start,
+              children: [
+                Text('リポジトリ名: ${repo.fullName}'),
+                Text('オーナーアイコン: ${repo.ownerAvatarUrl ?? "なし"}'),
+                Text('言語: ${repo.language ?? "不明"}'),
+                Text('スター数: ${repo.stargazersCount}'),
+                Text('ウォッチャー数: ${repo.watchersCount}'),
+                Text('フォーク数: ${repo.forksCount}'),
+                Text('Issue数: ${repo.openIssuesCount}'),
+              ],
+            );
+          },
         ),
       ),
     );

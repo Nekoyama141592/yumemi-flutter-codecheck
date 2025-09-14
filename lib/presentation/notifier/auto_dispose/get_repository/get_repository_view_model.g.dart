@@ -1,6 +1,6 @@
 // GENERATED CODE - DO NOT MODIFY BY HAND
 
-part of 'repository_item_view_model.dart';
+part of 'get_repository_view_model.dart';
 
 // **************************************************************************
 // RiverpodGenerator
@@ -9,43 +9,43 @@ part of 'repository_item_view_model.dart';
 // GENERATED CODE - DO NOT MODIFY BY HAND
 // ignore_for_file: type=lint, type=warning
 
-@ProviderFor(RepositoryItemViewModel)
-const repositoryItemViewModelProvider = RepositoryItemViewModelFamily._();
+@ProviderFor(GetRepositoryViewModel)
+const getRepositoryViewModelProvider = GetRepositoryViewModelFamily._();
 
-final class RepositoryItemViewModelProvider
+final class GetRepositoryViewModelProvider
     extends
         $AsyncNotifierProvider<
-          RepositoryItemViewModel,
+          GetRepositoryViewModel,
           GetRepositoryItemEntity?
         > {
-  const RepositoryItemViewModelProvider._({
-    required RepositoryItemViewModelFamily super.from,
+  const GetRepositoryViewModelProvider._({
+    required GetRepositoryViewModelFamily super.from,
     required (String, String) super.argument,
   }) : super(
          retry: null,
-         name: r'repositoryItemViewModelProvider',
+         name: r'getRepositoryViewModelProvider',
          isAutoDispose: true,
          dependencies: null,
          $allTransitiveDependencies: null,
        );
 
   @override
-  String debugGetCreateSourceHash() => _$repositoryItemViewModelHash();
+  String debugGetCreateSourceHash() => _$getRepositoryViewModelHash();
 
   @override
   String toString() {
-    return r'repositoryItemViewModelProvider'
+    return r'getRepositoryViewModelProvider'
         ''
         '$argument';
   }
 
   @$internal
   @override
-  RepositoryItemViewModel create() => RepositoryItemViewModel();
+  GetRepositoryViewModel create() => GetRepositoryViewModel();
 
   @override
   bool operator ==(Object other) {
-    return other is RepositoryItemViewModelProvider &&
+    return other is GetRepositoryViewModelProvider &&
         other.argument == argument;
   }
 
@@ -55,35 +55,35 @@ final class RepositoryItemViewModelProvider
   }
 }
 
-String _$repositoryItemViewModelHash() =>
-    r'1c7d1be8745d0814893483f4a1949228514da8c0';
+String _$getRepositoryViewModelHash() =>
+    r'cd8541b644747bdc6e8eae2ac811ad7ac64326e3';
 
-final class RepositoryItemViewModelFamily extends $Family
+final class GetRepositoryViewModelFamily extends $Family
     with
         $ClassFamilyOverride<
-          RepositoryItemViewModel,
+          GetRepositoryViewModel,
           AsyncValue<GetRepositoryItemEntity?>,
           GetRepositoryItemEntity?,
           FutureOr<GetRepositoryItemEntity?>,
           (String, String)
         > {
-  const RepositoryItemViewModelFamily._()
+  const GetRepositoryViewModelFamily._()
     : super(
         retry: null,
-        name: r'repositoryItemViewModelProvider',
+        name: r'getRepositoryViewModelProvider',
         dependencies: null,
         $allTransitiveDependencies: null,
         isAutoDispose: true,
       );
 
-  RepositoryItemViewModelProvider call(String userName, String name) =>
-      RepositoryItemViewModelProvider._(argument: (userName, name), from: this);
+  GetRepositoryViewModelProvider call(String userName, String name) =>
+      GetRepositoryViewModelProvider._(argument: (userName, name), from: this);
 
   @override
-  String toString() => r'repositoryItemViewModelProvider';
+  String toString() => r'getRepositoryViewModelProvider';
 }
 
-abstract class _$RepositoryItemViewModel
+abstract class _$GetRepositoryViewModel
     extends $AsyncNotifier<GetRepositoryItemEntity?> {
   late final _$args = ref.$arg as (String, String);
   String get userName => _$args.$1;
