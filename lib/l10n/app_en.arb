@@ -33,10 +33,7 @@
   },
   "error": "Error: {error}",
   "@error": {
-    "description": "Error text prefix with the given error description",
-    "placeholders": {
-      "error": {}
-    }
+    "description": "Error text prefix with the given error description"
   },
   "repositoryName": "Repository",
   "@repositoryName": {"description": "Label for repository name"},

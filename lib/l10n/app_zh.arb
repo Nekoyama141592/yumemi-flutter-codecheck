@@ -31,12 +31,9 @@
   "@save": {
     "description": "Save button label"
   },
-  "error": "错误：{error}",
+  "error": "错误",
   "@error": {
-    "description": "Error text prefix with the given error description",
-    "placeholders": {
-      "error": {}
-    }
+    "description": "Error text prefix with the given error description"
   },
   "repositoryName": "仓库名",
   "@repositoryName": {"description": "Label for repository name"},

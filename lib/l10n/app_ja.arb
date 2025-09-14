@@ -33,10 +33,7 @@
   },
   "error": "エラー: {error}",
   "@error": {
-    "description": "Error text prefix with the given error description",
-    "placeholders": {
-      "error": {}
-    }
+    "description": "Error text prefix with the given error description"
   },
   "repositoryName": "リポジトリ名",
   "@repositoryName": {"description": "Label for repository name"},

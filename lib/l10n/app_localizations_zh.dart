@@ -34,7 +34,7 @@ class AppLocalizationsZh extends AppLocalizations {
 
   @override
   String error(Object error) {
-    return '错误：$error';
+    return '错误';
   }
 
   @override

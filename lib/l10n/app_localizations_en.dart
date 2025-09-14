@@ -83,8 +83,7 @@ class AppLocalizationsEn extends AppLocalizations {
   String get startExploring => 'Start exploring';
 
   @override
-  String get startExploringSubtitle =>
-      'Search for GitHub repositories to discover amazing projects and code';
+  String get startExploringSubtitle => 'Search for GitHub repositories to discover amazing projects and code';
 
   @override
   String get repoErrorTitle => 'An error occurred';
@@ -96,8 +95,7 @@ class AppLocalizationsEn extends AppLocalizations {
   String get repoNotFoundTitle => 'Repository not found';
 
   @override
-  String get repoNotFoundSubtitle =>
-      'The specified repository does not exist or is inaccessible';
+  String get repoNotFoundSubtitle => 'The specified repository does not exist or is inaccessible';
 
   @override
   String get openInGitHub => 'Open in GitHub';
