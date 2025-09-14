@@ -76,3 +76,5 @@
 38. lib/presentation/page/repository_item/repository_item_page.dartの日本語を全て翻訳して。
 
 39. lib/core/util/url_util.dartにてurl_launcherをラップして外部ブラウザに遷移するstaticメソッドをもつUrlUtilクラスを作成して
+
+40. MyHomePageのListTileにてアイコンを押したら、UrlUtilを使用してhtmlUrlに遷移する処理を実装して。
