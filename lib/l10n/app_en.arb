@@ -31,13 +31,6 @@
   "@save": {
     "description": "Save button label"
   },
-  "error": "Error: {error}",
-  "@error": {
-    "description": "Error text prefix with the given error description",
-    "placeholders": {
-      "error": {}
-    }
-  },
   "repositoryName": "Repository",
   "@repositoryName": {"description": "Label for repository name"},
   "language": "Language",
@@ -65,15 +58,13 @@
   "@searchFieldHint": {"description": "Hint text for search field"},
   "searchingRepositories": "Searching repositories...",
   "@searchingRepositories": {"description": "Loading message while searching repos"},
-  "somethingWentWrong": "Something went wrong",
-  "@somethingWentWrong": {"description": "Generic error title"},
   "startExploring": "Start exploring",
   "@startExploring": {"description": "Empty state title"},
   "startExploringSubtitle": "Search for GitHub repositories to discover amazing projects and code",
   "@startExploringSubtitle": {"description": "Empty state subtitle"},
-  "repoErrorTitle": "An error occurred",
+  "repoErrorTitle": "Failed to get repository information",
   "@repoErrorTitle": {"description": "Repository page error title"},
-  "repoErrorSubtitle": "Failed to load repository information",
+  "repoErrorSubtitle": "Please register your personal access token from the top right of the screen",
   "@repoErrorSubtitle": {"description": "Repository page error subtitle"},
   "repoNotFoundTitle": "Repository not found",
   "@repoNotFoundTitle": {"description": "Repository not found title"},

@@ -56,7 +56,7 @@ final class GetRepositoryViewModelProvider
 }
 
 String _$getRepositoryViewModelHash() =>
-    r'cd8541b644747bdc6e8eae2ac811ad7ac64326e3';
+    r'bb019ffbccf18bb5f7b01ec9189b73dd803c3886';
 
 final class GetRepositoryViewModelFamily extends $Family
     with

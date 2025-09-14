@@ -33,11 +33,6 @@ class AppLocalizationsJa extends AppLocalizations {
   String get save => '保存';
 
   @override
-  String error(Object error) {
-    return 'エラー: $error';
-  }
-
-  @override
   String get repositoryName => 'リポジトリ名';
 
   @override
@@ -77,9 +72,6 @@ class AppLocalizationsJa extends AppLocalizations {
   String get searchingRepositories => 'リポジトリを検索中...';
 
   @override
-  String get somethingWentWrong => '問題が発生しました';
-
-  @override
   String get startExploring => '探索を始めましょう';
 
   @override
@@ -87,10 +79,10 @@ class AppLocalizationsJa extends AppLocalizations {
       'GitHubのリポジトリを検索して素晴らしいプロジェクトやコードを見つけましょう';
 
   @override
-  String get repoErrorTitle => 'エラーが発生しました';
+  String get repoErrorTitle => 'リポジトリ情報の取得に失敗しました';
 
   @override
-  String get repoErrorSubtitle => 'リポジトリの情報を取得できませんでした';
+  String get repoErrorSubtitle => '画面の右上から個人用アクセストークンを登録してください';
 
   @override
   String get repoNotFoundTitle => 'リポジトリが見つかりません';

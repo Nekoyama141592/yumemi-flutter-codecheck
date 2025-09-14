@@ -33,11 +33,6 @@ class AppLocalizationsZh extends AppLocalizations {
   String get save => '保存';
 
   @override
-  String error(Object error) {
-    return '错误：$error';
-  }
-
-  @override
   String get repositoryName => '仓库名';
 
   @override
@@ -77,19 +72,16 @@ class AppLocalizationsZh extends AppLocalizations {
   String get searchingRepositories => '正在搜索仓库…';
 
   @override
-  String get somethingWentWrong => '出现了一些问题';
-
-  @override
   String get startExploring => '开始探索';
 
   @override
   String get startExploringSubtitle => '搜索 GitHub 仓库，发现精彩的项目和代码';
 
   @override
-  String get repoErrorTitle => '发生错误';
+  String get repoErrorTitle => '获取仓库信息失败';
 
   @override
-  String get repoErrorSubtitle => '无法获取仓库信息';
+  String get repoErrorSubtitle => '请从屏幕右上角注册您的个人访问令牌';
 
   @override
   String get repoNotFoundTitle => '未找到仓库';

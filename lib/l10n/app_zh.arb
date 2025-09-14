@@ -31,13 +31,6 @@
   "@save": {
     "description": "Save button label"
   },
-  "error": "错误：{error}",
-  "@error": {
-    "description": "Error text prefix with the given error description",
-    "placeholders": {
-      "error": {}
-    }
-  },
   "repositoryName": "仓库名",
   "@repositoryName": {"description": "Label for repository name"},
   "language": "语言",
@@ -65,15 +58,13 @@
   "@searchFieldHint": {"description": "Hint text for search field"},
   "searchingRepositories": "正在搜索仓库…",
   "@searchingRepositories": {"description": "Loading message while searching repos"},
-  "somethingWentWrong": "出现了一些问题",
-  "@somethingWentWrong": {"description": "Generic error title"},
   "startExploring": "开始探索",
   "@startExploring": {"description": "Empty state title"},
   "startExploringSubtitle": "搜索 GitHub 仓库，发现精彩的项目和代码",
   "@startExploringSubtitle": {"description": "Empty state subtitle"},
-  "repoErrorTitle": "发生错误",
+  "repoErrorTitle": "获取仓库信息失败",
   "@repoErrorTitle": {"description": "Repository page error title"},
-  "repoErrorSubtitle": "无法获取仓库信息",
+  "repoErrorSubtitle": "请从屏幕右上角注册您的个人访问令牌",
   "@repoErrorSubtitle": {"description": "Repository page error subtitle"},
   "repoNotFoundTitle": "未找到仓库",
   "@repoNotFoundTitle": {"description": "Repository not found title"},

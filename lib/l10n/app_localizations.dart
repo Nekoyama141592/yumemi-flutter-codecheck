@@ -148,12 +148,6 @@ abstract class AppLocalizations {
   /// **'Save'**
   String get save;
 
-  /// Error text prefix with the given error description
-  ///
-  /// In en, this message translates to:
-  /// **'Error: {error}'**
-  String error(Object error);
-
   /// Label for repository name
   ///
   /// In en, this message translates to:
@@ -232,12 +226,6 @@ abstract class AppLocalizations {
   /// **'Searching repositories...'**
   String get searchingRepositories;
 
-  /// Generic error title
-  ///
-  /// In en, this message translates to:
-  /// **'Something went wrong'**
-  String get somethingWentWrong;
-
   /// Empty state title
   ///
   /// In en, this message translates to:
@@ -253,13 +241,13 @@ abstract class AppLocalizations {
   /// Repository page error title
   ///
   /// In en, this message translates to:
-  /// **'An error occurred'**
+  /// **'Failed to get repository information'**
   String get repoErrorTitle;
 
   /// Repository page error subtitle
   ///
   /// In en, this message translates to:
-  /// **'Failed to load repository information'**
+  /// **'Please register your personal access token from the top right of the screen'**
   String get repoErrorSubtitle;
 
   /// Repository not found title

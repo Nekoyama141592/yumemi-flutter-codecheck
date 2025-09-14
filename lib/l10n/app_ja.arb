@@ -31,13 +31,6 @@
   "@save": {
     "description": "Save button label"
   },
-  "error": "エラー: {error}",
-  "@error": {
-    "description": "Error text prefix with the given error description",
-    "placeholders": {
-      "error": {}
-    }
-  },
   "repositoryName": "リポジトリ名",
   "@repositoryName": {"description": "Label for repository name"},
   "language": "言語",
@@ -65,15 +58,13 @@
   "@searchFieldHint": {"description": "Hint text for search field"},
   "searchingRepositories": "リポジトリを検索中...",
   "@searchingRepositories": {"description": "Loading message while searching repos"},
-  "somethingWentWrong": "問題が発生しました",
-  "@somethingWentWrong": {"description": "Generic error title"},
   "startExploring": "探索を始めましょう",
   "@startExploring": {"description": "Empty state title"},
   "startExploringSubtitle": "GitHubのリポジトリを検索して素晴らしいプロジェクトやコードを見つけましょう",
   "@startExploringSubtitle": {"description": "Empty state subtitle"},
-  "repoErrorTitle": "エラーが発生しました",
+  "repoErrorTitle": "リポジトリ情報の取得に失敗しました",
   "@repoErrorTitle": {"description": "Repository page error title"},
-  "repoErrorSubtitle": "リポジトリの情報を取得できませんでした",
+  "repoErrorSubtitle": "画面の右上から個人用アクセストークンを登録してください",
   "@repoErrorSubtitle": {"description": "Repository page error subtitle"},
   "repoNotFoundTitle": "リポジトリが見つかりません",
   "@repoNotFoundTitle": {"description": "Repository not found title"},
