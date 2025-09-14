@@ -58,3 +58,5 @@
 29. lib/presentation/notifier/auto_dispose/repository_itemにrepository_item_view_model.dartをriverpod_generatorを使ってAutoDisposeAsyncNotifierで作成して。FamilyProviderでuserNameとnameを受け取り、GithubRepositoryの getRepositoryを使って。
 
 30. lib/presentation/notifier/auto_dispose/repository_item/repository_item_view_model.dartでtokenも取得して。
+
+31. lib/presentation/page/repository_item/repository_item_page.dartでRepositoryItemViewModelを使用して。
