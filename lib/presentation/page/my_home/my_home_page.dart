@@ -4,6 +4,7 @@ import 'package:flutter/services.dart';
 import 'package:hooks_riverpod/hooks_riverpod.dart';
 import 'package:yumemi_flutter_codecheck/core/util/route_util.dart';
 import 'package:yumemi_flutter_codecheck/domain/entity/search_repositories_item/search_repositories_item_entity.dart';
+import 'package:yumemi_flutter_codecheck/presentation/state/auto_dispose/my_home/my_home_state.dart';
 import '../../../l10n/app_localizations.dart';
 import 'package:yumemi_flutter_codecheck/presentation/notifier/auto_dispose/my_home/my_home_view_model.dart';
 import 'package:yumemi_flutter_codecheck/application/theme/extensions/app_colors.dart';
@@ -246,7 +247,7 @@ class MyHomePage extends HookConsumerWidget {
 
   Widget _buildContent(
     BuildContext context,
-    AsyncValue state,
+    AsyncValue<MyHomeState> state,
     AppColors appColors,
   ) {
     return state.when(
