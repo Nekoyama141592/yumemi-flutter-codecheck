@@ -39,6 +39,9 @@ class RepositoryItemPage extends HookConsumerWidget {
     final isDark = ref.watch(themeProvider).isDarkMode;
     final isLandscape =
         MediaQuery.of(context).orientation == Orientation.landscape;
+    final size = MediaQuery.of(context).size;
+    final scaleH = (size.height / 812).clamp(0.8, 1.3);
+    final pageInset = 20.0 * scaleH;
     final tokenFuture = useMemoized(
       () => ref.read(secureStorageRepositoryProvider).getToken(),
       const [],
@@ -64,7 +67,8 @@ class RepositoryItemPage extends HookConsumerWidget {
         actions: [
           // Theme toggle button
           Container(
-            margin: const EdgeInsets.symmetric(vertical: 8).copyWith(right: 8),
+            margin: EdgeInsets.symmetric(vertical: 8 * scaleH)
+                .copyWith(right: 8 * scaleH),
             decoration: BoxDecoration(
               color: appColors.cardBackground,
               borderRadius: BorderRadius.circular(12),
@@ -91,7 +95,8 @@ class RepositoryItemPage extends HookConsumerWidget {
           ),
           // Token edit button
           Container(
-            margin: const EdgeInsets.symmetric(vertical: 8).copyWith(right: 12),
+            margin: EdgeInsets.symmetric(vertical: 8 * scaleH)
+                .copyWith(right: 12 * scaleH),
             decoration: BoxDecoration(
               color: hasToken
                   ? appColors.tokenOn.withValues(alpha: 0.1)
@@ -121,7 +126,7 @@ class RepositoryItemPage extends HookConsumerWidget {
         child: LayoutBuilder(
           builder: (context, constraints) {
             final content = state.when(
-              loading: () => _buildLoadingState(appColors, isLandscape),
+              loading: () => _buildLoadingState(appColors, isLandscape, context),
               error: (_, _) => _buildErrorState(context, appColors),
               data: (repo) => repo == null
                   ? _buildNotFoundState(context, appColors)
@@ -137,7 +142,7 @@ class RepositoryItemPage extends HookConsumerWidget {
             // while keeping it scrollable when necessary.
             if (isLandscape) {
               return SingleChildScrollView(
-                padding: const EdgeInsets.all(20),
+                padding: EdgeInsets.all(pageInset),
                 child: ConstrainedBox(
                   constraints: BoxConstraints(minHeight: constraints.maxHeight),
                   child: Center(child: content),
@@ -147,7 +152,7 @@ class RepositoryItemPage extends HookConsumerWidget {
 
             // Portrait: keep previous behavior.
             return SingleChildScrollView(
-              padding: const EdgeInsets.all(20),
+              padding: EdgeInsets.all(pageInset),
               child: content,
             );
           },
@@ -156,7 +161,11 @@ class RepositoryItemPage extends HookConsumerWidget {
     );
   }
 
-  Widget _buildLoadingState(AppColors appColors, bool isLandscape) {
+  Widget _buildLoadingState(
+      AppColors appColors, bool isLandscape, BuildContext context) {
+    final size = MediaQuery.of(context).size;
+    final scaleH = (size.height / 812).clamp(0.8, 1.3);
+    final gap = 20.0 * scaleH;
     if (isLandscape) {
       return Column(
         crossAxisAlignment: CrossAxisAlignment.start,
@@ -164,12 +173,12 @@ class RepositoryItemPage extends HookConsumerWidget {
           Row(
             crossAxisAlignment: CrossAxisAlignment.start,
             children: [
-              Expanded(child: _buildHeaderCardLoading(appColors)),
-              const SizedBox(width: 20),
-              Expanded(child: _buildStatsGridLoading(appColors)),
+              Expanded(child: _buildHeaderCardLoading(context, appColors)),
+              SizedBox(width: gap),
+              Expanded(child: _buildStatsGridLoading(context, appColors)),
             ],
           ),
-          const SizedBox(height: 20),
+          SizedBox(height: gap),
           _buildActionButtonsLoading(appColors),
         ],
       );
@@ -177,19 +186,28 @@ class RepositoryItemPage extends HookConsumerWidget {
     return Column(
       crossAxisAlignment: CrossAxisAlignment.start,
       children: [
-        _buildHeaderCardLoading(appColors),
-        const SizedBox(height: 20),
-        _buildStatsGridLoading(appColors),
-        const SizedBox(height: 20),
+        _buildHeaderCardLoading(context, appColors),
+        SizedBox(height: gap),
+        _buildStatsGridLoading(context, appColors),
+        SizedBox(height: gap),
         _buildActionButtonsLoading(appColors),
       ],
     );
   }
 
-  Widget _buildHeaderCardLoading(AppColors appColors) {
+  Widget _buildHeaderCardLoading(BuildContext context, AppColors appColors) {
+    final size = MediaQuery.of(context).size;
+    final scaleH = (size.height / 812).clamp(0.8, 1.3);
+    final pad = 24.0 * scaleH;
+    final gapM = 16.0 * scaleH;
+    final gapS = 12.0 * scaleH;
+    final titleH = 28.0 * scaleH;
+    final chipH = 28.0 * scaleH;
+    final chipW = 80.0 * scaleH;
+    final avatarR = 40.0 * scaleH;
     return Container(
       width: double.infinity,
-      padding: const EdgeInsets.all(24),
+      padding: EdgeInsets.all(pad),
       decoration: BoxDecoration(
         color: appColors.cardBackground,
         borderRadius: BorderRadius.circular(16),
@@ -202,33 +220,35 @@ class RepositoryItemPage extends HookConsumerWidget {
           ),
         ],
       ),
-      child: const Column(
+      child: Column(
         children: [
-          _ShimmerCircle(radius: 40), // 80x80 avatar
-          SizedBox(height: 16),
+          _ShimmerCircle(radius: avatarR), // avatar
+          SizedBox(height: gapM),
           _ShimmerContainer(
-            height: 28, // approx title text height for fontSize 24
-            width: 200,
-            borderRadius: BorderRadius.all(Radius.circular(6)),
+            height: titleH,
+            width: 200 * scaleH,
+            borderRadius: const BorderRadius.all(Radius.circular(6)),
           ),
-          SizedBox(height: 12),
+          SizedBox(height: gapS),
           _ShimmerContainer(
-            height: 28, // language chip height
-            width: 80,
-            borderRadius: BorderRadius.all(Radius.circular(20)),
+            height: chipH,
+            width: chipW,
+            borderRadius: const BorderRadius.all(Radius.circular(20)),
           ),
         ],
       ),
     );
   }
 
-  Widget _buildStatsGridLoading(AppColors appColors) {
+  Widget _buildStatsGridLoading(BuildContext context, AppColors appColors) {
     const itemCount = 4; // same as stats length
     return LayoutBuilder(
       builder: (context, constraints) {
         // Compute responsive columns and aspect ratio based on available width
-        const spacing = 12.0;
-        const minTileHeight = 120.0; // ensure enough height for placeholders
+        final size = MediaQuery.of(context).size;
+        final scaleH = (size.height / 812).clamp(0.8, 1.3);
+        final spacing = (constraints.maxWidth * 0.03).clamp(8.0, 16.0);
+        final minTileHeight = 120.0 * scaleH; // ensure enough height for placeholders
         final tentativeCols = (constraints.maxWidth / 160).floor();
         final crossAxisCount = tentativeCols.clamp(1, 4);
         final tileWidth =
@@ -248,27 +268,27 @@ class RepositoryItemPage extends HookConsumerWidget {
           itemCount: itemCount,
           itemBuilder: (context, index) {
             return Container(
-              padding: const EdgeInsets.all(16),
+              padding: EdgeInsets.all(16 * scaleH),
               decoration: BoxDecoration(
                 color: appColors.cardBackground,
                 borderRadius: BorderRadius.circular(16),
                 border: Border.all(color: appColors.border, width: 1),
               ),
-              child: const Column(
+              child: Column(
                 mainAxisAlignment: MainAxisAlignment.center,
                 children: [
-                  _ShimmerCircle(radius: 20), // icon circle ~40x40
-                  SizedBox(height: 8),
+                  _ShimmerCircle(radius: 20 * scaleH), // icon circle
+                  SizedBox(height: 8 * scaleH),
                   _ShimmerContainer(
-                    height: 24, // value text height
-                    width: 60,
-                    borderRadius: BorderRadius.all(Radius.circular(6)),
+                    height: 24 * scaleH,
+                    width: 60 * scaleH,
+                    borderRadius: const BorderRadius.all(Radius.circular(6)),
                   ),
-                  SizedBox(height: 6),
+                  SizedBox(height: 6 * scaleH),
                   _ShimmerContainer(
-                    height: 14, // label text height
-                    width: 70,
-                    borderRadius: BorderRadius.all(Radius.circular(6)),
+                    height: 14 * scaleH,
+                    width: 70 * scaleH,
+                    borderRadius: const BorderRadius.all(Radius.circular(6)),
                   ),
                 ],
               ),
@@ -280,26 +300,32 @@ class RepositoryItemPage extends HookConsumerWidget {
   }
 
   Widget _buildActionButtonsLoading(AppColors appColors) {
-    return Container(
+    return Builder(builder: (context) {
+      final size = MediaQuery.of(context).size;
+      final scaleH = (size.height / 812).clamp(0.8, 1.3);
+      return Container(
       width: double.infinity,
-      padding: const EdgeInsets.all(20),
+      padding: EdgeInsets.all(20 * scaleH),
       decoration: BoxDecoration(
         color: appColors.cardBackground,
         borderRadius: BorderRadius.circular(16),
         border: Border.all(color: appColors.border, width: 1),
       ),
-      child: const _ShimmerContainer(
-        height: 52, // approx ElevatedButton height with vertical padding 16
+      child: _ShimmerContainer(
+        height: 52 * scaleH, // approx ElevatedButton height
         width: double.infinity,
-        borderRadius: BorderRadius.all(Radius.circular(12)),
+        borderRadius: const BorderRadius.all(Radius.circular(12)),
       ),
     );
+    });
   }
 
   Widget _buildErrorState(BuildContext context, AppColors appColors) {
+    final size = MediaQuery.of(context).size;
+    final scaleH = (size.height / 812).clamp(0.8, 1.3);
     return Container(
       width: double.infinity,
-      padding: const EdgeInsets.all(32),
+      padding: EdgeInsets.all(32 * scaleH),
       decoration: BoxDecoration(
         color: appColors.cardBackground,
         borderRadius: BorderRadius.circular(16),
@@ -308,7 +334,7 @@ class RepositoryItemPage extends HookConsumerWidget {
       child: Column(
         children: [
           Container(
-            padding: const EdgeInsets.all(16),
+            padding: EdgeInsets.all(16 * scaleH),
             decoration: BoxDecoration(
               color: appColors.accent.withValues(alpha: 0.1),
               shape: BoxShape.circle,
@@ -319,7 +345,7 @@ class RepositoryItemPage extends HookConsumerWidget {
               color: appColors.accent,
             ),
           ),
-          const SizedBox(height: 16),
+          SizedBox(height: 16 * scaleH),
           Text(
             AppLocalizations.of(context)!.repoErrorTitle,
             style: TextStyle(
@@ -328,7 +354,7 @@ class RepositoryItemPage extends HookConsumerWidget {
               fontWeight: FontWeight.w600,
             ),
           ),
-          const SizedBox(height: 8),
+          SizedBox(height: 8 * scaleH),
           Text(
             AppLocalizations.of(context)!.repoErrorSubtitle,
             style: TextStyle(color: appColors.secondary, fontSize: 14),
@@ -340,9 +366,11 @@ class RepositoryItemPage extends HookConsumerWidget {
   }
 
   Widget _buildNotFoundState(BuildContext context, AppColors appColors) {
+    final size = MediaQuery.of(context).size;
+    final scaleH = (size.height / 812).clamp(0.8, 1.3);
     return Container(
       width: double.infinity,
-      padding: const EdgeInsets.all(32),
+      padding: EdgeInsets.all(32 * scaleH),
       decoration: BoxDecoration(
         color: appColors.cardBackground,
         borderRadius: BorderRadius.circular(16),
@@ -351,7 +379,7 @@ class RepositoryItemPage extends HookConsumerWidget {
       child: Column(
         children: [
           Container(
-            padding: const EdgeInsets.all(16),
+            padding: EdgeInsets.all(16 * scaleH),
             decoration: BoxDecoration(
               color: appColors.secondary.withValues(alpha: 0.1),
               shape: BoxShape.circle,
@@ -362,7 +390,7 @@ class RepositoryItemPage extends HookConsumerWidget {
               color: appColors.secondary,
             ),
           ),
-          const SizedBox(height: 16),
+          SizedBox(height: 16 * scaleH),
           Text(
             AppLocalizations.of(context)!.repoNotFoundTitle,
             style: TextStyle(
@@ -371,7 +399,7 @@ class RepositoryItemPage extends HookConsumerWidget {
               fontWeight: FontWeight.w600,
             ),
           ),
-          const SizedBox(height: 8),
+          SizedBox(height: 8 * scaleH),
           Text(
             AppLocalizations.of(context)!.repoNotFoundSubtitle,
             style: TextStyle(color: appColors.secondary, fontSize: 14),
@@ -388,6 +416,9 @@ class RepositoryItemPage extends HookConsumerWidget {
     AppColors appColors,
     bool isLandscape,
   ) {
+    final size = MediaQuery.of(context).size;
+    final scaleH = (size.height / 812).clamp(0.8, 1.3);
+    final gap = 20.0 * scaleH;
     if (isLandscape) {
       return Column(
         crossAxisAlignment: CrossAxisAlignment.start,
@@ -396,11 +427,11 @@ class RepositoryItemPage extends HookConsumerWidget {
             crossAxisAlignment: CrossAxisAlignment.start,
             children: [
               Expanded(child: _buildHeaderCard(context, repo, appColors)),
-              const SizedBox(width: 20),
-              Expanded(child: _buildStatsGrid(context, repo, appColors)),
+              SizedBox(width: gap),
+              Expanded(child: _buildStatsGrid(context, repo, appColors,isLandscape)),
             ],
           ),
-          const SizedBox(height: 20),
+          SizedBox(height: gap),
           _buildActionButtons(context, repo, appColors),
         ],
       );
@@ -409,9 +440,9 @@ class RepositoryItemPage extends HookConsumerWidget {
       crossAxisAlignment: CrossAxisAlignment.start,
       children: [
         _buildHeaderCard(context, repo, appColors),
-        const SizedBox(height: 20),
-        _buildStatsGrid(context, repo, appColors),
-        const SizedBox(height: 20),
+        SizedBox(height: gap),
+        _buildStatsGrid(context, repo, appColors,isLandscape),
+        SizedBox(height: gap),
         _buildActionButtons(context, repo, appColors),
       ],
     );
@@ -424,9 +455,17 @@ class RepositoryItemPage extends HookConsumerWidget {
   ) {
     final avatarUrl = repo.ownerAvatarUrl;
 
+    final size = MediaQuery.of(context).size;
+    final scaleH = (size.height / 812).clamp(0.8, 1.3);
+    final pad = 24.0 * scaleH;
+    final avatar = 80.0 * scaleH;
+    final iconSize = 60.0 * scaleH;
+    final gapM = 16.0 * scaleH;
+    final gapS = 12.0 * scaleH;
+
     return Container(
       width: double.infinity,
-      padding: const EdgeInsets.all(24),
+      padding: EdgeInsets.all(pad),
       decoration: BoxDecoration(
         color: appColors.cardBackground,
         borderRadius: BorderRadius.circular(16),
@@ -443,23 +482,23 @@ class RepositoryItemPage extends HookConsumerWidget {
         children: [
           avatarUrl == null || avatarUrl.isEmpty
               ? Container(
-                  width: 80,
-                  height: 80,
+                  width: avatar,
+                  height: avatar,
                   decoration: BoxDecoration(
                     color: appColors.primary.withValues(alpha: 0.1),
                     shape: BoxShape.circle,
                   ),
                   child: Icon(
                     Icons.account_circle_rounded,
-                    size: 60,
+                    size: iconSize,
                     color: appColors.primary,
                   ),
                 )
               : CachedNetworkImage(
                   imageUrl: avatarUrl,
                   imageBuilder: (context, imageProvider) => Container(
-                    width: 80,
-                    height: 80,
+                    width: avatar,
+                    height: avatar,
                     decoration: BoxDecoration(
                       shape: BoxShape.circle,
                       image: DecorationImage(
@@ -469,22 +508,22 @@ class RepositoryItemPage extends HookConsumerWidget {
                     ),
                   ),
                   placeholder: (context, url) =>
-                      const _ShimmerCircle(radius: 40),
+                      _ShimmerCircle(radius: 40 * scaleH),
                   errorWidget: (context, url, error) => Container(
-                    width: 80,
-                    height: 80,
+                    width: avatar,
+                    height: avatar,
                     decoration: BoxDecoration(
                       color: appColors.accent.withValues(alpha: 0.1),
                       shape: BoxShape.circle,
                     ),
                     child: Icon(
                       Icons.error_outline_rounded,
-                      size: 40,
+                      size: 40 * scaleH,
                       color: appColors.accent,
                     ),
                   ),
                 ),
-          const SizedBox(height: 16),
+          SizedBox(height: gapM),
           Text(
             repo.fullName,
             style: TextStyle(
@@ -495,9 +534,12 @@ class RepositoryItemPage extends HookConsumerWidget {
             textAlign: TextAlign.center,
           ),
           if (repo.language != null) ...[
-            const SizedBox(height: 12),
+            SizedBox(height: gapS),
             Container(
-              padding: const EdgeInsets.symmetric(horizontal: 12, vertical: 6),
+              padding: EdgeInsets.symmetric(
+                horizontal: 12 * scaleH,
+                vertical: 6 * scaleH,
+              ),
               decoration: BoxDecoration(
                 color: appColors.primary.withValues(alpha: 0.1),
                 borderRadius: BorderRadius.circular(20),
@@ -524,6 +566,7 @@ class RepositoryItemPage extends HookConsumerWidget {
     BuildContext context,
     GetRepositoryItemEntity repo,
     AppColors appColors,
+    bool isLandscape
   ) {
     final stats = [
       _StatItem(
@@ -555,8 +598,10 @@ class RepositoryItemPage extends HookConsumerWidget {
     return LayoutBuilder(
       builder: (context, constraints) {
         // Compute responsive columns and aspect ratio based on available width
-        const spacing = 12.0;
-        const minTileHeight = 120.0; // ensure content fits vertically
+        final size = MediaQuery.of(context).size;
+        final scaleH = (size.height / 812).clamp(0.8, 1.3);
+        final spacing = (constraints.maxWidth * 0.03).clamp(8.0, 16.0);
+        final minTileHeight = 120.0 * scaleH; // ensure content fits vertically
         final tentativeCols = (constraints.maxWidth / 160).floor();
         final crossAxisCount = tentativeCols.clamp(1, 4);
         final tileWidth =
@@ -577,7 +622,7 @@ class RepositoryItemPage extends HookConsumerWidget {
           itemBuilder: (context, index) {
             final stat = stats[index];
             return Container(
-              padding: const EdgeInsets.all(16),
+              padding: EdgeInsets.all(16 * scaleH),
               decoration: BoxDecoration(
                 color: appColors.cardBackground,
                 borderRadius: BorderRadius.circular(16),
@@ -586,20 +631,20 @@ class RepositoryItemPage extends HookConsumerWidget {
               child: Column(
                 mainAxisAlignment: MainAxisAlignment.center,
                 children: [
-                  Container(
-                    padding: const EdgeInsets.all(8),
+                  if(!isLandscape) Container(
+                    padding: EdgeInsets.all(8 * scaleH),
                     decoration: BoxDecoration(
                       color: stat.color.withValues(alpha: 0.1),
                       shape: BoxShape.circle,
                     ),
                     child: Icon(stat.icon, color: stat.color, size: 24),
                   ),
-                  const SizedBox(height: 8),
+                  SizedBox(height: 8 * scaleH),
                   Text(
                     stat.value,
                     style: TextStyle(
                       color: appColors.onSurface,
-                      fontSize: 16,
+                      fontSize: 20,
                       fontWeight: FontWeight.w700,
                     ),
                   ),
@@ -607,7 +652,7 @@ class RepositoryItemPage extends HookConsumerWidget {
                     stat.label,
                     style: TextStyle(
                       color: appColors.secondary,
-                      fontSize: 8,
+                      fontSize: 12,
                       fontWeight: FontWeight.w500,
                     ),
                   ),
@@ -625,9 +670,11 @@ class RepositoryItemPage extends HookConsumerWidget {
     GetRepositoryItemEntity repo,
     AppColors appColors,
   ) {
+    final size = MediaQuery.of(context).size;
+    final scaleH = (size.height / 812).clamp(0.8, 1.3);
     return Container(
       width: double.infinity,
-      padding: const EdgeInsets.all(20),
+      padding: EdgeInsets.all(20 * scaleH),
       decoration: BoxDecoration(
         color: appColors.cardBackground,
         borderRadius: BorderRadius.circular(16),
@@ -645,7 +692,7 @@ class RepositoryItemPage extends HookConsumerWidget {
                 backgroundColor: appColors.primary,
                 foregroundColor: Colors.white,
                 elevation: 0,
-                padding: const EdgeInsets.symmetric(vertical: 16),
+                padding: EdgeInsets.symmetric(vertical: 16 * scaleH),
                 shape: RoundedRectangleBorder(
                   borderRadius: BorderRadius.circular(12),
                 ),

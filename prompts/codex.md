@@ -89,3 +89,5 @@
 
 44. 横向きのデザインだと「The following assertion was thrown during layout:
 A RenderFlex overflowed by 73 pixels on the bottom.」という上にオーバーフローしているエラーが発生するので縦の中央に配置するように修正して
+
+45. lib/presentation/page/repository_item/repository_item_page.dartやlib/presentation/page/my_home/my_home_page.dartのpaddingやheight, widthはハードコーディングするのではなく、どの端末の高さにも対応できるようにMediaQuery.of(context).sizeを使用するように修正してください。

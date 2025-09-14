@@ -23,14 +23,16 @@ class MyHomePage extends HookConsumerWidget {
     final token = state.value?.token;
     final searchController = useTextEditingController(text: 'flutter');
     final appColors = Theme.of(context).extension<AppColors>()!;
+    final size = MediaQuery.of(context).size;
+    final scaleH = (size.height / 812).clamp(0.8, 1.3);
 
     return Scaffold(
       backgroundColor: Theme.of(context).scaffoldBackgroundColor,
       body: SafeArea(
         child: Column(
           children: [
-            _buildHeader(context, ref, appColors, token),
-            _buildSearchSection(context, searchController, notifier, appColors),
+            _buildHeader(context, ref, appColors, token, scaleH),
+            _buildSearchSection(context, searchController, notifier, appColors, scaleH),
             Expanded(child: _buildContent(context, state, appColors)),
           ],
         ),
@@ -43,12 +45,13 @@ class MyHomePage extends HookConsumerWidget {
     WidgetRef ref,
     AppColors appColors,
     String? token,
+    double scaleH,
   ) {
     final isDark = ref.watch(themeProvider).isDarkMode;
 
     return Container(
       width: double.infinity,
-      padding: const EdgeInsets.fromLTRB(20, 20, 20, 0),
+      padding: EdgeInsets.fromLTRB(20 * scaleH, 20 * scaleH, 20 * scaleH, 0),
       decoration: BoxDecoration(
         color: appColors.surface,
         boxShadow: [
@@ -117,7 +120,7 @@ class MyHomePage extends HookConsumerWidget {
                       ),
                     ),
                   ),
-                  const SizedBox(width: 12),
+                  SizedBox(width: 12 * scaleH),
                   Container(
                     decoration: BoxDecoration(
                       color: token != null
@@ -150,7 +153,7 @@ class MyHomePage extends HookConsumerWidget {
               ),
             ],
           ),
-          const SizedBox(height: 20),
+          SizedBox(height: 20 * scaleH),
         ],
       ),
     );
@@ -161,10 +164,11 @@ class MyHomePage extends HookConsumerWidget {
     TextEditingController searchController,
     MyHomeViewModel Function() notifier,
     AppColors appColors,
+    double scaleH,
   ) {
     return Container(
       width: double.infinity,
-      padding: const EdgeInsets.all(20),
+      padding: EdgeInsets.all(20 * scaleH),
       child: Column(
         crossAxisAlignment: CrossAxisAlignment.start,
         children: [
@@ -176,7 +180,7 @@ class MyHomePage extends HookConsumerWidget {
               fontWeight: FontWeight.w600,
             ),
           ),
-          const SizedBox(height: 12),
+          SizedBox(height: 12 * scaleH),
           Container(
             decoration: BoxDecoration(
               boxShadow: [
@@ -194,14 +198,14 @@ class MyHomePage extends HookConsumerWidget {
                 hintText: AppLocalizations.of(context)!.searchFieldHint,
                 hintStyle: TextStyle(color: appColors.secondary, fontSize: 15),
                 prefixIcon: Container(
-                  margin: const EdgeInsets.only(left: 16, right: 12),
+                  margin: EdgeInsets.only(left: 16 * scaleH, right: 12 * scaleH),
                   child: Icon(
                     Icons.search_rounded,
                     color: appColors.primary,
                     size: 24,
                   ),
                 ),
-                prefixIconConstraints: const BoxConstraints(minWidth: 52),
+                prefixIconConstraints: BoxConstraints(minWidth: 52 * scaleH),
                 suffixIcon: searchController.text.isNotEmpty
                     ? IconButton(
                         onPressed: () {
@@ -229,9 +233,9 @@ class MyHomePage extends HookConsumerWidget {
                   borderRadius: BorderRadius.circular(16),
                   borderSide: BorderSide(color: appColors.primary, width: 2),
                 ),
-                contentPadding: const EdgeInsets.symmetric(
-                  horizontal: 20,
-                  vertical: 18,
+                contentPadding: EdgeInsets.symmetric(
+                  horizontal: 20 * scaleH,
+                  vertical: 18 * scaleH,
                 ),
               ),
               onChanged: (query) async {
@@ -263,12 +267,14 @@ class MyHomePage extends HookConsumerWidget {
   }
 
   Widget _buildLoadingState(BuildContext context, AppColors appColors) {
+    final size = MediaQuery.of(context).size;
+    final scaleH = (size.height / 812).clamp(0.8, 1.3);
     return Center(
       child: Column(
         mainAxisAlignment: MainAxisAlignment.center,
         children: [
           Container(
-            padding: const EdgeInsets.all(16),
+            padding: EdgeInsets.all(16 * scaleH),
             decoration: BoxDecoration(
               color: appColors.primary.withValues(alpha: 0.1),
               shape: BoxShape.circle,
@@ -278,7 +284,7 @@ class MyHomePage extends HookConsumerWidget {
               strokeWidth: 3,
             ),
           ),
-          const SizedBox(height: 24),
+          SizedBox(height: 24 * scaleH),
           Text(
             AppLocalizations.of(context)!.searchingRepositories,
             style: TextStyle(
@@ -297,14 +303,16 @@ class MyHomePage extends HookConsumerWidget {
     Object error,
     AppColors appColors,
   ) {
+    final size = MediaQuery.of(context).size;
+    final scaleH = (size.height / 812).clamp(0.8, 1.3);
     return Container(
-      padding: const EdgeInsets.all(32),
+      padding: EdgeInsets.all(32 * scaleH),
       child: Center(
         child: Column(
           mainAxisAlignment: MainAxisAlignment.center,
           children: [
             Container(
-              padding: const EdgeInsets.all(20),
+              padding: EdgeInsets.all(20 * scaleH),
               decoration: BoxDecoration(
                 color: appColors.accent.withValues(alpha: 0.1),
                 shape: BoxShape.circle,
@@ -315,7 +323,7 @@ class MyHomePage extends HookConsumerWidget {
                 color: appColors.accent,
               ),
             ),
-            const SizedBox(height: 24),
+            SizedBox(height: 24 * scaleH),
             Text(
               AppLocalizations.of(context)!.somethingWentWrong,
               style: TextStyle(
@@ -324,7 +332,7 @@ class MyHomePage extends HookConsumerWidget {
                 fontWeight: FontWeight.w600,
               ),
             ),
-            const SizedBox(height: 12),
+            SizedBox(height: 12 * scaleH),
             Text(
               AppLocalizations.of(context)!.error(error),
               style: TextStyle(
@@ -341,14 +349,16 @@ class MyHomePage extends HookConsumerWidget {
   }
 
   Widget _buildEmptyState(BuildContext context, AppColors appColors) {
+    final size = MediaQuery.of(context).size;
+    final scaleH = (size.height / 812).clamp(0.8, 1.3);
     return Container(
-      padding: const EdgeInsets.all(32),
+      padding: EdgeInsets.all(32 * scaleH),
       child: Center(
         child: Column(
           mainAxisAlignment: MainAxisAlignment.center,
           children: [
             Container(
-              padding: const EdgeInsets.all(20),
+              padding: EdgeInsets.all(20 * scaleH),
               decoration: BoxDecoration(
                 color: appColors.primary.withValues(alpha: 0.1),
                 shape: BoxShape.circle,
@@ -359,7 +369,7 @@ class MyHomePage extends HookConsumerWidget {
                 color: appColors.primary,
               ),
             ),
-            const SizedBox(height: 24),
+            SizedBox(height: 24 * scaleH),
             Text(
               AppLocalizations.of(context)!.startExploring,
               style: TextStyle(
@@ -368,7 +378,7 @@ class MyHomePage extends HookConsumerWidget {
                 fontWeight: FontWeight.w600,
               ),
             ),
-            const SizedBox(height: 12),
+            SizedBox(height: 12 * scaleH),
             Text(
               AppLocalizations.of(context)!.startExploringSubtitle,
               style: TextStyle(
@@ -389,10 +399,13 @@ class MyHomePage extends HookConsumerWidget {
     List repositories,
     AppColors appColors,
   ) {
+    final size = MediaQuery.of(context).size;
+    final scaleH = (size.height / 812).clamp(0.8, 1.3);
     return ListView.separated(
-      padding: const EdgeInsets.symmetric(horizontal: 20, vertical: 8),
+      padding:
+          EdgeInsets.symmetric(horizontal: 20 * scaleH, vertical: 8 * scaleH),
       itemCount: repositories.length,
-      separatorBuilder: (context, index) => const SizedBox(height: 12),
+      separatorBuilder: (context, index) => SizedBox(height: 12 * scaleH),
       itemBuilder: (context, index) {
         final repo = repositories[index];
         return _buildRepositoryCard(context, repo, appColors);
@@ -428,14 +441,17 @@ class MyHomePage extends HookConsumerWidget {
           );
         },
         borderRadius: BorderRadius.circular(16),
-        child: Padding(
-          padding: const EdgeInsets.all(20),
+        child: Builder(builder: (context) {
+          final size = MediaQuery.of(context).size;
+          final scaleH = (size.height / 812).clamp(0.8, 1.3);
+          return Padding(
+          padding: EdgeInsets.all(20 * scaleH),
           child: Column(
             crossAxisAlignment: CrossAxisAlignment.start,
             children: [
               Row(
                 children: [
-                  const SizedBox(width: 12),
+                  SizedBox(width: 12 * scaleH),
                   Expanded(
                     child: Text(
                       repo.fullName,
@@ -456,7 +472,8 @@ class MyHomePage extends HookConsumerWidget {
               ),
             ],
           ),
-        ),
+        );
+        }),
       ),
     );
   }
