@@ -158,20 +158,20 @@ class RepositoryItemPage extends HookConsumerWidget {
           ),
         ],
       ),
-      child: Column(
-        children: const [
+      child: const Column(
+        children: [
           _ShimmerCircle(radius: 40), // 80x80 avatar
           SizedBox(height: 16),
           _ShimmerContainer(
             height: 28, // approx title text height for fontSize 24
             width: 200,
-            borderRadius: const BorderRadius.all(Radius.circular(6)),
+            borderRadius: BorderRadius.all(Radius.circular(6)),
           ),
           SizedBox(height: 12),
           _ShimmerContainer(
             height: 28, // language chip height
             width: 80,
-            borderRadius: const BorderRadius.all(Radius.circular(20)),
+            borderRadius: BorderRadius.all(Radius.circular(20)),
           ),
         ],
       ),
@@ -198,21 +198,21 @@ class RepositoryItemPage extends HookConsumerWidget {
             borderRadius: BorderRadius.circular(16),
             border: Border.all(color: appColors.border, width: 1),
           ),
-          child: Column(
+          child: const Column(
             mainAxisAlignment: MainAxisAlignment.center,
-            children: const [
+            children: [
               _ShimmerCircle(radius: 20), // icon circle ~40x40
               SizedBox(height: 8),
               _ShimmerContainer(
                 height: 24, // value text height
                 width: 60,
-                borderRadius: const BorderRadius.all(Radius.circular(6)),
+                borderRadius: BorderRadius.all(Radius.circular(6)),
               ),
               SizedBox(height: 6),
               _ShimmerContainer(
                 height: 14, // label text height
                 width: 70,
-                borderRadius: const BorderRadius.all(Radius.circular(6)),
+                borderRadius: BorderRadius.all(Radius.circular(6)),
               ),
             ],
           ),

@@ -2,6 +2,7 @@ include: package:flutter_lints/flutter.yaml
 
 linter:
   rules:
+    prefer_const_constructors: true # dart fix --applyで実行
 
 analyzer:
   exclude:
