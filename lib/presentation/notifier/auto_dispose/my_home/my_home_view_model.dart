@@ -33,7 +33,7 @@ class MyHomeViewModel extends _$MyHomeViewModel {
     if (query.isEmpty || state.isLoading) return;
     state = const AsyncValue.loading();
     try {
-      final token = await ref.read(secureStorageRepositoryProvider).getToken();
+      final token = state.value!.token;
       final repo = ref.read(githubRepositoryProvider(token: token));
       final items = await repo.searchRepositories(
         query: query,
