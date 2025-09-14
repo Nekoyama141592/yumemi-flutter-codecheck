@@ -7,18 +7,13 @@ part 'get_repository_view_model.g.dart';
 @riverpod
 class GetRepositoryViewModel extends _$GetRepositoryViewModel {
   @override
-  FutureOr<GetRepositoryItemEntity?> build(
-    String userName,
-    String name,
-  ) async {
+  FutureOr<GetRepositoryItemEntity?> build(String userName, String name) async {
     try {
       final repo = ref.read(githubRepositoryProvider());
-      final result =
-          await repo.getRepository(userName: userName, name: name);
+      final result = await repo.getRepository(userName: userName, name: name);
       return result;
     } catch (e) {
       rethrow;
     }
   }
 }
-

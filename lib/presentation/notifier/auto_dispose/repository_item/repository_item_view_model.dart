@@ -8,10 +8,7 @@ part 'repository_item_view_model.g.dart';
 @riverpod
 class RepositoryItemViewModel extends _$RepositoryItemViewModel {
   @override
-  FutureOr<GetRepositoryItemEntity?> build(
-    String userName,
-    String name,
-  ) async {
+  FutureOr<GetRepositoryItemEntity?> build(String userName, String name) async {
     try {
       final token = await ref.read(secureStorageRepositoryProvider).getToken();
       final repo = ref.read(githubRepositoryProvider(token: token));
