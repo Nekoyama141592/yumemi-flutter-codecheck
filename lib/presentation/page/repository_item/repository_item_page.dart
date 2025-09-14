@@ -1,6 +1,8 @@
 import 'package:auto_route/auto_route.dart';
 import 'package:flutter/material.dart';
 import 'package:hooks_riverpod/hooks_riverpod.dart';
+import 'package:cached_network_image/cached_network_image.dart';
+import 'package:shimmer/shimmer.dart';
 import 'package:yumemi_flutter_codecheck/presentation/notifier/auto_dispose/repository_item/repository_item_view_model.dart';
 
 @RoutePage()
@@ -27,18 +29,60 @@ class RepositoryItemPage extends HookConsumerWidget {
       appBar: AppBar(),
       body: Center(
         child: state.when(
-          loading: () => Text('$userName/$name'),
-          error: (_, _) => Text('$userName/$name'),
+          loading: () => Column(
+            mainAxisSize: MainAxisSize.min,
+            children: [
+              _ShimmerCircle(radius: 42),
+              const SizedBox(height: 16),
+              Text('$userName/$name'),
+            ],
+          ),
+          error: (_, _) => Column(
+            mainAxisSize: MainAxisSize.min,
+            children: [
+              const CircleAvatar(radius: 42, child: Icon(Icons.error, size: 36)),
+              const SizedBox(height: 16),
+              Text('$userName/$name'),
+            ],
+          ),
           data: (repo) {
             if (repo == null) {
-              return Text('$userName/$name');
+              return Column(
+                mainAxisSize: MainAxisSize.min,
+                children: [
+                  const CircleAvatar(radius: 42, child: Icon(Icons.person, size: 36)),
+                  const SizedBox(height: 16),
+                  Text('$userName/$name'),
+                ],
+              );
             }
+
+            final avatarUrl = repo.ownerAvatarUrl;
             return Column(
               mainAxisSize: MainAxisSize.min,
               crossAxisAlignment: CrossAxisAlignment.start,
               children: [
+                Center(
+                  child: avatarUrl == null || avatarUrl.isEmpty
+                      ? const CircleAvatar(
+                          radius: 42,
+                          child: Icon(Icons.person, size: 36),
+                        )
+                      : CachedNetworkImage(
+                          imageUrl: avatarUrl,
+                          imageBuilder: (context, imageProvider) => CircleAvatar(
+                            radius: 42,
+                            backgroundImage: imageProvider,
+                          ),
+                          placeholder: (context, url) => const _ShimmerCircle(radius: 42),
+                          errorWidget: (context, url, error) => const CircleAvatar(
+                            radius: 42,
+                            child: Icon(Icons.error, size: 36),
+                          ),
+                        ),
+                ),
+                const SizedBox(height: 16),
                 Text('リポジトリ名: ${repo.fullName}'),
-                Text('オーナーアイコン: ${repo.ownerAvatarUrl ?? "なし"}'),
                 Text('言語: ${repo.language ?? "不明"}'),
                 Text('スター数: ${repo.stargazersCount}'),
                 Text('ウォッチャー数: ${repo.watchersCount}'),
@@ -48,6 +92,23 @@ class RepositoryItemPage extends HookConsumerWidget {
             );
           },
         ),
+      ),
+    );
+  }
+}
+
+class _ShimmerCircle extends StatelessWidget {
+  const _ShimmerCircle({required this.radius});
+  final double radius;
+
+  @override
+  Widget build(BuildContext context) {
+    return Shimmer.fromColors(
+      baseColor: Colors.grey.shade300,
+      highlightColor: Colors.grey.shade100,
+      child: CircleAvatar(
+        radius: radius,
+        backgroundColor: Colors.white,
       ),
     );
   }
