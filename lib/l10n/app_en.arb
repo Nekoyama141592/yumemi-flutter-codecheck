@@ -31,7 +31,7 @@
   "@save": {
     "description": "Save button label"
   },
-  "error": "Error: {error}",
+  "error": "Error",
   "@error": {
     "description": "Error text prefix with the given error description"
   },

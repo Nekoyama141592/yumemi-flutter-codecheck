@@ -33,9 +33,7 @@ class AppLocalizationsEn extends AppLocalizations {
   String get save => 'Save';
 
   @override
-  String error(Object error) {
-    return 'Error: $error';
-  }
+  String get error => 'Error';
 
   @override
   String get repositoryName => 'Repository';

@@ -33,9 +33,7 @@ class AppLocalizationsJa extends AppLocalizations {
   String get save => '保存';
 
   @override
-  String error(Object error) {
-    return 'エラー: $error';
-  }
+  String get error => 'エラー';
 
   @override
   String get repositoryName => 'リポジトリ名';

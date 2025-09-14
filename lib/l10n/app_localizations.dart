@@ -148,8 +148,8 @@ abstract class AppLocalizations {
   /// Error text prefix with the given error description
   ///
   /// In en, this message translates to:
-  /// **'Error: {error}'**
-  String error(Object error);
+  /// **'Error'**
+  String get error;
 
   /// Label for repository name
   ///

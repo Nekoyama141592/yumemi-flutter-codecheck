@@ -430,7 +430,7 @@ class MyHomePage extends HookConsumerWidget {
             ),
             SizedBox(height: 12 * scaleH),
             Text(
-              AppLocalizations.of(context)!.error(error),
+              AppLocalizations.of(context)!.error,
               style: TextStyle(
                 color: appColors.secondary,
                 fontSize: 14,

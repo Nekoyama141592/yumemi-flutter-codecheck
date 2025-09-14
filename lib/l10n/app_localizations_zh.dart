@@ -33,9 +33,7 @@ class AppLocalizationsZh extends AppLocalizations {
   String get save => '保存';
 
   @override
-  String error(Object error) {
-    return '错误';
-  }
+  String get error => '错误';
 
   @override
   String get repositoryName => '仓库名';
