@@ -9,6 +9,7 @@ import 'package:yumemi_flutter_codecheck/presentation/notifier/auto_dispose/my_h
 import 'package:yumemi_flutter_codecheck/application/theme/extensions/app_colors.dart';
 import 'package:yumemi_flutter_codecheck/presentation/page/my_home/components/edit_token_dialog.dart';
 import 'package:flutter_hooks/flutter_hooks.dart';
+import 'package:yumemi_flutter_codecheck/presentation/notifier/keep_alive/theme/theme_notifier.dart';
 
 @RoutePage()
 class MyHomePage extends HookConsumerWidget {
@@ -37,6 +38,15 @@ class MyHomePage extends HookConsumerWidget {
                     : Theme.of(context).extension<AppColors>()!.tokenOff,
               ),
             ),
+          ),
+          Builder(
+            builder: (context) {
+              final isDark = ref.watch(themeProvider).isDarkMode;
+              return IconButton(
+                onPressed: () => ref.read(themeProvider.notifier).toggleTheme(),
+                icon: Icon(isDark ? Icons.dark_mode : Icons.light_mode),
+              );
+            },
           ),
         ],
       ),

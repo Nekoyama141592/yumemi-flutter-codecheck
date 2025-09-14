@@ -64,3 +64,5 @@
 32. lib/domain/entity/get_repository_itemにてget_repository_item_entity.dartを作成し、RepositoryItemのModelからリポジトリ名、オーナーアイコン、プロジェクト言語、Star 数、Watcher 数、Fork 数、Issue 数をfactoryコンストラクタで受け取るようにして
 
 33. lib/domain/repository_interface/github_repository_interface.dartのgetRepositoryでSearchRepositoriesItemEntityではなく、GetRepositoryItemEntityを使用するようにして。
+
+34. MyHomePageの鍵アイコンの右横にAppBarの左上に月と太陽が切り替わるアイコンを設置して、そのボタンを押すことでもダークモードとライトモードも切り替えられるようにして
