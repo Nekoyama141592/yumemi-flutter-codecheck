@@ -54,3 +54,5 @@
 27. lib/presentation/page/repository_itemに/users/:userName/repositories/:nameというauto_routeのpathを持つRepositoryItemPageを作成して。userNameとnameは@pathParamで受け取って、CenterとTextのWidgetを使って表示して。
 
 28. lib/core/util/route_util.dartにてpushRepositoryItemPage()を作成して
+
+29. lib/presentation/notifier/auto_dispose/repository_itemにrepository_item_view_model.dartをriverpod_generatorを使ってAutoDisposeAsyncNotifierで作成して。FamilyProviderでuserNameとnameを受け取り、GithubRepositoryの getRepositoryを使って。
