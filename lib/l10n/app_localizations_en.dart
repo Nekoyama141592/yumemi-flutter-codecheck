@@ -75,19 +75,22 @@ class AppLocalizationsEn extends AppLocalizations {
   String get startExploring => 'Start exploring';
 
   @override
-  String get startExploringSubtitle => 'Search for GitHub repositories to discover amazing projects and code';
+  String get startExploringSubtitle =>
+      'Search for GitHub repositories to discover amazing projects and code';
 
   @override
   String get repoErrorTitle => 'Failed to get repository information';
 
   @override
-  String get repoErrorSubtitle => 'Please register your personal access token from the top right of the screen';
+  String get repoErrorSubtitle =>
+      'Please register your personal access token from the top right of the screen';
 
   @override
   String get repoNotFoundTitle => 'Repository not found';
 
   @override
-  String get repoNotFoundSubtitle => 'The specified repository does not exist or is inaccessible';
+  String get repoNotFoundSubtitle =>
+      'The specified repository does not exist or is inaccessible';
 
   @override
   String get openInGitHub => 'Open in GitHub';

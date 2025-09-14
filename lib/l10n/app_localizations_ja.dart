@@ -75,7 +75,8 @@ class AppLocalizationsJa extends AppLocalizations {
   String get startExploring => '探索を始めましょう';
 
   @override
-  String get startExploringSubtitle => 'GitHubのリポジトリを検索して素晴らしいプロジェクトやコードを見つけましょう';
+  String get startExploringSubtitle =>
+      'GitHubのリポジトリを検索して素晴らしいプロジェクトやコードを見つけましょう';
 
   @override
   String get repoErrorTitle => 'リポジトリ情報の取得に失敗しました';
