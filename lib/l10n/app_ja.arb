@@ -62,7 +62,7 @@
   "@searchFieldHint": {"description": "Hint text for search field"},
   "searchingRepositories": "リポジトリを検索中...",
   "@searchingRepositories": {"description": "Loading message while searching repos"},
-  "somethingWentWrong": "問題が発生しました",
+  "somethingWentWrong": "リポジトリ情報の取得に失敗しました",
   "@somethingWentWrong": {"description": "Generic error title"},
   "startExploring": "探索を始めましょう",
   "@startExploring": {"description": "Empty state title"},

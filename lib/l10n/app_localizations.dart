@@ -232,7 +232,7 @@ abstract class AppLocalizations {
   /// Generic error title
   ///
   /// In en, this message translates to:
-  /// **'Something went wrong'**
+  /// **'Failed to get repository information'**
   String get somethingWentWrong;
 
   /// Empty state title

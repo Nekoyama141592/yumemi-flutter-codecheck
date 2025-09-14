@@ -62,7 +62,7 @@
   "@searchFieldHint": {"description": "Hint text for search field"},
   "searchingRepositories": "正在搜索仓库…",
   "@searchingRepositories": {"description": "Loading message while searching repos"},
-  "somethingWentWrong": "出现了一些问题",
+  "somethingWentWrong": "获取仓库信息失败",
   "@somethingWentWrong": {"description": "Generic error title"},
   "startExploring": "开始探索",
   "@startExploring": {"description": "Empty state title"},

@@ -62,7 +62,7 @@
   "@searchFieldHint": {"description": "Hint text for search field"},
   "searchingRepositories": "Searching repositories...",
   "@searchingRepositories": {"description": "Loading message while searching repos"},
-  "somethingWentWrong": "Something went wrong",
+  "somethingWentWrong": "Failed to get repository information",
   "@somethingWentWrong": {"description": "Generic error title"},
   "startExploring": "Start exploring",
   "@startExploring": {"description": "Empty state title"},

@@ -75,7 +75,7 @@ class AppLocalizationsZh extends AppLocalizations {
   String get searchingRepositories => '正在搜索仓库…';
 
   @override
-  String get somethingWentWrong => '出现了一些问题';
+  String get somethingWentWrong => '获取仓库信息失败';
 
   @override
   String get startExploring => '开始探索';

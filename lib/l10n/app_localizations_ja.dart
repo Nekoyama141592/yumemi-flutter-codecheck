@@ -75,7 +75,7 @@ class AppLocalizationsJa extends AppLocalizations {
   String get searchingRepositories => 'リポジトリを検索中...';
 
   @override
-  String get somethingWentWrong => '問題が発生しました';
+  String get somethingWentWrong => 'リポジトリ情報の取得に失敗しました';
 
   @override
   String get startExploring => '探索を始めましょう';
