@@ -41,7 +41,10 @@ class RepositoryItemPage extends HookConsumerWidget {
           error: (_, _) => Column(
             mainAxisSize: MainAxisSize.min,
             children: [
-              const CircleAvatar(radius: 42, child: Icon(Icons.error, size: 36)),
+              const CircleAvatar(
+                radius: 42,
+                child: Icon(Icons.error, size: 36),
+              ),
               const SizedBox(height: 16),
               Text('$userName/$name'),
             ],
@@ -51,7 +54,10 @@ class RepositoryItemPage extends HookConsumerWidget {
               return Column(
                 mainAxisSize: MainAxisSize.min,
                 children: [
-                  const CircleAvatar(radius: 42, child: Icon(Icons.person, size: 36)),
+                  const CircleAvatar(
+                    radius: 42,
+                    child: Icon(Icons.person, size: 36),
+                  ),
                   const SizedBox(height: 16),
                   Text('$userName/$name'),
                 ],
@@ -71,15 +77,18 @@ class RepositoryItemPage extends HookConsumerWidget {
                         )
                       : CachedNetworkImage(
                           imageUrl: avatarUrl,
-                          imageBuilder: (context, imageProvider) => CircleAvatar(
-                            radius: 42,
-                            backgroundImage: imageProvider,
-                          ),
-                          placeholder: (context, url) => const _ShimmerCircle(radius: 42),
-                          errorWidget: (context, url, error) => const CircleAvatar(
-                            radius: 42,
-                            child: Icon(Icons.error, size: 36),
-                          ),
+                          imageBuilder: (context, imageProvider) =>
+                              CircleAvatar(
+                                radius: 42,
+                                backgroundImage: imageProvider,
+                              ),
+                          placeholder: (context, url) =>
+                              const _ShimmerCircle(radius: 42),
+                          errorWidget: (context, url, error) =>
+                              const CircleAvatar(
+                                radius: 42,
+                                child: Icon(Icons.error, size: 36),
+                              ),
                         ),
                 ),
                 const SizedBox(height: 16),
@@ -92,7 +101,9 @@ class RepositoryItemPage extends HookConsumerWidget {
                 Row(
                   children: [
                     Text('${AppLocalizations.of(context)!.language}: '),
-                    Text(repo.language ?? AppLocalizations.of(context)!.unknown),
+                    Text(
+                      repo.language ?? AppLocalizations.of(context)!.unknown,
+                    ),
                   ],
                 ),
                 Row(
@@ -137,10 +148,7 @@ class _ShimmerCircle extends StatelessWidget {
     return Shimmer.fromColors(
       baseColor: Colors.grey.shade300,
       highlightColor: Colors.grey.shade100,
-      child: CircleAvatar(
-        radius: radius,
-        backgroundColor: Colors.white,
-      ),
+      child: CircleAvatar(radius: radius, backgroundColor: Colors.white),
     );
   }
 }
