@@ -10,6 +10,7 @@ abstract class GithubRepositoryInterface {
   });
 
   Future<SearchRepositoriesItemEntity?> getRepository({
-    required String query,
+    required String userName,
+    required String name,
   });
 }

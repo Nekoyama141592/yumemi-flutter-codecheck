@@ -48,3 +48,5 @@
 24. MyHomePageのローディングをする箇所は検索バーより下に限定して。
 
 25. GithubRepositoryInterfaceにFuture<SearchRepositoriesItemEntity?>を返すgetRepositoryを定義して。引数はrequired String queryだけにして
+
+26. GithubRepositoryInterfaceのgetRepositoryの引数をrequired String userNameとrequired String nameに変更して。GitHubRepositoryは{userName}/{name}というqueryを使用するようにして。

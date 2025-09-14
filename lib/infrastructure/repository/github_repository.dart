@@ -30,10 +30,12 @@ class GithubRepository implements GithubRepositoryInterface {
 
   @override
   Future<SearchRepositoriesItemEntity?> getRepository({
-    required String query,
+    required String userName,
+    required String name,
   }) async {
+    final q = '$userName/$name';
     final response = await _apiClient.searchRepositories(
-      query,
+      q,
       null,
       null,
       1,
