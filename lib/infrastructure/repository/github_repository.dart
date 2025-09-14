@@ -27,4 +27,19 @@ class GithubRepository implements GithubRepositoryInterface {
         .map(SearchRepositoriesItemEntity.fromModel)
         .toList(growable: false);
   }
+
+  @override
+  Future<SearchRepositoriesItemEntity?> getRepository({
+    required String query,
+  }) async {
+    final response = await _apiClient.searchRepositories(
+      query,
+      null,
+      null,
+      1,
+      1,
+    );
+    if (response.items.isEmpty) return null;
+    return SearchRepositoriesItemEntity.fromModel(response.items.first);
+  }
 }

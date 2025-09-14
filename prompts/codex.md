@@ -46,3 +46,5 @@
 23. MyHomePageのListView.builderの上に検索バーを表示して。機能はまだ実装しなくて大丈夫
 
 24. MyHomePageのローディングをする箇所は検索バーより下に限定して。
+
+25. GithubRepositoryInterfaceにFuture<SearchRepositoriesItemEntity?>を返すgetRepositoryを定義して。引数はrequired String queryだけにして

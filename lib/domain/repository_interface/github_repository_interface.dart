@@ -8,4 +8,8 @@ abstract class GithubRepositoryInterface {
     int? perPage,
     int? page,
   });
+
+  Future<SearchRepositoriesItemEntity?> getRepository({
+    required String query,
+  });
 }
