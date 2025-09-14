@@ -19,3 +19,5 @@
 18.  l10n(ja,en,zh)のsomethingWentWrong, errorを廃止しそれぞれの使用箇所をrepoErrorTitle,repoErrorSubtitleに置換して
 19. lib/presentation/page/my_home/my_home_page.dartの複数のプライベートクラスを同階層のcomponentsフォルダ内に分割して新しいファイルを作成してパブリッククラスにして
 20. lib/presentation/page/repository_item/repository_item_page.dartの複数のプライベートクラスを同階層のcomponentsフォルダ内に分割して新しいファイルを作成してパブリッククラスにして
+21. lib/presentation/page/my_home/componentsの全てのWidgetに対してWidgetテストを実装して。
+22. lib/presentation/page/repository_item/componentsの全てのWidgetに対してWidgetテストを実装して。
