@@ -78,3 +78,5 @@
 39. lib/core/util/url_util.dartにてurl_launcherをラップして外部ブラウザに遷移するstaticメソッドをもつUrlUtilクラスを作成して
 
 40. MyHomePageのListTileにてアイコンを押したら、UrlUtilを使用してhtmlUrlに遷移する処理を実装して。
+
+41. lib/presentation/page/repository_item/repository_item_page.dartでもlib/presentation/page/my_home/my_home_page.dartと同様にAppBarでテーマ切り替えとtoken設定ができるように変更してください。

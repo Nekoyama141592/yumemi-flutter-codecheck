@@ -1,6 +1,8 @@
 import 'package:auto_route/auto_route.dart';
 import 'package:flutter/material.dart';
 import 'package:hooks_riverpod/hooks_riverpod.dart';
+import 'package:flutter/services.dart';
+import 'package:flutter_hooks/flutter_hooks.dart';
 import 'package:cached_network_image/cached_network_image.dart';
 import 'package:shimmer/shimmer.dart';
 import 'package:url_launcher/url_launcher.dart';
@@ -8,6 +10,9 @@ import 'package:yumemi_flutter_codecheck/application/theme/extensions/app_colors
 import 'package:yumemi_flutter_codecheck/domain/entity/get_repository_item/get_repository_item_entity.dart';
 import 'package:yumemi_flutter_codecheck/presentation/notifier/auto_dispose/repository_item/repository_item_view_model.dart';
 import '../../../l10n/app_localizations.dart';
+import 'package:yumemi_flutter_codecheck/presentation/notifier/keep_alive/theme/theme_notifier.dart';
+import 'package:yumemi_flutter_codecheck/presentation/page/my_home/components/edit_token_dialog.dart';
+import 'package:yumemi_flutter_codecheck/core/provider/repository/secure_storage/secure_storage_repository_provider.dart';
 
 @RoutePage()
 class RepositoryItemPage extends HookConsumerWidget {
@@ -30,6 +35,13 @@ class RepositoryItemPage extends HookConsumerWidget {
   Widget build(BuildContext context, WidgetRef ref) {
     final state = ref.watch(repositoryItemViewModelProvider(userName, name));
     final appColors = Theme.of(context).extension<AppColors>()!;
+    final isDark = ref.watch(themeProvider).isDarkMode;
+    final tokenFuture = useMemoized(
+      () => ref.read(secureStorageRepositoryProvider).getToken(),
+      const [],
+    );
+    final tokenSnapshot = useFuture(tokenFuture);
+    final hasToken = tokenSnapshot.data != null;
 
     return Scaffold(
       backgroundColor: Theme.of(context).scaffoldBackgroundColor,
@@ -46,6 +58,61 @@ class RepositoryItemPage extends HookConsumerWidget {
         foregroundColor: appColors.onSurface,
         elevation: 0,
         centerTitle: false,
+        actions: [
+          // Theme toggle button
+          Container(
+            margin: const EdgeInsets.symmetric(vertical: 8).copyWith(right: 8),
+            decoration: BoxDecoration(
+              color: appColors.cardBackground,
+              borderRadius: BorderRadius.circular(12),
+              border: Border.all(color: appColors.border),
+            ),
+            child: IconButton(
+              tooltip: isDark ? 'Light Mode' : 'Dark Mode',
+              onPressed: () {
+                HapticFeedback.lightImpact();
+                ref.read(themeProvider.notifier).toggleTheme();
+              },
+              icon: AnimatedSwitcher(
+                duration: const Duration(milliseconds: 200),
+                child: Icon(
+                  isDark
+                      ? Icons.light_mode_rounded
+                      : Icons.dark_mode_rounded,
+                  key: ValueKey(isDark),
+                  color: appColors.primary,
+                  size: 22,
+                ),
+              ),
+            ),
+          ),
+          // Token edit button
+          Container(
+            margin: const EdgeInsets.symmetric(vertical: 8).copyWith(right: 12),
+            decoration: BoxDecoration(
+              color: hasToken
+                  ? appColors.tokenOn.withValues(alpha: 0.1)
+                  : appColors.tokenOff.withValues(alpha: 0.1),
+              borderRadius: BorderRadius.circular(12),
+              border: Border.all(
+                color: hasToken ? appColors.tokenOn : appColors.tokenOff,
+                width: 1.5,
+              ),
+            ),
+            child: IconButton(
+              tooltip: AppLocalizations.of(context)!.editTokenTooltip,
+              onPressed: () {
+                HapticFeedback.lightImpact();
+                EditTokenDialog.show(context);
+              },
+              icon: Icon(
+                Icons.vpn_key_rounded,
+                color: hasToken ? appColors.tokenOn : appColors.tokenOff,
+                size: 22,
+              ),
+            ),
+          ),
+        ],
       ),
       body: SafeArea(
         child: SingleChildScrollView(
