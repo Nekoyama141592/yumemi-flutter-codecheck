@@ -12,7 +12,7 @@ import 'package:yumemi_flutter_codecheck/domain/entity/get_repository_item/get_r
 import 'package:yumemi_flutter_codecheck/presentation/notifier/auto_dispose/repository_item/repository_item_view_model.dart';
 import '../../../l10n/app_localizations.dart';
 import 'package:yumemi_flutter_codecheck/presentation/notifier/keep_alive/theme/theme_notifier.dart';
-import 'package:yumemi_flutter_codecheck/presentation/page/my_home/components/edit_token_dialog.dart';
+import 'package:yumemi_flutter_codecheck/presentation/common/edit_token_dialog.dart';
 import 'package:yumemi_flutter_codecheck/core/provider/repository/secure_storage/secure_storage_repository_provider.dart';
 
 @RoutePage()
