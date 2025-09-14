@@ -32,6 +32,15 @@ class RepositoryItemPage extends HookConsumerWidget {
   final String userName;
   final String name;
 
+  Future<void> _launchGitHubUrl(String? url) async {
+    if (url == null || url.isEmpty) return;
+
+    final uri = Uri.parse(url);
+    if (await canLaunchUrl(uri)) {
+      await launchUrl(uri, mode: LaunchMode.externalApplication);
+    }
+  }
+
   @override
   Widget build(BuildContext context, WidgetRef ref) {
     final state = ref.watch(repositoryItemViewModelProvider(userName, name));
@@ -173,13 +182,16 @@ class RepositoryItemPage extends HookConsumerWidget {
               child: state.when(
                 loading: () => FadeTransition(
                   opacity: fadeAnimationTween,
-                  child: _buildLoadingState(appColors, isLandscape, context),
+                  child: _LoadingState(
+                    appColors: appColors,
+                    isLandscape: isLandscape,
+                  ),
                 ),
-                error: (_, _) => SlideTransition(
+                error: (_, __) => SlideTransition(
                   position: slideAnimationTween,
                   child: FadeTransition(
                     opacity: fadeAnimationTween,
-                    child: _buildErrorState(context, appColors),
+                    child: _ErrorState(appColors: appColors),
                   ),
                 ),
                 data: (repo) => repo == null
@@ -187,7 +199,7 @@ class RepositoryItemPage extends HookConsumerWidget {
                         position: slideAnimationTween,
                         child: FadeTransition(
                           opacity: fadeAnimationTween,
-                          child: _buildNotFoundState(context, appColors),
+                          child: _NotFoundState(appColors: appColors),
                         ),
                       )
                     : SlideTransition(
@@ -196,11 +208,11 @@ class RepositoryItemPage extends HookConsumerWidget {
                           opacity: fadeAnimationTween,
                           child: ScaleTransition(
                             scale: scaleAnimationTween,
-                            child: _buildRepositoryContent(
-                              context,
-                              repo,
-                              appColors,
-                              isLandscape,
+                            child: _RepositoryContent(
+                              repo: repo,
+                              appColors: appColors,
+                              isLandscape: isLandscape,
+                              onLaunchUrl: _launchGitHubUrl,
                             ),
                           ),
                         ),
@@ -230,15 +242,25 @@ class RepositoryItemPage extends HookConsumerWidget {
       ),
     );
   }
+}
 
-  Widget _buildLoadingState(
-    AppColors appColors,
-    bool isLandscape,
-    BuildContext context,
-  ) {
+// --- UI state widgets ---
+
+class _LoadingState extends StatelessWidget {
+  const _LoadingState({
+    required this.appColors,
+    required this.isLandscape,
+  });
+
+  final AppColors appColors;
+  final bool isLandscape;
+
+  @override
+  Widget build(BuildContext context) {
     final size = MediaQuery.of(context).size;
     final scaleH = (size.height / 812).clamp(0.8, 1.3);
     final gap = 20.0 * scaleH;
+
     if (isLandscape) {
       return Column(
         crossAxisAlignment: CrossAxisAlignment.start,
@@ -246,159 +268,36 @@ class RepositoryItemPage extends HookConsumerWidget {
           Row(
             crossAxisAlignment: CrossAxisAlignment.start,
             children: [
-              Expanded(child: _buildHeaderCardLoading(context, appColors)),
+              Expanded(child: _HeaderCardLoading(appColors: appColors)),
               SizedBox(width: gap),
-              Expanded(child: _buildStatsGridLoading(context, appColors)),
+              Expanded(child: _StatsGridLoading(appColors: appColors)),
             ],
           ),
           SizedBox(height: gap),
-          _buildActionButtonsLoading(appColors),
+          _ActionButtonsLoading(appColors: appColors),
         ],
       );
     }
     return Column(
       crossAxisAlignment: CrossAxisAlignment.start,
       children: [
-        _buildHeaderCardLoading(context, appColors),
+        _HeaderCardLoading(appColors: appColors),
         SizedBox(height: gap),
-        _buildStatsGridLoading(context, appColors),
+        _StatsGridLoading(appColors: appColors),
         SizedBox(height: gap),
-        _buildActionButtonsLoading(appColors),
+        _ActionButtonsLoading(appColors: appColors),
       ],
     );
   }
+}
 
-  Widget _buildHeaderCardLoading(BuildContext context, AppColors appColors) {
-    final size = MediaQuery.of(context).size;
-    final scaleH = (size.height / 812).clamp(0.8, 1.3);
-    final pad = 24.0 * scaleH;
-    final gapM = 16.0 * scaleH;
-    final gapS = 12.0 * scaleH;
-    final titleH = 28.0 * scaleH;
-    final chipH = 28.0 * scaleH;
-    final chipW = 80.0 * scaleH;
-    final avatarR = 40.0 * scaleH;
-    return Container(
-      width: double.infinity,
-      padding: EdgeInsets.all(pad),
-      decoration: BoxDecoration(
-        color: appColors.cardBackground,
-        borderRadius: BorderRadius.circular(16),
-        border: Border.all(color: appColors.border, width: 1),
-        boxShadow: [
-          BoxShadow(
-            color: appColors.onSurface.withValues(alpha: 0.02),
-            blurRadius: 8,
-            offset: const Offset(0, 2),
-          ),
-        ],
-      ),
-      child: Column(
-        children: [
-          _ShimmerCircle(radius: avatarR), // avatar
-          SizedBox(height: gapM),
-          _ShimmerContainer(
-            height: titleH,
-            width: 200 * scaleH,
-            borderRadius: const BorderRadius.all(Radius.circular(6)),
-          ),
-          SizedBox(height: gapS),
-          _ShimmerContainer(
-            height: chipH,
-            width: chipW,
-            borderRadius: const BorderRadius.all(Radius.circular(20)),
-          ),
-        ],
-      ),
-    );
-  }
+class _ErrorState extends StatelessWidget {
+  const _ErrorState({required this.appColors});
 
-  Widget _buildStatsGridLoading(BuildContext context, AppColors appColors) {
-    const itemCount = 4; // same as stats length
-    return LayoutBuilder(
-      builder: (context, constraints) {
-        // Compute responsive columns and aspect ratio based on available width
-        final size = MediaQuery.of(context).size;
-        final scaleH = (size.height / 812).clamp(0.8, 1.3);
-        final spacing = (constraints.maxWidth * 0.03).clamp(8.0, 16.0);
-        // Ensure tile is tall enough: padding*2 + circle + gaps + two lines
-        final contentMinHeight =
-            (16 * 2 + 40 + 8 + 24 + 6 + 14) * scaleH; // 124 * scaleH
-        final minTileHeight = contentMinHeight + 4 * scaleH; // small buffer
-        final tentativeCols = (constraints.maxWidth / 160).floor();
-        final crossAxisCount = tentativeCols.clamp(1, 4);
-        final tileWidth =
-            (constraints.maxWidth - spacing * (crossAxisCount - 1)) /
-            crossAxisCount;
-        final childAspectRatio = tileWidth / math.max(minTileHeight, 1);
+  final AppColors appColors;
 
-        return GridView.builder(
-          shrinkWrap: true,
-          physics: const NeverScrollableScrollPhysics(),
-          gridDelegate: SliverGridDelegateWithFixedCrossAxisCount(
-            crossAxisCount: crossAxisCount,
-            crossAxisSpacing: spacing,
-            mainAxisSpacing: spacing,
-            childAspectRatio: childAspectRatio,
-          ),
-          itemCount: itemCount,
-          itemBuilder: (context, index) {
-            return Container(
-              padding: EdgeInsets.all(16 * scaleH),
-              decoration: BoxDecoration(
-                color: appColors.cardBackground,
-                borderRadius: BorderRadius.circular(16),
-                border: Border.all(color: appColors.border, width: 1),
-              ),
-              child: Column(
-                mainAxisAlignment: MainAxisAlignment.center,
-                children: [
-                  _ShimmerCircle(radius: 20 * scaleH), // icon circle
-                  SizedBox(height: 8 * scaleH),
-                  _ShimmerContainer(
-                    height: 24 * scaleH,
-                    width: 60 * scaleH,
-                    borderRadius: const BorderRadius.all(Radius.circular(6)),
-                  ),
-                  SizedBox(height: 6 * scaleH),
-                  _ShimmerContainer(
-                    height: 14 * scaleH,
-                    width: 70 * scaleH,
-                    borderRadius: const BorderRadius.all(Radius.circular(6)),
-                  ),
-                ],
-              ),
-            );
-          },
-        );
-      },
-    );
-  }
-
-  Widget _buildActionButtonsLoading(AppColors appColors) {
-    return Builder(
-      builder: (context) {
-        final size = MediaQuery.of(context).size;
-        final scaleH = (size.height / 812).clamp(0.8, 1.3);
-        return Container(
-          width: double.infinity,
-          padding: EdgeInsets.all(20 * scaleH),
-          decoration: BoxDecoration(
-            color: appColors.cardBackground,
-            borderRadius: BorderRadius.circular(16),
-            border: Border.all(color: appColors.border, width: 1),
-          ),
-          child: _ShimmerContainer(
-            height: 52 * scaleH, // approx ElevatedButton height
-            width: double.infinity,
-            borderRadius: const BorderRadius.all(Radius.circular(12)),
-          ),
-        );
-      },
-    );
-  }
-
-  Widget _buildErrorState(BuildContext context, AppColors appColors) {
+  @override
+  Widget build(BuildContext context) {
     final size = MediaQuery.of(context).size;
     final scaleH = (size.height / 812).clamp(0.8, 1.3);
     return Container(
@@ -442,8 +341,15 @@ class RepositoryItemPage extends HookConsumerWidget {
       ),
     );
   }
+}
 
-  Widget _buildNotFoundState(BuildContext context, AppColors appColors) {
+class _NotFoundState extends StatelessWidget {
+  const _NotFoundState({required this.appColors});
+
+  final AppColors appColors;
+
+  @override
+  Widget build(BuildContext context) {
     final size = MediaQuery.of(context).size;
     final scaleH = (size.height / 812).clamp(0.8, 1.3);
     return Container(
@@ -487,13 +393,25 @@ class RepositoryItemPage extends HookConsumerWidget {
       ),
     );
   }
+}
 
-  Widget _buildRepositoryContent(
-    BuildContext context,
-    GetRepositoryItemEntity repo,
-    AppColors appColors,
-    bool isLandscape,
-  ) {
+// --- Repository content widgets ---
+
+class _RepositoryContent extends StatelessWidget {
+  const _RepositoryContent({
+    required this.repo,
+    required this.appColors,
+    required this.isLandscape,
+    required this.onLaunchUrl,
+  });
+
+  final GetRepositoryItemEntity repo;
+  final AppColors appColors;
+  final bool isLandscape;
+  final Future<void> Function(String?) onLaunchUrl;
+
+  @override
+  Widget build(BuildContext context) {
     final size = MediaQuery.of(context).size;
     final scaleH = (size.height / 812).clamp(0.8, 1.3);
     final gap = 20.0 * scaleH;
@@ -508,14 +426,18 @@ class RepositoryItemPage extends HookConsumerWidget {
               Expanded(
                 child: _AnimatedCard(
                   delay: const Duration(milliseconds: 200),
-                  child: _buildHeaderCard(context, repo, appColors),
+                  child: _HeaderCard(repo: repo, appColors: appColors),
                 ),
               ),
               SizedBox(width: gap),
               Expanded(
                 child: _AnimatedCard(
                   delay: const Duration(milliseconds: 400),
-                  child: _buildStatsGrid(context, repo, appColors, isLandscape),
+                  child: _StatsGrid(
+                    repo: repo,
+                    appColors: appColors,
+                    isLandscape: isLandscape,
+                  ),
                 ),
               ),
             ],
@@ -523,7 +445,11 @@ class RepositoryItemPage extends HookConsumerWidget {
           SizedBox(height: gap),
           _AnimatedCard(
             delay: const Duration(milliseconds: 600),
-            child: _buildActionButtons(context, repo, appColors),
+            child: _ActionButtons(
+              repo: repo,
+              appColors: appColors,
+              onLaunchUrl: onLaunchUrl,
+            ),
           ),
         ],
       );
@@ -534,29 +460,42 @@ class RepositoryItemPage extends HookConsumerWidget {
       children: [
         _AnimatedCard(
           delay: const Duration(milliseconds: 200),
-          child: _buildHeaderCard(context, repo, appColors),
+          child: _HeaderCard(repo: repo, appColors: appColors),
         ),
         SizedBox(height: gap),
         _AnimatedCard(
           delay: const Duration(milliseconds: 400),
-          child: _buildStatsGrid(context, repo, appColors, isLandscape),
+          child: _StatsGrid(
+            repo: repo,
+            appColors: appColors,
+            isLandscape: isLandscape,
+          ),
         ),
         SizedBox(height: gap),
         _AnimatedCard(
           delay: const Duration(milliseconds: 600),
-          child: _buildActionButtons(context, repo, appColors),
+          child: _ActionButtons(
+            repo: repo,
+            appColors: appColors,
+            onLaunchUrl: onLaunchUrl,
+          ),
         ),
       ],
     );
   }
+}
 
-  Widget _buildHeaderCard(
-    BuildContext context,
-    GetRepositoryItemEntity repo,
-    AppColors appColors,
-  ) {
+// --- Component widgets ---
+
+class _HeaderCard extends StatelessWidget {
+  const _HeaderCard({required this.repo, required this.appColors});
+
+  final GetRepositoryItemEntity repo;
+  final AppColors appColors;
+
+  @override
+  Widget build(BuildContext context) {
     final avatarUrl = repo.ownerAvatarUrl;
-
     final size = MediaQuery.of(context).size;
     final scaleH = (size.height / 812).clamp(0.8, 1.3);
     final pad = 24.0 * scaleH;
@@ -663,13 +602,30 @@ class RepositoryItemPage extends HookConsumerWidget {
       ),
     );
   }
+}
 
-  Widget _buildStatsGrid(
-    BuildContext context,
-    GetRepositoryItemEntity repo,
-    AppColors appColors,
-    bool isLandscape,
-  ) {
+class _StatsGrid extends StatelessWidget {
+  const _StatsGrid({
+    required this.repo,
+    required this.appColors,
+    required this.isLandscape,
+  });
+
+  final GetRepositoryItemEntity repo;
+  final AppColors appColors;
+  final bool isLandscape;
+
+  String _formatNumber(int number) {
+    if (number >= 1000000) {
+      return '${(number / 1000000).toStringAsFixed(1)}M';
+    } else if (number >= 1000) {
+      return '${(number / 1000).toStringAsFixed(1)}k';
+    }
+    return number.toString();
+  }
+
+  @override
+  Widget build(BuildContext context) {
     final stats = [
       _StatItem(
         icon: Icons.star_rounded,
@@ -708,7 +664,7 @@ class RepositoryItemPage extends HookConsumerWidget {
         final crossAxisCount = tentativeCols.clamp(1, 4);
         final tileWidth =
             (constraints.maxWidth - spacing * (crossAxisCount - 1)) /
-            crossAxisCount;
+                crossAxisCount;
         final childAspectRatio = tileWidth / math.max(minTileHeight, 1);
 
         return GridView.builder(
@@ -767,12 +723,21 @@ class RepositoryItemPage extends HookConsumerWidget {
       },
     );
   }
+}
 
-  Widget _buildActionButtons(
-    BuildContext context,
-    GetRepositoryItemEntity repo,
-    AppColors appColors,
-  ) {
+class _ActionButtons extends StatelessWidget {
+  const _ActionButtons({
+    required this.repo,
+    required this.appColors,
+    required this.onLaunchUrl,
+  });
+
+  final GetRepositoryItemEntity repo;
+  final AppColors appColors;
+  final Future<void> Function(String?) onLaunchUrl;
+
+  @override
+  Widget build(BuildContext context) {
     final size = MediaQuery.of(context).size;
     final scaleH = (size.height / 812).clamp(0.8, 1.3);
     return Container(
@@ -788,9 +753,9 @@ class RepositoryItemPage extends HookConsumerWidget {
           SizedBox(
             width: double.infinity,
             child: _AnimatedButton(
-              onPressed: () => _launchGitHubUrl(repo.htmlUrl),
+              onPressed: () => onLaunchUrl(repo.htmlUrl),
               child: ElevatedButton.icon(
-                onPressed: () => _launchGitHubUrl(repo.htmlUrl),
+                onPressed: () => onLaunchUrl(repo.htmlUrl),
                 icon: const Icon(Icons.open_in_browser_rounded),
                 label: Text(AppLocalizations.of(context)!.openInGitHub),
                 style: ElevatedButton.styleFrom(
@@ -809,25 +774,156 @@ class RepositoryItemPage extends HookConsumerWidget {
       ),
     );
   }
+}
 
-  String _formatNumber(int number) {
-    if (number >= 1000000) {
-      return '${(number / 1000000).toStringAsFixed(1)}M';
-    } else if (number >= 1000) {
-      return '${(number / 1000).toStringAsFixed(1)}k';
-    }
-    return number.toString();
-  }
+// --- Loading state widgets ---
 
-  Future<void> _launchGitHubUrl(String? url) async {
-    if (url == null || url.isEmpty) return;
+class _HeaderCardLoading extends StatelessWidget {
+  const _HeaderCardLoading({required this.appColors});
+  final AppColors appColors;
 
-    final uri = Uri.parse(url);
-    if (await canLaunchUrl(uri)) {
-      await launchUrl(uri, mode: LaunchMode.externalApplication);
-    }
+  @override
+  Widget build(BuildContext context) {
+    final size = MediaQuery.of(context).size;
+    final scaleH = (size.height / 812).clamp(0.8, 1.3);
+    final pad = 24.0 * scaleH;
+    final gapM = 16.0 * scaleH;
+    final gapS = 12.0 * scaleH;
+    final titleH = 28.0 * scaleH;
+    final chipH = 28.0 * scaleH;
+    final chipW = 80.0 * scaleH;
+    final avatarR = 40.0 * scaleH;
+    return Container(
+      width: double.infinity,
+      padding: EdgeInsets.all(pad),
+      decoration: BoxDecoration(
+        color: appColors.cardBackground,
+        borderRadius: BorderRadius.circular(16),
+        border: Border.all(color: appColors.border, width: 1),
+        boxShadow: [
+          BoxShadow(
+            color: appColors.onSurface.withValues(alpha: 0.02),
+            blurRadius: 8,
+            offset: const Offset(0, 2),
+          ),
+        ],
+      ),
+      child: Column(
+        children: [
+          _ShimmerCircle(radius: avatarR), // avatar
+          SizedBox(height: gapM),
+          _ShimmerContainer(
+            height: titleH,
+            width: 200 * scaleH,
+            borderRadius: const BorderRadius.all(Radius.circular(6)),
+          ),
+          SizedBox(height: gapS),
+          _ShimmerContainer(
+            height: chipH,
+            width: chipW,
+            borderRadius: const BorderRadius.all(Radius.circular(20)),
+          ),
+        ],
+      ),
+    );
   }
 }
+
+class _StatsGridLoading extends StatelessWidget {
+  const _StatsGridLoading({required this.appColors});
+
+  final AppColors appColors;
+
+  @override
+  Widget build(BuildContext context) {
+    const itemCount = 4; // same as stats length
+    return LayoutBuilder(
+      builder: (context, constraints) {
+        // Compute responsive columns and aspect ratio based on available width
+        final size = MediaQuery.of(context).size;
+        final scaleH = (size.height / 812).clamp(0.8, 1.3);
+        final spacing = (constraints.maxWidth * 0.03).clamp(8.0, 16.0);
+        // Ensure tile is tall enough: padding*2 + circle + gaps + two lines
+        final contentMinHeight =
+            (16 * 2 + 40 + 8 + 24 + 6 + 14) * scaleH; // 124 * scaleH
+        final minTileHeight = contentMinHeight + 4 * scaleH; // small buffer
+        final tentativeCols = (constraints.maxWidth / 160).floor();
+        final crossAxisCount = tentativeCols.clamp(1, 4);
+        final tileWidth =
+            (constraints.maxWidth - spacing * (crossAxisCount - 1)) /
+                crossAxisCount;
+        final childAspectRatio = tileWidth / math.max(minTileHeight, 1);
+
+        return GridView.builder(
+          shrinkWrap: true,
+          physics: const NeverScrollableScrollPhysics(),
+          gridDelegate: SliverGridDelegateWithFixedCrossAxisCount(
+            crossAxisCount: crossAxisCount,
+            crossAxisSpacing: spacing,
+            mainAxisSpacing: spacing,
+            childAspectRatio: childAspectRatio,
+          ),
+          itemCount: itemCount,
+          itemBuilder: (context, index) {
+            return Container(
+              padding: EdgeInsets.all(16 * scaleH),
+              decoration: BoxDecoration(
+                color: appColors.cardBackground,
+                borderRadius: BorderRadius.circular(16),
+                border: Border.all(color: appColors.border, width: 1),
+              ),
+              child: Column(
+                mainAxisAlignment: MainAxisAlignment.center,
+                children: [
+                  _ShimmerCircle(radius: 20 * scaleH), // icon circle
+                  SizedBox(height: 8 * scaleH),
+                  _ShimmerContainer(
+                    height: 24 * scaleH,
+                    width: 60 * scaleH,
+                    borderRadius: const BorderRadius.all(Radius.circular(6)),
+                  ),
+                  SizedBox(height: 6 * scaleH),
+                  _ShimmerContainer(
+                    height: 14 * scaleH,
+                    width: 70 * scaleH,
+                    borderRadius: const BorderRadius.all(Radius.circular(6)),
+                  ),
+                ],
+              ),
+            );
+          },
+        );
+      },
+    );
+  }
+}
+
+class _ActionButtonsLoading extends StatelessWidget {
+  const _ActionButtonsLoading({required this.appColors});
+  final AppColors appColors;
+
+  @override
+  Widget build(BuildContext context) {
+    final size = MediaQuery.of(context).size;
+    final scaleH = (size.height / 812).clamp(0.8, 1.3);
+    return Container(
+      width: double.infinity,
+      padding: EdgeInsets.all(20 * scaleH),
+      decoration: BoxDecoration(
+        color: appColors.cardBackground,
+        borderRadius: BorderRadius.circular(16),
+        border: Border.all(color: appColors.border, width: 1),
+      ),
+      child: _ShimmerContainer(
+        height: 52 * scaleH, // approx ElevatedButton height
+        width: double.infinity,
+        borderRadius: const BorderRadius.all(Radius.circular(12)),
+      ),
+    );
+  }
+}
+
+// --- Helper classes ---
 
 class _ShimmerCircle extends StatelessWidget {
   const _ShimmerCircle({required this.radius});
