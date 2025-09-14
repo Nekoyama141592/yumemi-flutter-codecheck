@@ -40,45 +40,47 @@ class MyHomePage extends HookConsumerWidget {
         ],
       ),
       drawer: const OriginalDrawer(),
-      body: state.when(
-        loading: () => const Center(child: CircularProgressIndicator()),
-        error: (e, _) =>
-            Center(child: Text(AppLocalizations.of(context)!.error(e))),
-        data: (data) {
-          return Column(
-            children: [
-              Padding(
-                padding: const EdgeInsets.all(12),
-                child: TextFormField(
-                  controller: searchController,
-                  decoration: const InputDecoration(
-                    prefixIcon: Icon(Icons.search),
-                    border: OutlineInputBorder(),
-                  ),
-                  onChanged: (e) async {
-                    await notifier().searchRepositories(query: e);
+      body: Column(
+        children: [
+          Padding(
+            padding: const EdgeInsets.all(12),
+            child: TextFormField(
+              controller: searchController,
+              decoration: const InputDecoration(
+                prefixIcon: Icon(Icons.search),
+                border: OutlineInputBorder(),
+              ),
+              onChanged: (e) async {
+                await notifier().searchRepositories(query: e);
+              },
+            ),
+          ),
+          Expanded(
+            child: state.when(
+              loading: () => const Center(child: CircularProgressIndicator()),
+              error: (e, _) => Center(
+                child: Text(AppLocalizations.of(context)!.error(e)),
+              ),
+              data: (data) {
+                if (data.repositories.isEmpty) {
+                  return Center(
+                    child: Text(AppLocalizations.of(context)!.hello),
+                  );
+                }
+                return ListView.builder(
+                  itemCount: data.repositories.length,
+                  itemBuilder: (context, index) {
+                    final repo = data.repositories[index];
+                    return ListTile(
+                      title: Text(repo.fullName),
+                      subtitle: Text(repo.htmlUrl),
+                    );
                   },
-                ),
-              ),
-              Expanded(
-                child: data.repositories.isEmpty
-                    ? Center(
-                        child: Text(AppLocalizations.of(context)!.hello),
-                      )
-                    : ListView.builder(
-                        itemCount: data.repositories.length,
-                        itemBuilder: (context, index) {
-                          final repo = data.repositories[index];
-                          return ListTile(
-                            title: Text(repo.fullName),
-                            subtitle: Text(repo.htmlUrl),
-                          );
-                        },
-                      ),
-              ),
-            ],
-          );
-        },
+                );
+              },
+            ),
+          ),
+        ],
       ),
     );
   }

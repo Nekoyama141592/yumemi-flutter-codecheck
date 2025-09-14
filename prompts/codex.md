@@ -44,3 +44,5 @@
 22. lib/l10n/app_localizations.dartの変更点を全ての.arbファイルにも反映して。最後にflutter gen-l10nを実行して
 
 23. MyHomePageのListView.builderの上に検索バーを表示して。機能はまだ実装しなくて大丈夫
+
+24. MyHomePageのローディングをする箇所は検索バーより下に限定して。
