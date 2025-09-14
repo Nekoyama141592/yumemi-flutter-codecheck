@@ -46,3 +46,21 @@
 23. MyHomePageのListView.builderの上に検索バーを表示して。機能はまだ実装しなくて大丈夫
 
 24. MyHomePageのローディングをする箇所は検索バーより下に限定して。
+
+25. GithubRepositoryInterfaceにFuture<SearchRepositoriesItemEntity?>を返すgetRepositoryを定義して。引数はrequired String queryだけにして
+
+26. GithubRepositoryInterfaceのgetRepositoryの引数をrequired String userNameとrequired String nameに変更して。GitHubRepositoryは{userName}/{name}というqueryを使用するようにして。
+
+27. lib/presentation/page/repository_itemに/users/:userName/repositories/:nameというauto_routeのpathを持つRepositoryItemPageを作成して。userNameとnameは@pathParamで受け取って、CenterとTextのWidgetを使って表示して。
+
+28. lib/core/util/route_util.dartにてpushRepositoryItemPage()を作成して
+
+29. lib/presentation/notifier/auto_dispose/repository_itemにrepository_item_view_model.dartをriverpod_generatorを使ってAutoDisposeAsyncNotifierで作成して。FamilyProviderでuserNameとnameを受け取り、GithubRepositoryの getRepositoryを使って。
+
+30. lib/presentation/notifier/auto_dispose/repository_item/repository_item_view_model.dartでtokenも取得して。
+
+31. lib/presentation/page/repository_item/repository_item_page.dartでRepositoryItemViewModelを使用して。
+
+32. lib/domain/entity/get_repository_itemにてget_repository_item_entity.dartを作成し、RepositoryItemのModelからリポジトリ名、オーナーアイコン、プロジェクト言語、Star 数、Watcher 数、Fork 数、Issue 数をfactoryコンストラクタで受け取るようにして
+
+33. lib/domain/repository_interface/github_repository_interface.dartのgetRepositoryでSearchRepositoriesItemEntityではなく、GetRepositoryItemEntityを使用するようにして。

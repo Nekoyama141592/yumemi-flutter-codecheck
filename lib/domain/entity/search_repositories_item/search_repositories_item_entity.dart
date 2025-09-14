@@ -12,6 +12,7 @@ abstract class SearchRepositoriesItemEntity
     required int id,
     required String fullName,
     required String htmlUrl,
+    required String name,
   }) = _SearchRepositoriesItemEntity;
 
   factory SearchRepositoriesItemEntity.fromModel(RepositoryItem model) =>
@@ -19,8 +20,12 @@ abstract class SearchRepositoriesItemEntity
         id: model.id,
         fullName: model.fullName,
         htmlUrl: model.htmlUrl,
+        name: model.name,
       );
 
   factory SearchRepositoriesItemEntity.fromJson(Map<String, dynamic> json) =>
       _$SearchRepositoriesItemEntityFromJson(json);
+
+  /// fullNameを'/'でsplitし、0番目の要素を返す
+  String get userName => fullName.split('/').first;
 }
