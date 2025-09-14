@@ -68,7 +68,9 @@ class RepositoryItemPage extends HookConsumerWidget {
               border: Border.all(color: appColors.border),
             ),
             child: IconButton(
-              tooltip: isDark ? 'Light Mode' : 'Dark Mode',
+              tooltip: isDark
+                  ? AppLocalizations.of(context)!.themeLightTooltip
+                  : AppLocalizations.of(context)!.themeDarkTooltip,
               onPressed: () {
                 HapticFeedback.lightImpact();
                 ref.read(themeProvider.notifier).toggleTheme();
@@ -76,9 +78,7 @@ class RepositoryItemPage extends HookConsumerWidget {
               icon: AnimatedSwitcher(
                 duration: const Duration(milliseconds: 200),
                 child: Icon(
-                  isDark
-                      ? Icons.light_mode_rounded
-                      : Icons.dark_mode_rounded,
+                  isDark ? Icons.light_mode_rounded : Icons.dark_mode_rounded,
                   key: ValueKey(isDark),
                   color: appColors.primary,
                   size: 22,
@@ -119,9 +119,9 @@ class RepositoryItemPage extends HookConsumerWidget {
           padding: const EdgeInsets.all(20),
           child: state.when(
             loading: () => _buildLoadingState(appColors),
-            error: (_, _) => _buildErrorState(appColors),
+            error: (_, _) => _buildErrorState(context, appColors),
             data: (repo) => repo == null
-                ? _buildNotFoundState(appColors)
+                ? _buildNotFoundState(context, appColors)
                 : _buildRepositoryContent(context, repo, appColors),
           ),
         ),
@@ -167,7 +167,7 @@ class RepositoryItemPage extends HookConsumerWidget {
     );
   }
 
-  Widget _buildErrorState(AppColors appColors) {
+  Widget _buildErrorState(BuildContext context, AppColors appColors) {
     return Container(
       width: double.infinity,
       padding: const EdgeInsets.all(32),
@@ -192,7 +192,7 @@ class RepositoryItemPage extends HookConsumerWidget {
           ),
           const SizedBox(height: 16),
           Text(
-            'エラーが発生しました',
+            AppLocalizations.of(context)!.repoErrorTitle,
             style: TextStyle(
               color: appColors.onSurface,
               fontSize: 18,
@@ -201,7 +201,7 @@ class RepositoryItemPage extends HookConsumerWidget {
           ),
           const SizedBox(height: 8),
           Text(
-            'リポジトリの情報を取得できませんでした',
+            AppLocalizations.of(context)!.repoErrorSubtitle,
             style: TextStyle(color: appColors.secondary, fontSize: 14),
             textAlign: TextAlign.center,
           ),
@@ -210,7 +210,7 @@ class RepositoryItemPage extends HookConsumerWidget {
     );
   }
 
-  Widget _buildNotFoundState(AppColors appColors) {
+  Widget _buildNotFoundState(BuildContext context, AppColors appColors) {
     return Container(
       width: double.infinity,
       padding: const EdgeInsets.all(32),
@@ -235,7 +235,7 @@ class RepositoryItemPage extends HookConsumerWidget {
           ),
           const SizedBox(height: 16),
           Text(
-            'リポジトリが見つかりません',
+            AppLocalizations.of(context)!.repoNotFoundTitle,
             style: TextStyle(
               color: appColors.onSurface,
               fontSize: 18,
@@ -244,7 +244,7 @@ class RepositoryItemPage extends HookConsumerWidget {
           ),
           const SizedBox(height: 8),
           Text(
-            '指定されたリポジトリは存在しないか、アクセスできません',
+            AppLocalizations.of(context)!.repoNotFoundSubtitle,
             style: TextStyle(color: appColors.secondary, fontSize: 14),
             textAlign: TextAlign.center,
           ),
@@ -479,7 +479,7 @@ class RepositoryItemPage extends HookConsumerWidget {
             child: ElevatedButton.icon(
               onPressed: () => _launchGitHubUrl(repo.htmlUrl),
               icon: const Icon(Icons.open_in_browser_rounded),
-              label: const Text('GitHubで開く'),
+              label: Text(AppLocalizations.of(context)!.openInGitHub),
               style: ElevatedButton.styleFrom(
                 backgroundColor: appColors.primary,
                 foregroundColor: Colors.white,

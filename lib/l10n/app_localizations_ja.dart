@@ -57,4 +57,47 @@ class AppLocalizationsJa extends AppLocalizations {
 
   @override
   String get issues => 'Issue数';
+
+  @override
+  String get themeLightTooltip => 'ライトモード';
+
+  @override
+  String get themeDarkTooltip => 'ダークモード';
+
+  @override
+  String get repositoryExplorer => 'リポジトリ検索アプリ';
+
+  @override
+  String get searchRepositories => 'リポジトリを検索';
+
+  @override
+  String get searchFieldHint => 'リポジトリ名を入力（例: flutter, react）';
+
+  @override
+  String get searchingRepositories => 'リポジトリを検索中...';
+
+  @override
+  String get somethingWentWrong => '問題が発生しました';
+
+  @override
+  String get startExploring => '探索を始めましょう';
+
+  @override
+  String get startExploringSubtitle =>
+      'GitHubのリポジトリを検索して素晴らしいプロジェクトやコードを見つけましょう';
+
+  @override
+  String get repoErrorTitle => 'エラーが発生しました';
+
+  @override
+  String get repoErrorSubtitle => 'リポジトリの情報を取得できませんでした';
+
+  @override
+  String get repoNotFoundTitle => 'リポジトリが見つかりません';
+
+  @override
+  String get repoNotFoundSubtitle => '指定されたリポジトリは存在しないか、アクセスできません';
+
+  @override
+  String get openInGitHub => 'GitHubで開く';
 }

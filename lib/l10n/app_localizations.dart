@@ -195,6 +195,90 @@ abstract class AppLocalizations {
   /// In en, this message translates to:
   /// **'Issues'**
   String get issues;
+
+  /// Tooltip showing switch to light theme
+  ///
+  /// In en, this message translates to:
+  /// **'Light Mode'**
+  String get themeLightTooltip;
+
+  /// Tooltip showing switch to dark theme
+  ///
+  /// In en, this message translates to:
+  /// **'Dark Mode'**
+  String get themeDarkTooltip;
+
+  /// Subtitle under GitHub brand on home
+  ///
+  /// In en, this message translates to:
+  /// **'Repository Explorer'**
+  String get repositoryExplorer;
+
+  /// Header for repository search section
+  ///
+  /// In en, this message translates to:
+  /// **'Search Repositories'**
+  String get searchRepositories;
+
+  /// Hint text for search field
+  ///
+  /// In en, this message translates to:
+  /// **'Enter repository name (e.g. flutter, react)'**
+  String get searchFieldHint;
+
+  /// Loading message while searching repos
+  ///
+  /// In en, this message translates to:
+  /// **'Searching repositories...'**
+  String get searchingRepositories;
+
+  /// Generic error title
+  ///
+  /// In en, this message translates to:
+  /// **'Something went wrong'**
+  String get somethingWentWrong;
+
+  /// Empty state title
+  ///
+  /// In en, this message translates to:
+  /// **'Start exploring'**
+  String get startExploring;
+
+  /// Empty state subtitle
+  ///
+  /// In en, this message translates to:
+  /// **'Search for GitHub repositories to discover amazing projects and code'**
+  String get startExploringSubtitle;
+
+  /// Repository page error title
+  ///
+  /// In en, this message translates to:
+  /// **'An error occurred'**
+  String get repoErrorTitle;
+
+  /// Repository page error subtitle
+  ///
+  /// In en, this message translates to:
+  /// **'Failed to load repository information'**
+  String get repoErrorSubtitle;
+
+  /// Repository not found title
+  ///
+  /// In en, this message translates to:
+  /// **'Repository not found'**
+  String get repoNotFoundTitle;
+
+  /// Repository not found subtitle
+  ///
+  /// In en, this message translates to:
+  /// **'The specified repository does not exist or is inaccessible'**
+  String get repoNotFoundSubtitle;
+
+  /// Button label to open repo in GitHub
+  ///
+  /// In en, this message translates to:
+  /// **'Open in GitHub'**
+  String get openInGitHub;
 }
 
 class _AppLocalizationsDelegate

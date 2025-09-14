@@ -77,7 +77,7 @@ class MyHomePage extends HookConsumerWidget {
                       ),
                     ),
                     Text(
-                      'Repository Explorer',
+                      AppLocalizations.of(context)!.repositoryExplorer,
                       style: TextStyle(
                         color: appColors.secondary,
                         fontSize: 16,
@@ -96,7 +96,9 @@ class MyHomePage extends HookConsumerWidget {
                       border: Border.all(color: appColors.border),
                     ),
                     child: IconButton(
-                      tooltip: isDark ? 'Light Mode' : 'Dark Mode',
+                      tooltip: isDark
+                          ? AppLocalizations.of(context)!.themeLightTooltip
+                          : AppLocalizations.of(context)!.themeDarkTooltip,
                       onPressed: () {
                         HapticFeedback.lightImpact();
                         ref.read(themeProvider.notifier).toggleTheme();
@@ -166,7 +168,7 @@ class MyHomePage extends HookConsumerWidget {
         crossAxisAlignment: CrossAxisAlignment.start,
         children: [
           Text(
-            'Search Repositories',
+            AppLocalizations.of(context)!.searchRepositories,
             style: TextStyle(
               color: appColors.onSurface,
               fontSize: 18,
@@ -188,7 +190,7 @@ class MyHomePage extends HookConsumerWidget {
               controller: searchController,
               style: TextStyle(color: appColors.onSurface, fontSize: 16),
               decoration: InputDecoration(
-                hintText: 'Enter repository name (e.g. flutter, react)',
+                hintText: AppLocalizations.of(context)!.searchFieldHint,
                 hintStyle: TextStyle(color: appColors.secondary, fontSize: 15),
                 prefixIcon: Container(
                   margin: const EdgeInsets.only(left: 16, right: 12),
@@ -248,7 +250,7 @@ class MyHomePage extends HookConsumerWidget {
     AppColors appColors,
   ) {
     return state.when(
-      loading: () => _buildLoadingState(appColors),
+      loading: () => _buildLoadingState(context, appColors),
       error: (error, _) => _buildErrorState(context, error, appColors),
       data: (data) {
         if (data.repositories.isEmpty) {
@@ -259,7 +261,7 @@ class MyHomePage extends HookConsumerWidget {
     );
   }
 
-  Widget _buildLoadingState(AppColors appColors) {
+  Widget _buildLoadingState(BuildContext context, AppColors appColors) {
     return Center(
       child: Column(
         mainAxisAlignment: MainAxisAlignment.center,
@@ -277,7 +279,7 @@ class MyHomePage extends HookConsumerWidget {
           ),
           const SizedBox(height: 24),
           Text(
-            'Searching repositories...',
+            AppLocalizations.of(context)!.searchingRepositories,
             style: TextStyle(
               color: appColors.secondary,
               fontSize: 16,
@@ -314,7 +316,7 @@ class MyHomePage extends HookConsumerWidget {
             ),
             const SizedBox(height: 24),
             Text(
-              'Something went wrong',
+              AppLocalizations.of(context)!.somethingWentWrong,
               style: TextStyle(
                 color: appColors.onSurface,
                 fontSize: 20,
@@ -358,7 +360,7 @@ class MyHomePage extends HookConsumerWidget {
             ),
             const SizedBox(height: 24),
             Text(
-              'Start exploring',
+              AppLocalizations.of(context)!.startExploring,
               style: TextStyle(
                 color: appColors.onSurface,
                 fontSize: 20,
@@ -367,7 +369,7 @@ class MyHomePage extends HookConsumerWidget {
             ),
             const SizedBox(height: 12),
             Text(
-              'Search for GitHub repositories to discover amazing projects and code',
+              AppLocalizations.of(context)!.startExploringSubtitle,
               style: TextStyle(
                 color: appColors.secondary,
                 fontSize: 14,
