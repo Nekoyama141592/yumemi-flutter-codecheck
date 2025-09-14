@@ -15,7 +15,7 @@ T _$identity<T>(T value) => value;
 /// @nodoc
 mixin _$GetRepositoryItemEntity {
 
- String get fullName; String? get ownerAvatarUrl; String? get language; int get stargazersCount; int get watchersCount; int get forksCount; int get openIssuesCount;
+ String get fullName; String get htmlUrl; String? get ownerAvatarUrl; String? get language; int get stargazersCount; int get watchersCount; int get forksCount; int get openIssuesCount;
 /// Create a copy of GetRepositoryItemEntity
 /// with the given fields replaced by the non-null parameter values.
 @JsonKey(includeFromJson: false, includeToJson: false)
@@ -28,16 +28,16 @@ $GetRepositoryItemEntityCopyWith<GetRepositoryItemEntity> get copyWith => _$GetR
 
 @override
 bool operator ==(Object other) {
-  return identical(this, other) || (other.runtimeType == runtimeType&&other is GetRepositoryItemEntity&&(identical(other.fullName, fullName) || other.fullName == fullName)&&(identical(other.ownerAvatarUrl, ownerAvatarUrl) || other.ownerAvatarUrl == ownerAvatarUrl)&&(identical(other.language, language) || other.language == language)&&(identical(other.stargazersCount, stargazersCount) || other.stargazersCount == stargazersCount)&&(identical(other.watchersCount, watchersCount) || other.watchersCount == watchersCount)&&(identical(other.forksCount, forksCount) || other.forksCount == forksCount)&&(identical(other.openIssuesCount, openIssuesCount) || other.openIssuesCount == openIssuesCount));
+  return identical(this, other) || (other.runtimeType == runtimeType&&other is GetRepositoryItemEntity&&(identical(other.fullName, fullName) || other.fullName == fullName)&&(identical(other.htmlUrl, htmlUrl) || other.htmlUrl == htmlUrl)&&(identical(other.ownerAvatarUrl, ownerAvatarUrl) || other.ownerAvatarUrl == ownerAvatarUrl)&&(identical(other.language, language) || other.language == language)&&(identical(other.stargazersCount, stargazersCount) || other.stargazersCount == stargazersCount)&&(identical(other.watchersCount, watchersCount) || other.watchersCount == watchersCount)&&(identical(other.forksCount, forksCount) || other.forksCount == forksCount)&&(identical(other.openIssuesCount, openIssuesCount) || other.openIssuesCount == openIssuesCount));
 }
 
 @JsonKey(includeFromJson: false, includeToJson: false)
 @override
-int get hashCode => Object.hash(runtimeType,fullName,ownerAvatarUrl,language,stargazersCount,watchersCount,forksCount,openIssuesCount);
+int get hashCode => Object.hash(runtimeType,fullName,htmlUrl,ownerAvatarUrl,language,stargazersCount,watchersCount,forksCount,openIssuesCount);
 
 @override
 String toString() {
-  return 'GetRepositoryItemEntity(fullName: $fullName, ownerAvatarUrl: $ownerAvatarUrl, language: $language, stargazersCount: $stargazersCount, watchersCount: $watchersCount, forksCount: $forksCount, openIssuesCount: $openIssuesCount)';
+  return 'GetRepositoryItemEntity(fullName: $fullName, htmlUrl: $htmlUrl, ownerAvatarUrl: $ownerAvatarUrl, language: $language, stargazersCount: $stargazersCount, watchersCount: $watchersCount, forksCount: $forksCount, openIssuesCount: $openIssuesCount)';
 }
 
 
@@ -48,7 +48,7 @@ abstract mixin class $GetRepositoryItemEntityCopyWith<$Res>  {
   factory $GetRepositoryItemEntityCopyWith(GetRepositoryItemEntity value, $Res Function(GetRepositoryItemEntity) _then) = _$GetRepositoryItemEntityCopyWithImpl;
 @useResult
 $Res call({
- String fullName, String? ownerAvatarUrl, String? language, int stargazersCount, int watchersCount, int forksCount, int openIssuesCount
+ String fullName, String htmlUrl, String? ownerAvatarUrl, String? language, int stargazersCount, int watchersCount, int forksCount, int openIssuesCount
 });
 
 
@@ -65,9 +65,10 @@ class _$GetRepositoryItemEntityCopyWithImpl<$Res>
 
 /// Create a copy of GetRepositoryItemEntity
 /// with the given fields replaced by the non-null parameter values.
-@pragma('vm:prefer-inline') @override $Res call({Object? fullName = null,Object? ownerAvatarUrl = freezed,Object? language = freezed,Object? stargazersCount = null,Object? watchersCount = null,Object? forksCount = null,Object? openIssuesCount = null,}) {
+@pragma('vm:prefer-inline') @override $Res call({Object? fullName = null,Object? htmlUrl = null,Object? ownerAvatarUrl = freezed,Object? language = freezed,Object? stargazersCount = null,Object? watchersCount = null,Object? forksCount = null,Object? openIssuesCount = null,}) {
   return _then(_self.copyWith(
 fullName: null == fullName ? _self.fullName : fullName // ignore: cast_nullable_to_non_nullable
+as String,htmlUrl: null == htmlUrl ? _self.htmlUrl : htmlUrl // ignore: cast_nullable_to_non_nullable
 as String,ownerAvatarUrl: freezed == ownerAvatarUrl ? _self.ownerAvatarUrl : ownerAvatarUrl // ignore: cast_nullable_to_non_nullable
 as String?,language: freezed == language ? _self.language : language // ignore: cast_nullable_to_non_nullable
 as String?,stargazersCount: null == stargazersCount ? _self.stargazersCount : stargazersCount // ignore: cast_nullable_to_non_nullable
@@ -159,10 +160,10 @@ return $default(_that);case _:
 /// }
 /// ```
 
-@optionalTypeArgs TResult maybeWhen<TResult extends Object?>(TResult Function( String fullName,  String? ownerAvatarUrl,  String? language,  int stargazersCount,  int watchersCount,  int forksCount,  int openIssuesCount)?  $default,{required TResult orElse(),}) {final _that = this;
+@optionalTypeArgs TResult maybeWhen<TResult extends Object?>(TResult Function( String fullName,  String htmlUrl,  String? ownerAvatarUrl,  String? language,  int stargazersCount,  int watchersCount,  int forksCount,  int openIssuesCount)?  $default,{required TResult orElse(),}) {final _that = this;
 switch (_that) {
 case _GetRepositoryItemEntity() when $default != null:
-return $default(_that.fullName,_that.ownerAvatarUrl,_that.language,_that.stargazersCount,_that.watchersCount,_that.forksCount,_that.openIssuesCount);case _:
+return $default(_that.fullName,_that.htmlUrl,_that.ownerAvatarUrl,_that.language,_that.stargazersCount,_that.watchersCount,_that.forksCount,_that.openIssuesCount);case _:
   return orElse();
 
 }
@@ -180,10 +181,10 @@ return $default(_that.fullName,_that.ownerAvatarUrl,_that.language,_that.stargaz
 /// }
 /// ```
 
-@optionalTypeArgs TResult when<TResult extends Object?>(TResult Function( String fullName,  String? ownerAvatarUrl,  String? language,  int stargazersCount,  int watchersCount,  int forksCount,  int openIssuesCount)  $default,) {final _that = this;
+@optionalTypeArgs TResult when<TResult extends Object?>(TResult Function( String fullName,  String htmlUrl,  String? ownerAvatarUrl,  String? language,  int stargazersCount,  int watchersCount,  int forksCount,  int openIssuesCount)  $default,) {final _that = this;
 switch (_that) {
 case _GetRepositoryItemEntity():
-return $default(_that.fullName,_that.ownerAvatarUrl,_that.language,_that.stargazersCount,_that.watchersCount,_that.forksCount,_that.openIssuesCount);case _:
+return $default(_that.fullName,_that.htmlUrl,_that.ownerAvatarUrl,_that.language,_that.stargazersCount,_that.watchersCount,_that.forksCount,_that.openIssuesCount);case _:
   throw StateError('Unexpected subclass');
 
 }
@@ -200,10 +201,10 @@ return $default(_that.fullName,_that.ownerAvatarUrl,_that.language,_that.stargaz
 /// }
 /// ```
 
-@optionalTypeArgs TResult? whenOrNull<TResult extends Object?>(TResult? Function( String fullName,  String? ownerAvatarUrl,  String? language,  int stargazersCount,  int watchersCount,  int forksCount,  int openIssuesCount)?  $default,) {final _that = this;
+@optionalTypeArgs TResult? whenOrNull<TResult extends Object?>(TResult? Function( String fullName,  String htmlUrl,  String? ownerAvatarUrl,  String? language,  int stargazersCount,  int watchersCount,  int forksCount,  int openIssuesCount)?  $default,) {final _that = this;
 switch (_that) {
 case _GetRepositoryItemEntity() when $default != null:
-return $default(_that.fullName,_that.ownerAvatarUrl,_that.language,_that.stargazersCount,_that.watchersCount,_that.forksCount,_that.openIssuesCount);case _:
+return $default(_that.fullName,_that.htmlUrl,_that.ownerAvatarUrl,_that.language,_that.stargazersCount,_that.watchersCount,_that.forksCount,_that.openIssuesCount);case _:
   return null;
 
 }
@@ -215,10 +216,11 @@ return $default(_that.fullName,_that.ownerAvatarUrl,_that.language,_that.stargaz
 @JsonSerializable()
 
 class _GetRepositoryItemEntity extends GetRepositoryItemEntity {
-  const _GetRepositoryItemEntity({required this.fullName, this.ownerAvatarUrl, this.language, required this.stargazersCount, required this.watchersCount, required this.forksCount, required this.openIssuesCount}): super._();
+  const _GetRepositoryItemEntity({required this.fullName, required this.htmlUrl, this.ownerAvatarUrl, this.language, required this.stargazersCount, required this.watchersCount, required this.forksCount, required this.openIssuesCount}): super._();
   factory _GetRepositoryItemEntity.fromJson(Map<String, dynamic> json) => _$GetRepositoryItemEntityFromJson(json);
 
 @override final  String fullName;
+@override final  String htmlUrl;
 @override final  String? ownerAvatarUrl;
 @override final  String? language;
 @override final  int stargazersCount;
@@ -239,16 +241,16 @@ Map<String, dynamic> toJson() {
 
 @override
 bool operator ==(Object other) {
-  return identical(this, other) || (other.runtimeType == runtimeType&&other is _GetRepositoryItemEntity&&(identical(other.fullName, fullName) || other.fullName == fullName)&&(identical(other.ownerAvatarUrl, ownerAvatarUrl) || other.ownerAvatarUrl == ownerAvatarUrl)&&(identical(other.language, language) || other.language == language)&&(identical(other.stargazersCount, stargazersCount) || other.stargazersCount == stargazersCount)&&(identical(other.watchersCount, watchersCount) || other.watchersCount == watchersCount)&&(identical(other.forksCount, forksCount) || other.forksCount == forksCount)&&(identical(other.openIssuesCount, openIssuesCount) || other.openIssuesCount == openIssuesCount));
+  return identical(this, other) || (other.runtimeType == runtimeType&&other is _GetRepositoryItemEntity&&(identical(other.fullName, fullName) || other.fullName == fullName)&&(identical(other.htmlUrl, htmlUrl) || other.htmlUrl == htmlUrl)&&(identical(other.ownerAvatarUrl, ownerAvatarUrl) || other.ownerAvatarUrl == ownerAvatarUrl)&&(identical(other.language, language) || other.language == language)&&(identical(other.stargazersCount, stargazersCount) || other.stargazersCount == stargazersCount)&&(identical(other.watchersCount, watchersCount) || other.watchersCount == watchersCount)&&(identical(other.forksCount, forksCount) || other.forksCount == forksCount)&&(identical(other.openIssuesCount, openIssuesCount) || other.openIssuesCount == openIssuesCount));
 }
 
 @JsonKey(includeFromJson: false, includeToJson: false)
 @override
-int get hashCode => Object.hash(runtimeType,fullName,ownerAvatarUrl,language,stargazersCount,watchersCount,forksCount,openIssuesCount);
+int get hashCode => Object.hash(runtimeType,fullName,htmlUrl,ownerAvatarUrl,language,stargazersCount,watchersCount,forksCount,openIssuesCount);
 
 @override
 String toString() {
-  return 'GetRepositoryItemEntity(fullName: $fullName, ownerAvatarUrl: $ownerAvatarUrl, language: $language, stargazersCount: $stargazersCount, watchersCount: $watchersCount, forksCount: $forksCount, openIssuesCount: $openIssuesCount)';
+  return 'GetRepositoryItemEntity(fullName: $fullName, htmlUrl: $htmlUrl, ownerAvatarUrl: $ownerAvatarUrl, language: $language, stargazersCount: $stargazersCount, watchersCount: $watchersCount, forksCount: $forksCount, openIssuesCount: $openIssuesCount)';
 }
 
 
@@ -259,7 +261,7 @@ abstract mixin class _$GetRepositoryItemEntityCopyWith<$Res> implements $GetRepo
   factory _$GetRepositoryItemEntityCopyWith(_GetRepositoryItemEntity value, $Res Function(_GetRepositoryItemEntity) _then) = __$GetRepositoryItemEntityCopyWithImpl;
 @override @useResult
 $Res call({
- String fullName, String? ownerAvatarUrl, String? language, int stargazersCount, int watchersCount, int forksCount, int openIssuesCount
+ String fullName, String htmlUrl, String? ownerAvatarUrl, String? language, int stargazersCount, int watchersCount, int forksCount, int openIssuesCount
 });
 
 
@@ -276,9 +278,10 @@ class __$GetRepositoryItemEntityCopyWithImpl<$Res>
 
 /// Create a copy of GetRepositoryItemEntity
 /// with the given fields replaced by the non-null parameter values.
-@override @pragma('vm:prefer-inline') $Res call({Object? fullName = null,Object? ownerAvatarUrl = freezed,Object? language = freezed,Object? stargazersCount = null,Object? watchersCount = null,Object? forksCount = null,Object? openIssuesCount = null,}) {
+@override @pragma('vm:prefer-inline') $Res call({Object? fullName = null,Object? htmlUrl = null,Object? ownerAvatarUrl = freezed,Object? language = freezed,Object? stargazersCount = null,Object? watchersCount = null,Object? forksCount = null,Object? openIssuesCount = null,}) {
   return _then(_GetRepositoryItemEntity(
 fullName: null == fullName ? _self.fullName : fullName // ignore: cast_nullable_to_non_nullable
+as String,htmlUrl: null == htmlUrl ? _self.htmlUrl : htmlUrl // ignore: cast_nullable_to_non_nullable
 as String,ownerAvatarUrl: freezed == ownerAvatarUrl ? _self.ownerAvatarUrl : ownerAvatarUrl // ignore: cast_nullable_to_non_nullable
 as String?,language: freezed == language ? _self.language : language // ignore: cast_nullable_to_non_nullable
 as String?,stargazersCount: null == stargazersCount ? _self.stargazersCount : stargazersCount // ignore: cast_nullable_to_non_nullable

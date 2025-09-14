@@ -9,17 +9,10 @@ part of 'search_repositories_item_entity.dart';
 _SearchRepositoriesItemEntity _$SearchRepositoriesItemEntityFromJson(
   Map<String, dynamic> json,
 ) => _SearchRepositoriesItemEntity(
-  id: (json['id'] as num).toInt(),
   fullName: json['fullName'] as String,
-  htmlUrl: json['htmlUrl'] as String,
   name: json['name'] as String,
 );
 
 Map<String, dynamic> _$SearchRepositoriesItemEntityToJson(
   _SearchRepositoriesItemEntity instance,
-) => <String, dynamic>{
-  'id': instance.id,
-  'fullName': instance.fullName,
-  'htmlUrl': instance.htmlUrl,
-  'name': instance.name,
-};
+) => <String, dynamic>{'fullName': instance.fullName, 'name': instance.name};

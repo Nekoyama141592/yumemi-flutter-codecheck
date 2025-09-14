@@ -3,14 +3,6 @@
   "@hello": {
     "description": "A greeting message"
   },
-  "settings": "Settings",
-  "@settings": {
-    "description": "Settings title"
-  },
-  "darkMode": "Dark Mode",
-  "@darkMode": {
-    "description": "Dark mode toggle"
-  },
   "editTokenTooltip": "Edit token",
   "@editTokenTooltip": {
     "description": "Tooltip for editing the token"
@@ -45,5 +37,48 @@
     "placeholders": {
       "error": {}
     }
-  }
+  },
+  "repositoryName": "Repository",
+  "@repositoryName": {"description": "Label for repository name"},
+  "language": "Language",
+  "@language": {"description": "Label for programming language"},
+  "unknown": "Unknown",
+  "@unknown": {"description": "Fallback for unknown value"},
+  "stars": "Stars",
+  "@stars": {"description": "Label for stargazers count"},
+  "watchers": "Watchers",
+  "@watchers": {"description": "Label for watchers count"},
+  "forks": "Forks",
+  "@forks": {"description": "Label for forks count"},
+  "issues": "Issues",
+  "@issues": {"description": "Label for issues count"}
+  ,
+  "themeLightTooltip": "Light Mode",
+  "@themeLightTooltip": {"description": "Tooltip showing switch to light theme"},
+  "themeDarkTooltip": "Dark Mode",
+  "@themeDarkTooltip": {"description": "Tooltip showing switch to dark theme"},
+  "repositoryExplorer": "Repository Explorer",
+  "@repositoryExplorer": {"description": "Subtitle under GitHub brand on home"},
+  "searchRepositories": "Search Repositories",
+  "@searchRepositories": {"description": "Header for repository search section"},
+  "searchFieldHint": "Enter repository name (e.g. flutter, react)",
+  "@searchFieldHint": {"description": "Hint text for search field"},
+  "searchingRepositories": "Searching repositories...",
+  "@searchingRepositories": {"description": "Loading message while searching repos"},
+  "somethingWentWrong": "Something went wrong",
+  "@somethingWentWrong": {"description": "Generic error title"},
+  "startExploring": "Start exploring",
+  "@startExploring": {"description": "Empty state title"},
+  "startExploringSubtitle": "Search for GitHub repositories to discover amazing projects and code",
+  "@startExploringSubtitle": {"description": "Empty state subtitle"},
+  "repoErrorTitle": "An error occurred",
+  "@repoErrorTitle": {"description": "Repository page error title"},
+  "repoErrorSubtitle": "Failed to load repository information",
+  "@repoErrorSubtitle": {"description": "Repository page error subtitle"},
+  "repoNotFoundTitle": "Repository not found",
+  "@repoNotFoundTitle": {"description": "Repository not found title"},
+  "repoNotFoundSubtitle": "The specified repository does not exist or is inaccessible",
+  "@repoNotFoundSubtitle": {"description": "Repository not found subtitle"},
+  "openInGitHub": "Open in GitHub",
+  "@openInGitHub": {"description": "Button label to open repo in GitHub"}
 }

@@ -12,12 +12,6 @@ class AppLocalizationsEn extends AppLocalizations {
   String get hello => 'Hello';
 
   @override
-  String get settings => 'Settings';
-
-  @override
-  String get darkMode => 'Dark Mode';
-
-  @override
   String get editTokenTooltip => 'Edit token';
 
   @override
@@ -42,4 +36,69 @@ class AppLocalizationsEn extends AppLocalizations {
   String error(Object error) {
     return 'Error: $error';
   }
+
+  @override
+  String get repositoryName => 'Repository';
+
+  @override
+  String get language => 'Language';
+
+  @override
+  String get unknown => 'Unknown';
+
+  @override
+  String get stars => 'Stars';
+
+  @override
+  String get watchers => 'Watchers';
+
+  @override
+  String get forks => 'Forks';
+
+  @override
+  String get issues => 'Issues';
+
+  @override
+  String get themeLightTooltip => 'Light Mode';
+
+  @override
+  String get themeDarkTooltip => 'Dark Mode';
+
+  @override
+  String get repositoryExplorer => 'Repository Explorer';
+
+  @override
+  String get searchRepositories => 'Search Repositories';
+
+  @override
+  String get searchFieldHint => 'Enter repository name (e.g. flutter, react)';
+
+  @override
+  String get searchingRepositories => 'Searching repositories...';
+
+  @override
+  String get somethingWentWrong => 'Something went wrong';
+
+  @override
+  String get startExploring => 'Start exploring';
+
+  @override
+  String get startExploringSubtitle =>
+      'Search for GitHub repositories to discover amazing projects and code';
+
+  @override
+  String get repoErrorTitle => 'An error occurred';
+
+  @override
+  String get repoErrorSubtitle => 'Failed to load repository information';
+
+  @override
+  String get repoNotFoundTitle => 'Repository not found';
+
+  @override
+  String get repoNotFoundSubtitle =>
+      'The specified repository does not exist or is inaccessible';
+
+  @override
+  String get openInGitHub => 'Open in GitHub';
 }

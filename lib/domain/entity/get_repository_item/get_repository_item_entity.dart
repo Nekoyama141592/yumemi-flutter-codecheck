@@ -10,6 +10,7 @@ abstract class GetRepositoryItemEntity with _$GetRepositoryItemEntity {
 
   const factory GetRepositoryItemEntity({
     required String fullName,
+    required String htmlUrl,
     String? ownerAvatarUrl,
     String? language,
     required int stargazersCount,
@@ -21,6 +22,7 @@ abstract class GetRepositoryItemEntity with _$GetRepositoryItemEntity {
   factory GetRepositoryItemEntity.fromModel(RepositoryItem model) =>
       GetRepositoryItemEntity(
         fullName: model.fullName,
+        htmlUrl: model.htmlUrl,
         ownerAvatarUrl: model.owner?.avatarUrl,
         language: model.language,
         stargazersCount: model.stargazersCount,

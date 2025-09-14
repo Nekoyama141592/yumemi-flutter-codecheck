@@ -64,3 +64,30 @@
 32. lib/domain/entity/get_repository_itemにてget_repository_item_entity.dartを作成し、RepositoryItemのModelからリポジトリ名、オーナーアイコン、プロジェクト言語、Star 数、Watcher 数、Fork 数、Issue 数をfactoryコンストラクタで受け取るようにして
 
 33. lib/domain/repository_interface/github_repository_interface.dartのgetRepositoryでSearchRepositoriesItemEntityではなく、GetRepositoryItemEntityを使用するようにして。
+
+34. MyHomePageの鍵アイコンの右横にAppBarの左上に月と太陽が切り替わるアイコンを設置して、そのボタンを押すことでもダークモードとライトモードも切り替えられるようにして
+
+35. OriginalDrawerをHomePageで表示しないようにして。また、AppLocalizations.of(context)!.settings,AppLocalizations.of(context)!.darkModeの翻訳ももう不要なので削除して。最後にlib/presentation/common/original_drawer.dartのファイルを削除して。
+
+36. MyHomePageにて月と太陽のアイコンをAppBarの一番左に持ってきて
+
+37. lib/presentation/page/repository_item/repository_item_page.dartにてownerAvatarUrlに対してCachedNetWorkImageを使用して円形で表示して。画像のローディング中はshimmerを使ってスケルトンローディングを行なって
+
+38. lib/presentation/page/repository_item/repository_item_page.dartの日本語を全て翻訳して。
+
+39. lib/core/util/url_util.dartにてurl_launcherをラップして外部ブラウザに遷移するstaticメソッドをもつUrlUtilクラスを作成して
+
+40. MyHomePageのListTileにてアイコンを押したら、UrlUtilを使用してhtmlUrlに遷移する処理を実装して。
+
+41. lib/presentation/page/repository_item/repository_item_page.dartでもlib/presentation/page/my_home/my_home_page.dartと同様にAppBarでテーマ切り替えとtoken設定ができるように変更してください。
+
+41. lib/presentation/page/repository_item/repository_item_page.dartとlib/presentation/page/my_home/my_home_page.dartの文言の翻訳を行なってください。
+
+42. lib/presentation/page/repository_item/repository_item_page.dartでのshimmerでのスケルトンローディングの高さがローディング完了後と合っていないので一致させて
+
+43. lib/presentation/page/repository_item/repository_item_page.dartを画面横向きのUIにも対応させて
+
+44. 横向きのデザインだと「The following assertion was thrown during layout:
+A RenderFlex overflowed by 73 pixels on the bottom.」という上にオーバーフローしているエラーが発生するので縦の中央に配置するように修正して
+
+45. lib/presentation/page/repository_item/repository_item_page.dartやlib/presentation/page/my_home/my_home_page.dartのpaddingやheight, widthはハードコーディングするのではなく、どの端末の高さにも対応できるようにMediaQuery.of(context).sizeを使用するように修正してください。

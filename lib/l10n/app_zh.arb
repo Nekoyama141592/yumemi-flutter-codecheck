@@ -3,14 +3,6 @@
   "@hello": {
     "description": "A greeting message"
   },
-  "settings": "设置",
-  "@settings": {
-    "description": "Settings title"
-  },
-  "darkMode": "深色模式",
-  "@darkMode": {
-    "description": "Dark mode toggle"
-  },
   "editTokenTooltip": "编辑令牌",
   "@editTokenTooltip": {
     "description": "Tooltip for editing the token"
@@ -45,5 +37,48 @@
     "placeholders": {
       "error": {}
     }
-  }
+  },
+  "repositoryName": "仓库名",
+  "@repositoryName": {"description": "Label for repository name"},
+  "language": "语言",
+  "@language": {"description": "Label for programming language"},
+  "unknown": "未知",
+  "@unknown": {"description": "Fallback for unknown value"},
+  "stars": "星标数",
+  "@stars": {"description": "Label for stargazers count"},
+  "watchers": "关注者数",
+  "@watchers": {"description": "Label for watchers count"},
+  "forks": "分叉数",
+  "@forks": {"description": "Label for forks count"},
+  "issues": "问题数",
+  "@issues": {"description": "Label for issues count"}
+  ,
+  "themeLightTooltip": "浅色模式",
+  "@themeLightTooltip": {"description": "Tooltip showing switch to light theme"},
+  "themeDarkTooltip": "深色模式",
+  "@themeDarkTooltip": {"description": "Tooltip showing switch to dark theme"},
+  "repositoryExplorer": "仓库浏览器",
+  "@repositoryExplorer": {"description": "Subtitle under GitHub brand on home"},
+  "searchRepositories": "搜索仓库",
+  "@searchRepositories": {"description": "Header for repository search section"},
+  "searchFieldHint": "输入仓库名（例如：flutter、react）",
+  "@searchFieldHint": {"description": "Hint text for search field"},
+  "searchingRepositories": "正在搜索仓库…",
+  "@searchingRepositories": {"description": "Loading message while searching repos"},
+  "somethingWentWrong": "出现了一些问题",
+  "@somethingWentWrong": {"description": "Generic error title"},
+  "startExploring": "开始探索",
+  "@startExploring": {"description": "Empty state title"},
+  "startExploringSubtitle": "搜索 GitHub 仓库，发现精彩的项目和代码",
+  "@startExploringSubtitle": {"description": "Empty state subtitle"},
+  "repoErrorTitle": "发生错误",
+  "@repoErrorTitle": {"description": "Repository page error title"},
+  "repoErrorSubtitle": "无法获取仓库信息",
+  "@repoErrorSubtitle": {"description": "Repository page error subtitle"},
+  "repoNotFoundTitle": "未找到仓库",
+  "@repoNotFoundTitle": {"description": "Repository not found title"},
+  "repoNotFoundSubtitle": "指定的仓库不存在或无法访问",
+  "@repoNotFoundSubtitle": {"description": "Repository not found subtitle"},
+  "openInGitHub": "在 GitHub 中打开",
+  "@openInGitHub": {"description": "Button label to open repo in GitHub"}
 }

@@ -1,46 +1,93 @@
-# Gemini Code Check
+# Gemini Agent Guidelines
 
 ## Project Overview
+This is a Flutter application built with a clean architecture and build flavors (`dev`/`prod`). It uses Riverpod for state management, AutoRoute for navigation, and extensive code generation to reduce boilerplate.
 
-This is a Flutter project that serves as a starting point for a mobile application. It's structured with a clean architecture, separating concerns into `application`, `core`, `domain`, `infrastructure`, and `presentation` layers. The project is configured with build flavors for `dev` and `prod` environments, allowing for different configurations for development and production builds.
+## Project Structure
+- **`lib/`**: Main source code directory.
+  - `application/`: App router, theme, flavors, and top-level wiring.
+  - `core/`: Shared utilities, providers, and extensions.
+  - `domain/`: Business logic, entities, and repository interfaces. This layer must NOT import the infrastructure layer.
+  - `infrastructure/`: Data sources, API clients, and repository implementations.
+  - `presentation/`: UI widgets, pages, notifiers, and state.
+  - `main.dart`: The application entry point.
+- **`test/`**: Contains tests, mirroring the `lib/` directory structure.
+- **`assets/`**: Static assets, with launcher icons in `assets/images/`.
 
-## Building and Running
+## Development Commands
 
-To build and run the application, use the following commands:
-
-**Run the `dev` flavor:**
-
+**1. Initial Setup:**
+Install all dependencies.
 ```bash
-flutter run --flavor dev --target lib/main.dart
+flutter pub get
 ```
 
-**Run the `prod` flavor:**
-
+**2. Code Generation:**
+The project uses `build_runner` for `freezed`, `json_serializable`, `riverpod`, and `auto_route`.
 ```bash
-flutter run --flavor prod --target lib/main.dart
+# Run a one-off build
+flutter pub run build_runner build --delete-conflicting-outputs
+
+# Watch for changes and rebuild automatically
+flutter pub run build_runner watch --delete-conflicting-outputs
+```
+Localization files are generated separately. After editing files in `lib/l10n/`, run:
+```bash
+flutter gen-l10n
+```
+*Note: Never edit generated files (`*.g.dart`, `*.freezed.dart`) manually.*
+
+**3. Running the App (with Flavors):**
+Always specify both the flavor and the `appFlavor` dart-define variable.
+```bash
+# Run the 'dev' flavor
+flutter run --flavor dev --dart-define=appFlavor=dev
+
+# Run the 'prod' flavor
+flutter run --flavor prod --dart-define=appFlavor=prod
 ```
 
-**Build the `dev` flavor:**
-
+**4. Building the App:**
 ```bash
-flutter build apk --flavor dev --target lib/main.dart
-flutter build ios --flavor dev --target lib/main.dart
+# Build a production APK
+flutter build apk --flavor prod --dart-define=appFlavor=prod
+
+# Build a production iOS app
+flutter build ios --flavor prod --dart-define=appFlavor=prod
 ```
 
-**Build the `prod` flavor:**
-
+**5. Code Quality & Testing:**
+CI enforces formatting and analysis checks.
 ```bash
-flutter build apk --flavor prod --target lib/main.dart
-flutter build ios --flavor prod --target lib/main.dart
+# Run the code analyzer
+flutter analyze
+
+# Format all code
+dart format --set-exit-if-changed .
+
+# Run all tests
+flutter test
 ```
 
-## Development Conventions
+**6. Launcher Icons:**
+Generate flavor-specific launcher icons using the corresponding configuration file.
+```bash
+# Generate 'dev' icons
+dart run flutter_launcher_icons -f flutter_launcher_icons-dev.yaml
 
-*   **Clean Architecture:** The project follows a clean architecture pattern, with code organized into the following directories:
-    *   `lib/application`: Contains application-specific business rules and use cases.
-    *   `lib/core`: Contains core functionalities and utilities shared across the application.
-    *   `lib/domain`: Contains the domain models and business logic of the application.
-    *   `lib/infrastructure`: Contains the implementation of services defined in the domain layer, such as repositories and APIs.
-    *   `lib/presentation`: Contains the UI and presentation logic of the application.
-*   **Build Flavors:** The project uses `flutter_flavor` to manage different build configurations for `dev` and `prod` environments. Flavor-specific configurations can be found in `pubspec.yaml` and the `android` and `ios` directories.
-*   **Linting:** The project uses `flutter_lints` to enforce code quality and style. The linting rules are defined in `analysis_options.yaml`.
+# Generate 'prod' icons
+dart run flutter_launcher_icons -f flutter_launcher_icons-prod.yaml
+```
+
+## Key Architectural Rules
+- **State Management**: Use Riverpod with the `@riverpod` annotation for providers. Organize providers in `lib/core/provider/`.
+- **Navigation**: Use `auto_route`. Annotate page widgets with `@RoutePage()` and define routes in `lib/application/app_router/`.
+- **Immutability**: Use `freezed` for data classes (entities, models, state).
+- **Repository Pattern**: `infrastructure/repository/` classes must implement interfaces defined in `domain/repository_interface/`.
+- **Data Mapping**: Map infrastructure models to domain entities.
+- **Testing**: Write tests in the `test/` directory, mirroring the `lib/` structure. Use `flutter_test` and name files `*_test.dart`.
+
+## Agent Instructions
+- After modifying any files that require code generation (models, providers, routes), always run the `build_runner` command.
+- Always run `flutter analyze` and `flutter test` to verify changes before finalizing your work.
+- Adhere strictly to the existing file structure and naming conventions (`lower_snake_case.dart` for files, `UpperCamelCase` for classes).
