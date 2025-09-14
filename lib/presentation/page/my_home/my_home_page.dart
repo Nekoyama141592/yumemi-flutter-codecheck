@@ -18,7 +18,7 @@ class MyHomePage extends HookConsumerWidget {
     MyHomeViewModel notifier() => ref.read(myHomeViewModelProvider.notifier);
     final state = ref.watch(myHomeViewModelProvider);
     final token = state.value?.token;
-    final searchController = useTextEditingController();
+    final searchController = useTextEditingController(text: 'flutter');
 
     return Scaffold(
       appBar: AppBar(
