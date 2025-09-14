@@ -60,3 +60,5 @@
 30. lib/presentation/notifier/auto_dispose/repository_item/repository_item_view_model.dartでtokenも取得して。
 
 31. lib/presentation/page/repository_item/repository_item_page.dartでRepositoryItemViewModelを使用して。
+
+32. lib/domain/entity/get_repository_itemにてget_repository_item_entity.dartを作成し、RepositoryItemのModelからリポジトリ名、オーナーアイコン、プロジェクト言語、Star 数、Watcher 数、Fork 数、Issue 数をfactoryコンストラクタで受け取るようにして

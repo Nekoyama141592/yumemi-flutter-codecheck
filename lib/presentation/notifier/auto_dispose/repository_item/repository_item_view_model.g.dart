@@ -56,7 +56,7 @@ final class RepositoryItemViewModelProvider
 }
 
 String _$repositoryItemViewModelHash() =>
-    r'ca44ca12305aae1d05c85745a5077f1db59176f6';
+    r'7e48d6c7a6e4263c5d05a39368b6cc2259d53e32';
 
 final class RepositoryItemViewModelFamily extends $Family
     with

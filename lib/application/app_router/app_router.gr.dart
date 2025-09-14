@@ -31,8 +31,8 @@ class MyHomeRoute extends PageRouteInfo<void> {
 class RepositoryItemRoute extends PageRouteInfo<RepositoryItemRouteArgs> {
   RepositoryItemRoute({
     Key? key,
-    String userName = '',
-    String name = '',
+    required String userName,
+    required String name,
     List<PageRouteInfo>? children,
   }) : super(
          RepositoryItemRoute.name,
@@ -53,8 +53,8 @@ class RepositoryItemRoute extends PageRouteInfo<RepositoryItemRouteArgs> {
       final pathParams = data.inheritedPathParams;
       final args = data.argsAs<RepositoryItemRouteArgs>(
         orElse: () => RepositoryItemRouteArgs(
-          userName: pathParams.getString('userName', ''),
-          name: pathParams.getString('name', ''),
+          userName: pathParams.getString('userName'),
+          name: pathParams.getString('name'),
         ),
       );
       return RepositoryItemPage(
@@ -67,7 +67,11 @@ class RepositoryItemRoute extends PageRouteInfo<RepositoryItemRouteArgs> {
 }
 
 class RepositoryItemRouteArgs {
-  const RepositoryItemRouteArgs({this.key, this.userName = '', this.name = ''});
+  const RepositoryItemRouteArgs({
+    this.key,
+    required this.userName,
+    required this.name,
+  });
 
   final Key? key;
 
