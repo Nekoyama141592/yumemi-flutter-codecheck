@@ -11,18 +11,18 @@ class RepositoryItemPage extends StatelessWidget {
 
   static const path = '/users/:userName/repositories/:name';
 
-  static String generatePath({
-    required String userName,
-    required String name,
-  }) {
+  static String generatePath({required String userName, required String name}) {
     return '/users/$userName/repositories/$name';
   }
-  
+
   final String userName;
   final String name;
 
   @override
   Widget build(BuildContext context) {
-    return Scaffold(appBar: AppBar(),body: Center(child: Text('$userName/$name')));
+    return Scaffold(
+      appBar: AppBar(),
+      body: Center(child: Text('$userName/$name')),
+    );
   }
 }

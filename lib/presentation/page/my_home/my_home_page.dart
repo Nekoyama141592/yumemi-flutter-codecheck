@@ -75,7 +75,11 @@ class MyHomePage extends HookConsumerWidget {
                       title: Text(repo.fullName),
                       subtitle: Text(repo.htmlUrl),
                       onTap: () {
-                        RouteUtil.pushRepositoryItemPage(context, userName:repo.userName, name: repo.name);
+                        RouteUtil.pushRepositoryItemPage(
+                          context,
+                          userName: repo.userName,
+                          name: repo.name,
+                        );
                       },
                     );
                   },
