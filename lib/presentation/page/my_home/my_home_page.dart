@@ -26,20 +26,107 @@ class MyHomePage extends HookConsumerWidget {
     final size = MediaQuery.of(context).size;
     final scaleH = (size.height / 812).clamp(0.8, 1.3);
 
+    // Animation controllers
+    final headerAnimationController = useAnimationController(
+      duration: const Duration(milliseconds: 1000),
+    );
+    final searchAnimationController = useAnimationController(
+      duration: const Duration(milliseconds: 800),
+    );
+    final contentAnimationController = useAnimationController(
+      duration: const Duration(milliseconds: 600),
+    );
+
+    // Header animations
+    final headerFadeAnimation = Tween<double>(begin: 0.0, end: 1.0).animate(
+      CurvedAnimation(
+        parent: headerAnimationController,
+        curve: const Interval(0.0, 0.6, curve: Curves.easeOutCubic),
+      ),
+    );
+    final headerSlideAnimation =
+        Tween<Offset>(begin: const Offset(0, -0.5), end: Offset.zero).animate(
+          CurvedAnimation(
+            parent: headerAnimationController,
+            curve: const Interval(0.2, 0.8, curve: Curves.elasticOut),
+          ),
+        );
+
+    // Search section animations
+    final searchFadeAnimation = Tween<double>(begin: 0.0, end: 1.0).animate(
+      CurvedAnimation(
+        parent: searchAnimationController,
+        curve: Curves.easeOutCubic,
+      ),
+    );
+    final searchSlideAnimation =
+        Tween<Offset>(begin: const Offset(0, 0.3), end: Offset.zero).animate(
+          CurvedAnimation(
+            parent: searchAnimationController,
+            curve: Curves.easeOutCubic,
+          ),
+        );
+
+    // Content animations
+    final contentFadeAnimation = Tween<double>(begin: 0.0, end: 1.0).animate(
+      CurvedAnimation(
+        parent: contentAnimationController,
+        curve: Curves.easeOut,
+      ),
+    );
+
+    // Start animations
+    useEffect(() {
+      headerAnimationController.forward();
+      Future.delayed(const Duration(milliseconds: 300), () {
+        searchAnimationController.forward();
+      });
+      Future.delayed(const Duration(milliseconds: 600), () {
+        contentAnimationController.forward();
+      });
+      return null;
+    }, []);
+
+    // Restart content animation when state changes
+    useEffect(() {
+      if (state.hasValue || state.hasError) {
+        contentAnimationController.reset();
+        contentAnimationController.forward();
+      }
+      return null;
+    }, [state]);
+
     return Scaffold(
       backgroundColor: Theme.of(context).scaffoldBackgroundColor,
       body: SafeArea(
         child: Column(
           children: [
-            _buildHeader(context, ref, appColors, token, scaleH),
-            _buildSearchSection(
-              context,
-              searchController,
-              notifier,
-              appColors,
-              scaleH,
+            SlideTransition(
+              position: headerSlideAnimation,
+              child: FadeTransition(
+                opacity: headerFadeAnimation,
+                child: _buildHeader(context, ref, appColors, token, scaleH),
+              ),
             ),
-            Expanded(child: _buildContent(context, state, appColors)),
+            SlideTransition(
+              position: searchSlideAnimation,
+              child: FadeTransition(
+                opacity: searchFadeAnimation,
+                child: _buildSearchSection(
+                  context,
+                  searchController,
+                  notifier,
+                  appColors,
+                  scaleH,
+                ),
+              ),
+            ),
+            Expanded(
+              child: FadeTransition(
+                opacity: contentFadeAnimation,
+                child: _buildContent(context, state, appColors),
+              ),
+            ),
           ],
         ),
       ),
@@ -419,7 +506,10 @@ class MyHomePage extends HookConsumerWidget {
       separatorBuilder: (context, index) => SizedBox(height: 12 * scaleH),
       itemBuilder: (context, index) {
         final repo = repositories[index];
-        return _buildRepositoryCard(context, repo, appColors);
+        return _AnimatedListItem(
+          index: index,
+          child: _buildRepositoryCard(context, repo, appColors),
+        );
       },
     );
   }
@@ -442,7 +532,7 @@ class MyHomePage extends HookConsumerWidget {
           ),
         ],
       ),
-      child: InkWell(
+      child: _AnimatedCardButton(
         onTap: () {
           HapticFeedback.lightImpact();
           RouteUtil.pushRepositoryItemPage(
@@ -486,6 +576,118 @@ class MyHomePage extends HookConsumerWidget {
               ),
             );
           },
+        ),
+      ),
+    );
+  }
+}
+
+// Animated list item for staggered animations
+class _AnimatedListItem extends HookWidget {
+  const _AnimatedListItem({required this.index, required this.child});
+
+  final int index;
+  final Widget child;
+
+  @override
+  Widget build(BuildContext context) {
+    final animationController = useAnimationController(
+      duration: const Duration(milliseconds: 600),
+    );
+
+    final slideAnimation =
+        Tween<Offset>(begin: const Offset(0.5, 0), end: Offset.zero).animate(
+          CurvedAnimation(
+            parent: animationController,
+            curve: Curves.easeOutCubic,
+          ),
+        );
+
+    final fadeAnimation = Tween<double>(begin: 0.0, end: 1.0).animate(
+      CurvedAnimation(parent: animationController, curve: Curves.easeOut),
+    );
+
+    final scaleAnimation = Tween<double>(begin: 0.8, end: 1.0).animate(
+      CurvedAnimation(parent: animationController, curve: Curves.elasticOut),
+    );
+
+    useEffect(() {
+      final delay = Duration(milliseconds: (index * 100).clamp(0, 800));
+      Future.delayed(delay, () {
+        if (context.mounted) {
+          animationController.forward();
+        }
+      });
+      return null;
+    }, []);
+
+    return SlideTransition(
+      position: slideAnimation,
+      child: FadeTransition(
+        opacity: fadeAnimation,
+        child: ScaleTransition(scale: scaleAnimation, child: child),
+      ),
+    );
+  }
+}
+
+// Animated card button with press effects
+class _AnimatedCardButton extends HookWidget {
+  const _AnimatedCardButton({
+    required this.onTap,
+    required this.borderRadius,
+    required this.child,
+  });
+
+  final VoidCallback onTap;
+  final BorderRadius borderRadius;
+  final Widget child;
+
+  @override
+  Widget build(BuildContext context) {
+    final scaleController = useAnimationController(
+      duration: const Duration(milliseconds: 200),
+    );
+    final elevationController = useAnimationController(
+      duration: const Duration(milliseconds: 200),
+    );
+
+    final scaleAnimation = Tween<double>(begin: 1.0, end: 0.98).animate(
+      CurvedAnimation(parent: scaleController, curve: Curves.easeInOut),
+    );
+
+    final elevationAnimation = Tween<double>(begin: 0.0, end: 8.0).animate(
+      CurvedAnimation(parent: elevationController, curve: Curves.easeInOut),
+    );
+
+    return MouseRegion(
+      onEnter: (_) => elevationController.forward(),
+      onExit: (_) => elevationController.reverse(),
+      child: GestureDetector(
+        onTapDown: (_) {
+          HapticFeedback.selectionClick();
+          scaleController.forward();
+        },
+        onTapUp: (_) {
+          scaleController.reverse();
+          onTap();
+        },
+        onTapCancel: () => scaleController.reverse(),
+        child: AnimatedBuilder(
+          animation: Listenable.merge([scaleAnimation, elevationAnimation]),
+          builder: (context, child) => Transform.scale(
+            scale: scaleAnimation.value,
+            child: Material(
+              elevation: elevationAnimation.value,
+              borderRadius: borderRadius,
+              color: Colors.transparent,
+              child: InkWell(
+                onTap: onTap,
+                borderRadius: borderRadius,
+                child: this.child,
+              ),
+            ),
+          ),
         ),
       ),
     );
