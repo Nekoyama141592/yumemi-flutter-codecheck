@@ -91,3 +91,5 @@
 A RenderFlex overflowed by 73 pixels on the bottom.」という上にオーバーフローしているエラーが発生するので縦の中央に配置するように修正して
 
 45. lib/presentation/page/repository_item/repository_item_page.dartやlib/presentation/page/my_home/my_home_page.dartのpaddingやheight, widthはハードコーディングするのではなく、どの端末の高さにも対応できるようにMediaQuery.of(context).sizeを使用するように修正してください。
+
+46. lib/presentation/page/repository_item/repository_item_page.dartのスケルトンローディングで数字の下に「Another exception was thrown: A RenderFlex overflowed by 6.7 pixels on the bottom.」というエラーが発生するので修正して。

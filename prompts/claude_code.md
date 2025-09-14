@@ -11,3 +11,5 @@
 10. lib/presentation/page/repository_item/repository_item_page.dartにてSliverAppBarを廃止して普通のAppBarにして
 11. lib/presentation/page/my_home/my_home_page.dartにてめちゃくちゃおしゃれでモダンでだれもが使いやすくなるような最高のデザインに仕上げてください。ただ、絶対にグラデーションは使用しないでください。カラーは必ずlib/application/theme/dark_theme.dartとlib/application/theme/light_theme.dartに設定してからそれをTheme.of(context)から使用してください。
 12. lib/presentation/page/repository_item/repository_item_page.dartにて「Issuesを見る」ボタンを削除して。
+13. lib/presentation/page/repository_item/repository_item_page.dartにおしゃれなアニメーションを導入して
+14. lib/presentation/page/my_home/my_home_page.dartにもおしゃれなアニメーションを導入して
