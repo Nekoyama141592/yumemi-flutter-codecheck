@@ -36,4 +36,25 @@ class AppLocalizationsEn extends AppLocalizations {
   String error(Object error) {
     return 'Error: $error';
   }
+
+  @override
+  String get repositoryName => 'Repository';
+
+  @override
+  String get language => 'Language';
+
+  @override
+  String get unknown => 'Unknown';
+
+  @override
+  String get stars => 'Stars';
+
+  @override
+  String get watchers => 'Watchers';
+
+  @override
+  String get forks => 'Forks';
+
+  @override
+  String get issues => 'Issues';
 }

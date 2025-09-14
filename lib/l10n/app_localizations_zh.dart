@@ -36,4 +36,25 @@ class AppLocalizationsZh extends AppLocalizations {
   String error(Object error) {
     return '错误：$error';
   }
+
+  @override
+  String get repositoryName => '仓库名';
+
+  @override
+  String get language => '语言';
+
+  @override
+  String get unknown => '未知';
+
+  @override
+  String get stars => '星标数';
+
+  @override
+  String get watchers => '关注者数';
+
+  @override
+  String get forks => '分叉数';
+
+  @override
+  String get issues => '问题数';
 }

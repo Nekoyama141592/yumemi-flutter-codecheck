@@ -37,5 +37,19 @@
     "placeholders": {
       "error": {}
     }
-  }
+  },
+  "repositoryName": "Repository",
+  "@repositoryName": {"description": "Label for repository name"},
+  "language": "Language",
+  "@language": {"description": "Label for programming language"},
+  "unknown": "Unknown",
+  "@unknown": {"description": "Fallback for unknown value"},
+  "stars": "Stars",
+  "@stars": {"description": "Label for stargazers count"},
+  "watchers": "Watchers",
+  "@watchers": {"description": "Label for watchers count"},
+  "forks": "Forks",
+  "@forks": {"description": "Label for forks count"},
+  "issues": "Issues",
+  "@issues": {"description": "Label for issues count"}
 }

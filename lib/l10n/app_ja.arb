@@ -37,5 +37,19 @@
     "placeholders": {
       "error": {}
     }
-  }
+  },
+  "repositoryName": "リポジトリ名",
+  "@repositoryName": {"description": "Label for repository name"},
+  "language": "言語",
+  "@language": {"description": "Label for programming language"},
+  "unknown": "不明",
+  "@unknown": {"description": "Fallback for unknown value"},
+  "stars": "スター数",
+  "@stars": {"description": "Label for stargazers count"},
+  "watchers": "ウォッチャー数",
+  "@watchers": {"description": "Label for watchers count"},
+  "forks": "フォーク数",
+  "@forks": {"description": "Label for forks count"},
+  "issues": "Issue数",
+  "@issues": {"description": "Label for issues count"}
 }

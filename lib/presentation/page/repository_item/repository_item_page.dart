@@ -4,6 +4,7 @@ import 'package:hooks_riverpod/hooks_riverpod.dart';
 import 'package:cached_network_image/cached_network_image.dart';
 import 'package:shimmer/shimmer.dart';
 import 'package:yumemi_flutter_codecheck/presentation/notifier/auto_dispose/repository_item/repository_item_view_model.dart';
+import '../../../l10n/app_localizations.dart';
 
 @RoutePage()
 class RepositoryItemPage extends HookConsumerWidget {
@@ -84,37 +85,37 @@ class RepositoryItemPage extends HookConsumerWidget {
                 const SizedBox(height: 16),
                 Row(
                   children: [
-                    const Text('リポジトリ名: '),
+                    Text('${AppLocalizations.of(context)!.repositoryName}: '),
                     Text(repo.fullName),
                   ],
                 ),
                 Row(
                   children: [
-                    const Text('言語: '),
-                    Text(repo.language ?? "不明"),
+                    Text('${AppLocalizations.of(context)!.language}: '),
+                    Text(repo.language ?? AppLocalizations.of(context)!.unknown),
                   ],
                 ),
                 Row(
                   children: [
-                    const Text('スター数: '),
+                    Text('${AppLocalizations.of(context)!.stars}: '),
                     Text('${repo.stargazersCount}'),
                   ],
                 ),
                 Row(
                   children: [
-                    const Text('ウォッチャー数: '),
+                    Text('${AppLocalizations.of(context)!.watchers}: '),
                     Text('${repo.watchersCount}'),
                   ],
                 ),
                 Row(
                   children: [
-                    const Text('フォーク数: '),
+                    Text('${AppLocalizations.of(context)!.forks}: '),
                     Text('${repo.forksCount}'),
                   ],
                 ),
                 Row(
                   children: [
-                    const Text('Issue数: '),
+                    Text('${AppLocalizations.of(context)!.issues}: '),
                     Text('${repo.openIssuesCount}'),
                   ],
                 ),

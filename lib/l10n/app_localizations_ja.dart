@@ -36,4 +36,25 @@ class AppLocalizationsJa extends AppLocalizations {
   String error(Object error) {
     return 'エラー: $error';
   }
+
+  @override
+  String get repositoryName => 'リポジトリ名';
+
+  @override
+  String get language => '言語';
+
+  @override
+  String get unknown => '不明';
+
+  @override
+  String get stars => 'スター数';
+
+  @override
+  String get watchers => 'ウォッチャー数';
+
+  @override
+  String get forks => 'フォーク数';
+
+  @override
+  String get issues => 'Issue数';
 }
