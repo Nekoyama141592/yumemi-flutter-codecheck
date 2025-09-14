@@ -30,6 +30,7 @@ class MyHomeViewModel extends _$MyHomeViewModel {
     int? perPage,
     int? page,
   }) async {
+    if (query.isEmpty || state.isLoading) return;
     state = const AsyncValue.loading();
     try {
       final token = await ref.read(secureStorageRepositoryProvider).getToken();
