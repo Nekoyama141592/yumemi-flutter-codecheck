@@ -49,6 +49,45 @@ class RepositoryItemPage extends HookConsumerWidget {
     final tokenSnapshot = useFuture(tokenFuture);
     final hasToken = tokenSnapshot.data != null;
 
+    // Animation controllers
+    final animationController = useAnimationController(
+      duration: const Duration(milliseconds: 1200),
+    );
+    final fadeAnimationTween = Tween<double>(begin: 0.0, end: 1.0).animate(
+      CurvedAnimation(
+        parent: animationController,
+        curve: const Interval(0.0, 0.6, curve: Curves.easeOutCubic),
+      ),
+    );
+    final slideAnimationTween =
+        Tween<Offset>(begin: const Offset(0, 0.3), end: Offset.zero).animate(
+          CurvedAnimation(
+            parent: animationController,
+            curve: const Interval(0.2, 0.8, curve: Curves.easeOutCubic),
+          ),
+        );
+    final scaleAnimationTween = Tween<double>(begin: 0.8, end: 1.0).animate(
+      CurvedAnimation(
+        parent: animationController,
+        curve: const Interval(0.4, 1.0, curve: Curves.elasticOut),
+      ),
+    );
+
+    // Start animation when widget builds
+    useEffect(() {
+      animationController.forward();
+      return null;
+    }, []);
+
+    // Restart animation when state changes
+    useEffect(() {
+      if (state.hasValue || state.hasError) {
+        animationController.reset();
+        animationController.forward();
+      }
+      return null;
+    }, [state]);
+
     return Scaffold(
       backgroundColor: Theme.of(context).scaffoldBackgroundColor,
       appBar: AppBar(
@@ -127,18 +166,46 @@ class RepositoryItemPage extends HookConsumerWidget {
       body: SafeArea(
         child: LayoutBuilder(
           builder: (context, constraints) {
-            final content = state.when(
-              loading: () =>
-                  _buildLoadingState(appColors, isLandscape, context),
-              error: (_, _) => _buildErrorState(context, appColors),
-              data: (repo) => repo == null
-                  ? _buildNotFoundState(context, appColors)
-                  : _buildRepositoryContent(
-                      context,
-                      repo,
-                      appColors,
-                      isLandscape,
-                    ),
+            final content = AnimatedSwitcher(
+              duration: const Duration(milliseconds: 400),
+              switchInCurve: Curves.easeInOutCubic,
+              switchOutCurve: Curves.easeInOutCubic,
+              child: state.when(
+                loading: () => FadeTransition(
+                  opacity: fadeAnimationTween,
+                  child: _buildLoadingState(appColors, isLandscape, context),
+                ),
+                error: (_, _) => SlideTransition(
+                  position: slideAnimationTween,
+                  child: FadeTransition(
+                    opacity: fadeAnimationTween,
+                    child: _buildErrorState(context, appColors),
+                  ),
+                ),
+                data: (repo) => repo == null
+                    ? SlideTransition(
+                        position: slideAnimationTween,
+                        child: FadeTransition(
+                          opacity: fadeAnimationTween,
+                          child: _buildNotFoundState(context, appColors),
+                        ),
+                      )
+                    : SlideTransition(
+                        position: slideAnimationTween,
+                        child: FadeTransition(
+                          opacity: fadeAnimationTween,
+                          child: ScaleTransition(
+                            scale: scaleAnimationTween,
+                            child: _buildRepositoryContent(
+                              context,
+                              repo,
+                              appColors,
+                              isLandscape,
+                            ),
+                          ),
+                        ),
+                      ),
+              ),
             );
 
             // In landscape, vertically center the page content within viewport
@@ -430,6 +497,7 @@ class RepositoryItemPage extends HookConsumerWidget {
     final size = MediaQuery.of(context).size;
     final scaleH = (size.height / 812).clamp(0.8, 1.3);
     final gap = 20.0 * scaleH;
+
     if (isLandscape) {
       return Column(
         crossAxisAlignment: CrossAxisAlignment.start,
@@ -437,26 +505,47 @@ class RepositoryItemPage extends HookConsumerWidget {
           Row(
             crossAxisAlignment: CrossAxisAlignment.start,
             children: [
-              Expanded(child: _buildHeaderCard(context, repo, appColors)),
+              Expanded(
+                child: _AnimatedCard(
+                  delay: const Duration(milliseconds: 200),
+                  child: _buildHeaderCard(context, repo, appColors),
+                ),
+              ),
               SizedBox(width: gap),
               Expanded(
-                child: _buildStatsGrid(context, repo, appColors, isLandscape),
+                child: _AnimatedCard(
+                  delay: const Duration(milliseconds: 400),
+                  child: _buildStatsGrid(context, repo, appColors, isLandscape),
+                ),
               ),
             ],
           ),
           SizedBox(height: gap),
-          _buildActionButtons(context, repo, appColors),
+          _AnimatedCard(
+            delay: const Duration(milliseconds: 600),
+            child: _buildActionButtons(context, repo, appColors),
+          ),
         ],
       );
     }
+
     return Column(
       crossAxisAlignment: CrossAxisAlignment.start,
       children: [
-        _buildHeaderCard(context, repo, appColors),
+        _AnimatedCard(
+          delay: const Duration(milliseconds: 200),
+          child: _buildHeaderCard(context, repo, appColors),
+        ),
         SizedBox(height: gap),
-        _buildStatsGrid(context, repo, appColors, isLandscape),
+        _AnimatedCard(
+          delay: const Duration(milliseconds: 400),
+          child: _buildStatsGrid(context, repo, appColors, isLandscape),
+        ),
         SizedBox(height: gap),
-        _buildActionButtons(context, repo, appColors),
+        _AnimatedCard(
+          delay: const Duration(milliseconds: 600),
+          child: _buildActionButtons(context, repo, appColors),
+        ),
       ],
     );
   }
@@ -698,17 +787,20 @@ class RepositoryItemPage extends HookConsumerWidget {
         children: [
           SizedBox(
             width: double.infinity,
-            child: ElevatedButton.icon(
+            child: _AnimatedButton(
               onPressed: () => _launchGitHubUrl(repo.htmlUrl),
-              icon: const Icon(Icons.open_in_browser_rounded),
-              label: Text(AppLocalizations.of(context)!.openInGitHub),
-              style: ElevatedButton.styleFrom(
-                backgroundColor: appColors.primary,
-                foregroundColor: Colors.white,
-                elevation: 0,
-                padding: EdgeInsets.symmetric(vertical: 16 * scaleH),
-                shape: RoundedRectangleBorder(
-                  borderRadius: BorderRadius.circular(12),
+              child: ElevatedButton.icon(
+                onPressed: () => _launchGitHubUrl(repo.htmlUrl),
+                icon: const Icon(Icons.open_in_browser_rounded),
+                label: Text(AppLocalizations.of(context)!.openInGitHub),
+                style: ElevatedButton.styleFrom(
+                  backgroundColor: appColors.primary,
+                  foregroundColor: Colors.white,
+                  elevation: 0,
+                  padding: EdgeInsets.symmetric(vertical: 16 * scaleH),
+                  shape: RoundedRectangleBorder(
+                    borderRadius: BorderRadius.circular(12),
+                  ),
                 ),
               ),
             ),
@@ -791,4 +883,79 @@ class _StatItem {
   final String label;
   final String value;
   final Color color;
+}
+
+// Animated card widget for staggered animations
+class _AnimatedCard extends HookWidget {
+  const _AnimatedCard({required this.child, required this.delay});
+
+  final Widget child;
+  final Duration delay;
+
+  @override
+  Widget build(BuildContext context) {
+    final animationController = useAnimationController(
+      duration: const Duration(milliseconds: 800),
+    );
+
+    final slideAnimationTween =
+        Tween<Offset>(begin: const Offset(0, 0.5), end: Offset.zero).animate(
+          CurvedAnimation(
+            parent: animationController,
+            curve: Curves.easeOutCubic,
+          ),
+        );
+
+    final fadeAnimationTween = Tween<double>(begin: 0.0, end: 1.0).animate(
+      CurvedAnimation(parent: animationController, curve: Curves.easeOut),
+    );
+
+    useEffect(() {
+      Future.delayed(delay, () {
+        if (context.mounted) {
+          animationController.forward();
+        }
+      });
+      return null;
+    }, []);
+
+    return SlideTransition(
+      position: slideAnimationTween,
+      child: FadeTransition(opacity: fadeAnimationTween, child: child),
+    );
+  }
+}
+
+// Animated button with press effects
+class _AnimatedButton extends HookWidget {
+  const _AnimatedButton({required this.child, required this.onPressed});
+
+  final Widget child;
+  final VoidCallback onPressed;
+
+  @override
+  Widget build(BuildContext context) {
+    final scaleController = useAnimationController(
+      duration: const Duration(milliseconds: 150),
+    );
+
+    final scaleAnimationTween = Tween<double>(begin: 1.0, end: 0.95).animate(
+      CurvedAnimation(parent: scaleController, curve: Curves.easeInOut),
+    );
+
+    return GestureDetector(
+      onTapDown: (_) {
+        HapticFeedback.lightImpact();
+        scaleController.forward();
+      },
+      onTapUp: (_) {
+        scaleController.reverse();
+        onPressed();
+      },
+      onTapCancel: () {
+        scaleController.reverse();
+      },
+      child: ScaleTransition(scale: scaleAnimationTween, child: child),
+    );
+  }
 }
