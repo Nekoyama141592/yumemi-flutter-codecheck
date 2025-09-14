@@ -15,7 +15,7 @@ T _$identity<T>(T value) => value;
 /// @nodoc
 mixin _$SearchRepositoriesItemEntity {
 
- String get fullName; String get htmlUrl; String get name;
+ String get fullName; String get name;
 /// Create a copy of SearchRepositoriesItemEntity
 /// with the given fields replaced by the non-null parameter values.
 @JsonKey(includeFromJson: false, includeToJson: false)
@@ -28,16 +28,16 @@ $SearchRepositoriesItemEntityCopyWith<SearchRepositoriesItemEntity> get copyWith
 
 @override
 bool operator ==(Object other) {
-  return identical(this, other) || (other.runtimeType == runtimeType&&other is SearchRepositoriesItemEntity&&(identical(other.fullName, fullName) || other.fullName == fullName)&&(identical(other.htmlUrl, htmlUrl) || other.htmlUrl == htmlUrl)&&(identical(other.name, name) || other.name == name));
+  return identical(this, other) || (other.runtimeType == runtimeType&&other is SearchRepositoriesItemEntity&&(identical(other.fullName, fullName) || other.fullName == fullName)&&(identical(other.name, name) || other.name == name));
 }
 
 @JsonKey(includeFromJson: false, includeToJson: false)
 @override
-int get hashCode => Object.hash(runtimeType,fullName,htmlUrl,name);
+int get hashCode => Object.hash(runtimeType,fullName,name);
 
 @override
 String toString() {
-  return 'SearchRepositoriesItemEntity(fullName: $fullName, htmlUrl: $htmlUrl, name: $name)';
+  return 'SearchRepositoriesItemEntity(fullName: $fullName, name: $name)';
 }
 
 
@@ -48,7 +48,7 @@ abstract mixin class $SearchRepositoriesItemEntityCopyWith<$Res>  {
   factory $SearchRepositoriesItemEntityCopyWith(SearchRepositoriesItemEntity value, $Res Function(SearchRepositoriesItemEntity) _then) = _$SearchRepositoriesItemEntityCopyWithImpl;
 @useResult
 $Res call({
- String fullName, String htmlUrl, String name
+ String fullName, String name
 });
 
 
@@ -65,10 +65,9 @@ class _$SearchRepositoriesItemEntityCopyWithImpl<$Res>
 
 /// Create a copy of SearchRepositoriesItemEntity
 /// with the given fields replaced by the non-null parameter values.
-@pragma('vm:prefer-inline') @override $Res call({Object? fullName = null,Object? htmlUrl = null,Object? name = null,}) {
+@pragma('vm:prefer-inline') @override $Res call({Object? fullName = null,Object? name = null,}) {
   return _then(_self.copyWith(
 fullName: null == fullName ? _self.fullName : fullName // ignore: cast_nullable_to_non_nullable
-as String,htmlUrl: null == htmlUrl ? _self.htmlUrl : htmlUrl // ignore: cast_nullable_to_non_nullable
 as String,name: null == name ? _self.name : name // ignore: cast_nullable_to_non_nullable
 as String,
   ));
@@ -155,10 +154,10 @@ return $default(_that);case _:
 /// }
 /// ```
 
-@optionalTypeArgs TResult maybeWhen<TResult extends Object?>(TResult Function( String fullName,  String htmlUrl,  String name)?  $default,{required TResult orElse(),}) {final _that = this;
+@optionalTypeArgs TResult maybeWhen<TResult extends Object?>(TResult Function( String fullName,  String name)?  $default,{required TResult orElse(),}) {final _that = this;
 switch (_that) {
 case _SearchRepositoriesItemEntity() when $default != null:
-return $default(_that.fullName,_that.htmlUrl,_that.name);case _:
+return $default(_that.fullName,_that.name);case _:
   return orElse();
 
 }
@@ -176,10 +175,10 @@ return $default(_that.fullName,_that.htmlUrl,_that.name);case _:
 /// }
 /// ```
 
-@optionalTypeArgs TResult when<TResult extends Object?>(TResult Function( String fullName,  String htmlUrl,  String name)  $default,) {final _that = this;
+@optionalTypeArgs TResult when<TResult extends Object?>(TResult Function( String fullName,  String name)  $default,) {final _that = this;
 switch (_that) {
 case _SearchRepositoriesItemEntity():
-return $default(_that.fullName,_that.htmlUrl,_that.name);case _:
+return $default(_that.fullName,_that.name);case _:
   throw StateError('Unexpected subclass');
 
 }
@@ -196,10 +195,10 @@ return $default(_that.fullName,_that.htmlUrl,_that.name);case _:
 /// }
 /// ```
 
-@optionalTypeArgs TResult? whenOrNull<TResult extends Object?>(TResult? Function( String fullName,  String htmlUrl,  String name)?  $default,) {final _that = this;
+@optionalTypeArgs TResult? whenOrNull<TResult extends Object?>(TResult? Function( String fullName,  String name)?  $default,) {final _that = this;
 switch (_that) {
 case _SearchRepositoriesItemEntity() when $default != null:
-return $default(_that.fullName,_that.htmlUrl,_that.name);case _:
+return $default(_that.fullName,_that.name);case _:
   return null;
 
 }
@@ -211,11 +210,10 @@ return $default(_that.fullName,_that.htmlUrl,_that.name);case _:
 @JsonSerializable()
 
 class _SearchRepositoriesItemEntity extends SearchRepositoriesItemEntity {
-  const _SearchRepositoriesItemEntity({required this.fullName, required this.htmlUrl, required this.name}): super._();
+  const _SearchRepositoriesItemEntity({required this.fullName, required this.name}): super._();
   factory _SearchRepositoriesItemEntity.fromJson(Map<String, dynamic> json) => _$SearchRepositoriesItemEntityFromJson(json);
 
 @override final  String fullName;
-@override final  String htmlUrl;
 @override final  String name;
 
 /// Create a copy of SearchRepositoriesItemEntity
@@ -231,16 +229,16 @@ Map<String, dynamic> toJson() {
 
 @override
 bool operator ==(Object other) {
-  return identical(this, other) || (other.runtimeType == runtimeType&&other is _SearchRepositoriesItemEntity&&(identical(other.fullName, fullName) || other.fullName == fullName)&&(identical(other.htmlUrl, htmlUrl) || other.htmlUrl == htmlUrl)&&(identical(other.name, name) || other.name == name));
+  return identical(this, other) || (other.runtimeType == runtimeType&&other is _SearchRepositoriesItemEntity&&(identical(other.fullName, fullName) || other.fullName == fullName)&&(identical(other.name, name) || other.name == name));
 }
 
 @JsonKey(includeFromJson: false, includeToJson: false)
 @override
-int get hashCode => Object.hash(runtimeType,fullName,htmlUrl,name);
+int get hashCode => Object.hash(runtimeType,fullName,name);
 
 @override
 String toString() {
-  return 'SearchRepositoriesItemEntity(fullName: $fullName, htmlUrl: $htmlUrl, name: $name)';
+  return 'SearchRepositoriesItemEntity(fullName: $fullName, name: $name)';
 }
 
 
@@ -251,7 +249,7 @@ abstract mixin class _$SearchRepositoriesItemEntityCopyWith<$Res> implements $Se
   factory _$SearchRepositoriesItemEntityCopyWith(_SearchRepositoriesItemEntity value, $Res Function(_SearchRepositoriesItemEntity) _then) = __$SearchRepositoriesItemEntityCopyWithImpl;
 @override @useResult
 $Res call({
- String fullName, String htmlUrl, String name
+ String fullName, String name
 });
 
 
@@ -268,10 +266,9 @@ class __$SearchRepositoriesItemEntityCopyWithImpl<$Res>
 
 /// Create a copy of SearchRepositoriesItemEntity
 /// with the given fields replaced by the non-null parameter values.
-@override @pragma('vm:prefer-inline') $Res call({Object? fullName = null,Object? htmlUrl = null,Object? name = null,}) {
+@override @pragma('vm:prefer-inline') $Res call({Object? fullName = null,Object? name = null,}) {
   return _then(_SearchRepositoriesItemEntity(
 fullName: null == fullName ? _self.fullName : fullName // ignore: cast_nullable_to_non_nullable
-as String,htmlUrl: null == htmlUrl ? _self.htmlUrl : htmlUrl // ignore: cast_nullable_to_non_nullable
 as String,name: null == name ? _self.name : name // ignore: cast_nullable_to_non_nullable
 as String,
   ));

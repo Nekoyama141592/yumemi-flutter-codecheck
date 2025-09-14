@@ -10,16 +10,11 @@ abstract class SearchRepositoriesItemEntity
   const SearchRepositoriesItemEntity._();
   const factory SearchRepositoriesItemEntity({
     required String fullName,
-    required String htmlUrl,
     required String name,
   }) = _SearchRepositoriesItemEntity;
 
   factory SearchRepositoriesItemEntity.fromModel(RepositoryItem model) =>
-      SearchRepositoriesItemEntity(
-        fullName: model.fullName,
-        htmlUrl: model.htmlUrl,
-        name: model.name,
-      );
+      SearchRepositoriesItemEntity(fullName: model.fullName, name: model.name);
 
   factory SearchRepositoriesItemEntity.fromJson(Map<String, dynamic> json) =>
       _$SearchRepositoriesItemEntityFromJson(json);
