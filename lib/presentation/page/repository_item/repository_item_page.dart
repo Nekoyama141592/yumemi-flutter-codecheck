@@ -424,23 +424,6 @@ class RepositoryItemPage extends HookConsumerWidget {
               ),
             ),
           ),
-          const SizedBox(height: 12),
-          SizedBox(
-            width: double.infinity,
-            child: OutlinedButton.icon(
-              onPressed: () => _launchGitHubUrl('${repo.htmlUrl}/issues'),
-              icon: const Icon(Icons.bug_report_rounded),
-              label: const Text('Issues を見る'),
-              style: OutlinedButton.styleFrom(
-                foregroundColor: appColors.onSurface,
-                side: BorderSide(color: appColors.border),
-                padding: const EdgeInsets.symmetric(vertical: 16),
-                shape: RoundedRectangleBorder(
-                  borderRadius: BorderRadius.circular(12),
-                ),
-              ),
-            ),
-          ),
         ],
       ),
     );
