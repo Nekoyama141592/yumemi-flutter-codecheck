@@ -247,10 +247,7 @@ class RepositoryItemPage extends HookConsumerWidget {
 // --- UI state widgets ---
 
 class _LoadingState extends StatelessWidget {
-  const _LoadingState({
-    required this.appColors,
-    required this.isLandscape,
-  });
+  const _LoadingState({required this.appColors, required this.isLandscape});
 
   final AppColors appColors;
   final bool isLandscape;
@@ -664,7 +661,7 @@ class _StatsGrid extends StatelessWidget {
         final crossAxisCount = tentativeCols.clamp(1, 4);
         final tileWidth =
             (constraints.maxWidth - spacing * (crossAxisCount - 1)) /
-                crossAxisCount;
+            crossAxisCount;
         final childAspectRatio = tileWidth / math.max(minTileHeight, 1);
 
         return GridView.builder(
@@ -851,7 +848,7 @@ class _StatsGridLoading extends StatelessWidget {
         final crossAxisCount = tentativeCols.clamp(1, 4);
         final tileWidth =
             (constraints.maxWidth - spacing * (crossAxisCount - 1)) /
-                crossAxisCount;
+            crossAxisCount;
         final childAspectRatio = tileWidth / math.max(minTileHeight, 1);
 
         return GridView.builder(
