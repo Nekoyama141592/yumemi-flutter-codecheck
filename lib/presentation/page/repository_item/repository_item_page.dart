@@ -16,11 +16,6 @@ class RepositoryItemPage extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
-    return Scaffold(
-      body: Center(
-        child: Text('$userName/$name'),
-      ),
-    );
+    return Scaffold(body: Center(child: Text('$userName/$name')));
   }
 }
-

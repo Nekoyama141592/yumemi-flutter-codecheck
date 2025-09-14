@@ -34,13 +34,7 @@ class GithubRepository implements GithubRepositoryInterface {
     required String name,
   }) async {
     final q = '$userName/$name';
-    final response = await _apiClient.searchRepositories(
-      q,
-      null,
-      null,
-      1,
-      1,
-    );
+    final response = await _apiClient.searchRepositories(q, null, null, 1, 1);
     if (response.items.isEmpty) return null;
     return SearchRepositoriesItemEntity.fromModel(response.items.first);
   }
