@@ -67,8 +67,9 @@ class RepositoryItemPage extends HookConsumerWidget {
         actions: [
           // Theme toggle button
           Container(
-            margin: EdgeInsets.symmetric(vertical: 8 * scaleH)
-                .copyWith(right: 8 * scaleH),
+            margin: EdgeInsets.symmetric(
+              vertical: 8 * scaleH,
+            ).copyWith(right: 8 * scaleH),
             decoration: BoxDecoration(
               color: appColors.cardBackground,
               borderRadius: BorderRadius.circular(12),
@@ -95,8 +96,9 @@ class RepositoryItemPage extends HookConsumerWidget {
           ),
           // Token edit button
           Container(
-            margin: EdgeInsets.symmetric(vertical: 8 * scaleH)
-                .copyWith(right: 12 * scaleH),
+            margin: EdgeInsets.symmetric(
+              vertical: 8 * scaleH,
+            ).copyWith(right: 12 * scaleH),
             decoration: BoxDecoration(
               color: hasToken
                   ? appColors.tokenOn.withValues(alpha: 0.1)
@@ -126,7 +128,8 @@ class RepositoryItemPage extends HookConsumerWidget {
         child: LayoutBuilder(
           builder: (context, constraints) {
             final content = state.when(
-              loading: () => _buildLoadingState(appColors, isLandscape, context),
+              loading: () =>
+                  _buildLoadingState(appColors, isLandscape, context),
               error: (_, _) => _buildErrorState(context, appColors),
               data: (repo) => repo == null
                   ? _buildNotFoundState(context, appColors)
@@ -162,7 +165,10 @@ class RepositoryItemPage extends HookConsumerWidget {
   }
 
   Widget _buildLoadingState(
-      AppColors appColors, bool isLandscape, BuildContext context) {
+    AppColors appColors,
+    bool isLandscape,
+    BuildContext context,
+  ) {
     final size = MediaQuery.of(context).size;
     final scaleH = (size.height / 812).clamp(0.8, 1.3);
     final gap = 20.0 * scaleH;
@@ -248,7 +254,8 @@ class RepositoryItemPage extends HookConsumerWidget {
         final size = MediaQuery.of(context).size;
         final scaleH = (size.height / 812).clamp(0.8, 1.3);
         final spacing = (constraints.maxWidth * 0.03).clamp(8.0, 16.0);
-        final minTileHeight = 120.0 * scaleH; // ensure enough height for placeholders
+        final minTileHeight =
+            120.0 * scaleH; // ensure enough height for placeholders
         final tentativeCols = (constraints.maxWidth / 160).floor();
         final crossAxisCount = tentativeCols.clamp(1, 4);
         final tileWidth =
@@ -300,24 +307,26 @@ class RepositoryItemPage extends HookConsumerWidget {
   }
 
   Widget _buildActionButtonsLoading(AppColors appColors) {
-    return Builder(builder: (context) {
-      final size = MediaQuery.of(context).size;
-      final scaleH = (size.height / 812).clamp(0.8, 1.3);
-      return Container(
-      width: double.infinity,
-      padding: EdgeInsets.all(20 * scaleH),
-      decoration: BoxDecoration(
-        color: appColors.cardBackground,
-        borderRadius: BorderRadius.circular(16),
-        border: Border.all(color: appColors.border, width: 1),
-      ),
-      child: _ShimmerContainer(
-        height: 52 * scaleH, // approx ElevatedButton height
-        width: double.infinity,
-        borderRadius: const BorderRadius.all(Radius.circular(12)),
-      ),
+    return Builder(
+      builder: (context) {
+        final size = MediaQuery.of(context).size;
+        final scaleH = (size.height / 812).clamp(0.8, 1.3);
+        return Container(
+          width: double.infinity,
+          padding: EdgeInsets.all(20 * scaleH),
+          decoration: BoxDecoration(
+            color: appColors.cardBackground,
+            borderRadius: BorderRadius.circular(16),
+            border: Border.all(color: appColors.border, width: 1),
+          ),
+          child: _ShimmerContainer(
+            height: 52 * scaleH, // approx ElevatedButton height
+            width: double.infinity,
+            borderRadius: const BorderRadius.all(Radius.circular(12)),
+          ),
+        );
+      },
     );
-    });
   }
 
   Widget _buildErrorState(BuildContext context, AppColors appColors) {
@@ -428,7 +437,9 @@ class RepositoryItemPage extends HookConsumerWidget {
             children: [
               Expanded(child: _buildHeaderCard(context, repo, appColors)),
               SizedBox(width: gap),
-              Expanded(child: _buildStatsGrid(context, repo, appColors,isLandscape)),
+              Expanded(
+                child: _buildStatsGrid(context, repo, appColors, isLandscape),
+              ),
             ],
           ),
           SizedBox(height: gap),
@@ -441,7 +452,7 @@ class RepositoryItemPage extends HookConsumerWidget {
       children: [
         _buildHeaderCard(context, repo, appColors),
         SizedBox(height: gap),
-        _buildStatsGrid(context, repo, appColors,isLandscape),
+        _buildStatsGrid(context, repo, appColors, isLandscape),
         SizedBox(height: gap),
         _buildActionButtons(context, repo, appColors),
       ],
@@ -566,7 +577,7 @@ class RepositoryItemPage extends HookConsumerWidget {
     BuildContext context,
     GetRepositoryItemEntity repo,
     AppColors appColors,
-    bool isLandscape
+    bool isLandscape,
   ) {
     final stats = [
       _StatItem(
@@ -631,14 +642,15 @@ class RepositoryItemPage extends HookConsumerWidget {
               child: Column(
                 mainAxisAlignment: MainAxisAlignment.center,
                 children: [
-                  if(!isLandscape) Container(
-                    padding: EdgeInsets.all(8 * scaleH),
-                    decoration: BoxDecoration(
-                      color: stat.color.withValues(alpha: 0.1),
-                      shape: BoxShape.circle,
+                  if (!isLandscape)
+                    Container(
+                      padding: EdgeInsets.all(8 * scaleH),
+                      decoration: BoxDecoration(
+                        color: stat.color.withValues(alpha: 0.1),
+                        shape: BoxShape.circle,
+                      ),
+                      child: Icon(stat.icon, color: stat.color, size: 24),
                     ),
-                    child: Icon(stat.icon, color: stat.color, size: 24),
-                  ),
                   SizedBox(height: 8 * scaleH),
                   Text(
                     stat.value,

@@ -32,7 +32,13 @@ class MyHomePage extends HookConsumerWidget {
         child: Column(
           children: [
             _buildHeader(context, ref, appColors, token, scaleH),
-            _buildSearchSection(context, searchController, notifier, appColors, scaleH),
+            _buildSearchSection(
+              context,
+              searchController,
+              notifier,
+              appColors,
+              scaleH,
+            ),
             Expanded(child: _buildContent(context, state, appColors)),
           ],
         ),
@@ -198,7 +204,10 @@ class MyHomePage extends HookConsumerWidget {
                 hintText: AppLocalizations.of(context)!.searchFieldHint,
                 hintStyle: TextStyle(color: appColors.secondary, fontSize: 15),
                 prefixIcon: Container(
-                  margin: EdgeInsets.only(left: 16 * scaleH, right: 12 * scaleH),
+                  margin: EdgeInsets.only(
+                    left: 16 * scaleH,
+                    right: 12 * scaleH,
+                  ),
                   child: Icon(
                     Icons.search_rounded,
                     color: appColors.primary,
@@ -402,8 +411,10 @@ class MyHomePage extends HookConsumerWidget {
     final size = MediaQuery.of(context).size;
     final scaleH = (size.height / 812).clamp(0.8, 1.3);
     return ListView.separated(
-      padding:
-          EdgeInsets.symmetric(horizontal: 20 * scaleH, vertical: 8 * scaleH),
+      padding: EdgeInsets.symmetric(
+        horizontal: 20 * scaleH,
+        vertical: 8 * scaleH,
+      ),
       itemCount: repositories.length,
       separatorBuilder: (context, index) => SizedBox(height: 12 * scaleH),
       itemBuilder: (context, index) {
@@ -441,39 +452,41 @@ class MyHomePage extends HookConsumerWidget {
           );
         },
         borderRadius: BorderRadius.circular(16),
-        child: Builder(builder: (context) {
-          final size = MediaQuery.of(context).size;
-          final scaleH = (size.height / 812).clamp(0.8, 1.3);
-          return Padding(
-          padding: EdgeInsets.all(20 * scaleH),
-          child: Column(
-            crossAxisAlignment: CrossAxisAlignment.start,
-            children: [
-              Row(
+        child: Builder(
+          builder: (context) {
+            final size = MediaQuery.of(context).size;
+            final scaleH = (size.height / 812).clamp(0.8, 1.3);
+            return Padding(
+              padding: EdgeInsets.all(20 * scaleH),
+              child: Column(
+                crossAxisAlignment: CrossAxisAlignment.start,
                 children: [
-                  SizedBox(width: 12 * scaleH),
-                  Expanded(
-                    child: Text(
-                      repo.fullName,
-                      style: TextStyle(
-                        color: appColors.onSurface,
-                        fontSize: 16,
-                        fontWeight: FontWeight.w600,
+                  Row(
+                    children: [
+                      SizedBox(width: 12 * scaleH),
+                      Expanded(
+                        child: Text(
+                          repo.fullName,
+                          style: TextStyle(
+                            color: appColors.onSurface,
+                            fontSize: 16,
+                            fontWeight: FontWeight.w600,
+                          ),
+                          overflow: TextOverflow.ellipsis,
+                        ),
                       ),
-                      overflow: TextOverflow.ellipsis,
-                    ),
-                  ),
-                  Icon(
-                    Icons.arrow_forward_ios_rounded,
-                    color: appColors.secondary,
-                    size: 16,
+                      Icon(
+                        Icons.arrow_forward_ios_rounded,
+                        color: appColors.secondary,
+                        size: 16,
+                      ),
+                    ],
                   ),
                 ],
               ),
-            ],
-          ),
-        );
-        }),
+            );
+          },
+        ),
       ),
     );
   }
