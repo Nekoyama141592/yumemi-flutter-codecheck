@@ -82,3 +82,5 @@
 41. lib/presentation/page/repository_item/repository_item_page.dartでもlib/presentation/page/my_home/my_home_page.dartと同様にAppBarでテーマ切り替えとtoken設定ができるように変更してください。
 
 41. lib/presentation/page/repository_item/repository_item_page.dartとlib/presentation/page/my_home/my_home_page.dartの文言の翻訳を行なってください。
+
+42. lib/presentation/page/repository_item/repository_item_page.dartでのshimmerでのスケルトンローディングの高さがローディング完了後と合っていないので一致させて

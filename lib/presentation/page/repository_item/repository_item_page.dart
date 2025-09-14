@@ -131,39 +131,110 @@ class RepositoryItemPage extends HookConsumerWidget {
 
   Widget _buildLoadingState(AppColors appColors) {
     return Column(
+      crossAxisAlignment: CrossAxisAlignment.start,
       children: [
-        _ShimmerContainer(
-          height: 120,
-          width: double.infinity,
-          borderRadius: BorderRadius.circular(16),
-        ),
+        _buildHeaderCardLoading(appColors),
         const SizedBox(height: 20),
-        _ShimmerContainer(
-          height: 60,
-          width: double.infinity,
-          borderRadius: BorderRadius.circular(12),
-        ),
-        const SizedBox(height: 16),
-        Row(
-          children: [
-            Expanded(
-              child: _ShimmerContainer(
-                height: 80,
-                width: double.infinity,
-                borderRadius: BorderRadius.circular(12),
-              ),
-            ),
-            const SizedBox(width: 12),
-            Expanded(
-              child: _ShimmerContainer(
-                height: 80,
-                width: double.infinity,
-                borderRadius: BorderRadius.circular(12),
-              ),
-            ),
-          ],
-        ),
+        _buildStatsGridLoading(appColors),
+        const SizedBox(height: 20),
+        _buildActionButtonsLoading(appColors),
       ],
+    );
+  }
+
+  Widget _buildHeaderCardLoading(AppColors appColors) {
+    return Container(
+      width: double.infinity,
+      padding: const EdgeInsets.all(24),
+      decoration: BoxDecoration(
+        color: appColors.cardBackground,
+        borderRadius: BorderRadius.circular(16),
+        border: Border.all(color: appColors.border, width: 1),
+        boxShadow: [
+          BoxShadow(
+            color: appColors.onSurface.withValues(alpha: 0.02),
+            blurRadius: 8,
+            offset: const Offset(0, 2),
+          ),
+        ],
+      ),
+      child: Column(
+        children: const [
+          _ShimmerCircle(radius: 40), // 80x80 avatar
+          SizedBox(height: 16),
+          _ShimmerContainer(
+            height: 28, // approx title text height for fontSize 24
+            width: 200,
+            borderRadius: const BorderRadius.all(Radius.circular(6)),
+          ),
+          SizedBox(height: 12),
+          _ShimmerContainer(
+            height: 28, // language chip height
+            width: 80,
+            borderRadius: const BorderRadius.all(Radius.circular(20)),
+          ),
+        ],
+      ),
+    );
+  }
+
+  Widget _buildStatsGridLoading(AppColors appColors) {
+    const itemCount = 4; // same as stats length
+    return GridView.builder(
+      shrinkWrap: true,
+      physics: const NeverScrollableScrollPhysics(),
+      gridDelegate: const SliverGridDelegateWithFixedCrossAxisCount(
+        crossAxisCount: 2,
+        crossAxisSpacing: 12,
+        mainAxisSpacing: 12,
+        childAspectRatio: 1.4,
+      ),
+      itemCount: itemCount,
+      itemBuilder: (context, index) {
+        return Container(
+          padding: const EdgeInsets.all(16),
+          decoration: BoxDecoration(
+            color: appColors.cardBackground,
+            borderRadius: BorderRadius.circular(16),
+            border: Border.all(color: appColors.border, width: 1),
+          ),
+          child: Column(
+            mainAxisAlignment: MainAxisAlignment.center,
+            children: const [
+              _ShimmerCircle(radius: 20), // icon circle ~40x40
+              SizedBox(height: 8),
+              _ShimmerContainer(
+                height: 24, // value text height
+                width: 60,
+                borderRadius: const BorderRadius.all(Radius.circular(6)),
+              ),
+              SizedBox(height: 6),
+              _ShimmerContainer(
+                height: 14, // label text height
+                width: 70,
+                borderRadius: const BorderRadius.all(Radius.circular(6)),
+              ),
+            ],
+          ),
+        );
+      },
+    );
+  }
+
+  Widget _buildActionButtonsLoading(AppColors appColors) {
+    return Container(
+      width: double.infinity,
+      padding: const EdgeInsets.all(20),
+      decoration: BoxDecoration(
+        color: appColors.cardBackground,
+        borderRadius: BorderRadius.circular(16),
+        border: Border.all(color: appColors.border, width: 1),
+      ),
+      child: const _ShimmerContainer(
+        height: 52, // approx ElevatedButton height with vertical padding 16
+        width: double.infinity,
+        borderRadius: BorderRadius.all(Radius.circular(12)),
+      ),
     );
   }
 
