@@ -82,12 +82,42 @@ class RepositoryItemPage extends HookConsumerWidget {
                         ),
                 ),
                 const SizedBox(height: 16),
-                Text('リポジトリ名: ${repo.fullName}'),
-                Text('言語: ${repo.language ?? "不明"}'),
-                Text('スター数: ${repo.stargazersCount}'),
-                Text('ウォッチャー数: ${repo.watchersCount}'),
-                Text('フォーク数: ${repo.forksCount}'),
-                Text('Issue数: ${repo.openIssuesCount}'),
+                Row(
+                  children: [
+                    const Text('リポジトリ名: '),
+                    Text(repo.fullName),
+                  ],
+                ),
+                Row(
+                  children: [
+                    const Text('言語: '),
+                    Text(repo.language ?? "不明"),
+                  ],
+                ),
+                Row(
+                  children: [
+                    const Text('スター数: '),
+                    Text('${repo.stargazersCount}'),
+                  ],
+                ),
+                Row(
+                  children: [
+                    const Text('ウォッチャー数: '),
+                    Text('${repo.watchersCount}'),
+                  ],
+                ),
+                Row(
+                  children: [
+                    const Text('フォーク数: '),
+                    Text('${repo.forksCount}'),
+                  ],
+                ),
+                Row(
+                  children: [
+                    const Text('Issue数: '),
+                    Text('${repo.openIssuesCount}'),
+                  ],
+                ),
               ],
             );
           },
