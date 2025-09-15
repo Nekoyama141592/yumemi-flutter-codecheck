@@ -1,3 +1,5 @@
+import 'dart:async';
+
 import 'package:flutter/material.dart';
 import 'package:flutter_hooks/flutter_hooks.dart';
 
@@ -26,12 +28,13 @@ class AnimatedCard extends HookWidget {
     );
 
     useEffect(() {
-      Future.delayed(delay, () {
+      Timer? timer;
+      timer = Timer(delay, () {
         if (context.mounted) {
           animationController.forward();
         }
       });
-      return null;
+      return () => timer?.cancel();
     }, []);
 
     return SlideTransition(

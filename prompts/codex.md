@@ -95,3 +95,5 @@ A RenderFlex overflowed by 73 pixels on the bottom.」という上にオーバ�
 46. lib/presentation/page/repository_item/repository_item_page.dartのスケルトンローディングで数字の下に「Another exception was thrown: A RenderFlex overflowed by 6.7 pixels on the bottom.」というエラーが発生するので修正して。
 
 47. lib/presentation/page/my_home/my_home_page.dartにてWidgetを返しているbuild()以外のPrivateメソッドはクラスにして、同ファイルに保存し、MyHomePageで使用するようにして。ただ、WidgetRefやMyHomeViewModelを受け取るのではなく実際の値を受け取ったり関数をコールバックで受け取ったりするようにリファクタリングしてください。
+
+48. 失敗するテストが通るように、テストファイルもしくは実装本体のファイルを修正して。

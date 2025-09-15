@@ -7,6 +7,7 @@ import 'package:yumemi_flutter_codecheck/presentation/page/repository_item/compo
 import 'package:yumemi_flutter_codecheck/presentation/page/repository_item/components/header_card.dart';
 import 'package:yumemi_flutter_codecheck/presentation/page/repository_item/components/stats_grid.dart';
 import 'package:yumemi_flutter_codecheck/presentation/page/repository_item/components/action_buttons.dart';
+import 'test_helper.dart';
 
 void main() {
   group('RepositoryContent', () {
@@ -42,14 +43,12 @@ void main() {
       bool isLandscape = false,
       Future<void> Function(String?)? onLaunchUrl,
     }) {
-      return MaterialApp(
-        home: Scaffold(
-          body: RepositoryContent(
-            repo: mockRepo,
-            appColors: appColors,
-            isLandscape: isLandscape,
-            onLaunchUrl: onLaunchUrl ?? (_) async {},
-          ),
+      return createLocalizedTestWidget(
+        child: RepositoryContent(
+          repo: mockRepo,
+          appColors: appColors,
+          isLandscape: isLandscape,
+          onLaunchUrl: onLaunchUrl ?? (_) async {},
         ),
       );
     }
@@ -61,7 +60,7 @@ void main() {
       expect(find.byType(HeaderCard), findsOneWidget);
       expect(find.byType(StatsGrid), findsOneWidget);
       expect(find.byType(ActionButtons), findsOneWidget);
-      expect(find.byType(Row), findsNothing);
+      expect(find.byType(Row), findsOneWidget); // ElevatedButton.icon contains a Row
     });
 
     testWidgets('renders correctly in landscape mode', (tester) async {
@@ -71,7 +70,7 @@ void main() {
       expect(find.byType(HeaderCard), findsOneWidget);
       expect(find.byType(StatsGrid), findsOneWidget);
       expect(find.byType(ActionButtons), findsOneWidget);
-      expect(find.byType(Row), findsOneWidget);
+      expect(find.byType(Row), findsNWidgets(2)); // RepositoryContent Row + ElevatedButton.icon Row
       expect(find.byType(Expanded), findsNWidgets(2));
     });
 
@@ -89,12 +88,13 @@ void main() {
       await tester.pumpWidget(createTestWidget(isLandscape: true));
 
       final rowFinder = find.byType(Row);
-      expect(rowFinder, findsOneWidget);
+      expect(rowFinder, findsNWidgets(2)); // RepositoryContent Row + ElevatedButton.icon Row
 
-      final row = tester.widget<Row>(rowFinder);
-      expect(row.crossAxisAlignment, equals(CrossAxisAlignment.start));
+      // Test the main layout Row (RepositoryContent)
+      final mainRow = tester.widget<Row>(rowFinder.first);
+      expect(mainRow.crossAxisAlignment, equals(CrossAxisAlignment.start));
       expect(
-        row.children.length,
+        mainRow.children.length,
         equals(3),
       ); // Two Expanded widgets and one SizedBox
     });

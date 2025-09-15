@@ -1,3 +1,5 @@
+import 'dart:async';
+
 import 'package:flutter/material.dart';
 import 'package:flutter_hooks/flutter_hooks.dart';
 
@@ -31,12 +33,13 @@ class AnimatedListItem extends HookWidget {
 
     useEffect(() {
       final delay = Duration(milliseconds: (index * 100).clamp(0, 800));
-      Future.delayed(delay, () {
+      Timer? timer;
+      timer = Timer(delay, () {
         if (context.mounted) {
           animationController.forward();
         }
       });
-      return null;
+      return () => timer?.cancel();
     }, []);
 
     return SlideTransition(

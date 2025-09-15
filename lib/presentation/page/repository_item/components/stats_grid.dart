@@ -89,6 +89,7 @@ class StatsGrid extends StatelessWidget {
               ),
               child: Column(
                 mainAxisAlignment: MainAxisAlignment.center,
+                mainAxisSize: MainAxisSize.min,
                 children: [
                   if (!isLandscape)
                     Container(
@@ -99,21 +100,25 @@ class StatsGrid extends StatelessWidget {
                       ),
                       child: Icon(stat.icon, color: stat.color, size: 24),
                     ),
-                  SizedBox(height: 8 * scaleH),
-                  Text(
-                    stat.value,
-                    style: TextStyle(
-                      color: appColors.onSurface,
-                      fontSize: 20,
-                      fontWeight: FontWeight.w700,
+                  if (!isLandscape) SizedBox(height: 8 * scaleH),
+                  Flexible(
+                    child: Text(
+                      stat.value,
+                      style: TextStyle(
+                        color: appColors.onSurface,
+                        fontSize: 20,
+                        fontWeight: FontWeight.w700,
+                      ),
                     ),
                   ),
-                  Text(
-                    stat.label,
-                    style: TextStyle(
-                      color: appColors.secondary,
-                      fontSize: 12,
-                      fontWeight: FontWeight.w500,
+                  Flexible(
+                    child: Text(
+                      stat.label,
+                      style: TextStyle(
+                        color: appColors.secondary,
+                        fontSize: 12,
+                        fontWeight: FontWeight.w500,
+                      ),
                     ),
                   ),
                 ],
