@@ -245,21 +245,28 @@ void main() {
     expect(find.text('GitHub'), findsOneWidget);
     await tester.pump(const Duration(seconds: 10));
     // Two fake repositories are listed; pick one by its full name
-    expect(find.text('flutter/flutter'), findsOneWidget);
+    final repoTile = find.text('flutter/flutter');
+    expect(repoTile, findsOneWidget);
     // List view is present
     expect(find.byType(ListView), findsWidgets);
 
-    // Tap the first repository to navigate to detail
+    // Tap the repository to navigate to detail
+    await tester.tap(repoTile);
+    await tester.pump(const Duration(seconds: 1));
     await tester.pump(const Duration(seconds: 3));
 
     // AppBar title shows the full repo name
     expect(find.text('flutter/flutter'), findsWidgets);
 
-    // // Go back to home
-    // await tester.pageBack();
-    // await tester.pump(const Duration(seconds: 10));
+    // AppBarの戻るボタン（BackButtonまたはarrow_backアイコン）を探して戻る
+    final backFinder = find.byWidgetPredicate((widget) => widget is BackButton);
+    expect(backFinder, findsWidgets);
+    await tester.ensureVisible(backFinder.first);
+    await tester.tap(backFinder);
+    await tester.pump(const Duration(seconds: 1));
+    await tester.pump(const Duration(seconds: 2));
 
-    // // // Ensure we are back on home (header still visible)
-    // expect(find.text('GitHub'), findsOneWidget);
+    // // Ensure we are back on home (header still visible)
+    expect(find.text('GitHub'), findsOneWidget);
   });
 }

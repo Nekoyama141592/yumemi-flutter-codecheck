@@ -103,3 +103,5 @@ A RenderFlex overflowed by 73 pixels on the bottom.」という上にオーバ�
 50. integration_test/e2e_test.dartにE2Eの統合テストを実装して。
 
 51. integration_test/e2e_test.dartのdelayを充分な時間取るようにして
+
+52. integration_test/e2e_test.dartのawait tester.pageBack();が失敗するのでしっかりAppBarアイコンをタップしてページを戻るようにして
