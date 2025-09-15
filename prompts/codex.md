@@ -97,3 +97,5 @@ A RenderFlex overflowed by 73 pixels on the bottom.」という上にオーバ�
 47. lib/presentation/page/my_home/my_home_page.dartにてWidgetを返しているbuild()以外のPrivateメソッドはクラスにして、同ファイルに保存し、MyHomePageで使用するようにして。ただ、WidgetRefやMyHomeViewModelを受け取るのではなく実際の値を受け取ったり関数をコールバックで受け取ったりするようにリファクタリングしてください。
 
 48. 失敗するテストが通るように、テストファイルもしくは実装本体のファイルを修正して。
+
+49. RepositoryでUnitテストが行われていないものがあればモックを作ったり、Providerを上書きしたりして実装して
