@@ -60,7 +60,10 @@ void main() {
       expect(find.byType(HeaderCard), findsOneWidget);
       expect(find.byType(StatsGrid), findsOneWidget);
       expect(find.byType(ActionButtons), findsOneWidget);
-      expect(find.byType(Row), findsOneWidget); // ElevatedButton.icon contains a Row
+      expect(
+        find.byType(Row),
+        findsOneWidget,
+      ); // ElevatedButton.icon contains a Row
     });
 
     testWidgets('renders correctly in landscape mode', (tester) async {
@@ -70,7 +73,10 @@ void main() {
       expect(find.byType(HeaderCard), findsOneWidget);
       expect(find.byType(StatsGrid), findsOneWidget);
       expect(find.byType(ActionButtons), findsOneWidget);
-      expect(find.byType(Row), findsNWidgets(2)); // RepositoryContent Row + ElevatedButton.icon Row
+      expect(
+        find.byType(Row),
+        findsNWidgets(2),
+      ); // RepositoryContent Row + ElevatedButton.icon Row
       expect(find.byType(Expanded), findsNWidgets(2));
     });
 
@@ -88,7 +94,10 @@ void main() {
       await tester.pumpWidget(createTestWidget(isLandscape: true));
 
       final rowFinder = find.byType(Row);
-      expect(rowFinder, findsNWidgets(2)); // RepositoryContent Row + ElevatedButton.icon Row
+      expect(
+        rowFinder,
+        findsNWidgets(2),
+      ); // RepositoryContent Row + ElevatedButton.icon Row
 
       // Test the main layout Row (RepositoryContent)
       final mainRow = tester.widget<Row>(rowFinder.first);
