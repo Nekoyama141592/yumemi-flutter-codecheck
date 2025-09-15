@@ -99,3 +99,5 @@ A RenderFlex overflowed by 73 pixels on the bottom.」という上にオーバ�
 48. 失敗するテストが通るように、テストファイルもしくは実装本体のファイルを修正して。
 
 49. RepositoryでUnitテストが行われていないものがあればモックを作ったり、Providerを上書きしたりして実装して
+
+50. integration_test/e2e_test.dartにE2Eの統合テストを実装して。
