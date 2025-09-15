@@ -65,7 +65,8 @@ class FakeGitHubApiClient implements GitHubApiClient {
         login: user,
         id: id,
         nodeId: 'MDQ6VXNlcg$id',
-        avatarUrl: '$dummyUrl/avatar.png',
+        // Empty to avoid CachedNetworkImage network calls in tests
+        avatarUrl: '',
         url: '$apiBase/users/$user',
         htmlUrl: 'https://github.com/$user',
         followersUrl: '$apiBase/users/$user/followers',
@@ -248,9 +249,9 @@ void main() {
       ),
     );
 
-    // Allow initial load + entrance animations
+    // Allow initial load + entrance animations (long enough to be safe)
     await tester.pump(const Duration(seconds: 1));
-    await tester.pump(const Duration(seconds: 1));
+    await tester.pump(const Duration(seconds: 3));
 
     // Home header is visible
     expect(find.text('GitHub'), findsOneWidget);
@@ -258,12 +259,15 @@ void main() {
     // Two fake repositories are listed; pick one by its full name
     expect(find.text('flutter/awesome'), findsOneWidget);
     expect(find.text('octocat/hello-world'), findsOneWidget);
+    // List view is present
+    // ignore: deprecated_member_use
+    expect(find.byType(ListView), findsWidgets);
 
     // Tap the first repository to navigate to detail
     await tester.tap(find.text('flutter/awesome'));
-    // Let navigation and detail page animations progress
-    await tester.pump(const Duration(milliseconds: 300));
-    await tester.pump(const Duration(seconds: 2));
+    // Let navigation and detail page animations progress (long enough)
+    await tester.pump(const Duration(seconds: 1));
+    await tester.pump(const Duration(seconds: 3));
 
     // AppBar title shows the full repo name
     expect(find.text('flutter/awesome'), findsWidgets);
@@ -280,8 +284,8 @@ void main() {
 
     // Go back to home
     await tester.pageBack();
-    await tester.pump(const Duration(milliseconds: 300));
     await tester.pump(const Duration(seconds: 1));
+    await tester.pump(const Duration(seconds: 2));
 
     // Ensure we are back on home (header still visible)
     expect(find.text('GitHub'), findsOneWidget);
