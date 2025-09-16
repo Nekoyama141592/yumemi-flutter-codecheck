@@ -166,6 +166,7 @@ class FakeGitHubApiClient implements GitHubApiClient {
   ) async {
     // Simulate minimal network delay
     await Future<void>.delayed(const Duration(milliseconds: 50));
+    final normalizedQuery = q.trim().toLowerCase();
 
     // Detail page path-like query ("user/repo") returns a single exact match
     if (q.contains('/')) {
@@ -186,6 +187,26 @@ class FakeGitHubApiClient implements GitHubApiClient {
         totalCount: 1,
         incompleteResults: false,
         items: [item],
+      );
+    }
+
+    if (normalizedQuery == 'react-native') {
+      final items = <RepositoryItem>[
+        _buildRepo(
+          id: 2,
+          user: 'facebook',
+          name: 'react-native',
+          stars: 112000,
+          watchers: 112000,
+          forks: 24000,
+          issues: 900,
+          language: 'TypeScript',
+        ),
+      ];
+      return SearchRepositoriesResponse(
+        totalCount: items.length,
+        incompleteResults: false,
+        items: items,
       );
     }
 
@@ -267,6 +288,36 @@ void main() {
     await tester.pump(const Duration(seconds: 2));
 
     // // Ensure we are back on home (header still visible)
+    expect(find.text('GitHub'), findsOneWidget);
+
+    // Clear the existing query and search for another repository
+    final clearSearchButton = find.byIcon(Icons.clear_rounded);
+    expect(clearSearchButton, findsOneWidget);
+    await tester.tap(clearSearchButton);
+    await tester.pump(const Duration(milliseconds: 200));
+
+    final searchField = find.byType(TextFormField);
+    await tester.enterText(searchField, 'react-native');
+    await tester.pump(const Duration(milliseconds: 100));
+    await tester.pump(const Duration(seconds: 1));
+
+    final reactNativeTile = find.text('facebook/react-native');
+    expect(reactNativeTile, findsOneWidget);
+    await tester.tap(reactNativeTile);
+    await tester.pump(const Duration(seconds: 1));
+    await tester.pump(const Duration(seconds: 3));
+
+    expect(find.text('facebook/react-native'), findsWidgets);
+
+    final secondBackButtonFinder = find.byWidgetPredicate(
+      (widget) => widget is BackButton,
+    );
+    expect(secondBackButtonFinder, findsWidgets);
+    await tester.ensureVisible(secondBackButtonFinder.first);
+    await tester.tap(secondBackButtonFinder);
+    await tester.pump(const Duration(seconds: 1));
+    await tester.pump(const Duration(seconds: 2));
+
     expect(find.text('GitHub'), findsOneWidget);
   });
 }
