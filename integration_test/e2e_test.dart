@@ -319,5 +319,13 @@ void main() {
     await tester.pump(const Duration(seconds: 2));
 
     expect(find.text('GitHub'), findsOneWidget);
+
+    // Toggle theme using the header button in the top bar
+    final themeToggleButton = find.byIcon(Icons.light_mode_rounded);
+    expect(themeToggleButton, findsOneWidget);
+    await tester.tap(themeToggleButton);
+    await tester.pumpAndSettle();
+
+    expect(find.byIcon(Icons.dark_mode_rounded), findsOneWidget);
   });
 }
