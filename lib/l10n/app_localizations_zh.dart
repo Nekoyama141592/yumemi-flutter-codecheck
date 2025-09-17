@@ -18,6 +18,9 @@ class AppLocalizationsZh extends AppLocalizations {
   String get editTokenTitle => '编辑令牌';
 
   @override
+  String get editTokenSubtitle => '管理您的 GitHub 访问令牌';
+
+  @override
   String get tokenLabel => '令牌';
 
   @override
@@ -31,6 +34,12 @@ class AppLocalizationsZh extends AppLocalizations {
 
   @override
   String get save => '保存';
+
+  @override
+  String get tokenVisibilityShow => '显示令牌';
+
+  @override
+  String get tokenVisibilityHide => '隐藏令牌';
 
   @override
   String get repositoryName => '仓库名';

@@ -140,7 +140,8 @@ class _EditTokenDeleteButtonState extends State<EditTokenDeleteButton>
       onEnter: (_) => widget.enabled ? setState(() => _isHovered = true) : null,
       onExit: (_) => setState(() => _isHovered = false),
       child: GestureDetector(
-        onTapDown: (_) => widget.enabled ? _animationController.forward() : null,
+        onTapDown: (_) =>
+            widget.enabled ? _animationController.forward() : null,
         onTapUp: (_) => _animationController.reverse(),
         onTapCancel: () => _animationController.reverse(),
         child: ScaleTransition(
@@ -151,8 +152,8 @@ class _EditTokenDeleteButtonState extends State<EditTokenDeleteButton>
             decoration: BoxDecoration(
               color: widget.enabled
                   ? (_isHovered
-                      ? appColors.buttonDanger.withValues(alpha: 0.9)
-                      : appColors.buttonDanger)
+                        ? appColors.buttonDanger.withValues(alpha: 0.9)
+                        : appColors.buttonDanger)
                   : appColors.buttonDanger.withValues(alpha: 0.4),
               borderRadius: BorderRadius.circular(12),
               boxShadow: widget.enabled && _isHovered
@@ -252,7 +253,8 @@ class _EditTokenSaveButtonState extends State<EditTokenSaveButton>
       onEnter: (_) => widget.enabled ? setState(() => _isHovered = true) : null,
       onExit: (_) => setState(() => _isHovered = false),
       child: GestureDetector(
-        onTapDown: (_) => widget.enabled ? _animationController.forward() : null,
+        onTapDown: (_) =>
+            widget.enabled ? _animationController.forward() : null,
         onTapUp: (_) => _animationController.reverse(),
         onTapCancel: () => _animationController.reverse(),
         child: ScaleTransition(
@@ -263,8 +265,8 @@ class _EditTokenSaveButtonState extends State<EditTokenSaveButton>
             decoration: BoxDecoration(
               color: widget.enabled
                   ? (_isHovered
-                      ? appColors.buttonSuccess.withValues(alpha: 0.9)
-                      : appColors.buttonSuccess)
+                        ? appColors.buttonSuccess.withValues(alpha: 0.9)
+                        : appColors.buttonSuccess)
                   : appColors.buttonSuccess.withValues(alpha: 0.4),
               borderRadius: BorderRadius.circular(12),
               boxShadow: widget.enabled && _isHovered

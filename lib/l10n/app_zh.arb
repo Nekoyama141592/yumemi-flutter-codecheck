@@ -11,6 +11,10 @@
   "@editTokenTitle": {
     "description": "Dialog title for editing the token"
   },
+  "editTokenSubtitle": "管理您的 GitHub 访问令牌",
+  "@editTokenSubtitle": {
+    "description": "Subtitle shown under the edit token dialog title"
+  },
   "tokenLabel": "令牌",
   "@tokenLabel": {
     "description": "Label for token text field"
@@ -30,6 +34,14 @@
   "save": "保存",
   "@save": {
     "description": "Save button label"
+  },
+  "tokenVisibilityShow": "显示令牌",
+  "@tokenVisibilityShow": {
+    "description": "Tooltip for revealing the token text"
+  },
+  "tokenVisibilityHide": "隐藏令牌",
+  "@tokenVisibilityHide": {
+    "description": "Tooltip for hiding the token text"
   },
   "repositoryName": "仓库名",
   "@repositoryName": {"description": "Label for repository name"},

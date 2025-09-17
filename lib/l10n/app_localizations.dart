@@ -118,6 +118,12 @@ abstract class AppLocalizations {
   /// **'Edit Token'**
   String get editTokenTitle;
 
+  /// Subtitle shown under the edit token dialog title
+  ///
+  /// In en, this message translates to:
+  /// **'Manage your GitHub access token'**
+  String get editTokenSubtitle;
+
   /// Label for token text field
   ///
   /// In en, this message translates to:
@@ -147,6 +153,18 @@ abstract class AppLocalizations {
   /// In en, this message translates to:
   /// **'Save'**
   String get save;
+
+  /// Tooltip for revealing the token text
+  ///
+  /// In en, this message translates to:
+  /// **'Show token'**
+  String get tokenVisibilityShow;
+
+  /// Tooltip for hiding the token text
+  ///
+  /// In en, this message translates to:
+  /// **'Hide token'**
+  String get tokenVisibilityHide;
 
   /// Label for repository name
   ///

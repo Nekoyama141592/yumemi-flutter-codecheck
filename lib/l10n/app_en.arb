@@ -11,6 +11,10 @@
   "@editTokenTitle": {
     "description": "Dialog title for editing the token"
   },
+  "editTokenSubtitle": "Manage your GitHub access token",
+  "@editTokenSubtitle": {
+    "description": "Subtitle shown under the edit token dialog title"
+  },
   "tokenLabel": "Token",
   "@tokenLabel": {
     "description": "Label for token text field"
@@ -30,6 +34,14 @@
   "save": "Save",
   "@save": {
     "description": "Save button label"
+  },
+  "tokenVisibilityShow": "Show token",
+  "@tokenVisibilityShow": {
+    "description": "Tooltip for revealing the token text"
+  },
+  "tokenVisibilityHide": "Hide token",
+  "@tokenVisibilityHide": {
+    "description": "Tooltip for hiding the token text"
   },
   "repositoryName": "Repository",
   "@repositoryName": {"description": "Label for repository name"},

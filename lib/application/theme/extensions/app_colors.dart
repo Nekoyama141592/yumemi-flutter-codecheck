@@ -98,14 +98,25 @@ class AppColors extends ThemeExtension<AppColors> {
       secondary: Color.lerp(secondary, other.secondary, t) ?? secondary,
       accent: Color.lerp(accent, other.accent, t) ?? accent,
       border: Color.lerp(border, other.border, t) ?? border,
-      dialogBackground: Color.lerp(dialogBackground, other.dialogBackground, t) ?? dialogBackground,
-      dialogBorder: Color.lerp(dialogBorder, other.dialogBorder, t) ?? dialogBorder,
-      inputBackground: Color.lerp(inputBackground, other.inputBackground, t) ?? inputBackground,
+      dialogBackground:
+          Color.lerp(dialogBackground, other.dialogBackground, t) ??
+          dialogBackground,
+      dialogBorder:
+          Color.lerp(dialogBorder, other.dialogBorder, t) ?? dialogBorder,
+      inputBackground:
+          Color.lerp(inputBackground, other.inputBackground, t) ??
+          inputBackground,
       inputBorder: Color.lerp(inputBorder, other.inputBorder, t) ?? inputBorder,
-      inputFocusedBorder: Color.lerp(inputFocusedBorder, other.inputFocusedBorder, t) ?? inputFocusedBorder,
-      buttonSuccess: Color.lerp(buttonSuccess, other.buttonSuccess, t) ?? buttonSuccess,
-      buttonDanger: Color.lerp(buttonDanger, other.buttonDanger, t) ?? buttonDanger,
-      buttonSecondary: Color.lerp(buttonSecondary, other.buttonSecondary, t) ?? buttonSecondary,
+      inputFocusedBorder:
+          Color.lerp(inputFocusedBorder, other.inputFocusedBorder, t) ??
+          inputFocusedBorder,
+      buttonSuccess:
+          Color.lerp(buttonSuccess, other.buttonSuccess, t) ?? buttonSuccess,
+      buttonDanger:
+          Color.lerp(buttonDanger, other.buttonDanger, t) ?? buttonDanger,
+      buttonSecondary:
+          Color.lerp(buttonSecondary, other.buttonSecondary, t) ??
+          buttonSecondary,
       shadow: Color.lerp(shadow, other.shadow, t) ?? shadow,
     );
   }

@@ -18,6 +18,9 @@ class AppLocalizationsEn extends AppLocalizations {
   String get editTokenTitle => 'Edit Token';
 
   @override
+  String get editTokenSubtitle => 'Manage your GitHub access token';
+
+  @override
   String get tokenLabel => 'Token';
 
   @override
@@ -31,6 +34,12 @@ class AppLocalizationsEn extends AppLocalizations {
 
   @override
   String get save => 'Save';
+
+  @override
+  String get tokenVisibilityShow => 'Show token';
+
+  @override
+  String get tokenVisibilityHide => 'Hide token';
 
   @override
   String get repositoryName => 'Repository';

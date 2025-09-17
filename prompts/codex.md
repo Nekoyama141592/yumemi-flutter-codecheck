@@ -111,3 +111,5 @@ A RenderFlex overflowed by 73 pixels on the bottom.」という上にオーバ�
 54. integration_test/token_registration_test.dartで画面右上のアイコンをタップし、'example-token'というトークンを登録、その後再度アイコンをタップしてフォームに値が入っていることを確認、キャンセルし、さらにもう一度アイコンをタップしてトークン削除を行う統合テストを追加してください。
 
 55. integration_test/token_registration_test.dartのテスト内容をintegration_test/e2e_test.dartのEnd-to-end: search → open detail → backの最初含めるようにしてください。完了したらintegration_test/token_registration_test.dartを削除してください。
+
+56. lib/presentation/common/edit_token_dialog/edit_token_dialog.dartの翻訳されていない箇所を翻訳して。

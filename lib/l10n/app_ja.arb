@@ -11,6 +11,10 @@
   "@editTokenTitle": {
     "description": "Dialog title for editing the token"
   },
+  "editTokenSubtitle": "GitHubアクセストークンを管理",
+  "@editTokenSubtitle": {
+    "description": "Subtitle shown under the edit token dialog title"
+  },
   "tokenLabel": "トークン",
   "@tokenLabel": {
     "description": "Label for token text field"
@@ -30,6 +34,14 @@
   "save": "保存",
   "@save": {
     "description": "Save button label"
+  },
+  "tokenVisibilityShow": "表示する",
+  "@tokenVisibilityShow": {
+    "description": "Tooltip for revealing the token text"
+  },
+  "tokenVisibilityHide": "非表示にする",
+  "@tokenVisibilityHide": {
+    "description": "Tooltip for hiding the token text"
   },
   "repositoryName": "リポジトリ名",
   "@repositoryName": {"description": "Label for repository name"},
