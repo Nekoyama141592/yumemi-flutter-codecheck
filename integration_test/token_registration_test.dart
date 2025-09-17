@@ -26,11 +26,10 @@ void main() {
       ProviderScope(
         overrides: [
           prefsProvider.overrideWithValue(prefs),
-          githubApiClientProvider(token: null)
-              .overrideWithValue(FakeGitHubApiClient()),
-          secureStorageRepositoryProvider.overrideWithValue(
-            fakeSecureStorage,
-          ),
+          githubApiClientProvider(
+            token: null,
+          ).overrideWithValue(FakeGitHubApiClient()),
+          secureStorageRepositoryProvider.overrideWithValue(fakeSecureStorage),
         ],
         child: const App(),
       ),
