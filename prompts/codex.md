@@ -115,3 +115,5 @@ A RenderFlex overflowed by 73 pixels on the bottom.」という上にオーバ�
 56. lib/presentation/common/edit_token_dialog/edit_token_dialog.dartの翻訳されていない箇所を翻訳して。
 
 57. test/presentation/page/my_home/componentsのWidgetテストで共通化できる要素があればtest/presentation/helpersに共通化して。
+
+58. lib/presentation/common/edit_token_dialog/components/edit_token_dialog_buttons.dartのStatefulWidgetでの実装箇所をHookWidgetに変更して。

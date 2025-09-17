@@ -1,8 +1,9 @@
 import 'package:flutter/material.dart';
+import 'package:flutter_hooks/flutter_hooks.dart';
 import 'package:yumemi_flutter_codecheck/application/theme/extensions/app_colors.dart';
 import 'package:yumemi_flutter_codecheck/presentation/common/edit_token_dialog/components/edit_token_dialog_keys.dart';
 
-class EditTokenCancelButton extends StatefulWidget {
+class EditTokenCancelButton extends HookWidget {
   const EditTokenCancelButton({
     super.key,
     required this.label,
@@ -13,56 +14,38 @@ class EditTokenCancelButton extends StatefulWidget {
   final VoidCallback onPressed;
 
   @override
-  State<EditTokenCancelButton> createState() => _EditTokenCancelButtonState();
-}
-
-class _EditTokenCancelButtonState extends State<EditTokenCancelButton>
-    with SingleTickerProviderStateMixin {
-  late AnimationController _animationController;
-  late Animation<double> _scaleAnimation;
-  bool _isHovered = false;
-
-  @override
-  void initState() {
-    super.initState();
-    _animationController = AnimationController(
-      duration: const Duration(milliseconds: 150),
-      vsync: this,
-    );
-    _scaleAnimation = Tween<double>(begin: 1.0, end: 0.95).animate(
-      CurvedAnimation(parent: _animationController, curve: Curves.easeInOut),
-    );
-  }
-
-  @override
-  void dispose() {
-    _animationController.dispose();
-    super.dispose();
-  }
-
-  @override
   Widget build(BuildContext context) {
     final appColors = Theme.of(context).extension<AppColors>()!;
+    final isHovered = useState(false);
+    final animationController = useAnimationController(
+      duration: const Duration(milliseconds: 150),
+    );
+    final scaleAnimation = useMemoized(
+      () => Tween<double>(begin: 1.0, end: 0.95).animate(
+        CurvedAnimation(parent: animationController, curve: Curves.easeInOut),
+      ),
+      [animationController],
+    );
 
     return MouseRegion(
-      onEnter: (_) => setState(() => _isHovered = true),
-      onExit: (_) => setState(() => _isHovered = false),
+      onEnter: (_) => isHovered.value = true,
+      onExit: (_) => isHovered.value = false,
       child: GestureDetector(
-        onTapDown: (_) => _animationController.forward(),
-        onTapUp: (_) => _animationController.reverse(),
-        onTapCancel: () => _animationController.reverse(),
+        onTapDown: (_) => animationController.forward(),
+        onTapUp: (_) => animationController.reverse(),
+        onTapCancel: () => animationController.reverse(),
         child: ScaleTransition(
-          scale: _scaleAnimation,
+          scale: scaleAnimation,
           child: AnimatedContainer(
             duration: const Duration(milliseconds: 200),
             padding: const EdgeInsets.symmetric(horizontal: 20, vertical: 12),
             decoration: BoxDecoration(
-              color: _isHovered
+              color: isHovered.value
                   ? appColors.buttonSecondary.withValues(alpha: 0.8)
                   : appColors.buttonSecondary,
               borderRadius: BorderRadius.circular(12),
               border: Border.all(
-                color: _isHovered
+                color: isHovered.value
                     ? appColors.border.withValues(alpha: 0.6)
                     : appColors.border,
                 width: 1,
@@ -70,14 +53,14 @@ class _EditTokenCancelButtonState extends State<EditTokenCancelButton>
             ),
             child: TextButton(
               key: editTokenCancelButtonKey,
-              onPressed: widget.onPressed,
+              onPressed: onPressed,
               style: TextButton.styleFrom(
                 padding: EdgeInsets.zero,
                 minimumSize: Size.zero,
                 tapTargetSize: MaterialTapTargetSize.shrinkWrap,
               ),
               child: Text(
-                widget.label,
+                label,
                 style: TextStyle(
                   color: appColors.onSurface,
                   fontSize: 14,
@@ -92,7 +75,7 @@ class _EditTokenCancelButtonState extends State<EditTokenCancelButton>
   }
 }
 
-class EditTokenDeleteButton extends StatefulWidget {
+class EditTokenDeleteButton extends HookWidget {
   const EditTokenDeleteButton({
     super.key,
     required this.label,
@@ -105,58 +88,44 @@ class EditTokenDeleteButton extends StatefulWidget {
   final bool enabled;
 
   @override
-  State<EditTokenDeleteButton> createState() => _EditTokenDeleteButtonState();
-}
-
-class _EditTokenDeleteButtonState extends State<EditTokenDeleteButton>
-    with SingleTickerProviderStateMixin {
-  late AnimationController _animationController;
-  late Animation<double> _scaleAnimation;
-  bool _isHovered = false;
-
-  @override
-  void initState() {
-    super.initState();
-    _animationController = AnimationController(
-      duration: const Duration(milliseconds: 150),
-      vsync: this,
-    );
-    _scaleAnimation = Tween<double>(begin: 1.0, end: 0.95).animate(
-      CurvedAnimation(parent: _animationController, curve: Curves.easeInOut),
-    );
-  }
-
-  @override
-  void dispose() {
-    _animationController.dispose();
-    super.dispose();
-  }
-
-  @override
   Widget build(BuildContext context) {
     final appColors = Theme.of(context).extension<AppColors>()!;
+    final isHovered = useState(false);
+    final animationController = useAnimationController(
+      duration: const Duration(milliseconds: 150),
+    );
+    final scaleAnimation = useMemoized(
+      () => Tween<double>(begin: 1.0, end: 0.95).animate(
+        CurvedAnimation(parent: animationController, curve: Curves.easeInOut),
+      ),
+      [animationController],
+    );
+
+    void handleTapDown(_) {
+      if (!enabled) return;
+      animationController.forward();
+    }
 
     return MouseRegion(
-      onEnter: (_) => widget.enabled ? setState(() => _isHovered = true) : null,
-      onExit: (_) => setState(() => _isHovered = false),
+      onEnter: (_) => enabled ? isHovered.value = true : null,
+      onExit: (_) => isHovered.value = false,
       child: GestureDetector(
-        onTapDown: (_) =>
-            widget.enabled ? _animationController.forward() : null,
-        onTapUp: (_) => _animationController.reverse(),
-        onTapCancel: () => _animationController.reverse(),
+        onTapDown: handleTapDown,
+        onTapUp: (_) => animationController.reverse(),
+        onTapCancel: () => animationController.reverse(),
         child: ScaleTransition(
-          scale: _scaleAnimation,
+          scale: scaleAnimation,
           child: AnimatedContainer(
             duration: const Duration(milliseconds: 200),
             padding: const EdgeInsets.symmetric(horizontal: 20, vertical: 12),
             decoration: BoxDecoration(
-              color: widget.enabled
-                  ? (_isHovered
+              color: enabled
+                  ? (isHovered.value
                         ? appColors.buttonDanger.withValues(alpha: 0.9)
                         : appColors.buttonDanger)
                   : appColors.buttonDanger.withValues(alpha: 0.4),
               borderRadius: BorderRadius.circular(12),
-              boxShadow: widget.enabled && _isHovered
+              boxShadow: enabled && isHovered.value
                   ? [
                       BoxShadow(
                         color: appColors.buttonDanger.withValues(alpha: 0.3),
@@ -168,7 +137,7 @@ class _EditTokenDeleteButtonState extends State<EditTokenDeleteButton>
             ),
             child: TextButton(
               key: editTokenDeleteButtonKey,
-              onPressed: widget.enabled ? widget.onPressed : null,
+              onPressed: enabled ? onPressed : null,
               style: TextButton.styleFrom(
                 padding: EdgeInsets.zero,
                 minimumSize: Size.zero,
@@ -180,16 +149,14 @@ class _EditTokenDeleteButtonState extends State<EditTokenDeleteButton>
                   Icon(
                     Icons.delete_rounded,
                     size: 16,
-                    color: Colors.white.withValues(
-                      alpha: widget.enabled ? 1.0 : 0.6,
-                    ),
+                    color: Colors.white.withValues(alpha: enabled ? 1.0 : 0.6),
                   ),
                   const SizedBox(width: 6),
                   Text(
-                    widget.label,
+                    label,
                     style: TextStyle(
                       color: Colors.white.withValues(
-                        alpha: widget.enabled ? 1.0 : 0.6,
+                        alpha: enabled ? 1.0 : 0.6,
                       ),
                       fontSize: 14,
                       fontWeight: FontWeight.w500,
@@ -205,7 +172,7 @@ class _EditTokenDeleteButtonState extends State<EditTokenDeleteButton>
   }
 }
 
-class EditTokenSaveButton extends StatefulWidget {
+class EditTokenSaveButton extends HookWidget {
   const EditTokenSaveButton({
     super.key,
     required this.label,
@@ -216,60 +183,45 @@ class EditTokenSaveButton extends StatefulWidget {
   final String label;
   final VoidCallback onPressed;
   final bool enabled;
-
-  @override
-  State<EditTokenSaveButton> createState() => _EditTokenSaveButtonState();
-}
-
-class _EditTokenSaveButtonState extends State<EditTokenSaveButton>
-    with SingleTickerProviderStateMixin {
-  late AnimationController _animationController;
-  late Animation<double> _scaleAnimation;
-  bool _isHovered = false;
-
-  @override
-  void initState() {
-    super.initState();
-    _animationController = AnimationController(
-      duration: const Duration(milliseconds: 150),
-      vsync: this,
-    );
-    _scaleAnimation = Tween<double>(begin: 1.0, end: 0.95).animate(
-      CurvedAnimation(parent: _animationController, curve: Curves.easeInOut),
-    );
-  }
-
-  @override
-  void dispose() {
-    _animationController.dispose();
-    super.dispose();
-  }
-
   @override
   Widget build(BuildContext context) {
     final appColors = Theme.of(context).extension<AppColors>()!;
+    final isHovered = useState(false);
+    final animationController = useAnimationController(
+      duration: const Duration(milliseconds: 150),
+    );
+    final scaleAnimation = useMemoized(
+      () => Tween<double>(begin: 1.0, end: 0.95).animate(
+        CurvedAnimation(parent: animationController, curve: Curves.easeInOut),
+      ),
+      [animationController],
+    );
+
+    void handleTapDown(_) {
+      if (!enabled) return;
+      animationController.forward();
+    }
 
     return MouseRegion(
-      onEnter: (_) => widget.enabled ? setState(() => _isHovered = true) : null,
-      onExit: (_) => setState(() => _isHovered = false),
+      onEnter: (_) => enabled ? isHovered.value = true : null,
+      onExit: (_) => isHovered.value = false,
       child: GestureDetector(
-        onTapDown: (_) =>
-            widget.enabled ? _animationController.forward() : null,
-        onTapUp: (_) => _animationController.reverse(),
-        onTapCancel: () => _animationController.reverse(),
+        onTapDown: handleTapDown,
+        onTapUp: (_) => animationController.reverse(),
+        onTapCancel: () => animationController.reverse(),
         child: ScaleTransition(
-          scale: _scaleAnimation,
+          scale: scaleAnimation,
           child: AnimatedContainer(
             duration: const Duration(milliseconds: 200),
             padding: const EdgeInsets.symmetric(horizontal: 24, vertical: 12),
             decoration: BoxDecoration(
-              color: widget.enabled
-                  ? (_isHovered
+              color: enabled
+                  ? (isHovered.value
                         ? appColors.buttonSuccess.withValues(alpha: 0.9)
                         : appColors.buttonSuccess)
                   : appColors.buttonSuccess.withValues(alpha: 0.4),
               borderRadius: BorderRadius.circular(12),
-              boxShadow: widget.enabled && _isHovered
+              boxShadow: enabled && isHovered.value
                   ? [
                       BoxShadow(
                         color: appColors.buttonSuccess.withValues(alpha: 0.3),
@@ -281,7 +233,7 @@ class _EditTokenSaveButtonState extends State<EditTokenSaveButton>
             ),
             child: ElevatedButton(
               key: editTokenSaveButtonKey,
-              onPressed: widget.enabled ? widget.onPressed : null,
+              onPressed: enabled ? onPressed : null,
               style: ElevatedButton.styleFrom(
                 backgroundColor: Colors.transparent,
                 foregroundColor: Colors.white,
@@ -297,16 +249,14 @@ class _EditTokenSaveButtonState extends State<EditTokenSaveButton>
                   Icon(
                     Icons.save_rounded,
                     size: 16,
-                    color: Colors.white.withValues(
-                      alpha: widget.enabled ? 1.0 : 0.6,
-                    ),
+                    color: Colors.white.withValues(alpha: enabled ? 1.0 : 0.6),
                   ),
                   const SizedBox(width: 6),
                   Text(
-                    widget.label,
+                    label,
                     style: TextStyle(
                       color: Colors.white.withValues(
-                        alpha: widget.enabled ? 1.0 : 0.6,
+                        alpha: enabled ? 1.0 : 0.6,
                       ),
                       fontSize: 14,
                       fontWeight: FontWeight.w600,
