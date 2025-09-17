@@ -29,4 +29,4 @@
 
 26. lib/presentation/common/edit_token_dialogのWidgetテストが不十分であれば追加で実装を行なってください。
 
-27. 
+27. README.mdをとにかくおしゃれに装飾してください。
