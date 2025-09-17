@@ -86,12 +86,12 @@ graph TD
 
 ```
 📦 lib/
-├── 📋 application/     ← ルーター、テーマ、フレーバー設定
-├── ⚙️ core/            ← 共通プロバイダ・ユーティリティ
-├── 🎯 domain/          ← エンティティとリポジトリインターフェース
-├── 🔧 infrastructure/ ← APIクライアント・モデル・リポジトリ実装
-├── 🎨 presentation/    ← UI、状態、コンポーネント
-└── 🌐 l10n/           ← ローカライズファイル
+├── 📋 application/← ルーター、テーマ、フレーバー設定
+├── ⚙️ core/← 共通プロバイダ・ユーティリティ
+├── 🎯 domain/← エンティティとリポジトリインターフェース
+├── 🔧 infrastructure/← APIクライアント・モデル・リポジトリ実装
+├── 🎨 presentation/← UI、状態、コンポーネント
+└── 🌐 l10n/← ローカライズファイル
 
 📦 test/               ← テストコード (lib/と同じ構造)
 ├── 🧪 infrastructure/
