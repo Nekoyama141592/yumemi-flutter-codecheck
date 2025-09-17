@@ -2,7 +2,7 @@ import 'package:flutter/material.dart';
 import 'package:flutter_test/flutter_test.dart';
 import 'package:yumemi_flutter_codecheck/application/theme/extensions/app_colors.dart';
 import 'package:yumemi_flutter_codecheck/presentation/page/my_home/components/search_section.dart';
-import 'test_helper.dart';
+import '../../../helpers/widget_test_helpers.dart';
 
 void main() {
   group('SearchSection', () {
@@ -10,26 +10,7 @@ void main() {
     late TextEditingController searchController;
 
     setUp(() {
-      appColors = const AppColors(
-        primary: Colors.blue,
-        secondary: Colors.grey,
-        accent: Colors.red,
-        surface: Colors.white,
-        cardBackground: Colors.grey,
-        onSurface: Colors.black,
-        border: Colors.grey,
-        tokenOn: Colors.green,
-        tokenOff: Colors.red,
-        dialogBackground: Colors.white,
-        dialogBorder: Colors.grey,
-        inputBackground: Colors.white,
-        inputBorder: Colors.grey,
-        inputFocusedBorder: Colors.blue,
-        buttonSuccess: Colors.green,
-        buttonDanger: Colors.red,
-        buttonSecondary: Colors.grey,
-        shadow: Colors.black,
-      );
+      appColors = createTestAppColors();
       searchController = TextEditingController();
     });
 

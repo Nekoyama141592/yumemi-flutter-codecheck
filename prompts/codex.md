@@ -113,3 +113,5 @@ A RenderFlex overflowed by 73 pixels on the bottom.」という上にオーバ�
 55. integration_test/token_registration_test.dartのテスト内容をintegration_test/e2e_test.dartのEnd-to-end: search → open detail → backの最初含めるようにしてください。完了したらintegration_test/token_registration_test.dartを削除してください。
 
 56. lib/presentation/common/edit_token_dialog/edit_token_dialog.dartの翻訳されていない箇所を翻訳して。
+
+57. test/presentation/page/my_home/componentsのWidgetテストで共通化できる要素があればtest/presentation/helpersに共通化して。

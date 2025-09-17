@@ -3,6 +3,7 @@ import 'package:flutter_test/flutter_test.dart';
 import 'package:yumemi_flutter_codecheck/application/theme/extensions/app_colors.dart';
 import 'package:yumemi_flutter_codecheck/domain/entity/search_repositories_item/search_repositories_item_entity.dart';
 import 'package:yumemi_flutter_codecheck/presentation/page/my_home/components/repository_card.dart';
+import '../../../helpers/widget_test_helpers.dart';
 
 void main() {
   group('RepositoryCard', () {
@@ -10,27 +11,7 @@ void main() {
     late SearchRepositoriesItemEntity mockRepo;
 
     setUp(() {
-      appColors = const AppColors(
-        primary: Colors.blue,
-        secondary: Colors.grey,
-        accent: Colors.red,
-        surface: Colors.white,
-        cardBackground: Colors.grey,
-        onSurface: Colors.black,
-        border: Colors.grey,
-        tokenOn: Colors.green,
-        tokenOff: Colors.red,
-        dialogBackground: Colors.white,
-        dialogBorder: Colors.grey,
-        inputBackground: Colors.white,
-        inputBorder: Colors.grey,
-        inputFocusedBorder: Colors.blue,
-        buttonSuccess: Colors.green,
-        buttonDanger: Colors.red,
-        buttonSecondary: Colors.grey,
-        shadow: Colors.black,
-      );
-
+      appColors = createTestAppColors();
       mockRepo = const SearchRepositoriesItemEntity(
         fullName: 'flutter/flutter',
         name: 'flutter',
@@ -38,13 +19,11 @@ void main() {
     });
 
     Widget createTestWidget({VoidCallback? onTap}) {
-      return MaterialApp(
-        home: Scaffold(
-          body: RepositoryCard(
-            appColors: appColors,
-            repo: mockRepo,
-            onTap: onTap ?? () {},
-          ),
+      return createMaterialAppTestWidget(
+        child: RepositoryCard(
+          appColors: appColors,
+          repo: mockRepo,
+          onTap: onTap ?? () {},
         ),
       );
     }
@@ -84,13 +63,11 @@ void main() {
       );
 
       await tester.pumpWidget(
-        MaterialApp(
-          home: Scaffold(
-            body: RepositoryCard(
-              appColors: appColors,
-              repo: longNameRepo,
-              onTap: () {},
-            ),
+        createMaterialAppTestWidget(
+          child: RepositoryCard(
+            appColors: appColors,
+            repo: longNameRepo,
+            onTap: () {},
           ),
         ),
       );
