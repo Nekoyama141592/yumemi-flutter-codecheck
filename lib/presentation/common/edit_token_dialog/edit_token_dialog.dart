@@ -58,6 +58,27 @@ class EditTokenDialog extends HookConsumerWidget {
     }
 
     final appColors = Theme.of(context).extension<AppColors>()!;
+    final screenSize = MediaQuery.of(context).size;
+    final shortestSide = screenSize.shortestSide;
+    final dialogWidth = shortestSide * 0.85;
+    final dialogConstraints = BoxConstraints(
+      maxWidth: shortestSide * 0.9,
+      maxHeight: screenSize.height * 0.9,
+    );
+    final dialogPadding = EdgeInsets.symmetric(
+      horizontal: screenSize.width * 0.06,
+      vertical: screenSize.height * 0.05,
+    );
+    final headerSpacing = screenSize.height * 0.015;
+    final subtitleSpacing = headerSpacing * 0.6;
+    final sectionSpacing = screenSize.height * 0.04;
+    final buttonSpacing = screenSize.height * 0.02;
+    final iconContainerPadding = EdgeInsets.all(shortestSide * 0.025);
+    final inputPrefixPadding = EdgeInsets.all(shortestSide * 0.03);
+    final contentPadding = EdgeInsets.all(shortestSide * 0.035);
+    final progressHeight = screenSize.height * 0.12;
+    final progressSize = shortestSide * 0.05;
+    final horizontalGap = screenSize.width * 0.04;
     final animationController = useAnimationController(
       duration: const Duration(milliseconds: 400),
     );
@@ -103,8 +124,8 @@ class EditTokenDialog extends HookConsumerWidget {
               backgroundColor: Colors.transparent,
               elevation: 0,
               child: Container(
-                width: 420,
-                constraints: const BoxConstraints(maxWidth: 500),
+                width: dialogWidth,
+                constraints: dialogConstraints,
                 decoration: BoxDecoration(
                   color: appColors.dialogBackground,
                   borderRadius: BorderRadius.circular(24),
@@ -125,7 +146,7 @@ class EditTokenDialog extends HookConsumerWidget {
                   ],
                 ),
                 child: Padding(
-                  padding: const EdgeInsets.all(32),
+                  padding: dialogPadding,
                   child: Column(
                     mainAxisSize: MainAxisSize.min,
                     crossAxisAlignment: CrossAxisAlignment.stretch,
@@ -133,7 +154,7 @@ class EditTokenDialog extends HookConsumerWidget {
                       Row(
                         children: [
                           Container(
-                            padding: const EdgeInsets.all(12),
+                            padding: iconContainerPadding,
                             decoration: BoxDecoration(
                               color: appColors.primary.withValues(alpha: 0.1),
                               borderRadius: BorderRadius.circular(12),
@@ -144,7 +165,7 @@ class EditTokenDialog extends HookConsumerWidget {
                               size: 24,
                             ),
                           ),
-                          const SizedBox(width: 16),
+                          SizedBox(width: horizontalGap),
                           Expanded(
                             child: Column(
                               crossAxisAlignment: CrossAxisAlignment.start,
@@ -158,7 +179,7 @@ class EditTokenDialog extends HookConsumerWidget {
                                     letterSpacing: -0.5,
                                   ),
                                 ),
-                                const SizedBox(height: 4),
+                                SizedBox(height: subtitleSpacing),
                                 Text(
                                   AppLocalizations.of(
                                     context,
@@ -173,10 +194,10 @@ class EditTokenDialog extends HookConsumerWidget {
                           ),
                         ],
                       ),
-                      const SizedBox(height: 32),
+                      SizedBox(height: sectionSpacing),
                       if (loading.value)
                         Container(
-                          height: 80,
+                          height: progressHeight,
                           decoration: BoxDecoration(
                             color: appColors.inputBackground,
                             borderRadius: BorderRadius.circular(16),
@@ -187,8 +208,8 @@ class EditTokenDialog extends HookConsumerWidget {
                           ),
                           child: Center(
                             child: SizedBox(
-                              width: 24,
-                              height: 24,
+                              width: progressSize,
+                              height: progressSize,
                               child: CircularProgressIndicator(
                                 strokeWidth: 2.5,
                                 color: appColors.primary,
@@ -235,7 +256,7 @@ class EditTokenDialog extends HookConsumerWidget {
                                 fontSize: 14,
                               ),
                               prefixIcon: Padding(
-                                padding: const EdgeInsets.all(16),
+                                padding: inputPrefixPadding,
                                 child: Icon(
                                   Icons.key_rounded,
                                   color: appColors.secondary,
@@ -267,13 +288,13 @@ class EditTokenDialog extends HookConsumerWidget {
                                 ),
                               ),
                               border: InputBorder.none,
-                              contentPadding: const EdgeInsets.all(20),
+                              contentPadding: contentPadding,
                               floatingLabelBehavior:
                                   FloatingLabelBehavior.never,
                             ),
                           ),
                         ),
-                      const SizedBox(height: 32),
+                      SizedBox(height: sectionSpacing),
                       Column(
                         crossAxisAlignment: CrossAxisAlignment.stretch,
                         children: [
@@ -285,7 +306,7 @@ class EditTokenDialog extends HookConsumerWidget {
                             },
                             enabled: !loading.value,
                           ),
-                          const SizedBox(height: 12),
+                          SizedBox(height: buttonSpacing),
                           EditTokenDeleteButton(
                             label: AppLocalizations.of(context)!.delete,
                             onPressed: () {
@@ -294,7 +315,7 @@ class EditTokenDialog extends HookConsumerWidget {
                             },
                             enabled: !loading.value,
                           ),
-                          const SizedBox(height: 12),
+                          SizedBox(height: buttonSpacing),
                           EditTokenCancelButton(
                             label: AppLocalizations.of(context)!.cancel,
                             onPressed: () {
