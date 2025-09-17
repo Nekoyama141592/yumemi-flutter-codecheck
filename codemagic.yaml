@@ -95,3 +95,100 @@ workflows:
       app_store_connect:
         auth: integration
         submit_to_testflight: true
+
+  android-push-store-dev:
+    environment:
+      flutter: v3.32.2
+      android_signing:
+        - keystore_reference
+      groups:
+        - yumemi_flutter_codecheck_dev
+
+    triggering:
+      events:
+        - tag
+      tag_patterns:
+        - pattern: android-push*
+          include: true
+      cancel_previous_builds: true
+
+    cache:
+      cache_paths:
+        - ~/.pub-cache
+        - .dart_tool
+        - .packages
+        - .flutter-plugins
+        - .flutter-plugin-dependencies
+
+    scripts:
+      - name: flutter clean
+        script: flutter clean
+      - name: Install dependencies
+        script: flutter pub get
+      - name: Build AAB
+        script: flutter build appbundle --release --flavor dev
+    
+    artifacts:
+      - build/**/outputs/**/*.aab
+      - build/**/outputs/**/mapping.txt
+      - flutter_drive.log
+
+    publishing:
+      email:
+        recipients:
+          - dev.test@example.com
+        notify:
+          success: true
+          failure: true
+      google_play: 
+        credentials: $GCLOUD_SERVICE_ACCOUNT_CREDENTIALS
+        track: internal
+        submit_as_draft: true
+  android-push-store-prod:
+    environment:
+      flutter: v3.32.2
+      android_signing:
+        - keystore_reference
+      groups:
+        - yumemi_flutter_codecheck_prod
+
+    triggering:
+      events:
+        - tag
+      tag_patterns:
+        - pattern: android-push*
+          include: true
+      cancel_previous_builds: true
+
+    cache:
+      cache_paths:
+        - ~/.pub-cache
+        - .dart_tool
+        - .packages
+        - .flutter-plugins
+        - .flutter-plugin-dependencies
+
+    scripts:
+      - name: flutter clean
+        script: flutter clean
+      - name: Install dependencies
+        script: flutter pub get
+      - name: Build AAB
+        script: flutter build appbundle --release --flavor prod
+    
+    artifacts:
+      - build/**/outputs/**/*.aab
+      - build/**/outputs/**/mapping.txt
+      - flutter_drive.log
+
+    publishing:
+      email:
+        recipients:
+          - dev.test@example.com
+        notify:
+          success: true
+          failure: true
+      google_play: 
+        credentials: $GCLOUD_SERVICE_ACCOUNT_CREDENTIALS
+        track: internal
+        submit_as_draft: true
