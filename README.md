@@ -107,9 +107,11 @@ graph TD
 <details>
 <summary><strong>📱 1. 環境を整備</strong></summary>
 
-Flutter: 3.35.3
-Android Studio: Android Studio Ladybug Feature Drop
-XCode: 16.2
+| ツール              | バージョン                       |
+|---------------------|----------------------------------|
+| Flutter             | 3.35.3                           |
+| Android Studio      | Ladybug Feature Drop              |
+| Xcode               | 16.2                             |
 
 </details>
 
