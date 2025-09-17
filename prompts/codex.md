@@ -99,3 +99,15 @@ A RenderFlex overflowed by 73 pixels on the bottom.」という上にオーバ�
 48. 失敗するテストが通るように、テストファイルもしくは実装本体のファイルを修正して。
 
 49. RepositoryでUnitテストが行われていないものがあればモックを作ったり、Providerを上書きしたりして実装して
+
+50. integration_test/e2e_test.dartにE2Eの統合テストを実装して。
+
+51. integration_test/e2e_test.dartのdelayを充分な時間取るようにして
+
+52. integration_test/e2e_test.dartのawait tester.pageBack();が失敗するのでしっかりAppBarアイコンをタップしてページを戻るようにして
+
+53. lib/presentation/common/edit_token_dialog.dartの各ボタンをlib/presentation/common/componentsにクラスとして分割し、keyを設定して、integration_test/e2e_test.dartのテストでkeyからWidgetを見つけるようにしてください。
+
+54. integration_test/token_registration_test.dartで画面右上のアイコンをタップし、'example-token'というトークンを登録、その後再度アイコンをタップしてフォームに値が入っていることを確認、キャンセルし、さらにもう一度アイコンをタップしてトークン削除を行う統合テストを追加してください。
+
+55. integration_test/token_registration_test.dartのテスト内容をintegration_test/e2e_test.dartのEnd-to-end: search → open detail → backの最初含めるようにしてください。完了したらintegration_test/token_registration_test.dartを削除してください。
