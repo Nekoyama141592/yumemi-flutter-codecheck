@@ -9,7 +9,7 @@ import 'package:yumemi_flutter_codecheck/application/flavors.dart';
 import 'package:yumemi_flutter_codecheck/core/provider/overrides/prefs/prefs_provider.dart';
 import 'package:yumemi_flutter_codecheck/core/provider/datasource/github/github_api_client_provider.dart';
 import 'package:yumemi_flutter_codecheck/core/provider/repository/secure_storage/secure_storage_repository_provider.dart';
-
+import 'package:yumemi_flutter_codecheck/presentation/common/components/edit_token_dialog_keys.dart';
 import 'helpers/fakes.dart';
 
 void main() {
@@ -20,6 +20,7 @@ void main() {
     // Use in-memory SharedPreferences
     SharedPreferences.setMockInitialValues({});
     final prefs = await SharedPreferences.getInstance();
+    final fakeSecureStorage = FakeSecureStorageRepository();
 
     // Set flavor explicitly for tests
     F.appFlavor = Flavor.dev;
@@ -32,9 +33,7 @@ void main() {
           githubApiClientProvider(
             token: null,
           ).overrideWithValue(FakeGitHubApiClient()),
-          secureStorageRepositoryProvider.overrideWithValue(
-            FakeSecureStorageRepository(),
-          ),
+          secureStorageRepositoryProvider.overrideWithValue(fakeSecureStorage),
         ],
         child: const App(),
       ),
@@ -45,6 +44,73 @@ void main() {
 
     // Home header is visible
     expect(find.text('GitHub'), findsOneWidget);
+
+    final tokenButton = find.byIcon(Icons.vpn_key_rounded);
+    expect(tokenButton, findsOneWidget);
+
+    final textFieldFinder = find.byKey(editTokenTextFieldKey);
+
+    Future<void> waitForTokenField() async {
+      for (var i = 0; i < 10; i++) {
+        if (textFieldFinder.evaluate().isNotEmpty) {
+          return;
+        }
+        await tester.pump(const Duration(milliseconds: 50));
+      }
+      fail('Token text field did not appear');
+    }
+
+    await tester.tap(tokenButton);
+    await tester.pump();
+    await tester.pump(const Duration(milliseconds: 200));
+    await waitForTokenField();
+
+    final firstTextField = tester.widget<TextField>(textFieldFinder);
+    expect(firstTextField.controller?.text ?? '', isEmpty);
+
+    await tester.enterText(textFieldFinder, 'example-token');
+    await tester.pump();
+
+    final saveButton = find.byKey(editTokenSaveButtonKey);
+    expect(saveButton, findsOneWidget);
+    await tester.tap(saveButton);
+    await tester.pump();
+    await tester.pump(const Duration(milliseconds: 200));
+
+    expect(await fakeSecureStorage.getToken(), 'example-token');
+
+    await tester.tap(tokenButton);
+    await tester.pump();
+    await waitForTokenField();
+
+    final secondTextField = tester.widget<TextField>(textFieldFinder);
+    expect(secondTextField.controller?.text, 'example-token');
+
+    final cancelButton = find.byKey(editTokenCancelButtonKey);
+    expect(cancelButton, findsOneWidget);
+    await tester.tap(cancelButton);
+    await tester.pump();
+    await tester.pump(const Duration(milliseconds: 200));
+
+    expect(await fakeSecureStorage.getToken(), 'example-token');
+
+    await tester.tap(tokenButton);
+    await tester.pump();
+    await waitForTokenField();
+
+    final thirdTextField = tester.widget<TextField>(textFieldFinder);
+    expect(thirdTextField.controller?.text, 'example-token');
+
+    final deleteButton = find.byKey(editTokenDeleteButtonKey);
+    expect(deleteButton, findsOneWidget);
+    await tester.tap(deleteButton);
+    await tester.pump();
+    await tester.pump(const Duration(milliseconds: 200));
+
+    expect(await fakeSecureStorage.getToken(), isNull);
+
+    await tester.pump(const Duration(milliseconds: 200));
+
     await tester.pump(const Duration(seconds: 10));
     // Two fake repositories are listed; pick one by its full name
     final repoTile = find.text('flutter/flutter');
