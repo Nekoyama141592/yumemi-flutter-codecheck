@@ -271,9 +271,6 @@ class EditTokenDialog extends HookConsumerWidget {
                               floatingLabelBehavior:
                                   FloatingLabelBehavior.never,
                             ),
-                            onChanged: (value) {
-                              // Trigger rebuild for border animation
-                            },
                           ),
                         ),
                       const SizedBox(height: 32),
