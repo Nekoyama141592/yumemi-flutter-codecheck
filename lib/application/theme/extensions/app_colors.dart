@@ -11,6 +11,15 @@ class AppColors extends ThemeExtension<AppColors> {
     required this.secondary,
     required this.accent,
     required this.border,
+    required this.dialogBackground,
+    required this.dialogBorder,
+    required this.inputBackground,
+    required this.inputBorder,
+    required this.inputFocusedBorder,
+    required this.buttonSuccess,
+    required this.buttonDanger,
+    required this.buttonSecondary,
+    required this.shadow,
   });
 
   final Color tokenOn;
@@ -22,6 +31,15 @@ class AppColors extends ThemeExtension<AppColors> {
   final Color secondary;
   final Color accent;
   final Color border;
+  final Color dialogBackground;
+  final Color dialogBorder;
+  final Color inputBackground;
+  final Color inputBorder;
+  final Color inputFocusedBorder;
+  final Color buttonSuccess;
+  final Color buttonDanger;
+  final Color buttonSecondary;
+  final Color shadow;
 
   @override
   AppColors copyWith({
@@ -34,6 +52,15 @@ class AppColors extends ThemeExtension<AppColors> {
     Color? secondary,
     Color? accent,
     Color? border,
+    Color? dialogBackground,
+    Color? dialogBorder,
+    Color? inputBackground,
+    Color? inputBorder,
+    Color? inputFocusedBorder,
+    Color? buttonSuccess,
+    Color? buttonDanger,
+    Color? buttonSecondary,
+    Color? shadow,
   }) {
     return AppColors(
       tokenOn: tokenOn ?? this.tokenOn,
@@ -45,6 +72,15 @@ class AppColors extends ThemeExtension<AppColors> {
       secondary: secondary ?? this.secondary,
       accent: accent ?? this.accent,
       border: border ?? this.border,
+      dialogBackground: dialogBackground ?? this.dialogBackground,
+      dialogBorder: dialogBorder ?? this.dialogBorder,
+      inputBackground: inputBackground ?? this.inputBackground,
+      inputBorder: inputBorder ?? this.inputBorder,
+      inputFocusedBorder: inputFocusedBorder ?? this.inputFocusedBorder,
+      buttonSuccess: buttonSuccess ?? this.buttonSuccess,
+      buttonDanger: buttonDanger ?? this.buttonDanger,
+      buttonSecondary: buttonSecondary ?? this.buttonSecondary,
+      shadow: shadow ?? this.shadow,
     );
   }
 
@@ -62,6 +98,26 @@ class AppColors extends ThemeExtension<AppColors> {
       secondary: Color.lerp(secondary, other.secondary, t) ?? secondary,
       accent: Color.lerp(accent, other.accent, t) ?? accent,
       border: Color.lerp(border, other.border, t) ?? border,
+      dialogBackground:
+          Color.lerp(dialogBackground, other.dialogBackground, t) ??
+          dialogBackground,
+      dialogBorder:
+          Color.lerp(dialogBorder, other.dialogBorder, t) ?? dialogBorder,
+      inputBackground:
+          Color.lerp(inputBackground, other.inputBackground, t) ??
+          inputBackground,
+      inputBorder: Color.lerp(inputBorder, other.inputBorder, t) ?? inputBorder,
+      inputFocusedBorder:
+          Color.lerp(inputFocusedBorder, other.inputFocusedBorder, t) ??
+          inputFocusedBorder,
+      buttonSuccess:
+          Color.lerp(buttonSuccess, other.buttonSuccess, t) ?? buttonSuccess,
+      buttonDanger:
+          Color.lerp(buttonDanger, other.buttonDanger, t) ?? buttonDanger,
+      buttonSecondary:
+          Color.lerp(buttonSecondary, other.buttonSecondary, t) ??
+          buttonSecondary,
+      shadow: Color.lerp(shadow, other.shadow, t) ?? shadow,
     );
   }
 }

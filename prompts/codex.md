@@ -111,3 +111,19 @@ A RenderFlex overflowed by 73 pixels on the bottom.」という上にオーバ�
 54. integration_test/token_registration_test.dartで画面右上のアイコンをタップし、'example-token'というトークンを登録、その後再度アイコンをタップしてフォームに値が入っていることを確認、キャンセルし、さらにもう一度アイコンをタップしてトークン削除を行う統合テストを追加してください。
 
 55. integration_test/token_registration_test.dartのテスト内容をintegration_test/e2e_test.dartのEnd-to-end: search → open detail → backの最初含めるようにしてください。完了したらintegration_test/token_registration_test.dartを削除してください。
+
+56. lib/presentation/common/edit_token_dialog/edit_token_dialog.dartの翻訳されていない箇所を翻訳して。
+
+57. test/presentation/page/my_home/componentsのWidgetテストで共通化できる要素があればtest/presentation/helpersに共通化して。
+
+58. lib/presentation/common/edit_token_dialog/components/edit_token_dialog_buttons.dartのStatefulWidgetでの実装箇所をHookWidgetに変更して。
+
+59. lib/presentation/common/edit_token_dialog/components/edit_token_dialog_buttons.dartの全てのクラスをlib/presentation/common/edit_token_dialog/componentsに分割し、最後にlib/presentation/common/edit_token_dialog/components/edit_token_dialog_buttons.dartを削除してください。
+
+60. test/presentation/commonのテストが失敗するので修正して。
+
+61. lib/presentation/common/edit_token_dialogのpaddingやheight, widthはハードコーディングするのではなく、どの端末の高さにも対応できるようにMediaQuery.of(context).sizeを使用するように修正してください。
+
+62. lib/presentation/common/edit_token_dialog/componentsの各ファイルのpaddingやheight, widthはハードコーディングするのではなく、どの端末の高さにも対応できるようにMediaQuery.of(context).sizeを使用するように修正してください。
+
+63. lib/presentation/common/edit_token_dialogやlib/presentation/common/edit_token_dialog/componentsの各ファイルでテキストのfontSizeやcircularも数値をハードコーディングするのではなく、どの端末の高さにも対応できるようにMediaQuery.of(context).sizeを使用するように修正してください。

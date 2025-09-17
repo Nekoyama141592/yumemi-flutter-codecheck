@@ -21,3 +21,10 @@
 20. lib/presentation/page/repository_item/repository_item_page.dartの複数のプライベートクラスを同階層のcomponentsフォルダ内に分割して新しいファイルを作成してパブリッククラスにして
 21. lib/presentation/page/my_home/componentsの全てのWidgetに対してWidgetテストを実装して。
 22. lib/presentation/page/repository_item/componentsの全てのWidgetに対してWidgetテストを実装して。
+23. lib/presentation/common/edit_token_dialogのデザインをもっとおしゃれでモダンで誰もが感動するようなデザインにして。また、使っていて楽しいアニメーションも追加して。ただ、絶対にグラデーションは使用しないでください。カラーは必ずlib/application/theme/dark_theme.dartとlib/application/theme/light_theme.dartに設定してからそれをTheme.of(context)から使用してください。
+
+24. lib/presentation/common/edit_token_dialog/edit_token_dialog.dartの横並びのボタンにて右に30ピクセルのオーバーフローが発生しているので修正して。
+
+25. lib/presentation/common/edit_token_dialog/edit_token_dialog.dartのボタンの並びを横並びではなく、縦に並べて横に長く表示するように変更して
+
+26. lib/presentation/common/edit_token_dialogのWidgetテストが不十分であれば追加で実装を行なってください。

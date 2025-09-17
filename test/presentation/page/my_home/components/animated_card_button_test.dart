@@ -1,6 +1,7 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_test/flutter_test.dart';
 import 'package:yumemi_flutter_codecheck/presentation/page/my_home/components/animated_card_button.dart';
+import '../../../helpers/widget_test_helpers.dart';
 
 void main() {
   group('AnimatedCardButton', () {
@@ -9,13 +10,11 @@ void main() {
       Widget? child,
       BorderRadius? borderRadius,
     }) {
-      return MaterialApp(
-        home: Scaffold(
-          body: AnimatedCardButton(
-            onTap: onTap ?? () {},
-            borderRadius: borderRadius ?? BorderRadius.circular(16),
-            child: child ?? const Text('Test Button'),
-          ),
+      return createMaterialAppTestWidget(
+        child: AnimatedCardButton(
+          onTap: onTap ?? () {},
+          borderRadius: borderRadius ?? BorderRadius.circular(16),
+          child: child ?? const Text('Test Button'),
         ),
       );
     }

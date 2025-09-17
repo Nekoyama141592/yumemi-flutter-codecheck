@@ -15,6 +15,15 @@ final ThemeData darkTheme = ThemeData(
       secondary: Color(0xFF8B949E), // セカンダリ（グレー）
       accent: Color(0xFFFF7B72), // アクセント（オレンジレッド）
       border: Color(0xFF30363D), // ボーダー
+      dialogBackground: Color(0xFF1C2128), // モダンダイアログ背景
+      dialogBorder: Color(0xFF3D444D), // ダイアログボーダー
+      inputBackground: Color(0xFF0D1117), // インプット背景
+      inputBorder: Color(0xFF30363D), // インプットボーダー
+      inputFocusedBorder: Color(0xFF58A6FF), // フォーカス時ボーダー
+      buttonSuccess: Color(0xFF238636), // 成功ボタン
+      buttonDanger: Color(0xFFDA3633), // 危険ボタン
+      buttonSecondary: Color(0xFF373E47), // セカンダリボタン
+      shadow: Color(0x40000000), // シャドウ
     ),
   ],
 );

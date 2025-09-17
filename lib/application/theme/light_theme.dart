@@ -15,6 +15,15 @@ final ThemeData lightTheme = ThemeData(
       secondary: Color(0xFF656D76), // セカンダリ（グレー）
       accent: Color(0xFFCF222E), // アクセント（レッド）
       border: Color(0xFFD0D7DE), // ボーダー
+      dialogBackground: Color(0xFFFEFEFE), // モダンダイアログ背景
+      dialogBorder: Color(0xFFE1E4E8), // ダイアログボーダー
+      inputBackground: Color(0xFFF6F8FA), // インプット背景
+      inputBorder: Color(0xFFD0D7DE), // インプットボーダー
+      inputFocusedBorder: Color(0xFF0969DA), // フォーカス時ボーダー
+      buttonSuccess: Color(0xFF1A7F37), // 成功ボタン
+      buttonDanger: Color(0xFFCF222E), // 危険ボタン
+      buttonSecondary: Color(0xFFF6F8FA), // セカンダリボタン
+      shadow: Color(0x20000000), // シャドウ
     ),
   ],
 );

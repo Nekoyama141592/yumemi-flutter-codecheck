@@ -18,6 +18,9 @@ class AppLocalizationsJa extends AppLocalizations {
   String get editTokenTitle => 'トークンを編集';
 
   @override
+  String get editTokenSubtitle => 'GitHubアクセストークンを管理';
+
+  @override
   String get tokenLabel => 'トークン';
 
   @override
@@ -31,6 +34,12 @@ class AppLocalizationsJa extends AppLocalizations {
 
   @override
   String get save => '保存';
+
+  @override
+  String get tokenVisibilityShow => '表示する';
+
+  @override
+  String get tokenVisibilityHide => '非表示にする';
 
   @override
   String get repositoryName => 'リポジトリ名';

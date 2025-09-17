@@ -3,6 +3,7 @@ import 'package:flutter_test/flutter_test.dart';
 import 'package:yumemi_flutter_codecheck/application/theme/extensions/app_colors.dart';
 import 'package:yumemi_flutter_codecheck/domain/entity/search_repositories_item/search_repositories_item_entity.dart';
 import 'package:yumemi_flutter_codecheck/presentation/page/my_home/components/repository_list_view.dart';
+import '../../../helpers/widget_test_helpers.dart';
 
 void main() {
   group('RepositoryListView', () {
@@ -10,17 +11,7 @@ void main() {
     late List<SearchRepositoriesItemEntity> mockRepositories;
 
     setUp(() {
-      appColors = const AppColors(
-        primary: Colors.blue,
-        secondary: Colors.grey,
-        accent: Colors.red,
-        surface: Colors.white,
-        cardBackground: Colors.grey,
-        onSurface: Colors.black,
-        border: Colors.grey,
-        tokenOn: Colors.green,
-        tokenOff: Colors.red,
-      );
+      appColors = createTestAppColors();
 
       mockRepositories = [
         const SearchRepositoriesItemEntity(
@@ -38,13 +29,11 @@ void main() {
       List<SearchRepositoriesItemEntity>? repositories,
       ValueChanged<SearchRepositoriesItemEntity>? onTapRepo,
     }) {
-      return MaterialApp(
-        home: Scaffold(
-          body: RepositoryListView(
-            appColors: appColors,
-            repositories: repositories ?? mockRepositories,
-            onTapRepo: onTapRepo ?? (repo) {},
-          ),
+      return createMaterialAppTestWidget(
+        child: RepositoryListView(
+          appColors: appColors,
+          repositories: repositories ?? mockRepositories,
+          onTapRepo: onTapRepo ?? (repo) {},
         ),
       );
     }

@@ -5,7 +5,7 @@ import 'package:hooks_riverpod/hooks_riverpod.dart';
 import 'package:yumemi_flutter_codecheck/core/util/route_util.dart';
 import 'package:yumemi_flutter_codecheck/presentation/notifier/auto_dispose/my_home/my_home_view_model.dart';
 import 'package:yumemi_flutter_codecheck/application/theme/extensions/app_colors.dart';
-import 'package:yumemi_flutter_codecheck/presentation/common/edit_token_dialog.dart';
+import 'package:yumemi_flutter_codecheck/presentation/common/edit_token_dialog/edit_token_dialog.dart';
 import 'package:flutter_hooks/flutter_hooks.dart';
 import 'package:yumemi_flutter_codecheck/presentation/notifier/keep_alive/theme/theme_notifier.dart';
 import 'components/header.dart';
