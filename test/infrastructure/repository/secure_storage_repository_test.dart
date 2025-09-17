@@ -9,9 +9,12 @@ class _FakeSecureStorage extends FlutterSecureStorage {
   Future<void> write({
     required String key,
     required String? value,
-    IOSOptions? iOptions = IOSOptions.defaultOptions,
+    AppleOptions? iOptions = IOSOptions.defaultOptions,
     AndroidOptions? aOptions,
     LinuxOptions? lOptions,
+    WebOptions? webOptions,
+    AppleOptions? mOptions,
+    WindowsOptions? wOptions,
   }) async {
     _store[key] = value;
   }
@@ -19,9 +22,12 @@ class _FakeSecureStorage extends FlutterSecureStorage {
   @override
   Future<String?> read({
     required String key,
-    IOSOptions? iOptions = IOSOptions.defaultOptions,
+    AppleOptions? iOptions = IOSOptions.defaultOptions,
     AndroidOptions? aOptions,
     LinuxOptions? lOptions,
+    WebOptions? webOptions,
+    AppleOptions? mOptions,
+    WindowsOptions? wOptions,
   }) async {
     return _store[key];
   }
@@ -29,9 +35,12 @@ class _FakeSecureStorage extends FlutterSecureStorage {
   @override
   Future<void> delete({
     required String key,
-    IOSOptions? iOptions = IOSOptions.defaultOptions,
+    AppleOptions? iOptions = IOSOptions.defaultOptions,
     AndroidOptions? aOptions,
     LinuxOptions? lOptions,
+    WebOptions? webOptions,
+    AppleOptions? mOptions,
+    WindowsOptions? wOptions,
   }) async {
     _store.remove(key);
   }
