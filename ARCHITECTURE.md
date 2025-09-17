@@ -1,21 +1,21 @@
 lib/
   ├── application/
-  │   └── usecase/
+  |   ├── app_router/
+  │   └── theme/
   ├── core/
-  │   ├── extension/
   │   ├── provider/
   │   └── util/
   ├── domain/
   │   ├── entity/
-  │   ├── repository_interface/
-  │   ├── use_case_interface/
-  │   └── value/
+  │   └── repository_interface/
   ├── infrastructure/
   │   ├── datasource/
+  │   ├── model/
   │   └── repository/
+  ├── l10n/
   ├── presentation/
-  │   ├── component/
-  │   ├── navigation/
+  │   ├── common/
+  │   ├── constants/
   │   ├── notifier/
   │   ├── page/
   │   └── state/
