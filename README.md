@@ -105,9 +105,12 @@ graph TD
 ## 🚀 セットアップ手順
 
 <details>
-<summary><strong>📱 1. Flutter環境を整備</strong></summary>
+<summary><strong>📱 1. 環境を整備</strong></summary>
 
-推奨：最新のStableチャネル
+Flutter: 3.35.3
+Android Studio: Android Studio Ladybug Feature Drop
+XCode: 16.2
+
 </details>
 
 <details>
