@@ -82,7 +82,7 @@ graph TD
 
 ## 📁 ディレクトリ構成
 
-<div align="center">
+<div>
 
 ```
 📦 lib/
