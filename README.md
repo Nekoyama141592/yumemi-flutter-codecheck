@@ -9,7 +9,6 @@
 </p>
 
 <p align="center">
-  <img src="https://img.shields.io/github/license/Nekoyama141592/yumemi_flutter_codecheck?style=flat-square&color=blue" alt="License">
   <img src="https://img.shields.io/badge/version-1.0.0+1-brightgreen?style=flat-square" alt="Version">
   <img src="https://img.shields.io/badge/platform-iOS%20%7C%20Android-lightgrey?style=flat-square" alt="Platform">
 </p>
