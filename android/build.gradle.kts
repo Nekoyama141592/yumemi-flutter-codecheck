@@ -3,6 +3,17 @@ allprojects {
         google()
         mavenCentral()
     }
+    subprojects {
+        afterEvaluate {
+            val androidExtension = extensions.findByName("android")
+            if (androidExtension != null) {
+                val android = androidExtension as com.android.build.gradle.BaseExtension
+                if (android.namespace == null) {
+                    android.namespace = project.group.toString()
+                }
+            }
+        }
+    }
 }
 
 val newBuildDir: Directory =

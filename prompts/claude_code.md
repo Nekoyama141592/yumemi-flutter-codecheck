@@ -28,3 +28,5 @@
 25. lib/presentation/common/edit_token_dialog/edit_token_dialog.dartのボタンの並びを横並びではなく、縦に並べて横に長く表示するように変更して
 
 26. lib/presentation/common/edit_token_dialogのWidgetテストが不十分であれば追加で実装を行なってください。
+
+27. README.mdをとにかくおしゃれに装飾してください。
