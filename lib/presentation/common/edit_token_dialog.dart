@@ -2,8 +2,10 @@ import 'package:flutter/material.dart';
 import 'package:flutter_hooks/flutter_hooks.dart';
 import 'package:hooks_riverpod/hooks_riverpod.dart';
 import 'package:yumemi_flutter_codecheck/core/provider/repository/secure_storage/secure_storage_repository_provider.dart';
-import 'package:yumemi_flutter_codecheck/presentation/notifier/auto_dispose/my_home/my_home_view_model.dart';
 import 'package:yumemi_flutter_codecheck/l10n/app_localizations.dart';
+import 'package:yumemi_flutter_codecheck/presentation/common/components/edit_token_dialog_buttons.dart';
+import 'package:yumemi_flutter_codecheck/presentation/common/components/edit_token_dialog_keys.dart';
+import 'package:yumemi_flutter_codecheck/presentation/notifier/auto_dispose/my_home/my_home_view_model.dart';
 
 class EditTokenDialog extends HookConsumerWidget {
   const EditTokenDialog({super.key});
@@ -59,6 +61,7 @@ class EditTokenDialog extends HookConsumerWidget {
                 child: Center(child: CircularProgressIndicator()),
               )
             : TextField(
+                key: editTokenTextFieldKey,
                 controller: controller,
                 obscureText: obscure.value,
                 decoration: InputDecoration(
@@ -75,17 +78,19 @@ class EditTokenDialog extends HookConsumerWidget {
               ),
       ),
       actions: [
-        TextButton(
+        EditTokenCancelButton(
+          label: AppLocalizations.of(context)!.cancel,
           onPressed: () => Navigator.of(context).pop(),
-          child: Text(AppLocalizations.of(context)!.cancel),
         ),
-        TextButton(
-          onPressed: loading.value ? null : deleteToken,
-          child: Text(AppLocalizations.of(context)!.delete),
+        EditTokenDeleteButton(
+          label: AppLocalizations.of(context)!.delete,
+          onPressed: deleteToken,
+          enabled: !loading.value,
         ),
-        ElevatedButton(
-          onPressed: loading.value ? null : save,
-          child: Text(AppLocalizations.of(context)!.save),
+        EditTokenSaveButton(
+          label: AppLocalizations.of(context)!.save,
+          onPressed: save,
+          enabled: !loading.value,
         ),
       ],
     );
