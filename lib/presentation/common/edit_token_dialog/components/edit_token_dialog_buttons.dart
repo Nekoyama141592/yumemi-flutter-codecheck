@@ -1,5 +1,5 @@
 import 'package:flutter/material.dart';
-import 'package:yumemi_flutter_codecheck/presentation/common/components/edit_token_dialog_keys.dart';
+import 'package:yumemi_flutter_codecheck/presentation/common/edit_token_dialog/components/edit_token_dialog_keys.dart';
 
 class EditTokenCancelButton extends StatelessWidget {
   const EditTokenCancelButton({

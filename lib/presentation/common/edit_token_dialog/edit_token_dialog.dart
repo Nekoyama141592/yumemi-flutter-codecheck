@@ -3,8 +3,8 @@ import 'package:flutter_hooks/flutter_hooks.dart';
 import 'package:hooks_riverpod/hooks_riverpod.dart';
 import 'package:yumemi_flutter_codecheck/core/provider/repository/secure_storage/secure_storage_repository_provider.dart';
 import 'package:yumemi_flutter_codecheck/l10n/app_localizations.dart';
-import 'package:yumemi_flutter_codecheck/presentation/common/components/edit_token_dialog_buttons.dart';
-import 'package:yumemi_flutter_codecheck/presentation/common/components/edit_token_dialog_keys.dart';
+import 'package:yumemi_flutter_codecheck/presentation/common/edit_token_dialog/components/edit_token_dialog_buttons.dart';
+import 'package:yumemi_flutter_codecheck/presentation/common/edit_token_dialog/components/edit_token_dialog_keys.dart';
 import 'package:yumemi_flutter_codecheck/presentation/notifier/auto_dispose/my_home/my_home_view_model.dart';
 
 class EditTokenDialog extends HookConsumerWidget {

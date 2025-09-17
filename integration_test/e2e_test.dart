@@ -9,7 +9,7 @@ import 'package:yumemi_flutter_codecheck/application/flavors.dart';
 import 'package:yumemi_flutter_codecheck/core/provider/overrides/prefs/prefs_provider.dart';
 import 'package:yumemi_flutter_codecheck/core/provider/datasource/github/github_api_client_provider.dart';
 import 'package:yumemi_flutter_codecheck/core/provider/repository/secure_storage/secure_storage_repository_provider.dart';
-import 'package:yumemi_flutter_codecheck/presentation/common/components/edit_token_dialog_keys.dart';
+import 'package:yumemi_flutter_codecheck/presentation/common/edit_token_dialog/components/edit_token_dialog_keys.dart';
 import 'helpers/fakes.dart';
 
 void main() {

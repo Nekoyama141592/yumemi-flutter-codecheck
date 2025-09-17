@@ -8,7 +8,7 @@ import 'package:yumemi_flutter_codecheck/application/theme/extensions/app_colors
 import 'package:yumemi_flutter_codecheck/presentation/notifier/auto_dispose/repository_item/repository_item_view_model.dart';
 import '../../../l10n/app_localizations.dart';
 import 'package:yumemi_flutter_codecheck/presentation/notifier/keep_alive/theme/theme_notifier.dart';
-import 'package:yumemi_flutter_codecheck/presentation/common/edit_token_dialog.dart';
+import 'package:yumemi_flutter_codecheck/presentation/common/edit_token_dialog/edit_token_dialog.dart';
 import 'package:yumemi_flutter_codecheck/core/provider/repository/secure_storage/secure_storage_repository_provider.dart';
 import 'components/loading_state.dart';
 import 'components/error_state.dart';
