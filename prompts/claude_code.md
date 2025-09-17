@@ -1,0 +1,32 @@
+# Claude Code プロンプト集
+1. lib/application/themeにlight_theme.dartとdark_theme.dartを作成してください。また、ダークテーマの背景色は#0D1117に、ライトテーマの背景色は#ECDCC9にしてください。
+2. lib/presentation/my_home_page.dartのAppBarでlib/presentation/common/original_drawer.dartのOriginalDrawerを使用してください。
+3. lib/presentation/notifier/theme/theme_notifier.dartにダークモードとライトモードを切り替えるメソッドを作成してください。
+4. lib/presentation/common/original_drawer.dartにCupertinoのSwitchを使ってダークモードとライトモードを切り替えられるようにしてください。
+5. lib/presentation/common/original_drawer.dartの文言を日本語と簡体字に対応させてください。
+6. lib/presentation/notifier/theme/theme_notifier.dartにて、LocalRepositoryProviderを使用して、build時にダークモードかライトモードかを取得して、toggleTheme()にて非同期で保存してください。
+7. lib/presentation/notifier/theme/theme_notifier.dartのbuild()の処理内容を_fetchData()というプライベートメソッドに分離してください。
+8. SharedPreferences.setMockInitialValuesを使ってLocalRepositoryのUnitテストを行なって
+9. lib/presentation/page/repository_item/repository_item_page.dartにてめちゃくちゃおしゃれでモダンでだれもが使いやすくなるような最高のデザインに仕上げてください。ただ、絶対にグラデーションは使用しないでください。カラーは必ずlib/application/theme/dark_theme.dartとlib/application/theme/light_theme.dartに設定してからそれをTheme.of(context)から使用してください。
+10. lib/presentation/page/repository_item/repository_item_page.dartにてSliverAppBarを廃止して普通のAppBarにして
+11. lib/presentation/page/my_home/my_home_page.dartにてめちゃくちゃおしゃれでモダンでだれもが使いやすくなるような最高のデザインに仕上げてください。ただ、絶対にグラデーションは使用しないでください。カラーは必ずlib/application/theme/dark_theme.dartとlib/application/theme/light_theme.dartに設定してからそれをTheme.of(context)から使用してください。
+12. lib/presentation/page/repository_item/repository_item_page.dartにて「Issuesを見る」ボタンを削除して。
+13. lib/presentation/page/repository_item/repository_item_page.dartにおしゃれなアニメーションを導入して
+14. lib/presentation/page/my_home/my_home_page.dartにもおしゃれなアニメーションを導入して
+15. l10nのsomethingWentWrongを「リポジトリ情報の取得に失敗しました」の翻訳に変更して
+16. l10n(ja,en,zh)のerrorを「画面の右上から個人用アクセストークンを登録してください」の翻訳に変更して
+17. l10n(ja,en,zh)のrepoErrorTitleを「リポジトリ情報の取得に失敗しました」の翻訳に変更して。またrepoErrorSubtitleを「画面の右上から個人用アクセストークンを登録してください」の翻訳に変更して
+18.  l10n(ja,en,zh)のsomethingWentWrong, errorを廃止しそれぞれの使用箇所をrepoErrorTitle,repoErrorSubtitleに置換して
+19. lib/presentation/page/my_home/my_home_page.dartの複数のプライベートクラスを同階層のcomponentsフォルダ内に分割して新しいファイルを作成してパブリッククラスにして
+20. lib/presentation/page/repository_item/repository_item_page.dartの複数のプライベートクラスを同階層のcomponentsフォルダ内に分割して新しいファイルを作成してパブリッククラスにして
+21. lib/presentation/page/my_home/componentsの全てのWidgetに対してWidgetテストを実装して。
+22. lib/presentation/page/repository_item/componentsの全てのWidgetに対してWidgetテストを実装して。
+23. lib/presentation/common/edit_token_dialogのデザインをもっとおしゃれでモダンで誰もが感動するようなデザインにして。また、使っていて楽しいアニメーションも追加して。ただ、絶対にグラデーションは使用しないでください。カラーは必ずlib/application/theme/dark_theme.dartとlib/application/theme/light_theme.dartに設定してからそれをTheme.of(context)から使用してください。
+
+24. lib/presentation/common/edit_token_dialog/edit_token_dialog.dartの横並びのボタンにて右に30ピクセルのオーバーフローが発生しているので修正して。
+
+25. lib/presentation/common/edit_token_dialog/edit_token_dialog.dartのボタンの並びを横並びではなく、縦に並べて横に長く表示するように変更して
+
+26. lib/presentation/common/edit_token_dialogのWidgetテストが不十分であれば追加で実装を行なってください。
+
+27. README.mdをとにかくおしゃれに装飾してください。

@@ -1,0 +1,87 @@
+{
+  "hello": "こんにちは",
+  "@hello": {
+    "description": "A greeting message"
+  },
+  "editTokenTooltip": "トークンを編集",
+  "@editTokenTooltip": {
+    "description": "Tooltip for editing the token"
+  },
+  "editTokenTitle": "トークンを編集",
+  "@editTokenTitle": {
+    "description": "Dialog title for editing the token"
+  },
+  "editTokenSubtitle": "GitHubアクセストークンを管理",
+  "@editTokenSubtitle": {
+    "description": "Subtitle shown under the edit token dialog title"
+  },
+  "tokenLabel": "トークン",
+  "@tokenLabel": {
+    "description": "Label for token text field"
+  },
+  "tokenHint": "GitHub パーソナルアクセストークン",
+  "@tokenHint": {
+    "description": "Hint text for token text field"
+  },
+  "cancel": "キャンセル",
+  "@cancel": {
+    "description": "Cancel button label"
+  },
+  "delete": "削除",
+  "@delete": {
+    "description": "Delete button label"
+  },
+  "save": "保存",
+  "@save": {
+    "description": "Save button label"
+  },
+  "tokenVisibilityShow": "表示する",
+  "@tokenVisibilityShow": {
+    "description": "Tooltip for revealing the token text"
+  },
+  "tokenVisibilityHide": "非表示にする",
+  "@tokenVisibilityHide": {
+    "description": "Tooltip for hiding the token text"
+  },
+  "repositoryName": "リポジトリ名",
+  "@repositoryName": {"description": "Label for repository name"},
+  "language": "言語",
+  "@language": {"description": "Label for programming language"},
+  "unknown": "不明",
+  "@unknown": {"description": "Fallback for unknown value"},
+  "stars": "スター数",
+  "@stars": {"description": "Label for stargazers count"},
+  "watchers": "ウォッチャー数",
+  "@watchers": {"description": "Label for watchers count"},
+  "forks": "フォーク数",
+  "@forks": {"description": "Label for forks count"},
+  "issues": "Issue数",
+  "@issues": {"description": "Label for issues count"}
+  ,
+  "themeLightTooltip": "ライトモード",
+  "@themeLightTooltip": {"description": "Tooltip showing switch to light theme"},
+  "themeDarkTooltip": "ダークモード",
+  "@themeDarkTooltip": {"description": "Tooltip showing switch to dark theme"},
+  "repositoryExplorer": "リポジトリ検索アプリ",
+  "@repositoryExplorer": {"description": "Subtitle under GitHub brand on home"},
+  "searchRepositories": "リポジトリを検索",
+  "@searchRepositories": {"description": "Header for repository search section"},
+  "searchFieldHint": "リポジトリ名を入力（例: flutter, react）",
+  "@searchFieldHint": {"description": "Hint text for search field"},
+  "searchingRepositories": "リポジトリを検索中...",
+  "@searchingRepositories": {"description": "Loading message while searching repos"},
+  "startExploring": "探索を始めましょう",
+  "@startExploring": {"description": "Empty state title"},
+  "startExploringSubtitle": "GitHubのリポジトリを検索して素晴らしいプロジェクトやコードを見つけましょう",
+  "@startExploringSubtitle": {"description": "Empty state subtitle"},
+  "repoErrorTitle": "リポジトリ情報の取得に失敗しました",
+  "@repoErrorTitle": {"description": "Repository page error title"},
+  "repoErrorSubtitle": "画面の右上から個人用アクセストークンを登録してください",
+  "@repoErrorSubtitle": {"description": "Repository page error subtitle"},
+  "repoNotFoundTitle": "リポジトリが見つかりません",
+  "@repoNotFoundTitle": {"description": "Repository not found title"},
+  "repoNotFoundSubtitle": "指定されたリポジトリは存在しないか、アクセスできません",
+  "@repoNotFoundSubtitle": {"description": "Repository not found subtitle"},
+  "openInGitHub": "GitHubで開く",
+  "@openInGitHub": {"description": "Button label to open repo in GitHub"}
+}

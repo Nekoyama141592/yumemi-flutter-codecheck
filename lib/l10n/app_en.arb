@@ -1,0 +1,87 @@
+{
+  "hello": "Hello",
+  "@hello": {
+    "description": "A greeting message"
+  },
+  "editTokenTooltip": "Edit token",
+  "@editTokenTooltip": {
+    "description": "Tooltip for editing the token"
+  },
+  "editTokenTitle": "Edit Token",
+  "@editTokenTitle": {
+    "description": "Dialog title for editing the token"
+  },
+  "editTokenSubtitle": "Manage your GitHub access token",
+  "@editTokenSubtitle": {
+    "description": "Subtitle shown under the edit token dialog title"
+  },
+  "tokenLabel": "Token",
+  "@tokenLabel": {
+    "description": "Label for token text field"
+  },
+  "tokenHint": "GitHub Personal Access Token",
+  "@tokenHint": {
+    "description": "Hint text for token text field"
+  },
+  "cancel": "Cancel",
+  "@cancel": {
+    "description": "Cancel button label"
+  },
+  "delete": "Delete",
+  "@delete": {
+    "description": "Delete button label"
+  },
+  "save": "Save",
+  "@save": {
+    "description": "Save button label"
+  },
+  "tokenVisibilityShow": "Show token",
+  "@tokenVisibilityShow": {
+    "description": "Tooltip for revealing the token text"
+  },
+  "tokenVisibilityHide": "Hide token",
+  "@tokenVisibilityHide": {
+    "description": "Tooltip for hiding the token text"
+  },
+  "repositoryName": "Repository",
+  "@repositoryName": {"description": "Label for repository name"},
+  "language": "Language",
+  "@language": {"description": "Label for programming language"},
+  "unknown": "Unknown",
+  "@unknown": {"description": "Fallback for unknown value"},
+  "stars": "Stars",
+  "@stars": {"description": "Label for stargazers count"},
+  "watchers": "Watchers",
+  "@watchers": {"description": "Label for watchers count"},
+  "forks": "Forks",
+  "@forks": {"description": "Label for forks count"},
+  "issues": "Issues",
+  "@issues": {"description": "Label for issues count"}
+  ,
+  "themeLightTooltip": "Light Mode",
+  "@themeLightTooltip": {"description": "Tooltip showing switch to light theme"},
+  "themeDarkTooltip": "Dark Mode",
+  "@themeDarkTooltip": {"description": "Tooltip showing switch to dark theme"},
+  "repositoryExplorer": "Repository Explorer",
+  "@repositoryExplorer": {"description": "Subtitle under GitHub brand on home"},
+  "searchRepositories": "Search Repositories",
+  "@searchRepositories": {"description": "Header for repository search section"},
+  "searchFieldHint": "Enter repository name (e.g. flutter, react)",
+  "@searchFieldHint": {"description": "Hint text for search field"},
+  "searchingRepositories": "Searching repositories...",
+  "@searchingRepositories": {"description": "Loading message while searching repos"},
+  "startExploring": "Start exploring",
+  "@startExploring": {"description": "Empty state title"},
+  "startExploringSubtitle": "Search for GitHub repositories to discover amazing projects and code",
+  "@startExploringSubtitle": {"description": "Empty state subtitle"},
+  "repoErrorTitle": "Failed to get repository information",
+  "@repoErrorTitle": {"description": "Repository page error title"},
+  "repoErrorSubtitle": "Please register your personal access token from the top right of the screen",
+  "@repoErrorSubtitle": {"description": "Repository page error subtitle"},
+  "repoNotFoundTitle": "Repository not found",
+  "@repoNotFoundTitle": {"description": "Repository not found title"},
+  "repoNotFoundSubtitle": "The specified repository does not exist or is inaccessible",
+  "@repoNotFoundSubtitle": {"description": "Repository not found subtitle"},
+  "openInGitHub": "Open in GitHub",
+  "@openInGitHub": {"description": "Button label to open repo in GitHub"}
+}

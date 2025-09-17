@@ -1,0 +1,194 @@
+workflows:
+  test-flight-ios-workflow-dev:
+    name: TestFlight iOS Workflow Dev
+    integrations:
+      app_store_connect: Publisher
+    labels:
+      - iOS
+    max_build_duration: 60
+    instance_type: mac_mini_m1
+    environment:
+      ios_signing:
+        distribution_type: app_store
+        bundle_identifier: com.firebaseapp.yumemiFlutterCodecheckDev
+      vars:
+        APP_ID: 1111111111
+      flutter: v3.32.2
+      xcode: latest
+      cocoapods: default
+    triggering:
+      events:
+        - push
+      branch_patterns:
+        - pattern: "develop"
+          include: true
+          source: true
+    scripts:
+      - name: Set up code signing settings on Xcode project
+        script: |
+          xcode-project use-profiles
+      - name: Get Flutter packages
+        script: |
+          flutter packages pub get
+      - name: Install pods
+        script: |
+          find . -name "Podfile" -execdir pod install \;
+      - name: Flutter build ipa and automatic versioning
+        script: |
+          flutter build ipa --release --flavor dev \
+            --export-options-plist=/Users/builder/export_options.plist \
+            --build-number=$(($(app-store-connect get-latest-testflight-build-number "$APP_ID") + 1))
+    artifacts:
+      - build/ios/ipa/*.ipa
+      - /tmp/xcodebuild_logs/*.log
+      - flutter_drive.log
+      - $HOME/Library/Developer/Xcode/DerivedData/**/Build/**/*.dSYM
+    publishing:
+      app_store_connect:
+        auth: integration
+        submit_to_testflight: true
+  test-flight-ios-workflow-prod:
+    name: TestFlight iOS Workflow Prod
+    integrations:
+      app_store_connect: Publisher
+    labels:
+      - iOS
+    max_build_duration: 60
+    instance_type: mac_mini_m1
+    environment:
+      ios_signing:
+        distribution_type: app_store
+        bundle_identifier: com.firebaseapp.yumemiFlutterCodecheck
+      vars:
+        APP_ID: 2222222222
+      flutter: v3.32.2
+      xcode: latest
+      cocoapods: default
+    triggering:
+      events:
+        - push
+      branch_patterns:
+        - pattern: "main"
+          include: true
+          source: true
+    scripts:
+      - name: Set up code signing settings on Xcode project
+        script: |
+          xcode-project use-profiles
+      - name: Get Flutter packages
+        script: |
+          flutter packages pub get
+      - name: Install pods
+        script: |
+          find . -name "Podfile" -execdir pod install \;
+      - name: Flutter build ipa and automatic versioning
+        script: |
+          flutter build ipa --release --flavor prod \
+            --export-options-plist=/Users/builder/export_options.plist \
+            --build-number=$(($(app-store-connect get-latest-testflight-build-number "$APP_ID") + 1))
+    artifacts:
+      - build/ios/ipa/*.ipa
+      - /tmp/xcodebuild_logs/*.log
+      - flutter_drive.log
+      - $HOME/Library/Developer/Xcode/DerivedData/**/Build/**/*.dSYM
+    publishing:
+      app_store_connect:
+        auth: integration
+        submit_to_testflight: true
+
+  android-push-store-dev:
+    environment:
+      flutter: v3.32.2
+      android_signing:
+        - keystore_reference
+      groups:
+        - yumemi_flutter_codecheck_dev
+
+    triggering:
+      events:
+        - tag
+      tag_patterns:
+        - pattern: android-push*
+          include: true
+      cancel_previous_builds: true
+
+    cache:
+      cache_paths:
+        - ~/.pub-cache
+        - .dart_tool
+        - .packages
+        - .flutter-plugins
+        - .flutter-plugin-dependencies
+
+    scripts:
+      - name: flutter clean
+        script: flutter clean
+      - name: Install dependencies
+        script: flutter pub get
+      - name: Build AAB
+        script: flutter build appbundle --release --flavor dev
+    
+    artifacts:
+      - build/**/outputs/**/*.aab
+      - build/**/outputs/**/mapping.txt
+      - flutter_drive.log
+
+    publishing:
+      email:
+        recipients:
+          - dev.test@example.com
+        notify:
+          success: true
+          failure: true
+      google_play: 
+        credentials: $GCLOUD_SERVICE_ACCOUNT_CREDENTIALS
+        track: internal
+        submit_as_draft: true
+  android-push-store-prod:
+    environment:
+      flutter: v3.32.2
+      android_signing:
+        - keystore_reference
+      groups:
+        - yumemi_flutter_codecheck_prod
+
+    triggering:
+      events:
+        - tag
+      tag_patterns:
+        - pattern: android-push*
+          include: true
+      cancel_previous_builds: true
+
+    cache:
+      cache_paths:
+        - ~/.pub-cache
+        - .dart_tool
+        - .packages
+        - .flutter-plugins
+        - .flutter-plugin-dependencies
+
+    scripts:
+      - name: flutter clean
+        script: flutter clean
+      - name: Install dependencies
+        script: flutter pub get
+      - name: Build AAB
+        script: flutter build appbundle --release --flavor prod
+    
+    artifacts:
+      - build/**/outputs/**/*.aab
+      - build/**/outputs/**/mapping.txt
+      - flutter_drive.log
+
+    publishing:
+      email:
+        recipients:
+          - dev.test@example.com
+        notify:
+          success: true
+          failure: true
+      google_play: 
+        credentials: $GCLOUD_SERVICE_ACCOUNT_CREDENTIALS
+        track: internal
+        submit_as_draft: true

@@ -1,0 +1,129 @@
+# Codex プロンプト集
+1. lib/infrastructure/model/github/search_repositories/response 配下に、repository_item、simple_user、license_simple、permission という各フォルダを作成し、それぞれのクラスを分割して管理してください。各クラスのファイルは自動生成されるように設定します。
+
+2. lib/infrastructure/datasource/github/github_api_client.dart では、GitHubApiClient を retrofit および retrofit_generator を用いて実装します。/search/repositories エンドポイントをクエリパラメータ形式でリクエストする際には、lib/infrastructure/model/github/search_repositories/request/search_repositories_request.dart と lib/infrastructure/model/github/search_repositories/response/search_repositories_response.dart を利用してください。
+
+3. lib/infrastructure/model/github/search_repositories/requestのフォルダを削除して、それを踏まえてlib/infrastructure/datasource/github/github_api_client.dartも修正してください。
+
+4. lib/core/provider/datasourceにriverpod_generatorを使用してGitHubApiClientProviderを作成してください。
+
+5. lib/core/provider/datasource/github/github_api_client_provider.dartにてtokenを外から受け取るFamilyProviderに変更してください。
+
+6. lib/infrastructure/repositoryにGithubRepositoryInterfaceをimplementsしたGithubRepositoryを作成してください。
+
+7. GithubRepositoryInterfaceのsearchRepositoriesのquery以外をnull許容できるようにしてください。
+
+8. lib/domain/entity/search_repositories_item/search_repositories_item_entity.dartにfromModelというfactoryコンストラクタを作成してください。そしてGithubRepositoryではそれを使用してください。
+
+9. lib/core/provider/repository/github/github_repository_provider.dartにriverpod_generatorを使用してGithubRepositoryProviderを作成してください。
+
+10. lib/presentation/notifier/auto_dispose/my_home/my_home_view_model.dartにriverpod_generatorを使用してAutoDisposeAsyncNotifierのMyHomeViewModelを作成してください。stateはlib/presentation/state/auto_dispose/my_home/my_home_state.dartを使用してください。
+
+11. lib/presentation/notifier/auto_dispose/my_home/my_home_view_model.dartをAsyncNotifierではなくNotifierに変更してください。
+
+12. MyHomePageでHookConsumerWidgetを使用してMyHomeViewModelを使用して、GitHubのリポジトリのfullNameを表示してください。
+
+13. MyHomePageで初回表示時にサンプルクエリで検索を実行するのをViewModelのbuildメソッド内で行うようにしてください。
+
+14. GithubRepositoryInterfaceのsearchRepositoriesの引数を名前付き引数に変更してください。
+
+15. lib/infrastructure/repositoryにFlutterSecureStorageを外から受け取り、SecureStorageInterfaceをimplementsしたSecureStorageRepositoryを作成してください。
+
+16. lib/core/provider/repository/secure_storage/secure_storage_repository_provider.dartにriverpod_generatorを使用してSecureStorageRepositoryProviderを作成してください。
+
+17. MyHomePageの画面内にkeyのアイコンを追加し、MyHomeStateのtokenがnullの場合はkeyのアイコンを赤く表示し、そうでない場合はkeyのアイコンを緑色で表示してください。ただし、彩度の高さはダークテーマとライトテーマで変えて見やすいようにしてください。
+
+18. MyHomePageのstatusColorはlib/application/theme/dark_theme.dartとlib/application/theme/light_theme.dartに新たに定義した色を使い、Theme.of(context)を使ってください
+
+19. lib/presentation/page/my_home/components/edit_token_dialog.dartにHookConsumerWidgetを使用してSecureStorageRepositoryを使用し、tokenを編集するダイアログを作成してください。
+
+20. MyHomePageのkeyのアイコンを押下したらEditTokenDialogを表示してください。
+
+21. lib/presentation/page/my_home/my_home_page.dartとlib/presentation/page/my_home/components/edit_token_dialog.dartで表示してある文字列を全て翻訳して
+
+22. lib/l10n/app_localizations.dartの変更点を全ての.arbファイルにも反映して。最後にflutter gen-l10nを実行して
+
+23. MyHomePageのListView.builderの上に検索バーを表示して。機能はまだ実装しなくて大丈夫
+
+24. MyHomePageのローディングをする箇所は検索バーより下に限定して。
+
+25. GithubRepositoryInterfaceにFuture<SearchRepositoriesItemEntity?>を返すgetRepositoryを定義して。引数はrequired String queryだけにして
+
+26. GithubRepositoryInterfaceのgetRepositoryの引数をrequired String userNameとrequired String nameに変更して。GitHubRepositoryは{userName}/{name}というqueryを使用するようにして。
+
+27. lib/presentation/page/repository_itemに/users/:userName/repositories/:nameというauto_routeのpathを持つRepositoryItemPageを作成して。userNameとnameは@pathParamで受け取って、CenterとTextのWidgetを使って表示して。
+
+28. lib/core/util/route_util.dartにてpushRepositoryItemPage()を作成して
+
+29. lib/presentation/notifier/auto_dispose/repository_itemにrepository_item_view_model.dartをriverpod_generatorを使ってAutoDisposeAsyncNotifierで作成して。FamilyProviderでuserNameとnameを受け取り、GithubRepositoryの getRepositoryを使って。
+
+30. lib/presentation/notifier/auto_dispose/repository_item/repository_item_view_model.dartでtokenも取得して。
+
+31. lib/presentation/page/repository_item/repository_item_page.dartでRepositoryItemViewModelを使用して。
+
+32. lib/domain/entity/get_repository_itemにてget_repository_item_entity.dartを作成し、RepositoryItemのModelからリポジトリ名、オーナーアイコン、プロジェクト言語、Star 数、Watcher 数、Fork 数、Issue 数をfactoryコンストラクタで受け取るようにして
+
+33. lib/domain/repository_interface/github_repository_interface.dartのgetRepositoryでSearchRepositoriesItemEntityではなく、GetRepositoryItemEntityを使用するようにして。
+
+34. MyHomePageの鍵アイコンの右横にAppBarの左上に月と太陽が切り替わるアイコンを設置して、そのボタンを押すことでもダークモードとライトモードも切り替えられるようにして
+
+35. OriginalDrawerをHomePageで表示しないようにして。また、AppLocalizations.of(context)!.settings,AppLocalizations.of(context)!.darkModeの翻訳ももう不要なので削除して。最後にlib/presentation/common/original_drawer.dartのファイルを削除して。
+
+36. MyHomePageにて月と太陽のアイコンをAppBarの一番左に持ってきて
+
+37. lib/presentation/page/repository_item/repository_item_page.dartにてownerAvatarUrlに対してCachedNetWorkImageを使用して円形で表示して。画像のローディング中はshimmerを使ってスケルトンローディングを行なって
+
+38. lib/presentation/page/repository_item/repository_item_page.dartの日本語を全て翻訳して。
+
+39. lib/core/util/url_util.dartにてurl_launcherをラップして外部ブラウザに遷移するstaticメソッドをもつUrlUtilクラスを作成して
+
+40. MyHomePageのListTileにてアイコンを押したら、UrlUtilを使用してhtmlUrlに遷移する処理を実装して。
+
+41. lib/presentation/page/repository_item/repository_item_page.dartでもlib/presentation/page/my_home/my_home_page.dartと同様にAppBarでテーマ切り替えとtoken設定ができるように変更してください。
+
+41. lib/presentation/page/repository_item/repository_item_page.dartとlib/presentation/page/my_home/my_home_page.dartの文言の翻訳を行なってください。
+
+42. lib/presentation/page/repository_item/repository_item_page.dartでのshimmerでのスケルトンローディングの高さがローディング完了後と合っていないので一致させて
+
+43. lib/presentation/page/repository_item/repository_item_page.dartを画面横向きのUIにも対応させて
+
+44. 横向きのデザインだと「The following assertion was thrown during layout:
+A RenderFlex overflowed by 73 pixels on the bottom.」という上にオーバーフローしているエラーが発生するので縦の中央に配置するように修正して
+
+45. lib/presentation/page/repository_item/repository_item_page.dartやlib/presentation/page/my_home/my_home_page.dartのpaddingやheight, widthはハードコーディングするのではなく、どの端末の高さにも対応できるようにMediaQuery.of(context).sizeを使用するように修正してください。
+
+46. lib/presentation/page/repository_item/repository_item_page.dartのスケルトンローディングで数字の下に「Another exception was thrown: A RenderFlex overflowed by 6.7 pixels on the bottom.」というエラーが発生するので修正して。
+
+47. lib/presentation/page/my_home/my_home_page.dartにてWidgetを返しているbuild()以外のPrivateメソッドはクラスにして、同ファイルに保存し、MyHomePageで使用するようにして。ただ、WidgetRefやMyHomeViewModelを受け取るのではなく実際の値を受け取ったり関数をコールバックで受け取ったりするようにリファクタリングしてください。
+
+48. 失敗するテストが通るように、テストファイルもしくは実装本体のファイルを修正して。
+
+49. RepositoryでUnitテストが行われていないものがあればモックを作ったり、Providerを上書きしたりして実装して
+
+50. integration_test/e2e_test.dartにE2Eの統合テストを実装して。
+
+51. integration_test/e2e_test.dartのdelayを充分な時間取るようにして
+
+52. integration_test/e2e_test.dartのawait tester.pageBack();が失敗するのでしっかりAppBarアイコンをタップしてページを戻るようにして
+
+53. lib/presentation/common/edit_token_dialog.dartの各ボタンをlib/presentation/common/componentsにクラスとして分割し、keyを設定して、integration_test/e2e_test.dartのテストでkeyからWidgetを見つけるようにしてください。
+
+54. integration_test/token_registration_test.dartで画面右上のアイコンをタップし、'example-token'というトークンを登録、その後再度アイコンをタップしてフォームに値が入っていることを確認、キャンセルし、さらにもう一度アイコンをタップしてトークン削除を行う統合テストを追加してください。
+
+55. integration_test/token_registration_test.dartのテスト内容をintegration_test/e2e_test.dartのEnd-to-end: search → open detail → backの最初含めるようにしてください。完了したらintegration_test/token_registration_test.dartを削除してください。
+
+56. lib/presentation/common/edit_token_dialog/edit_token_dialog.dartの翻訳されていない箇所を翻訳して。
+
+57. test/presentation/page/my_home/componentsのWidgetテストで共通化できる要素があればtest/presentation/helpersに共通化して。
+
+58. lib/presentation/common/edit_token_dialog/components/edit_token_dialog_buttons.dartのStatefulWidgetでの実装箇所をHookWidgetに変更して。
+
+59. lib/presentation/common/edit_token_dialog/components/edit_token_dialog_buttons.dartの全てのクラスをlib/presentation/common/edit_token_dialog/componentsに分割し、最後にlib/presentation/common/edit_token_dialog/components/edit_token_dialog_buttons.dartを削除してください。
+
+60. test/presentation/commonのテストが失敗するので修正して。
+
+61. lib/presentation/common/edit_token_dialogのpaddingやheight, widthはハードコーディングするのではなく、どの端末の高さにも対応できるようにMediaQuery.of(context).sizeを使用するように修正してください。
+
+62. lib/presentation/common/edit_token_dialog/componentsの各ファイルのpaddingやheight, widthはハードコーディングするのではなく、どの端末の高さにも対応できるようにMediaQuery.of(context).sizeを使用するように修正してください。
+
+63. lib/presentation/common/edit_token_dialogやlib/presentation/common/edit_token_dialog/componentsの各ファイルでテキストのfontSizeやcircularも数値をハードコーディングするのではなく、どの端末の高さにも対応できるようにMediaQuery.of(context).sizeを使用するように修正してください。
