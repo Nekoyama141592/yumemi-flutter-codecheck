@@ -119,3 +119,5 @@ A RenderFlex overflowed by 73 pixels on the bottom.」という上にオーバ�
 58. lib/presentation/common/edit_token_dialog/components/edit_token_dialog_buttons.dartのStatefulWidgetでの実装箇所をHookWidgetに変更して。
 
 59. lib/presentation/common/edit_token_dialog/components/edit_token_dialog_buttons.dartの全てのクラスをlib/presentation/common/edit_token_dialog/componentsに分割し、最後にlib/presentation/common/edit_token_dialog/components/edit_token_dialog_buttons.dartを削除してください。
+
+60. test/presentation/commonのテストが失敗するので修正して。

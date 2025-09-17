@@ -26,3 +26,5 @@
 24. lib/presentation/common/edit_token_dialog/edit_token_dialog.dartの横並びのボタンにて右に30ピクセルのオーバーフローが発生しているので修正して。
 
 25. lib/presentation/common/edit_token_dialog/edit_token_dialog.dartのボタンの並びを横並びではなく、縦に並べて横に長く表示するように変更して
+
+26. lib/presentation/common/edit_token_dialogのWidgetテストが不十分であれば追加で実装を行なってください。

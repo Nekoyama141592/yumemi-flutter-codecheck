@@ -15,11 +15,11 @@ const secureStorageRepositoryProvider = SecureStorageRepositoryProvider._();
 final class SecureStorageRepositoryProvider
     extends
         $FunctionalProvider<
-          SecureStorageRepository,
-          SecureStorageRepository,
-          SecureStorageRepository
+          SecureStorageInterface,
+          SecureStorageInterface,
+          SecureStorageInterface
         >
-    with $Provider<SecureStorageRepository> {
+    with $Provider<SecureStorageInterface> {
   const SecureStorageRepositoryProvider._()
     : super(
         from: null,
@@ -36,23 +36,23 @@ final class SecureStorageRepositoryProvider
 
   @$internal
   @override
-  $ProviderElement<SecureStorageRepository> $createElement(
+  $ProviderElement<SecureStorageInterface> $createElement(
     $ProviderPointer pointer,
   ) => $ProviderElement(pointer);
 
   @override
-  SecureStorageRepository create(Ref ref) {
+  SecureStorageInterface create(Ref ref) {
     return secureStorageRepository(ref);
   }
 
   /// {@macro riverpod.override_with_value}
-  Override overrideWithValue(SecureStorageRepository value) {
+  Override overrideWithValue(SecureStorageInterface value) {
     return $ProviderOverride(
       origin: this,
-      providerOverride: $SyncValueProvider<SecureStorageRepository>(value),
+      providerOverride: $SyncValueProvider<SecureStorageInterface>(value),
     );
   }
 }
 
 String _$secureStorageRepositoryHash() =>
-    r'e1b94a9be8d6dcdfe6992daa295b89cb110f6efe';
+    r'2e193e174e756815885aa024f91c0885e072f851';
