@@ -1,7 +1,7 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_hooks/flutter_hooks.dart';
 import 'package:yumemi_flutter_codecheck/application/theme/extensions/app_colors.dart';
-import 'package:yumemi_flutter_codecheck/presentation/common/edit_token_dialog/components/edit_token_dialog_keys.dart';
+import 'package:yumemi_flutter_codecheck/presentation/constants/edit_token_dialog_keys.dart';
 
 class EditTokenCancelButton extends HookWidget {
   const EditTokenCancelButton({
