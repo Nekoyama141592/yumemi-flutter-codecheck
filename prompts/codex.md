@@ -123,3 +123,7 @@ A RenderFlex overflowed by 73 pixels on the bottom.」という上にオーバ�
 60. test/presentation/commonのテストが失敗するので修正して。
 
 61. lib/presentation/common/edit_token_dialogのpaddingやheight, widthはハードコーディングするのではなく、どの端末の高さにも対応できるようにMediaQuery.of(context).sizeを使用するように修正してください。
+
+62. lib/presentation/common/edit_token_dialog/componentsの各ファイルのpaddingやheight, widthはハードコーディングするのではなく、どの端末の高さにも対応できるようにMediaQuery.of(context).sizeを使用するように修正してください。
+
+63. lib/presentation/common/edit_token_dialogやlib/presentation/common/edit_token_dialog/componentsの各ファイルでテキストのfontSizeやcircularも数値をハードコーディングするのではなく、どの端末の高さにも対応できるようにMediaQuery.of(context).sizeを使用するように修正してください。

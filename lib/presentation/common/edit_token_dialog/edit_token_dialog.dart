@@ -79,6 +79,24 @@ class EditTokenDialog extends HookConsumerWidget {
     final progressHeight = screenSize.height * 0.12;
     final progressSize = shortestSide * 0.05;
     final horizontalGap = screenSize.width * 0.04;
+    final dialogRadius = (shortestSide * 0.06).clamp(18.0, 32.0).toDouble();
+    final mediumRadius = (shortestSide * 0.045).clamp(14.0, 24.0).toDouble();
+    final smallRadius = (shortestSide * 0.035).clamp(10.0, 18.0).toDouble();
+    final heroIconSize = (shortestSide * 0.06).clamp(22.0, 30.0).toDouble();
+    final textFieldIconSize = (shortestSide * 0.045)
+        .clamp(18.0, 24.0)
+        .toDouble();
+    final visibilityIconSize = (shortestSide * 0.045)
+        .clamp(18.0, 24.0)
+        .toDouble();
+    final titleFontSize = (shortestSide * 0.065).clamp(20.0, 28.0).toDouble();
+    final subtitleFontSize = (shortestSide * 0.038)
+        .clamp(12.0, 18.0)
+        .toDouble();
+    final textFieldFontSize = (shortestSide * 0.045)
+        .clamp(14.0, 20.0)
+        .toDouble();
+    final labelFontSize = (shortestSide * 0.035).clamp(12.0, 16.0).toDouble();
     final animationController = useAnimationController(
       duration: const Duration(milliseconds: 400),
     );
@@ -128,19 +146,19 @@ class EditTokenDialog extends HookConsumerWidget {
                 constraints: dialogConstraints,
                 decoration: BoxDecoration(
                   color: appColors.dialogBackground,
-                  borderRadius: BorderRadius.circular(24),
+                  borderRadius: BorderRadius.circular(dialogRadius),
                   border: Border.all(color: appColors.dialogBorder, width: 1),
                   boxShadow: [
                     BoxShadow(
                       color: appColors.shadow,
-                      blurRadius: 32,
-                      offset: const Offset(0, 16),
+                      blurRadius: (shortestSide * 0.08).clamp(20.0, 40.0),
+                      offset: Offset(0, screenSize.height * 0.02),
                       spreadRadius: -4,
                     ),
                     BoxShadow(
                       color: appColors.shadow.withValues(alpha: 0.1),
-                      blurRadius: 64,
-                      offset: const Offset(0, 32),
+                      blurRadius: (shortestSide * 0.16).clamp(32.0, 72.0),
+                      offset: Offset(0, screenSize.height * 0.04),
                       spreadRadius: -12,
                     ),
                   ],
@@ -157,12 +175,12 @@ class EditTokenDialog extends HookConsumerWidget {
                             padding: iconContainerPadding,
                             decoration: BoxDecoration(
                               color: appColors.primary.withValues(alpha: 0.1),
-                              borderRadius: BorderRadius.circular(12),
+                              borderRadius: BorderRadius.circular(smallRadius),
                             ),
                             child: Icon(
                               Icons.vpn_key_rounded,
                               color: appColors.primary,
-                              size: 24,
+                              size: heroIconSize,
                             ),
                           ),
                           SizedBox(width: horizontalGap),
@@ -173,7 +191,7 @@ class EditTokenDialog extends HookConsumerWidget {
                                 Text(
                                   AppLocalizations.of(context)!.editTokenTitle,
                                   style: TextStyle(
-                                    fontSize: 24,
+                                    fontSize: titleFontSize,
                                     fontWeight: FontWeight.bold,
                                     color: appColors.onSurface,
                                     letterSpacing: -0.5,
@@ -185,7 +203,7 @@ class EditTokenDialog extends HookConsumerWidget {
                                     context,
                                   )!.editTokenSubtitle,
                                   style: TextStyle(
-                                    fontSize: 14,
+                                    fontSize: subtitleFontSize,
                                     color: appColors.secondary,
                                   ),
                                 ),
@@ -200,7 +218,7 @@ class EditTokenDialog extends HookConsumerWidget {
                           height: progressHeight,
                           decoration: BoxDecoration(
                             color: appColors.inputBackground,
-                            borderRadius: BorderRadius.circular(16),
+                            borderRadius: BorderRadius.circular(mediumRadius),
                             border: Border.all(
                               color: appColors.inputBorder,
                               width: 1,
@@ -222,7 +240,7 @@ class EditTokenDialog extends HookConsumerWidget {
                           duration: const Duration(milliseconds: 200),
                           decoration: BoxDecoration(
                             color: appColors.inputBackground,
-                            borderRadius: BorderRadius.circular(16),
+                            borderRadius: BorderRadius.circular(mediumRadius),
                             border: Border.all(
                               color: controller.text.isNotEmpty
                                   ? appColors.inputFocusedBorder
@@ -236,7 +254,7 @@ class EditTokenDialog extends HookConsumerWidget {
                             obscureText: obscure.value,
                             style: TextStyle(
                               color: appColors.onSurface,
-                              fontSize: 16,
+                              fontSize: textFieldFontSize,
                               fontFamily: 'monospace',
                               letterSpacing: 0.5,
                             ),
@@ -247,20 +265,20 @@ class EditTokenDialog extends HookConsumerWidget {
                               hintText: AppLocalizations.of(context)!.tokenHint,
                               labelStyle: TextStyle(
                                 color: appColors.secondary,
-                                fontSize: 14,
+                                fontSize: labelFontSize,
                               ),
                               hintStyle: TextStyle(
                                 color: appColors.secondary.withValues(
                                   alpha: 0.6,
                                 ),
-                                fontSize: 14,
+                                fontSize: labelFontSize,
                               ),
                               prefixIcon: Padding(
                                 padding: inputPrefixPadding,
                                 child: Icon(
                                   Icons.key_rounded,
                                   color: appColors.secondary,
-                                  size: 20,
+                                  size: textFieldIconSize,
                                 ),
                               ),
                               suffixIcon: AnimatedSwitcher(
@@ -276,7 +294,7 @@ class EditTokenDialog extends HookConsumerWidget {
                                         ? Icons.visibility_rounded
                                         : Icons.visibility_off_rounded,
                                     color: appColors.secondary,
-                                    size: 20,
+                                    size: visibilityIconSize,
                                   ),
                                   tooltip: obscure.value
                                       ? AppLocalizations.of(

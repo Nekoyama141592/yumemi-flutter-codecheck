@@ -16,6 +16,18 @@ class EditTokenCancelButton extends HookWidget {
   @override
   Widget build(BuildContext context) {
     final appColors = Theme.of(context).extension<AppColors>()!;
+    final screenSize = MediaQuery.of(context).size;
+    final shortestSide = screenSize.shortestSide;
+    final horizontalPadding = (shortestSide * 0.05)
+        .clamp(16.0, 36.0)
+        .toDouble();
+    final verticalPadding = (screenSize.height * 0.015)
+        .clamp(8.0, 20.0)
+        .toDouble();
+    final textSize = (shortestSide * 0.035).clamp(12.0, 16.0).toDouble();
+    final borderRadiusValue = (shortestSide * 0.035)
+        .clamp(10.0, 18.0)
+        .toDouble();
     final isHovered = useState(false);
     final animationController = useAnimationController(
       duration: const Duration(milliseconds: 150),
@@ -38,12 +50,15 @@ class EditTokenCancelButton extends HookWidget {
           scale: scaleAnimation,
           child: AnimatedContainer(
             duration: const Duration(milliseconds: 200),
-            padding: const EdgeInsets.symmetric(horizontal: 20, vertical: 12),
+            padding: EdgeInsets.symmetric(
+              horizontal: horizontalPadding,
+              vertical: verticalPadding,
+            ),
             decoration: BoxDecoration(
               color: isHovered.value
                   ? appColors.buttonSecondary.withValues(alpha: 0.8)
                   : appColors.buttonSecondary,
-              borderRadius: BorderRadius.circular(12),
+              borderRadius: BorderRadius.circular(borderRadiusValue),
               border: Border.all(
                 color: isHovered.value
                     ? appColors.border.withValues(alpha: 0.6)
@@ -63,7 +78,7 @@ class EditTokenCancelButton extends HookWidget {
                 label,
                 style: TextStyle(
                   color: appColors.onSurface,
-                  fontSize: 14,
+                  fontSize: textSize,
                   fontWeight: FontWeight.w500,
                 ),
               ),

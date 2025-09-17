@@ -18,6 +18,22 @@ class EditTokenSaveButton extends HookWidget {
   @override
   Widget build(BuildContext context) {
     final appColors = Theme.of(context).extension<AppColors>()!;
+    final screenSize = MediaQuery.of(context).size;
+    final shortestSide = screenSize.shortestSide;
+    final horizontalPadding = (shortestSide * 0.06)
+        .clamp(18.0, 44.0)
+        .toDouble();
+    final verticalPadding = (screenSize.height * 0.015)
+        .clamp(8.0, 20.0)
+        .toDouble();
+    final contentSpacing = (shortestSide * 0.015).clamp(4.0, 16.0).toDouble();
+    final iconSize = (shortestSide * 0.045).clamp(14.0, 22.0).toDouble();
+    final textSize = (shortestSide * 0.035).clamp(12.0, 16.0).toDouble();
+    final borderRadiusValue = (shortestSide * 0.035)
+        .clamp(10.0, 18.0)
+        .toDouble();
+    final shadowBlur = (shortestSide * 0.02).clamp(6.0, 14.0).toDouble();
+    final shadowOffset = screenSize.height * 0.005;
     final isHovered = useState(false);
     final animationController = useAnimationController(
       duration: const Duration(milliseconds: 150),
@@ -45,20 +61,23 @@ class EditTokenSaveButton extends HookWidget {
           scale: scaleAnimation,
           child: AnimatedContainer(
             duration: const Duration(milliseconds: 200),
-            padding: const EdgeInsets.symmetric(horizontal: 24, vertical: 12),
+            padding: EdgeInsets.symmetric(
+              horizontal: horizontalPadding,
+              vertical: verticalPadding,
+            ),
             decoration: BoxDecoration(
               color: enabled
                   ? (isHovered.value
                         ? appColors.buttonSuccess.withValues(alpha: 0.9)
                         : appColors.buttonSuccess)
                   : appColors.buttonSuccess.withValues(alpha: 0.4),
-              borderRadius: BorderRadius.circular(12),
+              borderRadius: BorderRadius.circular(borderRadiusValue),
               boxShadow: enabled && isHovered.value
                   ? [
                       BoxShadow(
                         color: appColors.buttonSuccess.withValues(alpha: 0.3),
-                        blurRadius: 8,
-                        offset: const Offset(0, 4),
+                        blurRadius: shadowBlur,
+                        offset: Offset(0, shadowOffset),
                       ),
                     ]
                   : null,
@@ -80,17 +99,17 @@ class EditTokenSaveButton extends HookWidget {
                 children: [
                   Icon(
                     Icons.save_rounded,
-                    size: 16,
+                    size: iconSize,
                     color: Colors.white.withValues(alpha: enabled ? 1.0 : 0.6),
                   ),
-                  const SizedBox(width: 6),
+                  SizedBox(width: contentSpacing),
                   Text(
                     label,
                     style: TextStyle(
                       color: Colors.white.withValues(
                         alpha: enabled ? 1.0 : 0.6,
                       ),
-                      fontSize: 14,
+                      fontSize: textSize,
                       fontWeight: FontWeight.w600,
                     ),
                   ),

@@ -230,9 +230,15 @@ void main() {
       final textField = tester.widget<TextField>(
         find.byKey(editTokenTextFieldKey),
       );
+      final context = tester.element(find.byKey(editTokenTextFieldKey));
+      final screenSize = MediaQuery.of(context).size;
+      final shortestSide = screenSize.shortestSide;
+      final expectedFontSize = (shortestSide * 0.045)
+          .clamp(14.0, 20.0)
+          .toDouble();
 
       expect(textField.style?.fontFamily, equals('monospace'));
-      expect(textField.style?.fontSize, equals(16));
+      expect(textField.style?.fontSize, equals(expectedFontSize));
       expect(textField.style?.letterSpacing, equals(0.5));
     });
 

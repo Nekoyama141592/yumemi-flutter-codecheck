@@ -247,11 +247,15 @@ void main() {
       final container = tester.widget<AnimatedContainer>(
         find.byType(AnimatedContainer),
       );
-
-      expect(
-        container.padding,
-        equals(const EdgeInsets.symmetric(horizontal: 24, vertical: 12)),
+      final context = tester.element(find.byType(EditTokenSaveButton));
+      final screenSize = MediaQuery.of(context).size;
+      final shortestSide = screenSize.shortestSide;
+      final expectedPadding = EdgeInsets.symmetric(
+        horizontal: (shortestSide * 0.06).clamp(18.0, 44.0).toDouble(),
+        vertical: (screenSize.height * 0.015).clamp(8.0, 20.0).toDouble(),
       );
+
+      expect(container.padding, equals(expectedPadding));
     });
 
     testWidgets('displays icon and text in row', (tester) async {
