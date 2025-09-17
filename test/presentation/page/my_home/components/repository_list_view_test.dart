@@ -20,6 +20,15 @@ void main() {
         border: Colors.grey,
         tokenOn: Colors.green,
         tokenOff: Colors.red,
+        dialogBackground: Colors.white,
+        dialogBorder: Colors.grey,
+        inputBackground: Colors.white,
+        inputBorder: Colors.grey,
+        inputFocusedBorder: Colors.blue,
+        buttonSuccess: Colors.green,
+        buttonDanger: Colors.red,
+        buttonSecondary: Colors.grey,
+        shadow: Colors.black,
       );
 
       mockRepositories = [
